@@ -1,0 +1,67 @@
+version: '3.8'
+
+# Production override - optimized for deployment
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
+services:
+  db:
+    restart: always
+    # Limit resources
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+    # Use a specific backup volume
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/backups:/backups
+
+  vkg:
+    restart: always
+    environment:
+      ONTOP_DEV_MODE: "false"
+      ONTOP_LAZY_INIT: "false"
+      # Restrict CORS in production
+      ONTOP_CORS_ALLOWED_ORIGINS: "https://yourdomain.com"
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+
+  sampo:
+    restart: always
+    environment:
+      NODE_ENV: production
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+volumes:
+  postgres_data:
+    driver: local
+
+
+  dataseeder:
+    environment:
+      # Larger dataset for production-like testing
+      SEED_COMPANIES: 10000
+      SEED_PERSONS: 20000
+      SEED_BATCH_SIZE: 2000
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G

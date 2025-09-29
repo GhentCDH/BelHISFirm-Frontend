@@ -1,0 +1,27 @@
+# Environment files
+.env
+
+# Docker volumes
+postgres_data/
+
+# JDBC drivers (add manually)
+vkg/jdbc/*.jar
+
+# Node modules
+sampo/node_modules/
+sampo/build/
+sampo/dist/
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
