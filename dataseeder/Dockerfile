@@ -26,4 +26,4 @@ ENV DB_HOST=db \
     SEED_BATCH_SIZE=1000
 
 # Entry point script to wait for database and run seeder
-CMD ["sh", "-c", "echo 'Waiting for database to be ready...' && sleep 3 && echo 'Started seeding' seed --companies ${SEED_COMPANIES} --persons ${SEED_PERSONS} --batch-size ${SEED_BATCH_SIZE} --db-host ${DB_HOST}"]
+CMD ["sh", "-c", "echo 'Waiting for database to be ready...' && sleep 3 && echo 'Started seeding' && seed --companies ${SEED_COMPANIES} --persons ${SEED_PERSONS} --batch-size ${SEED_BATCH_SIZE} --db-host ${DB_HOST}"]

@@ -43,7 +43,6 @@ mappingId	COMPANY-REGISTERED-CAPITAL
 target		:company/{id} bhf:registeredCapital {registered_capital}^^xsd:decimal .
 source		SELECT id, registered_capital FROM companies WHERE registered_capital IS NOT NULL
 
-
 mappingId	COMPANY-LOCATION
 target		:company/{id} bhf:hasAddress :address/{id} .
 source		SELECT id FROM companies WHERE street_address IS NOT NULL

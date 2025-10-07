@@ -66,6 +66,7 @@ class DatabaseSeeder:
                 %(date_of_dissolution)s, %(business_sector)s, %(company_type)s,
                 %(registered_capital)s
             )
+            ON CONFLICT (id) DO NOTHING
         """
         
         with tqdm(total=len(companies), desc="Inserting companies", unit="records") as pbar:
@@ -92,6 +93,7 @@ class DatabaseSeeder:
                 %(date_of_birth)s, %(place_of_birth)s, %(date_of_death)s,
                 %(nationality)s
             )
+            ON CONFLICT (id) DO NOTHING
         """
         
         with tqdm(total=len(persons), desc="Inserting persons", unit="records") as pbar:
@@ -116,6 +118,7 @@ class DatabaseSeeder:
                 %(id)s, %(company_id)s, %(person_id)s, %(role)s,
                 %(start_date)s, %(end_date)s, %(share_percentage)s
             )
+            ON CONFLICT (id) DO NOTHING
         """
         
         with tqdm(total=len(relationships), desc="Inserting relationships", unit="records") as pbar:
