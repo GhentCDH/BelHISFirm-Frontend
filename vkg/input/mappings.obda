@@ -43,12 +43,9 @@ mappingId	COMPANY-REGISTERED-CAPITAL
 target		:company/{id} bhf:registeredCapital {registered_capital}^^xsd:decimal .
 source		SELECT id, registered_capital FROM companies WHERE registered_capital IS NOT NULL
 
-mappingId	COMPANY-ADDRESS
-target		:company/{id} bhf:streetAddress {street_address}^^xsd:string ; bhf:city {city}^^xsd:string ; bhf:postalCode {postal_code}^^xsd:string ; bhf:country {country}^^xsd:string .
-source		SELECT id, street_address, city, postal_code, country FROM companies WHERE street_address IS NOT NULL
 
 mappingId	COMPANY-LOCATION
-target		:company/{id} schema:address :address/{id} .
+target		:company/{id} bhf:hasAddress :address/{id} .
 source		SELECT id FROM companies WHERE street_address IS NOT NULL
 
 mappingId	ADDRESS-TYPE
@@ -56,7 +53,7 @@ target		:address/{id} a bhf:Address , vcard:Address .
 source		SELECT id FROM companies WHERE street_address IS NOT NULL
 
 mappingId	ADDRESS-PROPERTIES
-target		:address/{id} vcard:street-address {street_address}^^xsd:string ; vcard:locality {city}^^xsd:string ; vcard:postal-code {postal_code}^^xsd:string ; vcard:country-name {country}^^xsd:string .
+target		:address/{id} bhf:streetAddress {street_address}^^xsd:string ; bhf:city {city}^^xsd:string ; bhf:postalCode {postal_code}^^xsd:string ; bhf:country {country}^^xsd:string .
 source		SELECT id, street_address, city, postal_code, country FROM companies WHERE street_address IS NOT NULL
 
 mappingId	PERSON-TYPE
