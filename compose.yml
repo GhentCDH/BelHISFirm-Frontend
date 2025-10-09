@@ -73,6 +73,44 @@ services:
       timeout: 10s
       retries: 3
 
+  sampo-client:
+    build:
+      context: ./sampo/client
+      target: client-dev
+    command: npm run dev
+    volumes:
+      - ./sampo/client:/app/client
+      - client_node_modules:/app/client/node_modules # Prevent overwrite of deps
+    ports:
+      - "8081:8080"
+    working_dir: /app/client
+    environment:
+      BABEL_ENV: ${BABEL_ENV}
+      NODE_ENV: ${NODE_ENV}
+      API_URL: ${API_URL}
+    depends_on:
+      - sampo-server
+    networks:
+      - bellhisfirm-network
+
+  sampo-server:
+    build:
+      context: ./sampo/server
+      target: server-dev
+    command: npm run dev
+    volumes:
+      - ./sampo/server:/app/server
+      - ./sampo/configs:/app/configs
+      - server_node_modules:/app/server/node_modules # Prevent overwrite of deps
+    ports:
+      - "3001:3001"
+    working_dir: /app/server
+    environment:
+      BABEL_ENV: ${SERVER_BABEL_ENV}
+      NODE_ENV: ${NODE_ENV}
+    networks:
+      - bellhisfirm-network
+
 
 networks:
   bellhisfirm-network:
@@ -80,3 +118,5 @@ networks:
 
 volumes:
   postgres_data:
+  client_node_modules:
+  server_node_modules:
