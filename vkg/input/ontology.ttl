@@ -103,15 +103,6 @@ bhf:founded
     rdfs:label   "founded"@en, "opgericht"@nl ;
     rdfs:comment "Links a person to a company they founded"@en .
 
-bhf:hasAddress
-    rdf:type           owl:ObjectProperty ;
-    rdfs:subPropertyOf vcard:hasAddress ;
-    rdfs:subPropertyOf schema:address ;
-    rdfs:domain        bhf:Company ;
-    rdfs:range         bhf:Address ;
-    rdfs:label         "has address"@en, "heeft adres"@nl ;
-    rdfs:comment       "Links a company to its physical address"@en .
-
 #################################################################
 #    Data Properties
 #################################################################
@@ -119,6 +110,7 @@ bhf:hasAddress
 ### Company properties
 bhf:companyName
     rdf:type     owl:DatatypeProperty ;
+    rdfs:subPropertyOf foaf:name ;
     rdfs:domain  bhf:Company ;
     rdfs:range   xsd:string ;
     rdfs:label   "company name"@en, "bedrijfsnaam"@nl ;
@@ -133,6 +125,7 @@ bhf:legalForm
 
 bhf:dateOfFounding
     rdf:type     owl:DatatypeProperty ;
+    rdfs:subPropertyOf dct:created ;
     rdfs:domain  bhf:Company ;
     rdfs:range   xsd:date ;
     rdfs:label   "date of founding"@en, "oprichtingsdatum"@nl ;
@@ -158,6 +151,15 @@ bhf:registeredCapital
     rdfs:range   xsd:decimal ;
     rdfs:label   "registered capital"@en, "maatschappelijk kapitaal"@nl ;
     rdfs:comment "The registered capital of the company"@en .
+
+bhf:hasAddress
+    rdf:type           owl:ObjectProperty ;
+    rdfs:subPropertyOf vcard:hasAddress ;
+    rdfs:subPropertyOf schema:address ;
+    rdfs:domain        bhf:Company ;
+    rdfs:range         bhf:Address ;
+    rdfs:label         "has address"@en, "heeft adres"@nl ;
+    rdfs:comment       "Links a company to its physical address"@en .
 
 ### Person properties (using FOAF where appropriate)
 # foaf:firstName, foaf:lastName, foaf:name are used from FOAF ontology

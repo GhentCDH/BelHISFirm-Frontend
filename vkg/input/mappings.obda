@@ -20,7 +20,7 @@ target		:company/{id} a bhf:Company .
 source		SELECT id FROM companies
 
 mappingId	COMPANY-NAME
-target		:company/{id} bhf:companyName {company_name}^^xsd:string ; foaf:name {company_name}^^xsd:string .
+target		:company/{id} bhf:companyName {company_name}^^xsd:string .
 source		SELECT id, company_name FROM companies
 
 mappingId	COMPANY-LEGAL-FORM
@@ -28,7 +28,7 @@ target		:company/{id} bhf:legalForm {legal_form}^^xsd:string .
 source		SELECT id, legal_form FROM companies WHERE legal_form IS NOT NULL
 
 mappingId	COMPANY-FOUNDING-DATE
-target		:company/{id} bhf:dateOfFounding {date_of_founding}^^xsd:date ; dct:created {date_of_founding}^^xsd:date .
+target		:company/{id} bhf:dateOfFounding {date_of_founding}^^xsd:date .
 source		SELECT id, date_of_founding FROM companies WHERE date_of_founding IS NOT NULL
 
 mappingId	COMPANY-DISSOLUTION-DATE
@@ -48,7 +48,7 @@ target		:company/{id} bhf:hasAddress :address/{id} .
 source		SELECT id FROM companies WHERE street_address IS NOT NULL
 
 mappingId	ADDRESS-TYPE
-target		:address/{id} a bhf:Address , vcard:Address .
+target		:address/{id} a bhf:Address .
 source		SELECT id FROM companies WHERE street_address IS NOT NULL
 
 mappingId	ADDRESS-PROPERTIES

@@ -4,7 +4,8 @@
     "staticsUrl": "",
     "perspectives": {
         "searchPerspectives": [
-            "perspective1"
+            "perspective1",
+            "belhisfirm"
         ],
         "onlyInstancePages": [
             "manuscripts",
