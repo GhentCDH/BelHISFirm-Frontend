@@ -73,22 +73,6 @@ services:
       timeout: 10s
       retries: 3
 
-  # Sampo UI Server
-  sampo:
-    build:
-      context: ./sampo
-      dockerfile: Dockerfile
-    container_name: bellhisfirm-sampo
-    restart: unless-stopped
-    depends_on:
-      - vkg
-    ports:
-      - "3000:3000"
-    environment:
-      VKG_ENDPOINT: http://vkg:8080/sparql
-      NODE_ENV: production
-    networks:
-      - bellhisfirm-network
 
 networks:
   bellhisfirm-network:
