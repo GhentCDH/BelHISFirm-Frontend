@@ -3,7 +3,8 @@
     "endpoint": {
         "url": "http://vkg:8080/sparql",
         "useAuth": false,
-        "prefixesFile": "SparqlQueriesPrefixes.js"
+        "prefixesFile": "SparqlQueriesPrefixes.js",
+        "defaultSparql": true
     },
     "sparqlQueriesFile": "SparqlQueriesBelhisfirm.js",
     "baseURI": "http://belhisfirm/resource",
@@ -13,7 +14,7 @@
     "searchMode": "faceted-search",
     "enableDynamicLanguageChange": false,
     "defaultActiveFacets": [
-        "prefLabel"
+        "companyName"
     ],
     "defaultTab": "table",
     "defaultInstancePageTab": "table",
@@ -90,6 +91,15 @@
             "minWidth": 200
         },
         {
+            "id": "businessSector",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200
+        },
+        {
             "id": "director",
             "valueType": "object",
             "makeLink": true,
@@ -136,15 +146,6 @@
             "minWidth": 200
         },
         {
-            "id": "businessSector",
-            "valueType": "object",
-            "makeLink": false,
-            "externalLink": true,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 200
-        },
-        {
             "id": "registeredCapital",
             "valueType": "object",
             "makeLink": false,
@@ -161,6 +162,19 @@
             "filterType": "textFilter",
             "sortByPredicate": "foaf:name",
             "textQueryProperty": "foaf:name"
+        },
+        "businessSector": {
+            "containerClass": "ten",
+            "filterType": "uriFilter",
+            "predicate": "bhf:businessSector",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "bhf:businessSector",
+            "sortDirection": "desc",
+            "literal": true
         }
     }
 }
