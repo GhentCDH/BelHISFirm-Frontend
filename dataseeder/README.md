@@ -76,8 +76,8 @@ uv run seed --companies 100000 --persons 200000 --batch-size 5000
 | `--relationships-per-company` | 3 | Avg relationships per company |
 | `--db-host` | `db` | Database host |
 | `--db-port` | 5432 | Database port |
-| `--db-name` | `bellhisfirm` | Database name |
-| `--db-user` | `bellhisfirm_user` | Database user |
+| `--db-name` | `belhisfirm` | Database name |
+| `--db-user` | `belhisfirm_user` | Database user |
 | `--db-password` | Set via env | Database password |
 | `--clear-existing` | False | Clear existing data before seeding |
 
@@ -88,8 +88,8 @@ Create a `.env` file in the `dataseeder` directory:
 ```env
 DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=bellhisfirm
-DB_USER=bellhisfirm_user
+DB_NAME=belhisfirm
+DB_USER=belhisfirm_user
 DB_PASSWORD=changeme_secure_password
 ```
 
@@ -240,12 +240,12 @@ uv run seed --companies 1000 --persons 2000 --clear-existing
 
 After seeding, the data is immediately available via:
 - **SPARQL Endpoint**: http://localhost:8080
-- **Direct SQL**: psql -h localhost -U bellhisfirm_user -d bellhisfirm
+- **Direct SQL**: psql -h localhost -U belhisfirm_user -d belhisfirm
 
 Test with SPARQL:
 ```sparql
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 
 SELECT (COUNT(?company) as ?count)
 WHERE {

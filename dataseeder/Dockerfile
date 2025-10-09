@@ -18,8 +18,8 @@ RUN uv pip install --system -e .
 # Set environment variables with defaults
 ENV DB_HOST=db \
     DB_PORT=5432 \
-    DB_NAME=bellhisfirm \
-    DB_USER=bellhisfirm_user \
+    DB_NAME=belhisfirm \
+    DB_USER=belhisfirm_user \
     DB_PASSWORD=changeme_secure_password \
     SEED_COMPANIES=1000 \
     SEED_PERSONS=2000 \

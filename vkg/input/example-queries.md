@@ -8,7 +8,7 @@ This document contains example SPARQL queries for exploring Belgian historical c
 Get all companies with their names and founding dates.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?company ?name ?foundingDate
@@ -24,7 +24,7 @@ ORDER BY ?foundingDate
 Get all persons with their names and birth dates.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?person ?name ?firstName ?lastName ?birthDate
@@ -43,7 +43,7 @@ ORDER BY ?lastName ?firstName
 Count companies per city.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 
 SELECT ?city (COUNT(?company) as ?count)
 WHERE {
@@ -58,7 +58,7 @@ ORDER BY DESC(?count)
 List companies grouped by their business sector.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?sector ?companyName
@@ -76,7 +76,7 @@ ORDER BY ?sector ?companyName
 Find all companies with their directors.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?companyName ?directorName
@@ -94,7 +94,7 @@ ORDER BY ?companyName
 Find companies and their founders with founding dates.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?companyName ?founderName ?foundingDate
@@ -112,7 +112,7 @@ ORDER BY ?foundingDate
 Find all companies associated with a specific person.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?personName ?companyName ?role
@@ -129,7 +129,7 @@ WHERE {
 Find companies founded between 1800 and 1900.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
@@ -152,7 +152,7 @@ ORDER BY ?foundingDate
 Get complete address information for all companies.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?companyName ?street ?city ?postalCode ?country
@@ -171,7 +171,7 @@ ORDER BY ?city ?companyName
 Count persons by their nationality.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?nationality (COUNT(?person) as ?count)
@@ -187,7 +187,7 @@ ORDER BY DESC(?count)
 Find all companies located in Brussels with their sectors.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?companyName ?sector ?address ?foundingDate
@@ -207,7 +207,7 @@ ORDER BY ?companyName
 Find directors who were born before 1850.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
@@ -226,7 +226,7 @@ ORDER BY ?birthDate
 Find companies that share directors (network analysis).
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?company1Name ?company2Name ?directorName
@@ -246,7 +246,7 @@ ORDER BY ?directorName
 Find persons who are both founders and directors of companies.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT DISTINCT ?personName ?companyName
@@ -265,7 +265,7 @@ ORDER BY ?personName
 Get statistics on registered capital by business sector.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 
 SELECT ?sector 
        (COUNT(?company) as ?companyCount)
@@ -285,7 +285,7 @@ ORDER BY DESC(?avgCapital)
 Comprehensive person information using FOAF ontology.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX schema: <http://schema.org/>
 
@@ -308,7 +308,7 @@ ORDER BY ?lastName ?firstName
 Find companies that were active (founded before, not yet dissolved) in 1900.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
@@ -329,7 +329,7 @@ ORDER BY ?foundingDate
 Count companies founded per decade.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 SELECT ?decade (COUNT(?company) as ?count)
@@ -348,7 +348,7 @@ ORDER BY ?decade
 Create a subgraph of Belgian companies in Brussels.
 
 ```sparql
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 CONSTRUCT {
@@ -370,7 +370,7 @@ Create a FOAF-compatible person network.
 
 ```sparql
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 
 CONSTRUCT {
   ?person a foaf:Person ;

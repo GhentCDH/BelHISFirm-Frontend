@@ -103,7 +103,7 @@ prod:
 
 # Database shell
 shell-db:
-	@docker compose exec db psql -U bellhisfirm_user -d bellhisfirm
+	@docker compose exec db psql -U belhisfirm_user -d belhisfirm
 
 # Build services
 build:
@@ -154,7 +154,7 @@ seed-custom:
 # Clear seeded data (keeps sample data)
 clear-seeded:
 	@echo "🗑️  Clearing seeded data (keeping sample data with ID ≤ 100)..."
-	@docker compose exec db psql -U bellhisfirm_user -d bellhisfirm -c \
+	@docker compose exec db psql -U belhisfirm_user -d belhisfirm -c \
 		"DELETE FROM company_person WHERE id >= 1001; \
 		 DELETE FROM persons WHERE id >= 1001; \
 		 DELETE FROM companies WHERE id >= 1001;"

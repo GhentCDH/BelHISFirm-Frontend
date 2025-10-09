@@ -19,7 +19,7 @@ This avoids conflicts with the sample data (IDs 1-100) and any previously seeded
 
 ```bash
 # Clear existing seeded data (keeps sample data with ID ≤ 100)
-docker compose exec db psql -U bellhisfirm_user -d bellhisfirm <<EOF
+docker compose exec db psql -U belhisfirm_user -d belhisfirm <<EOF
 DELETE FROM company_person WHERE id >= 1001;
 DELETE FROM persons WHERE id >= 1001;
 DELETE FROM companies WHERE id >= 1001;

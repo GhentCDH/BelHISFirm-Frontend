@@ -82,7 +82,7 @@ http://localhost:8080
 ### 3. Try Example Query
 ```sparql
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 
 SELECT ?personName ?companyName
 WHERE {
@@ -154,8 +154,8 @@ BellHisFirm-Frontend/
 
 ### Verify Database
 ```bash
-docker-compose exec db psql -U bellhisfirm_user -d bellhisfirm -c "SELECT COUNT(*) FROM companies;"
-docker-compose exec db psql -U bellhisfirm_user -d bellhisfirm -c "SELECT COUNT(*) FROM persons;"
+docker-compose exec db psql -U belhisfirm_user -d belhisfirm -c "SELECT COUNT(*) FROM companies;"
+docker-compose exec db psql -U belhisfirm_user -d belhisfirm -c "SELECT COUNT(*) FROM persons;"
 ```
 
 Expected: 10 companies, 15 persons

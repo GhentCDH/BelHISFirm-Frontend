@@ -118,8 +118,8 @@ Once all services are running:
 - **Sampo UI**: http://localhost:3000
 - **Ontop SPARQL Endpoint**: http://localhost:8080
 - **PostgreSQL Database**: localhost:5432
-  - Database: `bellhisfirm`
-  - User: `bellhisfirm_user`
+  - Database: `belhisfirm`
+  - User: `belhisfirm_user`
   - Password: `changeme_secure_password`
 
 ## Configuration
@@ -188,7 +188,7 @@ docker-compose up -d --build
 ### View Database
 Connect with any PostgreSQL client:
 ```bash
-psql -h localhost -p 5432 -U bellhisfirm_user -d bellhisfirm
+psql -h localhost -p 5432 -U belhisfirm_user -d belhisfirm
 ```
 
 ### Test SPARQL Queries

@@ -1,5 +1,5 @@
 [project]
-name = "bellhisfirm-dataseeder"
+name = "belhisfirm-dataseeder"
 version = "1.0.0"
 description = "Data seeder for BellHisFirm database - generates realistic Belgian company and person data"
 authors = [

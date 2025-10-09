@@ -14,8 +14,8 @@ class DatabaseConfig:
     """Database connection configuration"""
     host: str = os.getenv("DB_HOST", "localhost")
     port: int = int(os.getenv("DB_PORT", "5432"))
-    database: str = os.getenv("DB_NAME", "bellhisfirm")
-    user: str = os.getenv("DB_USER", "bellhisfirm_user")
+    database: str = os.getenv("DB_NAME", "belhisfirm")
+    user: str = os.getenv("DB_USER", "belhisfirm_user")
     password: str = os.getenv("DB_PASSWORD", "changeme_secure_password")
 
     @property

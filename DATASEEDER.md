@@ -76,7 +76,7 @@ cd dataseeder && uv run seed --companies 10000 --persons 20000 --batch-size 5000
 **Solution**:
 ```bash
 # Clear existing data
-docker compose exec db psql -U bellhisfirm_user -d bellhisfirm \
+docker compose exec db psql -U belhisfirm_user -d belhisfirm \
   -c "DELETE FROM company_person WHERE id > 100; \
       DELETE FROM persons WHERE id > 100; \
       DELETE FROM companies WHERE id > 100;"
@@ -105,7 +105,7 @@ When seeding is complete, you should see:
 
 🔍 Test your data:
    SPARQL Endpoint: http://localhost:8080
-   Database: psql -h db -U bellhisfirm_user -d bellhisfirm
+   Database: psql -h db -U belhisfirm_user -d belhisfirm
 ```
 
 ## 📖 Key Files
@@ -183,7 +183,7 @@ After seeding, explore the generated data:
 
 ```bash
 # Connect to database
-docker compose exec db psql -U bellhisfirm_user -d bellhisfirm
+docker compose exec db psql -U belhisfirm_user -d belhisfirm
 
 # Sample companies
 SELECT company_name, city, business_sector 

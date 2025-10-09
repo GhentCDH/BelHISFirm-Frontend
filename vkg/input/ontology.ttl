@@ -1,5 +1,5 @@
-@prefix :       <http://bellhisfirm.be/resource/> .
-@prefix bhf:    <http://bellhisfirm.be/ontology#> .
+@prefix :       <http://belhisfirm.be/resource/> .
+@prefix bhf:    <http://belhisfirm.be/ontology#> .
 @prefix owl:    <http://www.w3.org/2002/07/owl#> .
 @prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml:    <http://www.w3.org/XML/1998/namespace> .
@@ -11,9 +11,9 @@
 @prefix schema: <http://schema.org/> .
 @prefix dct:    <http://purl.org/dc/terms/> .
 @prefix vcard:  <http://www.w3.org/2006/vcard/ns#> .
-@base <http://bellhisfirm.be/ontology> .
+@base <http://belhisfirm.be/ontology> .
 
-<http://bellhisfirm.be/ontology>
+<http://belhisfirm.be/ontology>
     rdf:type        owl:Ontology ;
     rdfs:label      "BellHisFirm Ontology"@en ;
     rdfs:comment    "Ontology for Belgian Historical Firm Data (SCOB)"@en ;

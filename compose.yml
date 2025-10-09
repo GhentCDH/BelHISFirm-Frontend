@@ -2,11 +2,11 @@ services:
   # PostgreSQL Database
   db:
     image: postgres:17
-    container_name: bellhisfirm-db
+    container_name: belhisfirm-db
     restart: unless-stopped
     environment:
-      POSTGRES_DB: bellhisfirm
-      POSTGRES_USER: bellhisfirm_user
+      POSTGRES_DB: belhisfirm
+      POSTGRES_USER: belhisfirm_user
       POSTGRES_PASSWORD: changeme_secure_password
     ports:
       - "5432:5432"
@@ -14,9 +14,9 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./db/init:/docker-entrypoint-initdb.d
     networks:
-      - bellhisfirm-network
+      - belhisfirm-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U bellhisfirm_user -d bellhisfirm"]
+      test: ["CMD-SHELL", "pg_isready -U belhisfirm_user -d belhisfirm"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -26,27 +26,27 @@ services:
     build:
       context: ./dataseeder
       dockerfile: Dockerfile
-    container_name: bellhisfirm-dataseeder
+    container_name: belhisfirm-dataseeder
     depends_on:
       db:
         condition: service_healthy
     environment:
       DB_HOST: db
       DB_PORT: 5432
-      DB_NAME: bellhisfirm
-      DB_USER: bellhisfirm_user
+      DB_NAME: belhisfirm
+      DB_USER: belhisfirm_user
       DB_PASSWORD: changeme_secure_password
       SEED_COMPANIES: ${SEED_COMPANIES:-0}
       SEED_PERSONS: ${SEED_PERSONS:-0}
       SEED_BATCH_SIZE: ${SEED_BATCH_SIZE:-1000}
     networks:
-      - bellhisfirm-network
+      - belhisfirm-network
     restart: "no"
 
   # Ontop Virtual Knowledge Graph
   vkg:
     image: ontop/ontop:latest
-    container_name: bellhisfirm-vkg
+    container_name: belhisfirm-vkg
     restart: unless-stopped
     depends_on:
       db:
@@ -54,7 +54,7 @@ services:
       dataseeder:
         condition: service_completed_successfully
     ports:
-      - "8080:8080"
+      - "8081:8080"
     volumes:
       - ./vkg/input:/opt/ontop/input
       - ./vkg/jdbc:/opt/ontop/jdbc
@@ -66,7 +66,7 @@ services:
       ONTOP_LAZY_INIT: "true"
       ONTOP_DEV_MODE: "false"
     networks:
-      - bellhisfirm-network
+      - belhisfirm-network
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/"]
       interval: 30s
@@ -82,7 +82,7 @@ services:
       - ./sampo/client:/app/client
       - client_node_modules:/app/client/node_modules # Prevent overwrite of deps
     ports:
-      - "8081:8080"
+      - "8080:8080"
     working_dir: /app/client
     environment:
       BABEL_ENV: ${BABEL_ENV}
@@ -91,7 +91,7 @@ services:
     depends_on:
       - sampo-server
     networks:
-      - bellhisfirm-network
+      - belhisfirm-network
 
   sampo-server:
     build:
@@ -109,11 +109,11 @@ services:
       BABEL_ENV: ${SERVER_BABEL_ENV}
       NODE_ENV: ${NODE_ENV}
     networks:
-      - bellhisfirm-network
+      - belhisfirm-network
 
 
 networks:
-  bellhisfirm-network:
+  belhisfirm-network:
     driver: bridge
 
 volumes:

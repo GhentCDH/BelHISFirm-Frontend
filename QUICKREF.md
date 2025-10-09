@@ -47,10 +47,10 @@ docker-compose ps
 
 ```bash
 # Using psql
-psql -h localhost -p 5432 -U bellhisfirm_user -d bellhisfirm
+psql -h localhost -p 5432 -U belhisfirm_user -d belhisfirm
 
 # Connection string
-postgresql://bellhisfirm_user:changeme_secure_password@localhost:5432/bellhisfirm
+postgresql://belhisfirm_user:changeme_secure_password@localhost:5432/belhisfirm
 ```
 
 ## Common Issues

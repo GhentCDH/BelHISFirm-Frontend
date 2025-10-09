@@ -52,7 +52,7 @@ docker compose up -d
 docker compose logs -f dataseeder
 
 # Check database stats
-docker compose exec db psql -U bellhisfirm_user -d bellhisfirm \
+docker compose exec db psql -U belhisfirm_user -d belhisfirm \
   -c "SELECT 
       (SELECT COUNT(*) FROM companies) as companies,
       (SELECT COUNT(*) FROM persons) as persons,
@@ -248,11 +248,11 @@ docker compose logs dataseeder
 
 ```bash
 # SQL query
-docker compose exec db psql -U bellhisfirm_user -d bellhisfirm -c \
+docker compose exec db psql -U belhisfirm_user -d belhisfirm -c \
   "SELECT COUNT(*) FROM companies;"
 
 # SPARQL query at http://localhost:8080
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 SELECT (COUNT(?c) as ?count) WHERE { ?c a bhf:Company }
 ```
 
@@ -262,8 +262,8 @@ SELECT (COUNT(?c) as ?count) WHERE { ?c a bhf:Company }
 
 ```env
 # Database
-POSTGRES_DB=bellhisfirm
-POSTGRES_USER=bellhisfirm_user
+POSTGRES_DB=belhisfirm
+POSTGRES_USER=belhisfirm_user
 POSTGRES_PASSWORD=changeme_secure_password
 
 # Data Seeder
@@ -391,7 +391,7 @@ docker compose ps db
 
 ```bash
 # Clear seeded data
-docker compose exec db psql -U bellhisfirm_user -d bellhisfirm <<EOF
+docker compose exec db psql -U belhisfirm_user -d belhisfirm <<EOF
 DELETE FROM company_person WHERE id > 100;
 DELETE FROM persons WHERE id > 100;
 DELETE FROM companies WHERE id > 100;

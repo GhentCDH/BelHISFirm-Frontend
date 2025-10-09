@@ -183,7 +183,7 @@ share_percentage        →  bhf:sharePercentage
 ### User Query (SPARQL)
 ```sparql
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 
 SELECT ?name ?company
 WHERE {
@@ -207,7 +207,7 @@ WHERE cp.role IN ('Director', 'Manager')
 ## Vocabulary Prefixes Used
 
 ```
-bhf:     http://bellhisfirm.be/ontology#         (Custom)
+bhf:     http://belhisfirm.be/ontology#         (Custom)
 foaf:    http://xmlns.com/foaf/0.1/              (Person data)
 org:     http://www.w3.org/ns/org#               (Organizations)
 rov:     http://www.w3.org/ns/regorg#            (Registered Orgs)

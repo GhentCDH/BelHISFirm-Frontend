@@ -21,7 +21,7 @@ export const prefixes = `
   PREFIX h-schema: <http://ldf.fi/schema/hellerau/> 
   PREFIX gn: <http://www.geonames.org/ontology#>
   PREFIX semparls: <http://ldf.fi/schema/semparl/>
-  PREFIX bhf: <http://bellhisfirm.be/ontology#>
+  PREFIX bhf: <http://belhisfirm.be/ontology#>
   PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
   PREFIX schema: <http://schema.org/>
   PREFIX org: <http://www.w3.org/ns/org#>

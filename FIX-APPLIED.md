@@ -82,7 +82,7 @@ Visit: http://localhost:8080
 Try this query:
 ```sparql
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX bhf: <http://bellhisfirm.be/ontology#>
+PREFIX bhf: <http://belhisfirm.be/ontology#>
 
 SELECT ?name
 WHERE {
