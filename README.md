@@ -15,7 +15,7 @@ A Docker Compose application stack for BellHisFirm consisting of:
          │
          ▼
 ┌─────────────────┐
-│   Ontop VKG     │  (Port 8080)
+│   Ontop VKG     │  (Port 8081)
 │ SPARQL Endpoint │
 └────────┬────────┘
          │
