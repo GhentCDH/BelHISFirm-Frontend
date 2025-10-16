@@ -54,8 +54,8 @@
             "component": "Export",
             "tabPath": "export",
             "tabIcon": "CloudDownload",
-            "resultClass": "perspective1",
-            "facetClass": "perspective1"
+            "resultClass": "belhisfirm",
+            "facetClass": "belhisfirm"
         },
         "knowledgeGraphMetadata": {
             "sparqlQuery": "knowledgeGraphMetadataQuery",
@@ -115,8 +115,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 200,
-            "onlyOnInstancePage": true
+            "minWidth": 200
         },
         {
             "id": "legalForm",
@@ -143,7 +142,8 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 200
+            "minWidth": 200,
+            "onlyOnInstancePage": true
         },
         {
             "id": "registeredCapital",
@@ -153,6 +153,15 @@
             "sortValues": true,
             "numberedList": false,
             "minWidth": 200
+        },
+        {
+            "id": "address",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth":250
         }
     ],
     "facets": {
@@ -165,6 +174,7 @@
         },
         "businessSector": {
             "containerClass": "ten",
+            "facetType": "list",
             "filterType": "uriFilter",
             "predicate": "bhf:businessSector",
             "pieChartButton": true,
@@ -175,6 +185,57 @@
             "sortByPredicate": "bhf:businessSector",
             "sortDirection": "desc",
             "literal": true
+        },
+        "founder": {
+            "containerClass": "one",
+            "facetType": "text",
+            "filterType": "textFilter",
+            "predicate": "bhf:hasFounder",
+            "sortByPredicate": "bhf:hasFounder/foaf:name",
+            "textQueryProperty": "bhf:hasFounder/foaf:name"
+        },
+        "director": {
+            "containerClass": "one",
+            "facetType": "text",
+            "filterType": "textFilter",
+            "predicate": "bhf:hasDirector",
+            "sortByPredicate": "bhf:hasDirector/foaf:name",
+            "textQueryProperty": "bhf:hasDirector/foaf:name"
+        },
+        "shareholder": {
+            "containerClass": "one",
+            "facetType": "text",
+            "filterType": "textFilter",
+            "predicate": "bhf:hasShareholder",
+            "sortByPredicate": "bhf:hasShareholder/foaf:name",
+            "textQueryProperty": "bhf:hasShareholder/foaf:name"
+        },
+        "legalForm": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "bhf:legalForm",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "bhf:legalForm",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "dateOfFounding": {
+            "containerClass": "four",
+            "facetType": "integer",
+            "filterType": "dateNoTimespanFilter",
+            "max": null,
+            "min": null,
+            "startProperty": "bhf:dateOfFounding",
+            "endProperty": "bhf:dateOfFounding",
+            "predicate": "bhf:dateOfFounding",
+            "sortByAscPredicate": "bhf:dateOfFounding",
+            "sortByDescPredicate": "bhf:dateOfFounding",
+            "sortByPredicate": "bhf:dateOfFounding"
         }
     }
 }

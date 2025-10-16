@@ -53,7 +53,7 @@ export const getPaginatedResults = ({
   }
   if (sortBy == null) {
     q = q.replace('<ORDER_BY_TRIPLE>', '')
-    q = q.replace('<ORDER_BY>', '# no sorting')
+    q = q.replaceAll('<ORDER_BY>', '# no sorting')
   }
   if (sortBy !== null) {
     let sortByPredicate
@@ -71,7 +71,7 @@ export const getPaginatedResults = ({
       sortByPattern = `OPTIONAL { ?id ${sortByPredicate} ?orderBy }`
     }
     q = q.replace('<ORDER_BY_TRIPLE>', sortByPattern)
-    q = q = q.replace('<ORDER_BY>', `ORDER BY (!BOUND(?orderBy)) ${sortDirection}(?orderBy)`)
+    q = q = q.replaceAll('<ORDER_BY>', `ORDER BY (!BOUND(?orderBy)) ${sortDirection}(?orderBy)`)
   }
   q = q.replace(/<FACET_CLASS>/g, facetClass)
   if (has(backendSearchConfig[resultClass], 'facetClassPredicate')) {

@@ -111,7 +111,7 @@
         "yasguiParams": {
             "contentTypeConstruct": "text/turtle",
             "contentTypeSelect": "application/sparql-results+json",
-            "endpoint": "https://ldf.fi/mmm/sparql",
+            "endpoint": "http://vkg:8080/sparql",
             "requestMethod": "POST",
             "tabTitle": "Exported query"
         }

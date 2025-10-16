@@ -120,7 +120,7 @@ export const getFacet = async ({
       : ''
   )
   if (facetConfig.facetType === 'hierarchical') {
-    q = q.replace('<ORDER_BY>', '# no need for ordering')
+    q = q.replaceAll('<ORDER_BY>', '# no need for ordering')
 
     if (facetConfig.maxHierarchyLevel) {
       q = q.replace(/<HIERARCHY>/g, generateHierarchyBlock({ depth: facetConfig.maxHierarchyLevel }))
@@ -134,7 +134,7 @@ export const getFacet = async ({
       `)
     }
   } else {
-    q = q.replace('<ORDER_BY>', `ORDER BY ${sortDirection}(?${sortBy})`)
+    q = q.replaceAll('<ORDER_BY>', `ORDER BY ${sortDirection}(?${sortBy})`)
     q = q.replace(/<PREDICATE>/g, facetConfig.predicate)
     q = q.replace('<PARENTS>', ' # no parents')
   }
