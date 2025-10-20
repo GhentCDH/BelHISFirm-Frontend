@@ -243,6 +243,20 @@
             "min": null,
             "predicate": "bhf:registeredCapital",
             "sortByPredicate": "bhf:registeredCapital"
+        },
+        "address": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "bhf:hasAddress/bhf:city",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "bhf:hasAddress/bhf:city",
+            "sortDirection": "desc",
+            "literal": true
         }
     }
 }
