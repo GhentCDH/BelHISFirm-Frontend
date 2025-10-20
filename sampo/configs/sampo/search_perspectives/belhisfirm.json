@@ -230,12 +230,19 @@
             "filterType": "dateNoTimespanFilter",
             "max": null,
             "min": null,
-            "startProperty": "bhf:dateOfFounding",
-            "endProperty": "bhf:dateOfFounding",
             "predicate": "bhf:dateOfFounding",
             "sortByAscPredicate": "bhf:dateOfFounding",
             "sortByDescPredicate": "bhf:dateOfFounding",
             "sortByPredicate": "bhf:dateOfFounding"
+        },
+        "registeredCapital": {
+            "containerClass": "four",
+            "facetType": "integer",
+            "filterType": "integerFilterRange",
+            "max": null,
+            "min": null,
+            "predicate": "bhf:registeredCapital",
+            "sortByPredicate": "bhf:registeredCapital"
         }
     }
 }
