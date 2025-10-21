@@ -63,6 +63,25 @@ export const companyProperties = `
   }
 `
 
+export const facetResultSetQueryBelhisfirm = `
+  SELECT *
+  WHERE {
+    {
+      SELECT DISTINCT * {
+        <FILTER>
+        VALUES ?facetClass { <FACET_CLASS> }
+        ?id <FACET_CLASS_PREDICATE> ?facetClass .
+        <ORDER_BY_TRIPLE>
+      }
+      <ORDER_BY>
+      <PAGE>
+    }
+    FILTER(BOUND(?id))
+    <RESULT_SET_PROPERTIES>
+  }
+  <ORDER_BY>
+`
+
 export const knowledgeGraphMetadataQuery = `
   SELECT * 
   WHERE {

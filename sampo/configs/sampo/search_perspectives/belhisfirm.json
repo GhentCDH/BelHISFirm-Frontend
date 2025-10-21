@@ -6,6 +6,9 @@
         "prefixesFile": "SparqlQueriesPrefixes.js",
         "defaultSparql": true
     },
+    "generalQueries": {
+        "facetResultSetQuery": "facetResultSetQueryBelhisfirm"
+    },
     "sparqlQueriesFile": "SparqlQueriesBelhisfirm.js",
     "baseURI": "http://belhisfirm.be/resource",
     "URITemplate": "<BASE_URI>/company/<LOCAL_ID>",
