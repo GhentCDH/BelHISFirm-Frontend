@@ -172,23 +172,23 @@ class FacetBar extends React.Component {
             maxLabel={intl.get('facetBar.max')}
           />
         )
-      break
+        break
       case 'dateNoTimespanFilter':
         facetComponent = (
-            <SliderFacet
-                facetID={facetID}
-                facet={facet}
-                facetFilter={null}
-                facetLabel={label}
-                facetClass={this.props.facetClass}
-                fetchFacet={this.props.fetchFacet}
-                someFacetIsFetching={someFacetIsFetching}
-                updateFacetOption={this.props.updateFacetOption}
-                showError={this.props.showError}
-                dataType='ISOString'
-                minLabel={intl.get('facetBar.min')}
-                maxLabel={intl.get('facetBar.max')}
-            />
+          <SliderFacet
+            facetID={facetID}
+            facet={facet}
+            facetFilter={null}
+            facetLabel={label}
+            facetClass={this.props.facetClass}
+            fetchFacet={this.props.fetchFacet}
+            someFacetIsFetching={someFacetIsFetching}
+            updateFacetOption={this.props.updateFacetOption}
+            showError={this.props.showError}
+            dataType='ISOString'
+            minLabel={intl.get('facetBar.min')}
+            maxLabel={intl.get('facetBar.max')}
+          />
         )
         break
       case 'integerFilter':

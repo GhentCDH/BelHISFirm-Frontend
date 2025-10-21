@@ -275,8 +275,7 @@ const generateDateNoTimespanFilter = ({
   inverse
 }) => {
   const facetConfig = backendSearchConfig[facetClass].facets[facetID]
-  const start = values.start
-  const end = values.end
+  const { start, end } = values
   let datefilter = ''
   if (start === '') {
     datefilter = `?value <= "${end}"^^xsd:date`

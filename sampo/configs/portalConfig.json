@@ -4,14 +4,9 @@
     "staticsUrl": "",
     "perspectives": {
         "searchPerspectives": [
-            "perspective1",
             "belhisfirm"
         ],
         "onlyInstancePages": [
-            "manuscripts",
-            "collections",
-            "works",
-            "actors"
         ]
     },
     "localeConfig": {

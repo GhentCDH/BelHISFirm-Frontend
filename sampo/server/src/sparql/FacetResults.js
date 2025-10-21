@@ -118,7 +118,6 @@ export const getAllResults = ({
   const finalPerspectiveID = perspectiveID || facetClass
   const perspectiveConfig = backendSearchConfig[finalPerspectiveID]
   if (perspectiveConfig === undefined) {
-    console.log(`Error: config not found for perspective "${finalPerspectiveID}"`)
     return Promise.resolve({
       data: null,
       sparqlQuery: ''
