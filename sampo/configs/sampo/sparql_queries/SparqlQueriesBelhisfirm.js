@@ -5,6 +5,7 @@ export const companyProperties = `
     BIND(?companyName__id as ?companyName__prefLabel)
     BIND(?id as ?uri__id)
     BIND(?id as ?uri__prefLabel)
+    BIND(CONCAT("/belhisfirm/page/", STRAFTER(STR(?id), "company/")) AS ?companyName__dataProviderUrl)
   }
   UNION
   {

@@ -7,7 +7,7 @@
         "defaultSparql": true
     },
     "sparqlQueriesFile": "SparqlQueriesBelhisfirm.js",
-    "baseURI": "http://belhisfirm/resource",
+    "baseURI": "http://belhisfirm.be/resource",
     "URITemplate": "<BASE_URI>/company/<LOCAL_ID>",
     "facetClass": "bhf:Company",
     "frontPageImage": "main_page/works-452x262.jpg",
