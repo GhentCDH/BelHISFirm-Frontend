@@ -14,19 +14,20 @@
 @base <http://belhisfirm.be/ontology> .
 
 <http://belhisfirm.be/ontology>
-    rdf:type        owl:Ontology ;
-    rdfs:label      "BellHisFirm Ontology"@en ;
-    rdfs:comment    "Ontology for Belgian Historical Firm Data (SCOB)"@en ;
-    dct:creator     "BellHisFirm Project" ;
-    dct:description "An ontology for representing Belgian historical corporation data, persons, and their relationships"@en .
+    rdf:type     owl:Ontology ;
+    rdfs:label   "BellHisFirm Ontology"@en ;
+    rdfs:comment "Ontology for Belgian Historical Firm Data (SCOB)"@en ;
+    dct:creator  "BellHisFirm Project" ;
+    dct:description
+                 "An ontology for representing Belgian historical corporation data, persons, and their relationships"@en .
 
 #################################################################
 #    Classes
 #################################################################
 
 bhf:PropertyClass
-    rdf:type owl:Class ;
-    rdfs:label "belhisfirm property class"@en ;
+    rdf:type     owl:Class ;
+    rdfs:label   "belhisfirm property class"@en ;
     rdfs:comment "Generic property class for properties of corporations."@en .
 
 ### Corporation Classes
@@ -44,52 +45,65 @@ bhf:Address
     rdfs:comment    "Physical address of a corporation"@en .
 
 bhf:LegalForm
-    rdf:type     owl:Class ;
+    rdf:type        owl:Class ;
     rdfs:subClassOf bhf:PropertyClass ;
-    rdfs:label   "Legal Form"@en, "Juridisch Statuut"@nl ;
-    rdfs:comment "Legal Form of a corporation within a certain timespan"@en .
+    rdfs:label      "Legal Form"@en, "Juridisch Statuut"@nl ;
+    rdfs:comment    "Legal Form of a corporation within a certain timespan"@en .
 
 bhf:CorporationName
-    rdf:type     owl:Class ;
+    rdf:type        owl:Class ;
     rdfs:subClassOf bhf:PropertyClass ;
-    rdfs:label   "Corporation Name"@en, "Bedrijfsnaam"@nl ;
-    rdfs:comment "Legal name of a corporation within a certain timespan"@en .
-
+    rdfs:label      "Corporation Name"@en, "Bedrijfsnaam"@nl ;
+    rdfs:comment    "Legal name of a corporation within a certain timespan"@en .
 
 ### General properties
 bhf:startDate
-    rdf:type owl:DatatypeProperty ;
-    rdfs:domain bhf:PropertyClass ;
-    rdfs:range xsd:date ;
-    rdfs:label "start date"@en, "start datum"@nl ;
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:PropertyClass ;
+    rdfs:range   xsd:date ;
+    rdfs:label   "start date"@en, "start datum"@nl ;
     rdfs:comment "Start date of when a property became valid."@en .
 
 bhf:endDate
-    rdf:type owl:DatatypeProperty ;
-    rdfs:domain bhf:PropertyClass ;
-    rdfs:range xsd:date ;
-    rdfs:label "end date"@en, "einde datum"@nl ;
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:PropertyClass ;
+    rdfs:range   xsd:date ;
+    rdfs:label   "end date"@en, "einde datum"@nl ;
     rdfs:comment "end date of when a property became valid."@en .
 
 bhf:label
-    rdf:type owl:DatatypeProperty ;
+    rdf:type           owl:DatatypeProperty ;
     rdfs:subPropertyOf rdfs:label ;
-    rdfs:domain bhf:PropertyClass ;
-    rdfs:range xsd:date ;
-    rdfs:label "Label"@en, "Label"@nl ;
-    rdfs:comment "String representation of property"@en .
+    rdfs:domain        bhf:PropertyClass ;
+    rdfs:range         xsd:string ;
+    rdfs:label         "Label"@en, "Label"@nl ;
+    rdfs:comment       "String representation of property"@en .
+
+bhf:source
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:PropertyClass ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Source"@en, "Bron"@nl ;
+    rdfs:comment "Source of the property"@en .
+
+bhf:comments
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:LegalForm ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Comments"@en, "Extra info"@nl ;
+    rdfs:comment "Extra info on the property"@en .
 
 
 ### Corporation properties
-bhf:corporationName
-    rdf:type     owl:DatatypeProperty ;
+bhf:hasName
+    rdf:type     owl:ObjectProperty ;
     rdfs:domain  bhf:Corporation ;
     rdfs:range   bhf:CorporationName ;
     rdfs:label   "corporation name"@en, "bedrijfsnaam"@nl ;
     rdfs:comment "The legal name of the corporation"@en .
 
-bhf:legalForm
-    rdf:type     owl:DatatypeProperty ;
+bhf:hasLegalForm
+    rdf:type     owl:ObjectProperty ;
     rdfs:domain  bhf:Corporation ;
     rdfs:range   bhf:LegalForm ;
     rdfs:label   "legal form"@en, "rechtsvorm"@nl ;
@@ -144,25 +158,6 @@ bhf:country
 
 
 ### LegalForm properties
-bhf:legalFormSource
-    rdf:type owl:DatatypeProperty ;
-    rdfs:domain bhf:LegalForm ;
-    rdfs:range xsd:string ;
-    rdfs:label "Legal Form Source"@en, "Juridisch statuut Bron"@nl ;
-    rdfs:comment "Source of the legal form"@en .
-
-bhf:legalFormComments
-    rdf:type owl:DatatypeProperty ;
-    rdfs:domain bhf:LegalForm ;
-    rdfs:range xsd:string ;
-    rdfs:label "Legal Form Comments"@en, "Juridisch Statuut Info"@nl ;
-    rdfs:comment "Extra comments on the legal form"@en .
 
 
 ### CorporationName properties
-bhf:corporationNameSource
-    rdf:type owl:DatatypeProperty ;
-    rdfs:domain bhf:CorporationName ;
-    rdfs:range xsd:string ;
-    rdfs:label "Corporation name source"@en, "Bedrijfsnaam bron"@nl ;
-    rdfs:comment "Source of the corporation name"@en .

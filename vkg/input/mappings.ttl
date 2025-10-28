@@ -1,0 +1,211 @@
+@prefix :       <http://belhisfirm.be/resource/> .
+@prefix bhf:    <http://belhisfirm.be/ontology#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf:   <http://xmlns.com/foaf/0.1/> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix rov:    <http://www.w3.org/ns/regorg#> .
+@prefix schema: <http://schema.org/> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix vcard:  <http://www.w3.org/2006/vcard/ns#> .
+@prefix rr:     <http://www.w3.org/ns/r2rml#> .
+
+#################
+# CORPORATION
+##################
+:CORPORATION-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """SELECT id FROM scoball.corporation""" ] ;
+    rr:subjectMap   [ rr:template "corporation/{id}" ;
+                      rr:class    bhf:Corporation ] .
+
+:CORPORATION-NAME
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery
+                                    """SELECT corporation, id FROM scoball.corporation_name WHERE name IS NOT NULL""" ] ;
+    rr:subjectMap         [ rr:template "corporation/{corporation}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasName ;
+                            rr:objectMap [ rr:template "corporationName/{id}" ] ] .
+
+:CORPORATION-LEGAL-FORM
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery
+                                    """SELECT id, corporation FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
+    rr:subjectMap         [ rr:template "corporation/{corporation}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasLegalForm ;
+                            rr:objectMap [ rr:template "legalForm/{id}" ] ] .
+
+:CORPORATION-LOCATION
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, corporation FROM scoball.corporation_location""" ] ;
+    rr:subjectMap         [ rr:template "corporation/{corporation}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasAddress ;
+                            rr:objectMap [ rr:template "address/{id}" ] ] .
+
+:CORPORATION-PROPERTIES
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                                            SELECT id,
+                                            CASE
+                                                WHEN startdate <= DATE '1000-12-31' THEN NULL
+                                                ELSE startdate
+                                            END AS startdate,
+                                            CASE
+                                                WHEN enddate >= DATE '3999-01-01' THEN NULL
+                                                ELSE enddate
+                                            END AS enddate
+                                            FROM scoball.corporation
+                                       """ ] ;
+    rr:subjectMap         [ rr:template "corporation/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:dateOfFounding ;
+                            rr:objectMap    [ rr:column   "startdate" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:dateOfDissolution ;
+                            rr:objectMap    [ rr:column   "enddate" ;
+                                           rr:datatype xsd:date ] ] .
+
+
+###################
+# COROPORATION NAME
+###################
+
+:CORPORATION-NAME-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """SELECT id FROM scoball.corporation_name WHERE name IS NOT NULL""" ] ;
+    rr:subjectMap   [ rr:template "corporationName/{id}" ;
+                      rr:class    bhf:CorporationName ] .
+
+:CORPORATION-NAME-PROPERTIES
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                                        SELECT
+                                            id,
+                                            name,
+                                            CASE
+                                                WHEN startdate <= DATE '1000-12-31' THEN NULL
+                                                ELSE startdate
+                                            END AS startdate,
+                                            CASE
+                                                WHEN enddate >= DATE '3999-01-01' THEN NULL
+                                                ELSE enddate
+                                            END AS enddate,
+                                            source,
+                                            comments
+                                        FROM scoball.corporation_name
+                                        WHERE name IS NOT NULL
+                                        """ ] ;
+    rr:subjectMap         [ rr:template "corporationName/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:startDate ;
+                            rr:objectMap [ rr:column   "startdate" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:endDate ;
+                            rr:objectMap [ rr:column   "enddate" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:source ;
+                            rr:objectMap [ rr:column   "source" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:comments ;
+                            rr:objectMap [ rr:column   "comments" ;
+                                           rr:datatype xsd:string ] ] .
+
+
+##################
+# LEGAL FORM
+#################
+
+:LEGAL-FORM-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery
+                              """SELECT id FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
+    rr:subjectMap   [ rr:template "legalForm/{id}" ;
+                      rr:class    bhf:LegalForm ] .
+
+:LEGAL-FORM-PROPERTIES
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                                 SELECT
+                                    id,
+                                    juridisch_statuut,
+                                    CASE
+                                        WHEN startdate <= DATE '1000-12-31' THEN NULL
+                                        ELSE startdate
+                                    END AS startdate,
+                                    CASE
+                                        WHEN enddate >= DATE '3999-01-01' THEN NULL
+                                        ELSE enddate
+                                    END AS enddate,
+                                    source,
+                                    comments
+                                FROM scoball.corporation_juridisch_statuut
+                                WHERE juridisch_statuut IS NOT NULL
+    """ ] ;
+    rr:subjectMap         [ rr:template "legalForm/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap    [ rr:column   "juridisch_statuut" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:startDate ;
+                            rr:objectMap    [ rr:column   "startdate" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:endDate ;
+                            rr:objectMap    [ rr:column   "enddate" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:source ;
+                            rr:objectMap    [ rr:column   "source" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:comments ;
+                            rr:objectMap    [ rr:column   "comments" ;
+                                           rr:datatype xsd:string ] ] .
+
+
+###################
+# LOCATION
+##################
+:LOCATION-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """SELECT id FROM scoball.corporation_location""" ] ;
+    rr:subjectMap   [ rr:template "location/{id}" ;
+                      rr:class    bhf:Address ] .
+
+:LOCATION-PROPERTIES
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                                SELECT
+                                    id,
+                                    address,
+                                    city,
+                                    country,
+                                    CASE
+                                        WHEN startdate <= DATE '1000-12-31' THEN NULL
+                                        ELSE startdate
+                                    END AS startdate,
+                                    CASE
+                                        WHEN enddate >= DATE '3999-01-01' THEN NULL
+                                        ELSE enddate
+                                    END AS enddate
+                                FROM scoball.corporation_location
+    """ ] ;
+    rr:subjectMap         [ rr:template "location/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:streetAddress ;
+                            rr:objectMap    [ rr:column   "address" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:city ;
+                            rr:objectMap    [ rr:column   "city" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:country ;
+                            rr:objectMap    [ rr:column   "country" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:startDate ;
+                            rr:objectMap    [ rr:column   "startdate" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:endDate ;
+                            rr:objectMap    [ rr:column   "enddate" ;
+                                           rr:datatype xsd:date ] ] .
+
+
+
+
