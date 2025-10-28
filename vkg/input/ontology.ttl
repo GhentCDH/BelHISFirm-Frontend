@@ -18,206 +18,107 @@
     rdfs:label      "BellHisFirm Ontology"@en ;
     rdfs:comment    "Ontology for Belgian Historical Firm Data (SCOB)"@en ;
     dct:creator     "BellHisFirm Project" ;
-    dct:description "An ontology for representing Belgian historical company data, persons, and their relationships"@en .
+    dct:description "An ontology for representing Belgian historical corporation data, persons, and their relationships"@en .
 
 #################################################################
 #    Classes
 #################################################################
 
-### Company Classes
-bhf:Company
+bhf:PropertyClass
+    rdf:type owl:Class ;
+    rdfs:label "belhisfirm property class"@en ;
+    rdfs:comment "Generic property class for properties of corporations."@en .
+
+### Corporation Classes
+bhf:Corporation
     rdf:type        owl:Class ;
     rdfs:subClassOf org:Organization, rov:RegisteredOrganization ;
-    rdfs:label      "Company"@en, "Bedrijf"@nl ;
+    rdfs:label      "Corporation"@en, "Bedrijf"@nl ;
     rdfs:comment    "A business organization registered in Belgium"@en .
-
-### Person Classes
-bhf:Person
-    rdf:type        owl:Class ;
-    rdfs:subClassOf foaf:Person ;
-    rdfs:label      "Person"@en, "Persoon"@nl ;
-    rdfs:comment    "A person associated with Belgian companies"@en .
-
-bhf:Director
-    rdf:type        owl:Class ;
-    rdfs:subClassOf bhf:Person ;
-    rdfs:label      "Director"@en, "Directeur"@nl ;
-    rdfs:comment    "A person serving as a company director"@en .
-
-bhf:Founder
-    rdf:type        owl:Class ;
-    rdfs:subClassOf bhf:Person ;
-    rdfs:label      "Founder"@en, "Oprichter"@nl ;
-    rdfs:comment    "A person who founded a company"@en .
-
-bhf:Shareholder
-    rdf:type        owl:Class ;
-    rdfs:subClassOf bhf:Person ;
-    rdfs:label      "Shareholder"@en, "Aandeelhouder"@nl ;
-    rdfs:comment    "A person who holds shares in a company"@en .
 
 ### Address and Location
 bhf:Address
     rdf:type        owl:Class ;
-    rdfs:subClassOf vcard:Address ;
+    rdfs:subClassOf vcard:Address, bhf:PropertyClass ;
     rdfs:label      "Address"@en, "Adres"@nl ;
-    rdfs:comment    "Physical address of a company"@en .
+    rdfs:comment    "Physical address of a corporation"@en .
 
-#################################################################
-#    Object Properties
-#################################################################
+bhf:LegalForm
+    rdf:type     owl:Class ;
+    rdfs:subClassOf bhf:PropertyClass ;
+    rdfs:label   "Legal Form"@en, "Juridisch Statuut"@nl ;
+    rdfs:comment "Legal Form of a corporation within a certain timespan"@en .
 
-### Relationships between persons and companies
-bhf:hasDirector
-    rdf:type     owl:ObjectProperty ;
-    rdfs:domain  bhf:Company ;
-    rdfs:range   bhf:Person ;
-    rdfs:label   "has director"@en, "heeft directeur"@nl ;
-    rdfs:comment "Links a company to a person serving as director"@en .
+bhf:CorporationName
+    rdf:type     owl:Class ;
+    rdfs:subClassOf bhf:PropertyClass ;
+    rdfs:label   "Corporation Name"@en, "Bedrijfsnaam"@nl ;
+    rdfs:comment "Legal name of a corporation within a certain timespan"@en .
 
-bhf:hasFounder
-    rdf:type     owl:ObjectProperty ;
-    rdfs:domain  bhf:Company ;
-    rdfs:range   bhf:Person ;
-    rdfs:label   "has founder"@en, "heeft oprichter"@nl ;
-    rdfs:comment "Links a company to its founder"@en .
 
-bhf:hasShareholder
-    rdf:type     owl:ObjectProperty ;
-    rdfs:domain  bhf:Company ;
-    rdfs:range   bhf:Person ;
-    rdfs:label   "has shareholder"@en, "heeft aandeelhouder"@nl ;
-    rdfs:comment "Links a company to a shareholder"@en .
+### General properties
+bhf:startDate
+    rdf:type owl:DatatypeProperty ;
+    rdfs:domain bhf:PropertyClass ;
+    rdfs:range xsd:date ;
+    rdfs:label "start date"@en, "start datum"@nl ;
+    rdfs:comment "Start date of when a property became valid."@en .
 
-bhf:worksFor
-    rdf:type     owl:ObjectProperty ;
-    rdfs:domain  bhf:Person ;
-    rdfs:range   bhf:Company ;
-    rdfs:label   "works for"@en, "werkt voor"@nl ;
-    rdfs:comment "Links a person to a company they work for"@en .
+bhf:endDate
+    rdf:type owl:DatatypeProperty ;
+    rdfs:domain bhf:PropertyClass ;
+    rdfs:range xsd:date ;
+    rdfs:label "end date"@en, "einde datum"@nl ;
+    rdfs:comment "end date of when a property became valid."@en .
 
-bhf:founded
-    rdf:type     owl:ObjectProperty ;
-    rdfs:domain  bhf:Person ;
-    rdfs:range   bhf:Company ;
-    rdfs:label   "founded"@en, "opgericht"@nl ;
-    rdfs:comment "Links a person to a company they founded"@en .
+bhf:label
+    rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf rdfs:label ;
+    rdfs:domain bhf:PropertyClass ;
+    rdfs:range xsd:date ;
+    rdfs:label "Label"@en, "Label"@nl ;
+    rdfs:comment "String representation of property"@en .
 
-#################################################################
-#    Data Properties
-#################################################################
 
-### Company properties
-bhf:companyName
+### Corporation properties
+bhf:corporationName
     rdf:type     owl:DatatypeProperty ;
-    rdfs:subPropertyOf foaf:name ;
-    rdfs:domain  bhf:Company ;
-    rdfs:range   xsd:string ;
-    rdfs:label   "company name"@en, "bedrijfsnaam"@nl ;
-    rdfs:comment "The legal name of the company"@en .
+    rdfs:domain  bhf:Corporation ;
+    rdfs:range   bhf:CorporationName ;
+    rdfs:label   "corporation name"@en, "bedrijfsnaam"@nl ;
+    rdfs:comment "The legal name of the corporation"@en .
 
 bhf:legalForm
     rdf:type     owl:DatatypeProperty ;
-    rdfs:domain  bhf:Company ;
-    rdfs:range   xsd:string ;
+    rdfs:domain  bhf:Corporation ;
+    rdfs:range   bhf:LegalForm ;
     rdfs:label   "legal form"@en, "rechtsvorm"@nl ;
-    rdfs:comment "The legal form of the company (e.g., SA, NV)"@en .
+    rdfs:comment "The legal form of the corporation (e.g., SA, NV)"@en .
 
 bhf:dateOfFounding
-    rdf:type     owl:DatatypeProperty ;
+    rdf:type           owl:DatatypeProperty ;
     rdfs:subPropertyOf dct:created ;
-    rdfs:domain  bhf:Company ;
-    rdfs:range   xsd:date ;
-    rdfs:label   "date of founding"@en, "oprichtingsdatum"@nl ;
-    rdfs:comment "The date when the company was founded"@en .
+    rdfs:domain        bhf:Corporation ;
+    rdfs:range         xsd:date ;
+    rdfs:label         "date of founding"@en, "oprichtingsdatum"@nl ;
+    rdfs:comment       "The date when the corporation was founded"@en .
 
 bhf:dateOfDissolution
     rdf:type     owl:DatatypeProperty ;
-    rdfs:domain  bhf:Company ;
+    rdfs:domain  bhf:Corporation ;
     rdfs:range   xsd:date ;
     rdfs:label   "date of dissolution"@en, "ontbindingsdatum"@nl ;
-    rdfs:comment "The date when the company was dissolved"@en .
-
-bhf:businessSector
-    rdf:type     owl:DatatypeProperty ;
-    rdfs:domain  bhf:Company ;
-    rdfs:range   xsd:string ;
-    rdfs:label   "business sector"@en, "bedrijfssector"@nl ;
-    rdfs:comment "The business sector or industry of the company"@en .
-
-bhf:registeredCapital
-    rdf:type     owl:DatatypeProperty ;
-    rdfs:domain  bhf:Company ;
-    rdfs:range   xsd:decimal ;
-    rdfs:label   "registered capital"@en, "maatschappelijk kapitaal"@nl ;
-    rdfs:comment "The registered capital of the company"@en .
+    rdfs:comment "The date when the corporation was dissolved"@en .
 
 bhf:hasAddress
     rdf:type           owl:ObjectProperty ;
     rdfs:subPropertyOf vcard:hasAddress ;
     rdfs:subPropertyOf schema:address ;
-    rdfs:domain        bhf:Company ;
+    rdfs:domain        bhf:Corporation ;
     rdfs:range         bhf:Address ;
     rdfs:label         "has address"@en, "heeft adres"@nl ;
-    rdfs:comment       "Links a company to its physical address"@en .
+    rdfs:comment       "Links a corporation to its physical address"@en .
 
-### Person properties (using FOAF where appropriate)
-# foaf:firstName, foaf:lastName, foaf:name are used from FOAF ontology
-
-bhf:dateOfBirth
-    rdf:type     owl:DatatypeProperty ;
-    rdfs:domain  bhf:Person ;
-    rdfs:range   xsd:date ;
-    rdfs:label   "date of birth"@en, "geboortedatum"@nl ;
-    rdfs:comment "The date when the person was born"@en .
-
-bhf:dateOfDeath
-    rdf:type     owl:DatatypeProperty ;
-    rdfs:domain  bhf:Person ;
-    rdfs:range   xsd:date ;
-    rdfs:label   "date of death"@en, "overlijdensdatum"@nl ;
-    rdfs:comment "The date when the person died"@en .
-
-bhf:placeOfBirth
-    rdf:type     owl:DatatypeProperty ;
-    rdfs:domain  bhf:Person ;
-    rdfs:range   xsd:string ;
-    rdfs:label   "place of birth"@en, "geboorteplaats"@nl ;
-    rdfs:comment "The place where the person was born"@en .
-
-bhf:nationality
-    rdf:type     owl:DatatypeProperty ;
-    rdfs:domain  bhf:Person ;
-    rdfs:range   xsd:string ;
-    rdfs:label   "nationality"@en, "nationaliteit"@nl ;
-    rdfs:comment "The nationality of the person"@en .
-
-### Role properties
-bhf:role
-    rdf:type     owl:DatatypeProperty ;
-    rdfs:domain  bhf:Person ;
-    rdfs:range   xsd:string ;
-    rdfs:label   "role"@en, "rol"@nl ;
-    rdfs:comment "The role a person has in a company"@en .
-
-bhf:startDate
-    rdf:type     owl:DatatypeProperty ;
-    rdfs:range   xsd:date ;
-    rdfs:label   "start date"@en, "begindatum"@nl ;
-    rdfs:comment "The date when a role or relationship started"@en .
-
-bhf:endDate
-    rdf:type     owl:DatatypeProperty ;
-    rdfs:range   xsd:date ;
-    rdfs:label   "end date"@en, "einddatum"@nl ;
-    rdfs:comment "The date when a role or relationship ended"@en .
-
-bhf:sharePercentage
-    rdf:type     owl:DatatypeProperty ;
-    rdfs:domain  bhf:Shareholder ;
-    rdfs:range   xsd:decimal ;
-    rdfs:label   "share percentage"@en, "aandelenpercentage"@nl ;
-    rdfs:comment "The percentage of shares held"@en .
 
 ### Address properties
 bhf:streetAddress
@@ -228,22 +129,40 @@ bhf:streetAddress
     rdfs:label         "street address"@en, "straatadres"@nl .
 
 bhf:city
-    rdf:type    owl:DatatypeProperty ;
+    rdf:type           owl:DatatypeProperty ;
     rdfs:subPropertyOf vcard:locality ;
-    rdfs:domain bhf:Address ;
-    rdfs:range  xsd:string ;
-    rdfs:label  "city"@en, "stad"@nl .
-
-bhf:postalCode
-    rdf:type    owl:DatatypeProperty ;
-    rdfs:subPropertyOf vcard:postal-code ;
-    rdfs:domain bhf:Address ;
-    rdfs:range  xsd:string ;
-    rdfs:label  "postal code"@en, "postcode"@nl .
+    rdfs:domain        bhf:Address ;
+    rdfs:range         xsd:string ;
+    rdfs:label         "city"@en, "stad"@nl .
 
 bhf:country
-    rdf:type    owl:DatatypeProperty ;
+    rdf:type           owl:DatatypeProperty ;
     rdfs:subPropertyOf vcard:country-name ;
-    rdfs:domain bhf:Address ;
-    rdfs:range  xsd:string ;
-    rdfs:label  "country"@en, "land"@nl .
+    rdfs:domain        bhf:Address ;
+    rdfs:range         xsd:string ;
+    rdfs:label         "country"@en, "land"@nl .
+
+
+### LegalForm properties
+bhf:legalFormSource
+    rdf:type owl:DatatypeProperty ;
+    rdfs:domain bhf:LegalForm ;
+    rdfs:range xsd:string ;
+    rdfs:label "Legal Form Source"@en, "Juridisch statuut Bron"@nl ;
+    rdfs:comment "Source of the legal form"@en .
+
+bhf:legalFormComments
+    rdf:type owl:DatatypeProperty ;
+    rdfs:domain bhf:LegalForm ;
+    rdfs:range xsd:string ;
+    rdfs:label "Legal Form Comments"@en, "Juridisch Statuut Info"@nl ;
+    rdfs:comment "Extra comments on the legal form"@en .
+
+
+### CorporationName properties
+bhf:corporationNameSource
+    rdf:type owl:DatatypeProperty ;
+    rdfs:domain bhf:CorporationName ;
+    rdfs:range xsd:string ;
+    rdfs:label "Corporation name source"@en, "Bedrijfsnaam bron"@nl ;
+    rdfs:comment "Source of the corporation name"@en .

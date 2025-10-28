@@ -1,0 +1,146 @@
+[PrefixDeclaration]
+:		http://belhisfirm.be/resource/
+bhf:		http://belhisfirm.be/ontology#
+owl:		http://www.w3.org/2002/07/owl#
+rdf:		http://www.w3.org/1999/02/22-rdf-syntax-ns#
+rdfs:		http://www.w3.org/2000/01/rdf-schema#
+xsd:		http://www.w3.org/2001/XMLSchema#
+foaf:		http://xmlns.com/foaf/0.1/
+org:		http://www.w3.org/ns/org#
+rov:		http://www.w3.org/ns/regorg#
+schema:		http://schema.org/
+dct:		http://purl.org/dc/terms/
+vcard:		http://www.w3.org/2006/vcard/ns#
+obda:		https://w3id.org/obda/vocabulary#
+
+[MappingDeclaration] @collection [[
+
+mappingId	COMPANY-TYPE
+target		:company/{id} a bhf:Company .
+source		SELECT id FROM companies
+
+mappingId	COMPANY-NAME
+target		:company/{id} bhf:companyName {company_name}^^xsd:string .
+source		SELECT id, company_name FROM companies
+
+mappingId	COMPANY-LEGAL-FORM
+target		:company/{id} bhf:legalForm {legal_form}^^xsd:string .
+source		SELECT id, legal_form FROM companies WHERE legal_form IS NOT NULL
+
+mappingId	COMPANY-FOUNDING-DATE
+target		:company/{id} bhf:dateOfFounding {date_of_founding}^^xsd:date .
+source		SELECT id, date_of_founding FROM companies WHERE date_of_founding IS NOT NULL
+
+mappingId	COMPANY-DISSOLUTION-DATE
+target		:company/{id} bhf:dateOfDissolution {date_of_dissolution}^^xsd:date .
+source		SELECT id, date_of_dissolution FROM companies WHERE date_of_dissolution IS NOT NULL
+
+mappingId	COMPANY-BUSINESS-SECTOR
+target		:company/{id} bhf:businessSector {business_sector}^^xsd:string .
+source		SELECT id, business_sector FROM companies WHERE business_sector IS NOT NULL
+
+mappingId	COMPANY-REGISTERED-CAPITAL
+target		:company/{id} bhf:registeredCapital {registered_capital}^^xsd:decimal .
+source		SELECT id, registered_capital FROM companies WHERE registered_capital IS NOT NULL
+
+mappingId	COMPANY-LOCATION
+target		:company/{id} bhf:hasAddress :address/{id} .
+source		SELECT id FROM companies WHERE street_address IS NOT NULL
+
+mappingId	ADDRESS-TYPE
+target		:address/{id} a bhf:Address .
+source		SELECT id FROM companies WHERE street_address IS NOT NULL
+
+mappingId	ADDRESS-PROPERTIES
+target		:address/{id} bhf:streetAddress {street_address}^^xsd:string ; bhf:city {city}^^xsd:string ; bhf:postalCode {postal_code}^^xsd:string ; bhf:country {country}^^xsd:string .
+source		SELECT id, street_address, city, postal_code, country FROM companies WHERE street_address IS NOT NULL
+
+mappingId	PERSON-TYPE
+target		:person/{id} a bhf:Person , foaf:Person .
+source		SELECT id FROM persons
+
+mappingId	PERSON-NAME
+target		:person/{id} foaf:name {full_name}^^xsd:string ; foaf:firstName {first_name}^^xsd:string ; foaf:lastName {last_name}^^xsd:string ; foaf:givenName {first_name}^^xsd:string ; foaf:familyName {last_name}^^xsd:string .
+source		SELECT id, full_name, first_name, last_name FROM persons
+
+mappingId	PERSON-BIRTH-DATE
+target		:person/{id} bhf:dateOfBirth {date_of_birth}^^xsd:date ; schema:birthDate {date_of_birth}^^xsd:date .
+source		SELECT id, date_of_birth FROM persons WHERE date_of_birth IS NOT NULL
+
+mappingId	PERSON-DEATH-DATE
+target		:person/{id} bhf:dateOfDeath {date_of_death}^^xsd:date ; schema:deathDate {date_of_death}^^xsd:date .
+source		SELECT id, date_of_death FROM persons WHERE date_of_death IS NOT NULL
+
+mappingId	PERSON-BIRTH-PLACE
+target		:person/{id} bhf:placeOfBirth {place_of_birth}^^xsd:string ; schema:birthPlace {place_of_birth}^^xsd:string .
+source		SELECT id, place_of_birth FROM persons WHERE place_of_birth IS NOT NULL
+
+mappingId	PERSON-NATIONALITY
+target		:person/{id} bhf:nationality {nationality}^^xsd:string ; schema:nationality {nationality}^^xsd:string .
+source		SELECT id, nationality FROM persons WHERE nationality IS NOT NULL
+
+mappingId	COMPANY-HAS-DIRECTOR
+target		:company/{company_id} bhf:hasDirector :person/{person_id} .
+source		SELECT company_id, person_id FROM company_person WHERE role = 'Director'
+
+mappingId	PERSON-DIRECTOR-OF
+target		:person/{person_id} bhf:worksFor :company/{company_id} ; org:memberOf :company/{company_id} .
+source		SELECT company_id, person_id FROM company_person WHERE role = 'Director'
+
+mappingId	DIRECTOR-TYPE
+target		:person/{person_id} a bhf:Director .
+source		SELECT person_id FROM company_person WHERE role = 'Director'
+
+mappingId	COMPANY-HAS-FOUNDER
+target		:company/{company_id} bhf:hasFounder :person/{person_id} ; dct:creator :person/{person_id} .
+source		SELECT company_id, person_id FROM company_person WHERE role = 'Founder'
+
+mappingId	PERSON-FOUNDED
+target		:person/{person_id} bhf:founded :company/{company_id} .
+source		SELECT company_id, person_id FROM company_person WHERE role = 'Founder'
+
+mappingId	FOUNDER-TYPE
+target		:person/{person_id} a bhf:Founder .
+source		SELECT person_id FROM company_person WHERE role = 'Founder'
+
+mappingId	COMPANY-HAS-SHAREHOLDER
+target		:company/{company_id} bhf:hasShareholder :person/{person_id} .
+source		SELECT company_id, person_id FROM company_person WHERE role = 'Shareholder'
+
+mappingId	SHAREHOLDER-TYPE
+target		:person/{person_id} a bhf:Shareholder .
+source		SELECT person_id FROM company_person WHERE role = 'Shareholder'
+
+mappingId	SHAREHOLDER-PERCENTAGE
+target		:person/{person_id} bhf:sharePercentage {share_percentage}^^xsd:decimal .
+source		SELECT person_id, share_percentage FROM company_person WHERE role = 'Shareholder' AND share_percentage IS NOT NULL
+
+mappingId	ROLE-START-DATE
+target		:relationship/{id} bhf:startDate {start_date}^^xsd:date .
+source		SELECT id, start_date FROM company_person WHERE start_date IS NOT NULL
+
+mappingId	ROLE-END-DATE
+target		:relationship/{id} bhf:endDate {end_date}^^xsd:date .
+source		SELECT id, end_date FROM company_person WHERE end_date IS NOT NULL
+
+mappingId	PERSON-ROLE
+target		:person/{person_id} bhf:role {role}^^xsd:string .
+source		SELECT person_id, role FROM company_person
+
+mappingId	COMPANY-HAS-MANAGER
+target		:company/{company_id} org:hasMember :person/{person_id} .
+source		SELECT company_id, person_id FROM company_person WHERE role = 'Manager'
+
+mappingId	PERSON-MANAGER-OF
+target		:person/{person_id} bhf:worksFor :company/{company_id} .
+source		SELECT company_id, person_id FROM company_person WHERE role = 'Manager'
+
+mappingId	COMPANY-ORG-TYPE
+target		:company/{id} a org:Organization .
+source		SELECT id FROM companies
+
+mappingId	COMPANY-SCHEMA-TYPE
+target		:company/{id} a schema:Organization , schema:Corporation .
+source		SELECT id FROM companies
+
+]]
