@@ -156,8 +156,3 @@ bhf:country
     rdfs:range         xsd:string ;
     rdfs:label         "country"@en, "land"@nl .
 
-
-### LegalForm properties
-
-
-### CorporationName properties

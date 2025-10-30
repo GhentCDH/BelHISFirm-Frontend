@@ -4,7 +4,8 @@
     "staticsUrl": "",
     "perspectives": {
         "searchPerspectives": [
-            "belhisfirm"
+            "belhisfirm",
+            "scob"
         ],
         "onlyInstancePages": [
         ]

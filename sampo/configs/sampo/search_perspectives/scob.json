@@ -1,7 +1,7 @@
 {
-    "id": "belhisfirm",
+    "id": "scob",
     "endpoint": {
-        "url": "http://vkg:8080/sparql",
+        "url": "http://vkg-scob:8080/sparql",
         "useAuth": false,
         "prefixesFile": "SparqlQueriesPrefixes.js",
         "defaultSparql": true
@@ -9,32 +9,32 @@
     "generalQueries": {
         "facetResultSetQuery": "facetResultSetQueryBelhisfirm"
     },
-    "sparqlQueriesFile": "SparqlQueriesBelhisfirm.js",
+    "sparqlQueriesFile": "SparqlQueriesScob.js",
     "baseURI": "http://belhisfirm.be/resource",
-    "URITemplate": "<BASE_URI>/company/<LOCAL_ID>",
-    "facetClass": "bhf:Company",
-    "frontPageImage": "main_page/works-452x262.jpg",
+    "URITemplate": "<BASE_URI>/corporation/<LOCAL_ID>",
+    "facetClass": "bhf:Corporation",
+    "frontPageImage": "main_page/events-452x262.jpg",
     "searchMode": "faceted-search",
     "enableDynamicLanguageChange": false,
     "defaultActiveFacets": [
-        "companyName"
+        "corporationName"
     ],
     "defaultTab": "table",
     "defaultInstancePageTab": "table",
     "resultClasses": {
-        "belhisfirm": {
+        "scob": {
             "paginatedResultsConfig": {
                 "tabID": 0,
                 "component": "ResultTable",
                 "tabPath": "table",
                 "tabIcon": "CalendarViewDay",
-                "propertiesQueryBlock": "companyProperties",
+                "propertiesQueryBlock": "corporationProperties",
                 "pagesize": 10,
                 "sortBy": null,
                 "sortDirection": null
             },
             "instanceConfig": {
-                "propertiesQueryBlock": "companyProperties",
+                "propertiesQueryBlock": "corporationProperties",
                 "instancePageResultClasses": {
                     "instancePageTable": {
                         "tabID": 0,
@@ -54,10 +54,10 @@
             "externalLink": true,
             "sortValues": true,
             "numberedList": false,
-            "onlyOnInstancePage": true
+            "minWidth": 300
         },
         {
-            "id": "companyName",
+            "id": "corporationName",
             "valueType": "object",
             "makeLink": true,
             "externalLink": false,
@@ -66,49 +66,40 @@
             "minWidth": 250
         },
         {
-            "id": "founder",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 200
-        },
-        {
-            "id": "businessSector",
-            "valueType": "object",
-            "makeLink": false,
-            "externalLink": true,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 200
-        },
-        {
-            "id": "director",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 200
-        },
-        {
-            "id": "shareholder",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 200
-        },
-        {
             "id": "legalForm",
             "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200
+        },
+        {
+            "id": "country",
+            "valueType": "object",
             "makeLink": false,
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
             "minWidth": 200
+        },
+        {
+            "id": "city",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200
+        },
+        {
+            "id": "streetAddress",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 300
         },
         {
             "id": "dateOfFounding",
@@ -118,81 +109,18 @@
             "sortValues": true,
             "numberedList": false,
             "minWidth": 200
-        },
-        {
-            "id": "dateOfDissolution",
-            "valueType": "object",
-            "makeLink": false,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 200,
-            "onlyOnInstancePage": true
-        },
-        {
-            "id": "registeredCapital",
-            "valueType": "object",
-            "makeLink": false,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 200
-        },
-        {
-            "id": "address",
-            "valueType": "object",
-            "makeLink": false,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth":250
         }
     ],
     "facets": {
-        "companyName": {
+        "uri": {
+            "sortByPredicate": ""
+        },
+        "corporationName": {
             "containerClass": "one",
             "facetType": "text",
             "filterType": "textFilter",
-            "sortByPredicate": "foaf:name",
-            "textQueryProperty": "foaf:name"
-        },
-        "businessSector": {
-            "containerClass": "ten",
-            "facetType": "list",
-            "filterType": "uriFilter",
-            "predicate": "bhf:businessSector",
-            "pieChartButton": true,
-            "barChartButton": true,
-            "searchField": true,
-            "sortButton": true,
-            "sortBy": "instanceCount",
-            "sortByPredicate": "bhf:businessSector",
-            "sortDirection": "desc",
-            "literal": true
-        },
-        "founder": {
-            "containerClass": "one",
-            "facetType": "text",
-            "filterType": "textFilter",
-            "predicate": "bhf:hasFounder",
-            "sortByPredicate": "bhf:hasFounder/foaf:name",
-            "textQueryProperty": "bhf:hasFounder/foaf:name"
-        },
-        "director": {
-            "containerClass": "one",
-            "facetType": "text",
-            "filterType": "textFilter",
-            "predicate": "bhf:hasDirector",
-            "sortByPredicate": "bhf:hasDirector/foaf:name",
-            "textQueryProperty": "bhf:hasDirector/foaf:name"
-        },
-        "shareholder": {
-            "containerClass": "one",
-            "facetType": "text",
-            "filterType": "textFilter",
-            "predicate": "bhf:hasShareholder",
-            "sortByPredicate": "bhf:hasShareholder/foaf:name",
-            "textQueryProperty": "bhf:hasShareholder/foaf:name"
+            "sortByPredicate": "bhf:hasName/rdfs:label",
+            "textQueryProperty": "bhf:hasName/rdfs:label"
         },
         "legalForm": {
             "containerClass": "ten",
@@ -219,26 +147,17 @@
             "sortByDescPredicate": "bhf:dateOfFounding",
             "sortByPredicate": "bhf:dateOfFounding"
         },
-        "registeredCapital": {
-            "containerClass": "four",
-            "facetType": "integer",
-            "filterType": "integerFilterRange",
-            "max": null,
-            "min": null,
-            "predicate": "bhf:registeredCapital",
-            "sortByPredicate": "bhf:registeredCapital"
-        },
-        "address": {
+        "country": {
             "containerClass": "ten",
             "facetType": "list",
             "filterType": "uriFilter",
-            "predicate": "bhf:hasAddress/bhf:city",
+            "predicate": "bhf:hasAddress/bhf:country",
             "pieChartButton": true,
             "barChartButton": true,
             "searchField": true,
             "sortButton": true,
             "sortBy": "instanceCount",
-            "sortByPredicate": "bhf:hasAddress/bhf:city",
+            "sortByPredicate": "bhf:hasAddress/bhf:country",
             "sortDirection": "desc",
             "literal": true
         }
