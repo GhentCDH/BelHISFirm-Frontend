@@ -18,31 +18,31 @@
 :CORPORATION-TYPE
     a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery """SELECT id FROM scoball.corporation""" ] ;
-    rr:subjectMap   [ rr:template "corporation/{id}" ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/corporation/{id}" ;
                       rr:class    bhf:Corporation ] .
 
 :CORPORATION-NAME
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery
                                     """SELECT corporation, id FROM scoball.corporation_name WHERE name IS NOT NULL""" ] ;
-    rr:subjectMap         [ rr:template "corporation/{corporation}" ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasName ;
-                            rr:objectMap [ rr:template "corporationName/{id}" ] ] .
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/corporationName/{id}" ] ] .
 
 :CORPORATION-LEGAL-FORM
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery
                                     """SELECT id, corporation FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
-    rr:subjectMap         [ rr:template "corporation/{corporation}" ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasLegalForm ;
-                            rr:objectMap [ rr:template "legalForm/{id}" ] ] .
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/legalForm/{id}" ] ] .
 
 :CORPORATION-LOCATION
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """SELECT id, corporation FROM scoball.corporation_location""" ] ;
-    rr:subjectMap         [ rr:template "corporation/{corporation}" ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasAddress ;
-                            rr:objectMap [ rr:template "address/{id}" ] ] .
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/address/{id}" ] ] .
 
 :CORPORATION-PROPERTIES
     a                     rr:TriplesMap ;
@@ -58,7 +58,7 @@
                                             END AS enddate
                                             FROM scoball.corporation
                                        """ ] ;
-    rr:subjectMap         [ rr:template "corporation/{id}" ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:dateOfFounding ;
                             rr:objectMap    [ rr:column   "startdate" ;
                                            rr:datatype xsd:date ] ] ;
@@ -74,7 +74,7 @@
 :CORPORATION-NAME-TYPE
     a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery """SELECT id FROM scoball.corporation_name WHERE name IS NOT NULL""" ] ;
-    rr:subjectMap   [ rr:template "corporationName/{id}" ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/corporationName/{id}" ;
                       rr:class    bhf:CorporationName ] .
 
 :CORPORATION-NAME-PROPERTIES
@@ -96,7 +96,7 @@
                                         FROM scoball.corporation_name
                                         WHERE name IS NOT NULL
                                         """ ] ;
-    rr:subjectMap         [ rr:template "corporationName/{id}" ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporationName/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate rdfs:label ;
                             rr:objectMap [ rr:column   "name" ;
                                            rr:datatype xsd:string ] ] ;
@@ -122,7 +122,7 @@
     a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery
                               """SELECT id FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
-    rr:subjectMap   [ rr:template "legalForm/{id}" ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/legalForm/{id}" ;
                       rr:class    bhf:LegalForm ] .
 
 :LEGAL-FORM-PROPERTIES
@@ -144,7 +144,7 @@
                                 FROM scoball.corporation_juridisch_statuut
                                 WHERE juridisch_statuut IS NOT NULL
     """ ] ;
-    rr:subjectMap         [ rr:template "legalForm/{id}" ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/legalForm/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate rdfs:label ;
                             rr:objectMap    [ rr:column   "juridisch_statuut" ;
                                            rr:datatype xsd:string ] ] ;
@@ -168,7 +168,7 @@
 :LOCATION-TYPE
     a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery """SELECT id FROM scoball.corporation_location""" ] ;
-    rr:subjectMap   [ rr:template "location/{id}" ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/address/{id}" ;
                       rr:class    bhf:Address ] .
 
 :LOCATION-PROPERTIES
@@ -189,7 +189,7 @@
                                     END AS enddate
                                 FROM scoball.corporation_location
     """ ] ;
-    rr:subjectMap         [ rr:template "location/{id}" ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/address/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:streetAddress ;
                             rr:objectMap    [ rr:column   "address" ;
                                            rr:datatype xsd:string ] ] ;
