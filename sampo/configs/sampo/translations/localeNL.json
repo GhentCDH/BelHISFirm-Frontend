@@ -1,0 +1,289 @@
+{
+    "languageLabel": "Nederlands",
+    "html": {
+        "title": "Sampo-UI – A framework for building user interfaces for semantic portals",
+        "description": "The Sampo-UI framework makes it possible to create highly customizable, user-friendly, and responsive user interfaces using current state-of-the-art JavaScript libraries and data from SPARQL endpoints."
+    },
+    "appTitle": {
+        "short": "Sampo-UI",
+        "mobile": "S-UI",
+        "long": "&nbsp; &nbsp; Sampo-UI &nbsp; &nbsp;",
+        "subheading": "\"Here to forge for us the Sampo, Hammer us the lid in colors\""
+    },
+    "appDescription1": "Sampo is a web service for searching and studying place names. The search results can be viewed as a table, on maps, and as statistical distributions. Historical and current background maps are provided.",
+    "appDescription2": "Start by choosing source dataset(s) and input a place name on the search field. Alternatively you can search by area.",
+    "selectPerspective": "Select a perspective to search and browse the knowledge graph:",
+    "mainPageImageLicence": "Images used under license from Shutterstock.com",
+    "backendErrorText": "One of the backend services is not available at the moment. Please try again later.",
+    "infoHeader": {
+        "toggleInstructions": "Click to show or hide instructions"
+    },
+    "topBar": {
+        "feedback": "feedback",
+        "info": {
+            "info": "Info",
+            "blog": "Projectblog",
+            "blogUrl": "https://seco.cs.aalto.fi/tools/sampo-ui/",
+            "aboutThePortal": "Over het portaal"
+        },
+        "searchBarPlaceHolder": "Zoek alle inhoud",
+        "searchBarPlaceHolderShort": "Zoeken",
+        "instructions": "instructies"
+    },
+    "facetBar": {
+        "results": "Resultaten",
+        "filters": "Filters",
+        "activeFilters": "Actieve filters:",
+        "removeAllFilters": "Alles verwijderen",
+        "narrowDownBy": "Verfijn op",
+        "filterOptions": "Filteropties",
+        "filterByName": "Filter op naam",
+        "filterByBoundingBox": "Filter op begrenzingsvak",
+        "selectionOptions": "Selectieopties",
+        "selectAlsoSubconcepts": "Selecteer automatisch alle subconcepten",
+        "doNotSelectSubconcepts": "Selecteer geen subconcepten",
+        "sortingOptions": "Sorteeropties",
+        "sortAlphabetically": "Alfabetisch sorteren",
+        "sortByNumberOfSearchResults": "Sorteren op aantal zoekresultaten",
+        "useDisjunction": "Gebruik logisch OF tussen selecties",
+        "useConjuction": "Gebruik logisch EN tussen selecties",
+        "minYear": "Min jaar",
+        "maxYear": "Max jaar",
+        "min": "Min",
+        "max": "Max",
+        "facetSearchFieldPlaceholder": "Zoeken...",
+        "applyFacetSelection": "toepassen",
+        "pieChart": {
+            "tooltip": "Taartdiagram"
+        },
+        "barChart": {
+            "tooltip": "Staafdiagram",
+            "language": {
+                "title": "Taal",
+                "xaxisTitle": "Taal",
+                "yaxisTitle": "Manuscriptaantal",
+                "seriesTitle": "Manuscriptaantal"
+            }
+        },
+        "lineChart": {
+            "tooltip": "Lijndiagram",
+            "productionTimespan": {
+                "title": "Manuscriptproductie per decennium",
+                "xaxisTitle": "Decennium",
+                "yaxisTitle": "Manuscriptaantal",
+                "seriesTitle": "Manuscriptaantal"
+            }
+        }
+    },
+    "tabs": {
+        "table": "tabel",
+        "map": "kaart",
+        "production_places": "productieplaatsen",
+        "production_places_heatmap": "productie heatmap",
+        "last_known_locations": "laatst bekende locaties",
+        "migrations": "migraties",
+        "network": "netwerk",
+        "export": "exporteren",
+        "production_dates": "productiedata",
+        "event_dates": "gebeurtenisdata",
+        "map_clusters": "geclusterde kaart",
+        "map_markers": "kaart",
+        "heatmap": "heatmap",
+        "statistics": "statistieken",
+        "emloLetterNetwork": "Brievennetwerk",
+        "emloSentReceived": "Verzonden en ontvangen brieven",
+        "download": "download",
+        "recommendations": "aanbevelingen",
+        "share": "delen"
+    },
+    "table": {
+        "rowsPerPage": "Rijen per pagina",
+        "of": "van"
+    },
+    "lineChart": {
+        "productionCount": "Productie",
+        "transferCount": "Overdracht van bewaring",
+        "observationCount": "Observatie",
+        "sentCount": "Verzonden",
+        "receivedCount": "Ontvangen",
+        "allCount": "Alles"
+    },
+    "exportToYasgui": "open de resultaat-tabelquery in de yasgui sparql-editor",
+    "openInLinkedDataBrowser": "openen in linked-data browser",
+    "resultsAsCSV": "download de zoekresultaten als een CSV-tabel",
+    "facets": {
+        "dateFacet": {
+            "invalidDate": "Ongeldige datum.",
+            "toBeforeFrom": "Startdatum moet vóór einddatum zijn.",
+            "minDate": "De vroegste toegestane datum is {minDate}",
+            "maxDate": "De laatste toegestane datum is {maxDate}",
+            "cancel": "Annuleren",
+            "fromLabel": "Begin",
+            "toLabel": "Einde"
+        },
+        "textFacet": {
+            "inputLabel": "Zoeken op naam"
+        },
+        "sliderFacet": {
+            "invalidStartOrEnd": "Min-waarde moet kleiner zijn dan max-waarde. De kleinste waarde kan {min} zijn en de grootste {max}."
+        }
+    },
+    "leafletMap": {
+        "basemaps": {
+            "mapbox": {
+                "light-v10": "Mapbox Licht (OpenStreetMap)"
+            },
+            "googleRoadmap": "Google Maps",
+            "topographicalMapNLS": "Topografische kaart (Kadaster Finland)",
+            "backgroundMapNLS": "Achtergrondkaart (Kadaster Finland)",
+            "airMapNLS": "Luchtkaart (Kadaster Finland)"
+        },
+        "externalLayers": {
+            "WFS_MV_Kulttuuriymparisto:Arkeologiset_kohteet_aule": "Register archeologische locaties, gebieden (Fins Erfgoedagentschap)",
+            "...": "..."
+        },
+        "mapModeButtons": {
+            "markers": "Markers",
+            "heatmap": "Heatmap"
+        },
+        "wrongZoomLevel": "Het zoomniveau moet minstens 11 zijn",
+        "wrongZoomLevelFHA": "Het zoomniveau moet minstens 13 zijn om deze laag te tonen",
+        "tooManyResults": "Meer dan 500 resultaten, gebruik geclusterde kaart of heatmap"
+    },
+
+    "instancePageGeneral": {
+        "introduction": "<p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Deze landingspagina geeft een leesbare samenvatting van de datapunten die naar dit {entity} verwijzen. ... </p>",
+        "repetition": "<h6 class=\"MuiTypography-root MuiTypography-h6\"> Herhaling van gegevens </h6> ... "
+    },
+
+    "deckGlMap": {
+        "arcColouring": "Boogkleuring:",
+        "showMoreInformation": "Klik voor meer informatie.",
+        "placesMsMigrations": {
+            "legendTitle": "Boogkleuring",
+            "legendFrom": "Manuscriptproductieplaats",
+            "legendTo": "Laatst bekende locatie",
+            "from": "Productieplaats:",
+            "to": "Laatst bekende locatie:",
+            "count": "Manuscriptaantal",
+            "listHeadingSingleInstance": "Manuscript:",
+            "listHeadingMultipleInstances": "Manuscripten:"
+        }
+    },
+
+    "perspectives": {
+        "belhisfirm": {
+            "label": "belhisfirm",
+            "facetResultsType": "bedrijven",
+            "shortDescription": "belhisfirm sampo",
+            "longDescription": "belhisfirm sampo lange beschrijving",
+            "instancePage": {
+                "label": "Bedrijf",
+                "description": "belhisfirm bedrijf"
+            },
+            "properties": {
+                "uri": {
+                    "label": "URI",
+                    "description": "Uniform Resource Identifier"
+                },
+                "companyName": {
+                    "label": "Bedrijfsnaam",
+                    "description": "Naam van het bedrijf",
+                    "textFacetInputPlaceholder": "Zoeken..."
+                },
+                "founder": {
+                    "label": "oprichter(s)",
+                    "description": "Oprichter(s) van het bedrijf"
+                },
+                "director": {
+                    "label": "directeur(s)",
+                    "description": "Directeur(s) van het bedrijf"
+                },
+                "shareholder": {
+                    "label": "aandeelhouder(s)",
+                    "description": "Aandeelhouder(s) van het bedrijf"
+                },
+                "address": {
+                    "label": "adres",
+                    "description": "Adres van het bedrijf"
+                },
+                "legalForm": {
+                    "label": "rechtsvorm",
+                    "description": ""
+                },
+                "dateOfFounding": {
+                    "label": "oprichtingsdatum",
+                    "description": ""
+                },
+                "dateOfDissolution": {
+                    "label": "datum van ontbinding",
+                    "description": ""
+                },
+                "businessSector": {
+                    "label": "bedrijfssector",
+                    "description": ""
+                },
+                "registeredCapital": {
+                    "label": "geregistreerd kapitaal",
+                    "description": ""
+                }
+            }
+        },
+        "scob": {
+            "label": "scob",
+            "facetResultsType": "bedrijven",
+            "shortDescription": "scob belhisfirm sampo ui",
+            "longDescription": "TODO Insert long description here",
+            "instancePage": {
+                "label": "Bedrijf",
+                "description": "scob belhisfirm bedrijf"
+            },
+            "properties": {
+                "uri": {
+                    "label": "id",
+                    "description": "uri van het bedrijf"
+                },
+                "corporationName": {
+                    "label": "Naam/namen",
+                    "description": "Naam/namen die het bedrijf heeft gehad"
+                },
+                "legalForm": {
+                    "label": "Rechtsvorm",
+                    "description": "Rechtsvorm van het bedrijf"
+                },
+                "country": {
+                    "label": "Land",
+                    "description": "Land waar het bedrijf is gevestigd"
+                },
+                "city": {
+                    "label": "Stad",
+                    "description": "Stad waar het bedrijf is gevestigd"
+                },
+                "streetAddress": {
+                    "label": "Adres",
+                    "description": "Adres van het bedrijf"
+                },
+                "dateOfFounding": {
+                    "label": "Oprichtingsdatum",
+                    "description": "Datum van oprichting"
+                }
+            }
+        }
+    },
+
+    "aboutThePortalPartOne": "<h1 ...> Over het portaal </h1> <p> ... </p>",
+    "aboutThePortalPartTwo": "<p> ... </p>",
+    "instructions": "<h1 ...> Instructies </h1> <p> ... </p>",
+    "feedback": "<h1 ...> Feedback </h1> <p> ... </p>",
+    "exportLink": {
+        "viewLabel": "Tab",
+        "viewInstructions": "Kies de tab waarin de query wordt geopend",
+        "fieldLabel": "Gegenereerde link (alleen-lezen)",
+        "infoBody": "U kunt de query delen via onderstaande link...",
+        "warningTitle": "Gegenereerde link kan te lang zijn",
+        "warningBody": "...",
+        "errorTitle": "Link is te lang",
+        "errorBody": "...",
+        "copyLinkToClipboard": "Kopieer link naar klembord"
+    }
+}

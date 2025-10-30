@@ -18,6 +18,11 @@
                 "id": "en",
                 "label": "English",
                 "filename": "localeEN.json"
+            },
+            {
+                "id": "nl",
+                "label": "Nederlands",
+                "filename": "localeNL.json"
             }
         ]
     },
