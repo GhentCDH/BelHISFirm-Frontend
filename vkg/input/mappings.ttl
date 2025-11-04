@@ -53,18 +53,21 @@
                                                 ELSE startdate
                                             END AS startdate,
                                             CASE
-                                                WHEN enddate >= DATE '3999-01-01' THEN NULL
+                                                WHEN enddate >= DATE '3900-01-01' THEN NULL
                                                 ELSE enddate
                                             END AS enddate
                                             FROM scoball.corporation
                                        """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:dateOfFounding ;
-                            rr:objectMap    [ rr:column   "startdate" ;
+                            rr:objectMap [ rr:column   "startdate" ;
                                            rr:datatype xsd:date ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:dateOfDissolution ;
-                            rr:objectMap    [ rr:column   "enddate" ;
-                                           rr:datatype xsd:date ] ] .
+                            rr:objectMap [ rr:column   "enddate" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:scobID ;
+                            rr:objectMap [ rr:column   "id" ;
+                                           rr:datatype xsd:integer ] ] .
 
 
 ###################
@@ -88,7 +91,7 @@
                                                 ELSE startdate
                                             END AS startdate,
                                             CASE
-                                                WHEN enddate >= DATE '3999-01-01' THEN NULL
+                                                WHEN enddate >= DATE '3900-01-01' THEN NULL
                                                 ELSE enddate
                                             END AS enddate,
                                             source,
@@ -136,7 +139,7 @@
                                         ELSE startdate
                                     END AS startdate,
                                     CASE
-                                        WHEN enddate >= DATE '3999-01-01' THEN NULL
+                                        WHEN enddate >= DATE '3900-01-01' THEN NULL
                                         ELSE enddate
                                     END AS enddate,
                                     source,
@@ -146,19 +149,19 @@
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/legalForm/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate rdfs:label ;
-                            rr:objectMap    [ rr:column   "juridisch_statuut" ;
+                            rr:objectMap [ rr:column   "juridisch_statuut" ;
                                            rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:startDate ;
-                            rr:objectMap    [ rr:column   "startdate" ;
+                            rr:objectMap [ rr:column   "startdate" ;
                                            rr:datatype xsd:date ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:endDate ;
-                            rr:objectMap    [ rr:column   "enddate" ;
+                            rr:objectMap [ rr:column   "enddate" ;
                                            rr:datatype xsd:date ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:source ;
-                            rr:objectMap    [ rr:column   "source" ;
+                            rr:objectMap [ rr:column   "source" ;
                                            rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:comments ;
-                            rr:objectMap    [ rr:column   "comments" ;
+                            rr:objectMap [ rr:column   "comments" ;
                                            rr:datatype xsd:string ] ] .
 
 
@@ -184,26 +187,26 @@
                                         ELSE startdate
                                     END AS startdate,
                                     CASE
-                                        WHEN enddate >= DATE '3999-01-01' THEN NULL
+                                        WHEN enddate >= DATE '3900-01-01' THEN NULL
                                         ELSE enddate
                                     END AS enddate
                                 FROM scoball.corporation_location
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/address/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:streetAddress ;
-                            rr:objectMap    [ rr:column   "address" ;
+                            rr:objectMap [ rr:column   "address" ;
                                            rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:city ;
-                            rr:objectMap    [ rr:column   "city" ;
+                            rr:objectMap [ rr:column   "city" ;
                                            rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:country ;
-                            rr:objectMap    [ rr:column   "country" ;
+                            rr:objectMap [ rr:column   "country" ;
                                            rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:startDate ;
-                            rr:objectMap    [ rr:column   "startdate" ;
+                            rr:objectMap [ rr:column   "startdate" ;
                                            rr:datatype xsd:date ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:endDate ;
-                            rr:objectMap    [ rr:column   "enddate" ;
+                            rr:objectMap [ rr:column   "enddate" ;
                                            rr:datatype xsd:date ] ] .
 
 

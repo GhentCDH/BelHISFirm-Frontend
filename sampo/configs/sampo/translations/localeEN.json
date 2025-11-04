@@ -272,6 +272,10 @@
                 "dateOfFounding": {
                     "label": "Date of Founding",
                     "description": "Date of founding"
+                },
+                "dateOfDissolution": {
+                    "label": "Date of Dissolution",
+                    "description": "Date of dissolution"
                 }
             }
         }

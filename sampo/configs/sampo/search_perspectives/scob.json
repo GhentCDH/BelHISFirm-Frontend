@@ -109,11 +109,20 @@
             "sortValues": true,
             "numberedList": false,
             "minWidth": 200
+        },
+        {
+            "id": "dateOfDissolution",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200
         }
     ],
     "facets": {
         "uri": {
-            "sortByPredicate": ""
+            "sortByPredicate": "bhf:scobID"
         },
         "corporationName": {
             "containerClass": "one",
@@ -146,6 +155,17 @@
             "sortByAscPredicate": "bhf:dateOfFounding",
             "sortByDescPredicate": "bhf:dateOfFounding",
             "sortByPredicate": "bhf:dateOfFounding"
+        },
+        "dateOfDissolution": {
+            "containerClass": "four",
+            "facetType": "integer",
+            "filterType": "dateNoTimespanFilter",
+            "max": null,
+            "min": null,
+            "predicate": "bhf:dateOfDissolution",
+            "sortByAscPredicate": "bhf:dateOfDissolution",
+            "sortByDescPredicate": "bhf:dateOfDissolution",
+            "sortByPredicate": "bhf:dateOfDissolution"
         },
         "streetAddress": {
             "containerClass": "one",

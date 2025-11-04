@@ -22,6 +22,8 @@ export const corporationProperties = `
     OPTIONAL { ?address__id bhf:streetAddress ?address__street . }
     OPTIONAL { ?address__id bhf:city ?address__city . }
     OPTIONAL { ?address__id bhf:country ?address__country . }
+    OPTIONAL { ?address__id bhf:startDate ?address__startDate . }
+    OPTIONAL { ?address__id bhf:endDate ?address__endDate . }
     BIND(CONCAT(?address__street, " ", ?address__city, " ", ?address__country) as ?address__prefLabel)
     BIND(?address__street as ?streetAddress__id)
     BIND(?address__street as ?streetAddress__prefLabel)
