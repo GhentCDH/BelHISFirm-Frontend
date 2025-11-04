@@ -137,7 +137,7 @@ const generateTextFilter = ({
   if (defaultSparql) {
     filterStr = `
       ?${filterTarget} ${facetConfig.textQueryProperty} ?o .
-      FILTER(CONTAINS(LCASE(?o), "${queryString}"))
+      FILTER(CONTAINS(LCASE(?o), LCASE("${queryString}")))
     `
   } else {
     filterStr = facetConfig.textQueryPredicate

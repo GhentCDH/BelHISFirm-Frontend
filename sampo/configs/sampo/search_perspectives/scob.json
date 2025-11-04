@@ -147,6 +147,27 @@
             "sortByDescPredicate": "bhf:dateOfFounding",
             "sortByPredicate": "bhf:dateOfFounding"
         },
+        "streetAddress": {
+            "containerClass": "one",
+            "facetType": "text",
+            "filterType": "textFilter",
+            "sortByPredicate": "bhf:hasAddress/bhf:streetAddress",
+            "textQueryProperty": "bhf:hasAddress/bhf:streetAddress"
+        },
+        "city": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "bhf:hasAddress/bhf:city",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "bhf:hasAddress/bhf:city",
+            "sortDirection": "desc",
+            "literal": true
+        },
         "country": {
             "containerClass": "ten",
             "facetType": "list",
@@ -161,5 +182,6 @@
             "sortDirection": "desc",
             "literal": true
         }
+
     }
 }
