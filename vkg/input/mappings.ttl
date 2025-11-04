@@ -32,10 +32,10 @@
 :CORPORATION-LEGAL-FORM
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery
-                                    """SELECT id, corporation FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
+                                    """SELECT juridisch_statuut, corporation FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasLegalForm ;
-                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/legalForm/{id}" ] ] .
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/legalForm/{juridisch_statuut}" ] ] .
 
 :CORPORATION-LOCATION
     a                     rr:TriplesMap ;
@@ -124,8 +124,8 @@
 :LEGAL-FORM-TYPE
     a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery
-                              """SELECT id FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
-    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/legalForm/{id}" ;
+                              """SELECT juridisch_statuut FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/legalForm/{juridisch_statuut}" ;
                       rr:class    bhf:LegalForm ] .
 
 :LEGAL-FORM-PROPERTIES

@@ -9,6 +9,7 @@ export const corporationProperties = `
   {
     ?id bhf:hasName ?corporationName__id .
     ?corporationName__id rdfs:label ?corporationName__prefLabel .
+    BIND(CONCAT("/corporation-name/page/", STRAFTER(STR(?corporationName__id), "corporationName/")) AS ?corporationName__dataProviderUrl)
   }
   UNION
   {
@@ -25,11 +26,11 @@ export const corporationProperties = `
     OPTIONAL { ?address__id bhf:startDate ?address__startDate . }
     OPTIONAL { ?address__id bhf:endDate ?address__endDate . }
     BIND(CONCAT(?address__street, " ", ?address__city, " ", ?address__country) as ?address__prefLabel)
-    BIND(?address__street as ?streetAddress__id)
+    BIND(?address__id as ?streetAddress__id)
     BIND(?address__street as ?streetAddress__prefLabel)
-    BIND(?address__city as ?city__id)
+    BIND(?address__id as ?city__id)
     BIND(?address__city as ?city__prefLabel)
-    BIND(?address__country as ?country__id)
+    BIND(?address__id as ?country__id)
     BIND(?address__country as ?country__prefLabel)
   }
   UNION
@@ -43,7 +44,6 @@ export const corporationProperties = `
     BIND(?dateOfDissolution__id as ?dateOfDissolution__prefLabel)
   }
 `
-
 
 
 export const facetResultSetQueryBelhisfirm = `
@@ -63,4 +63,39 @@ export const facetResultSetQueryBelhisfirm = `
     <RESULT_SET_PROPERTIES>
   }
   <ORDER_BY>
+`
+
+
+export const corporationNamePropertiesInstancePage = `
+{
+    ?id bhf:label ?name__id .
+    BIND(?id as ?uri__prefLabel)
+    BIND(?name__id as ?name__prefLabel)
+}
+UNION
+{
+    ?corporation__id bhf:hasName ?id .
+    BIND(?corporation as ?corporation__prefLabel) .
+}
+UNION
+{
+    ?id bhf:startDate ?startDate__id .
+    BIND(?startDate__id as ?startDate__prefLabel) .
+}
+UNION
+{
+    ?id bhf:endDate ?endDate__id .
+    BIND(?endDate__id as ?endDate__prefLabel) .
+}
+UNION
+{
+    ?id bhf:source ?source__id .
+    BIND(?source__id as ?source__prefLabel) .
+}
+UNION
+{
+    ?id bhf:comments ?comments__id .
+    BIND(?comments__id as ?comments__prefLabel) .
+}
+
 `

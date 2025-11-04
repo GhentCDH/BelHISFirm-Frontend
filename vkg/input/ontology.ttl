@@ -72,12 +72,12 @@ bhf:endDate
     rdfs:comment "end date of when a property became valid."@en .
 
 bhf:label
-    rdf:type           owl:DatatypeProperty ;
-    rdfs:subPropertyOf rdfs:label ;
-    rdfs:domain        bhf:PropertyClass ;
-    rdfs:range         xsd:string ;
-    rdfs:label         "Label"@en, "Label"@nl ;
-    rdfs:comment       "String representation of property"@en .
+    rdf:type               owl:DatatypeProperty ;
+    owl:equivalentProperty rdfs:label ;
+    rdfs:domain            bhf:PropertyClass ;
+    rdfs:range             xsd:string ;
+    rdfs:label             "Label"@en, "Label"@nl ;
+    rdfs:comment           "String representation of property"@en .
 
 bhf:source
     rdf:type     owl:DatatypeProperty ;
@@ -88,7 +88,7 @@ bhf:source
 
 bhf:comments
     rdf:type     owl:DatatypeProperty ;
-    rdfs:domain  bhf:LegalForm ;
+    rdfs:domain  bhf:PropertyClass ;
     rdfs:range   xsd:string ;
     rdfs:label   "Comments"@en, "Extra info"@nl ;
     rdfs:comment "Extra info on the property"@en .
