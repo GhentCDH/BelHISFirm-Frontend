@@ -9,7 +9,7 @@ export const corporationProperties = `
   {
     ?id bhf:hasName ?corporationName__id .
     ?corporationName__id rdfs:label ?corporationName__prefLabel .
-    BIND(CONCAT("/corporation-name/page/", STRAFTER(STR(?corporationName__id), "corporationName/")) AS ?corporationName__dataProviderUrl)
+    BIND(CONCAT("/corporationNames/page/", STRAFTER(STR(?corporationName__id), "corporationName/")) AS ?corporationName__dataProviderUrl)
   }
   UNION
   {
@@ -68,14 +68,16 @@ export const facetResultSetQueryBelhisfirm = `
 
 export const corporationNamePropertiesInstancePage = `
 {
-    ?id bhf:label ?name__id .
+    ?id rdfs:label ?name__id .
     BIND(?id as ?uri__prefLabel)
     BIND(?name__id as ?name__prefLabel)
+    BIND(CONCAT("/corporationNames/page/", STRAFTER(STR(?id), "corporationName/")) AS ?uri__dataProviderUrl)
 }
 UNION
 {
     ?corporation__id bhf:hasName ?id .
-    BIND(?corporation as ?corporation__prefLabel) .
+    BIND(?corporation__id as ?corporation__prefLabel)
+    BIND(CONCAT("/scob/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporation__dataProviderUrl)
 }
 UNION
 {

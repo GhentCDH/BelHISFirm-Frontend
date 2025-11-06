@@ -69,7 +69,7 @@
             "id": "legalForm",
             "valueType": "object",
             "makeLink": true,
-            "externalLink": false,
+            "externalLink": true,
             "sortValues": true,
             "numberedList": false,
             "minWidth": 200
