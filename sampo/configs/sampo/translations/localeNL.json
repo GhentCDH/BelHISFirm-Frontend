@@ -248,11 +248,11 @@
                     "description": "Naam/namen die het bedrijf heeft gehad"
                 },
                 "legalForm": {
-                    "label": "juridisch statuut",
+                    "label": "Juridisch statuut",
                     "description": "juridisch statuut van het bedrijf"
                 },
                 "address": {
-                    "label": "adres(sen)",
+                    "label": "Adres(sen)",
                     "description": "Adres(sen) van het bedrijf"
                 },
                 "country": {
@@ -272,8 +272,119 @@
                     "description": "Datum van oprichting"
                 },
                 "dateOfDissolution": {
-                    "label": "ontbindingsdatum",
+                    "label": "Ontbindingsdatum",
                     "description": "Datum van ontbinding"
+                }
+            }
+        },
+        "corporationNames": {
+            "label": "bedrijfsnamen",
+            "instancePage": {
+                "label": "bedrijfsnaam",
+                "description": "Naam die het bedrijf op een bepaald moment had of heeft gehad."
+            },
+            "properties": {
+                "uri": {
+                    "label": "uri",
+                    "description": "Id van de naam die aan het bedrijf is gekoppeld"
+                },
+                "corporation": {
+                    "label": "bedrijf",
+                    "description": "bedrijf dat aan deze naam is gekoppeld"
+                },
+                "name": {
+                    "label": "naam",
+                    "description": "naam van het bedrijf"
+                },
+                "startDate": {
+                    "label": "startdatum",
+                    "description": "Startdatum waarop deze naam werd gebruikt"
+                },
+                "endDate": {
+                    "label": "einddatum",
+                    "description": "Einddatum waarop deze naam werd gebruikt"
+                },
+                "source": {
+                    "label": "bron",
+                    "description": "bron van deze informatie"
+                },
+                "comments": {
+                    "label": "opmerkingen",
+                    "description": "extra informatie"
+                }
+            }
+        },
+        "legalForms": {
+            "label": "juridische statuten",
+            "instancePage": {
+                "label": "juridisch statuut",
+                "description": "Juridisch statuut dat het bedrijf op een bepaald moment had of heeft gehad."
+            },
+            "properties": {
+                "uri": {
+                    "label": "uri",
+                    "description": "Id van de instantie van het juridisch statuut dat aan het bedrijf is gekoppeld"
+                },
+                "corporation": {
+                    "label": "bedrijf",
+                    "description": "bedrijf dat aan deze instantie van juridisch statuut is gekoppeld"
+                },
+                "legalForm": {
+                    "label": "juridisch statuut",
+                    "description": "juridisch statuut van het bedrijf"
+                },
+                "startDate": {
+                    "label": "startdatum",
+                    "description": "Startdatum waarop dit juridisch statuut werd gebruikt"
+                },
+                "endDate": {
+                    "label": "einddatum",
+                    "description": "Einddatum waarop dit juridisch statuut werd gebruikt"
+                },
+                "source": {
+                    "label": "bron",
+                    "description": "bron van deze informatie"
+                },
+                "comments": {
+                    "label": "opmerkingen",
+                    "description": "extra informatie"
+                }
+            }
+        },
+        "addresses": {
+            "label": "adressen",
+            "instancePage": {
+                "label": "adres",
+                "description": "Adres dat het bedrijf op een bepaald moment had of heeft gehad."
+            },
+            "properties": {
+                "uri": {
+                    "label": "uri",
+                    "description": "Id van deze locatie"
+                },
+                "corporation": {
+                    "label": "bedrijf",
+                    "description": "bedrijf dat aan deze locatie is gekoppeld"
+                },
+                "country": {
+                    "label": "land",
+                    "description": "land van deze locatie"
+                },
+                "city": {
+                    "label": "stad",
+                    "description": "stad van deze locatie"
+                },
+                "streetAddress": {
+                    "label": "straatadres",
+                    "description": "straatadres van deze locatie"
+                },
+                "startDate": {
+                    "label": "startdatum",
+                    "description": "startdatum waarop dit adres werd gebruikt"
+                },
+                "endDate": {
+                    "label": "einddatum",
+                    "description": "einddatum waarop dit adres werd gebruikt"
                 }
             }
         }
