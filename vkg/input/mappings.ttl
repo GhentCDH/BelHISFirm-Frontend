@@ -32,11 +32,11 @@
 :CORPORATION-LEGAL-FORM
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery
-                                    """SELECT juridisch_statuut, corporation FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
+                                    """SELECT id, corporation FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasLegalForm ;
                             rr:objectMap [ rr:template
-                                                   "http://belhisfirm.be/resource/legalForm/{juridisch_statuut}" ] ] .
+                                                   "http://belhisfirm.be/resource/legalForm/{id}" ] ] .
 
 :CORPORATION-LOCATION
     a                     rr:TriplesMap ;
@@ -125,15 +125,15 @@
 :LEGAL-FORM-TYPE
     a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery
-                              """SELECT juridisch_statuut FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
-    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/legalForm/{juridisch_statuut}" ;
+                              """SELECT id FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/legalForm/{id}" ;
                       rr:class    bhf:LegalForm ] .
 
 :LEGAL-FORM-PROPERTIES
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """
             SELECT
-                cjs.id,
+                cjs.id AS id,
                 cjs.juridisch_statuut AS juridisch_statuut_id,
                 js.juridisch_statuut  AS juridisch_statuut_label,
                 CASE WHEN cjs.startdate <= DATE '1000-12-31' THEN NULL ELSE cjs.startdate END AS startdate,
