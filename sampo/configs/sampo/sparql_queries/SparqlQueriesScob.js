@@ -24,7 +24,14 @@ export const corporationProperties = `
     OPTIONAL { ?address__id bhf:country ?address__country . }
     OPTIONAL { ?address__id bhf:startDate ?address__startDate . }
     OPTIONAL { ?address__id bhf:endDate ?address__endDate . }
-    BIND(CONCAT(?address__street, " ", ?address__city, " ", ?address__country) as ?address__prefLabel)
+    BIND(
+      CONCAT(
+        COALESCE(?address__street, ""), 
+        " ",
+        COALESCE(?address__city, ""), 
+        " ",
+        COALESCE(?address__country, ""))
+    AS ?address__prefLabel)
     BIND(?address__id as ?streetAddress__id)
     BIND(?address__street as ?streetAddress__prefLabel)
     BIND(?address__id as ?city__id)
@@ -99,4 +106,15 @@ UNION
     BIND(?comments__id as ?comments__prefLabel) .
 }
 
+`
+
+export const corporationLegalFormPropertiesInstancePage = `
+{
+    ?id rdfs:label ?legalForm__id .
+    BIND(?legalForm__id as ?legalForm__prefLabel)
+}
+UNION
+{
+    
+}
 `

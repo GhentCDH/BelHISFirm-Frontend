@@ -52,7 +52,7 @@
         "min": "Min",
         "max": "Max",
         "facetSearchFieldPlaceholder": "Zoeken...",
-        "applyFacetSelection": "toepassen",
+        "applyFacetSelection": "Apply",
         "pieChart": {
             "tooltip": "Taartdiagram"
         },
@@ -208,7 +208,7 @@
                     "description": "Adres van het bedrijf"
                 },
                 "legalForm": {
-                    "label": "rechtsvorm",
+                    "label": "juridisch statuut",
                     "description": ""
                 },
                 "dateOfFounding": {
@@ -248,8 +248,12 @@
                     "description": "Naam/namen die het bedrijf heeft gehad"
                 },
                 "legalForm": {
-                    "label": "Rechtsvorm",
-                    "description": "Rechtsvorm van het bedrijf"
+                    "label": "juridisch statuut",
+                    "description": "juridisch statuut van het bedrijf"
+                },
+                "address": {
+                    "label": "adres(sen)",
+                    "description": "Adres(sen) van het bedrijf"
                 },
                 "country": {
                     "label": "Land",
@@ -266,6 +270,10 @@
                 "dateOfFounding": {
                     "label": "Oprichtingsdatum",
                     "description": "Datum van oprichting"
+                },
+                "dateOfDissolution": {
+                    "label": "ontbindingsdatum",
+                    "description": "Datum van ontbinding"
                 }
             }
         }

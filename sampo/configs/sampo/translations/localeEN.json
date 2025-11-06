@@ -257,6 +257,10 @@
                     "label": "Legal form",
                     "description": "Legal form of the corporation"
                 },
+                "address": {
+                    "label": "address(es)",
+                    "description": "Address(es) of the corporation"
+                },
                 "country": {
                     "label": "Country",
                     "description": "Country where the corporation is located"
@@ -282,7 +286,7 @@
         "corporationNames": {
             "label": "corporation names",
             "instancePage": {
-                "label": "corporationName",
+                "label": "corporation name",
                 "description": "Name the corporation has/had at some point in time."
             },
             "properties": {

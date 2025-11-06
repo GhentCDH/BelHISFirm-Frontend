@@ -75,31 +75,13 @@
             "minWidth": 200
         },
         {
-            "id": "country",
+            "id": "address",
             "valueType": "object",
             "makeLink": false,
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 200
-        },
-        {
-            "id": "city",
-            "valueType": "object",
-            "makeLink": false,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 200
-        },
-        {
-            "id": "streetAddress",
-            "valueType": "object",
-            "makeLink": false,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 300
+            "minWidth": 350
         },
         {
             "id": "dateOfFounding",
