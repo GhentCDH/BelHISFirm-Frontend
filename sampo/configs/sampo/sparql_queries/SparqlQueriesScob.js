@@ -15,6 +15,7 @@ export const corporationProperties = `
   {
     ?id bhf:hasLegalForm ?legalForm__id .
     ?legalForm__id rdfs:label ?legalForm__prefLabel .
+    BIND(CONCAT("/legalForms/page/", STRAFTER(STR(?legalForm__id), "legalForm/")) AS ?legalForm__dataProviderUrl)
   }
   UNION
   {
@@ -30,7 +31,8 @@ export const corporationProperties = `
         " ",
         COALESCE(?address__city, ""), 
         " ",
-        COALESCE(?address__country, ""))
+        COALESCE(?address__country, "")
+      )
     AS ?address__prefLabel)
     BIND(?address__id as ?streetAddress__id)
     BIND(?address__street as ?streetAddress__prefLabel)
@@ -76,6 +78,7 @@ export const corporationNamePropertiesInstancePage = `
 {
     ?id rdfs:label ?name__id .
     BIND(?id as ?uri__prefLabel)
+    BIND(?id as ?uri__id)
     BIND(?name__id as ?name__prefLabel)
     BIND(CONCAT("/corporationNames/page/", STRAFTER(STR(?id), "corporationName/")) AS ?uri__dataProviderUrl)
 }
@@ -105,16 +108,43 @@ UNION
     ?id bhf:comments ?comments__id .
     BIND(?comments__id as ?comments__prefLabel) .
 }
-
 `
 
 export const corporationLegalFormPropertiesInstancePage = `
 {
     ?id rdfs:label ?legalForm__id .
     BIND(?legalForm__id as ?legalForm__prefLabel)
+    BIND(?id as ?uri__prefLabel)
+    BIND(?id as ?uri__id)
+    BIND(CONCAT("/legalForms/page/", STRAFTER(STR(?id), "legalForm/")) AS ?uri__dataProviderUrl)
 }
 UNION
 {
-    
+    ?corporation__id bhf:hasLegalForm ?id .
+    BIND(?corporation__id as ?corporation__prefLabel)
+    BIND(CONCAT("/scob/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporation__dataProviderUrl)
+}
+UNION
+{
+    ?id bhf:startDate ?startDate__id .
+    BIND(?startDate__id as ?startDate__prefLabel) .
+}
+UNION
+{
+    ?id bhf:endDate ?endDate__id .
+    BIND(?endDate__id as ?endDate__prefLabel) .
+}
+UNION
+{
+    ?id bhf:comments ?comments__id .
+    BIND(?comments__id as ?comments__prefLabel) .
+}
+UNION
+{
+    ?id bhf:source ?source__id .
+    BIND(?source__id as ?source__prefLabel) .
 }
 `
+
+
+

@@ -1,5 +1,5 @@
 {
-    "id": "corporationNames",
+    "id": "legalForms",
     "endpoint": {
         "url": "http://vkg-scob:8080/sparql",
         "useAuth": false,
@@ -8,11 +8,11 @@
     },
     "sparqlQueriesFile": "SparqlQueriesScob.js",
     "baseURI": "http://belhisfirm.be/resource",
-    "URITemplate": "<BASE_URI>/corporationName/<LOCAL_ID>",
+    "URITemplate": "<BASE_URI>/legalForm/<LOCAL_ID>",
     "resultClasses": {
-        "corporationNames": {
+        "legalForms": {
             "instanceConfig": {
-                "propertiesQueryBlock": "corporationNamePropertiesInstancePage",
+                "propertiesQueryBlock": "corporationLegalFormPropertiesInstancePage",
                 "instancePageResultClasses": {
                     "instancePageTable": {
                         "tabID": 0,
@@ -26,7 +26,7 @@
     },
     "properties": [
         {
-            "id": "name",
+            "id": "legalForm",
             "valueType": "object",
             "minWidth": 250
         },

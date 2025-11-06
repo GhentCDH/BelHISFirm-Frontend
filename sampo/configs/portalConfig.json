@@ -8,7 +8,8 @@
             "scob"
         ],
         "onlyInstancePages": [
-            "corporationNames"
+            "corporationNames",
+            "legalForms"
         ]
     },
     "localeConfig": {

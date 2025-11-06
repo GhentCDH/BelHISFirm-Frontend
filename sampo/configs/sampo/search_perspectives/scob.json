@@ -60,7 +60,7 @@
             "id": "corporationName",
             "valueType": "object",
             "makeLink": true,
-            "externalLink": false,
+            "externalLink": true,
             "sortValues": true,
             "numberedList": false,
             "minWidth": 250
@@ -90,7 +90,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 200
+            "minWidth": 150
         },
         {
             "id": "dateOfDissolution",
@@ -99,7 +99,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 200
+            "minWidth": 150
         }
     ],
     "facets": {
