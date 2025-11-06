@@ -246,7 +246,7 @@
             },
             "properties": {
                 "uri": {
-                    "label": "id",
+                    "label": "uri",
                     "description": "uri of corporation"
                 },
                 "corporationName": {
@@ -291,7 +291,7 @@
             },
             "properties": {
                 "uri": {
-                    "label": "id",
+                    "label": "uri",
                     "description": "Id of the name associated to the corporation"
                 },
                 "corporation": {
@@ -328,7 +328,7 @@
             },
             "properties": {
                 "uri": {
-                    "label": "id",
+                    "label": "uri",
                     "description": "Id of the legal form instance associated to the corporation"
                 },
                 "corporation": {
@@ -354,6 +354,43 @@
                 "comments": {
                     "label": "comments",
                     "description": "extra info"
+                }
+            }
+        },
+        "addresses": {
+            "label": "Addresses",
+            "instancePage": {
+                "label": "Address",
+                "description": "Address the corporation has/had at some point in time."
+            },
+            "properties": {
+                "uri": {
+                    "label": "uri",
+                    "description": "Id of this location"
+                },
+                "corporation": {
+                    "label": "corporation",
+                    "description": "corporation associated with this location"
+                },
+                "country": {
+                    "label": "country",
+                    "description": "country of this location"
+                },
+                "city": {
+                    "label": "city",
+                    "description": "city of this location"
+                },
+                "streetAddress": {
+                    "label": "street address",
+                    "description": "street address of this location"
+                },
+                "startDate": {
+                    "label": "start date",
+                    "description": "start date of this address being used"
+                },
+                "endDate": {
+                    "label": "end date",
+                    "description": "end date of this address being used"
                 }
             }
         }

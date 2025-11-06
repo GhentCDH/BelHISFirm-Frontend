@@ -9,7 +9,8 @@
         ],
         "onlyInstancePages": [
             "corporationNames",
-            "legalForms"
+            "legalForms",
+            "addresses"
         ]
     },
     "localeConfig": {

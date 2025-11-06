@@ -40,6 +40,7 @@ export const corporationProperties = `
     BIND(?address__city as ?city__prefLabel)
     BIND(?address__id as ?country__id)
     BIND(?address__country as ?country__prefLabel)
+    BIND(CONCAT("/addresses/page/", STRAFTER(STR(?address__id), "address/")) AS ?address__dataProviderUrl)
   }
   UNION
   {
@@ -146,5 +147,41 @@ UNION
 }
 `
 
+export const corporationAddressPropertiesInstancePage = `
+{
+    ?id bhf:country ?country__id .
+    BIND(?country__id as ?country__prefLabel)
+    BIND(?id as ?uri__prefLabel)
+    BIND(?id as ?uri__id)
+    BIND(CONCAT("/addresses/page/", STRAFTER(STR(?id), "address/")) AS ?uri__dataProviderUrl)
+}
+UNION
+{
+    ?corporation__id bhf:hasAddress ?id .
+    BIND(?corporation__id as ?corporation__prefLabel)
+    BIND(CONCAT("/scob/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporation__dataProviderUrl)
+}
+UNION
+{
+    ?id bhf:city ?city__id .
+    BIND(?city__id as ?city__prefLabel)
+}
+UNION
+{
+    ?id bhf:streetAddress ?streetAddress__id .
+    BIND(?streetAddress__id as ?streetAddress__prefLabel)
+}
+UNION
+{
+    ?id bhf:startDate ?startDate__id .
+    BIND(?startDate__id as ?startDate__prefLabel)
+}
+UNION
+{
+    ?id bhf:endDate ?endDate__id .
+    BIND(?endDate__id as ?endDate__prefLabel)
+}
+
+`
 
 

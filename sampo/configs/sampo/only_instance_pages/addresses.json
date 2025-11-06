@@ -1,0 +1,68 @@
+{
+    "id": "addresses",
+    "endpoint": {
+        "url": "http://vkg-scob:8080/sparql",
+        "useAuth": false,
+        "prefixesFile": "SparqlQueriesPrefixes.js",
+        "defaultSparql": true
+    },
+    "sparqlQueriesFile": "SparqlQueriesScob.js",
+    "baseURI": "http://belhisfirm.be/resource",
+    "URITemplate": "<BASE_URI>/address/<LOCAL_ID>",
+    "resultClasses": {
+        "addresses": {
+            "instanceConfig": {
+                "propertiesQueryBlock": "corporationAddressPropertiesInstancePage",
+                "instancePageResultClasses": {
+                    "instancePageTable": {
+                        "tabID": 0,
+                        "component": "InstancePageTable",
+                        "tabPath": "table",
+                        "tabIcon": "CalendarViewDay"
+                    }
+                }
+            }
+        }
+    },
+    "properties": [
+        {
+            "id": "uri",
+            "valueType": "object",
+            "minWidth": 250,
+            "makeLink": true,
+            "externalLink": false
+        },
+        {
+            "id": "corporation",
+            "valueType": "object",
+            "minWidth": 250,
+            "makeLink": true,
+            "externalLink": true
+        },
+        {
+            "id": "country",
+            "valueType": "object",
+            "minWidth": 250
+        },
+        {
+            "id": "city",
+            "valueType": "object",
+            "minWidth": 250
+        },
+        {
+            "id": "streetAddress",
+            "valueType": "object",
+            "minWidth": 250
+        },
+        {
+            "id": "startDate",
+            "valueType": "object",
+            "minWidth": 250
+        },
+        {
+            "id": "endDate",
+            "valueType": "object",
+            "minWidth": 250
+        }
+    ]
+}
