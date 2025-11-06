@@ -14,8 +14,7 @@ export const corporationProperties = `
   UNION
   {
     ?id bhf:hasLegalForm ?legalForm__id .
-    #TODO fix for legal form labels table
-    BIND(?legalForm__id as ?legalForm__prefLabel)
+    ?legalForm__id rdfs:label ?legalForm__prefLabel .
   }
   UNION
   {

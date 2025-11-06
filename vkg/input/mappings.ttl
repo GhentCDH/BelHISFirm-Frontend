@@ -35,7 +35,8 @@
                                     """SELECT juridisch_statuut, corporation FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasLegalForm ;
-                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/legalForm/{juridisch_statuut}" ] ] .
+                            rr:objectMap [ rr:template
+                                                   "http://belhisfirm.be/resource/legalForm/{juridisch_statuut}" ] ] .
 
 :CORPORATION-LOCATION
     a                     rr:TriplesMap ;
@@ -131,25 +132,22 @@
 :LEGAL-FORM-PROPERTIES
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """
-                                 SELECT
-                                    id,
-                                    juridisch_statuut,
-                                    CASE
-                                        WHEN startdate <= DATE '1000-12-31' THEN NULL
-                                        ELSE startdate
-                                    END AS startdate,
-                                    CASE
-                                        WHEN enddate >= DATE '3900-01-01' THEN NULL
-                                        ELSE enddate
-                                    END AS enddate,
-                                    source,
-                                    comments
-                                FROM scoball.corporation_juridisch_statuut
-                                WHERE juridisch_statuut IS NOT NULL
-    """ ] ;
+            SELECT
+                cjs.id,
+                cjs.juridisch_statuut AS juridisch_statuut_id,
+                js.juridisch_statuut  AS juridisch_statuut_label,
+                CASE WHEN cjs.startdate <= DATE '1000-12-31' THEN NULL ELSE cjs.startdate END AS startdate,
+                CASE WHEN cjs.enddate >= DATE '3900-01-01' THEN NULL ELSE cjs.enddate END AS enddate,
+                cjs.source,
+                cjs.comments
+            FROM scoball.corporation_juridisch_statuut cjs
+            JOIN scoball.juridisch_statuut js
+                ON cjs.juridisch_statuut = js.id
+            WHERE cjs.juridisch_statuut IS NOT NULL
+        """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/legalForm/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate rdfs:label ;
-                            rr:objectMap [ rr:column   "juridisch_statuut" ;
+                            rr:objectMap [ rr:column   "juridisch_statuut_label" ;
                                            rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:startDate ;
                             rr:objectMap [ rr:column   "startdate" ;
