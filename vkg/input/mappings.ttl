@@ -35,8 +35,7 @@
                                     """SELECT id, corporation FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasLegalForm ;
-                            rr:objectMap [ rr:template
-                                                   "http://belhisfirm.be/resource/legalForm/{id}" ] ] .
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/legalForm/{id}" ] ] .
 
 :CORPORATION-LOCATION
     a                     rr:TriplesMap ;
@@ -178,8 +177,14 @@
                                 SELECT
                                     id,
                                     address,
-                                    city,
-                                    country,
+                                    CASE
+                                        WHEN LOWER(city) = 'onbekend' THEN NULL
+                                        ELSE city
+                                    END AS city,
+                                    CASE
+                                        WHEN LOWER(country) = 'onbekend' THEN NULL
+                                        ELSE country
+                                    END AS country,
                                     CASE
                                         WHEN startdate <= DATE '1000-12-31' THEN NULL
                                         ELSE startdate
@@ -188,7 +193,7 @@
                                         WHEN enddate >= DATE '3900-01-01' THEN NULL
                                         ELSE enddate
                                     END AS enddate
-                                FROM scoball.corporation_location
+                                FROM scoball.corporation_location;
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/address/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:streetAddress ;
