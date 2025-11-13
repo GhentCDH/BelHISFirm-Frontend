@@ -1,26 +1,4 @@
 services:
-  # PostgreSQL Database
-  db:
-    image: postgres:17
-    container_name: belhisfirm-db
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: belhisfirm
-      POSTGRES_USER: belhisfirm_user
-      POSTGRES_PASSWORD: changeme_secure_password
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./db/init:/docker-entrypoint-initdb.d
-    networks:
-      - belhisfirm-network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U belhisfirm_user -d belhisfirm"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
 
   db-scob:
     image: postgres:17
@@ -42,57 +20,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
-#   Data Seeder - Generates test data
-  dataseeder:
-    build:
-      context: ./dataseeder
-      dockerfile: Dockerfile
-    container_name: belhisfirm-dataseeder
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_NAME: belhisfirm
-      DB_USER: belhisfirm_user
-      DB_PASSWORD: changeme_secure_password
-      SEED_COMPANIES: ${SEED_COMPANIES:-0}
-      SEED_PERSONS: ${SEED_PERSONS:-0}
-      SEED_BATCH_SIZE: ${SEED_BATCH_SIZE:-1000}
-    networks:
-      - belhisfirm-network
-    restart: "no"
-
-  vkg:
-    image: ontop/ontop:latest
-    container_name: belhisfirm-vkg
-    restart: unless-stopped
-    depends_on:
-      db:
-        condition: service_healthy
-    #      dataseeder:
-    #        condition: service_completed_successfully
-    ports:
-      - "8081:8080"
-    volumes:
-      - ./vkg/input:/opt/ontop/input
-      - ./vkg/jdbc:/opt/ontop/jdbc
-    environment:
-      ONTOP_ONTOLOGY_FILE: /opt/ontop/input/ontology_old.ttl
-      ONTOP_MAPPING_FILE: /opt/ontop/input/mappings_old.obda
-      ONTOP_PROPERTIES_FILE: /opt/ontop/input/ontop_old.properties
-      ONTOP_CORS_ALLOWED_ORIGINS: "*"
-      ONTOP_LAZY_INIT: "true"
-      ONTOP_DEV_MODE: "false"
-    networks:
-      - belhisfirm-network
-    healthcheck:
-      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/" ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
   # Ontop Virtual Knowledge Graph
   vkg-scob:
