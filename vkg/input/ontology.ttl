@@ -109,7 +109,7 @@ bhf:hasLegalForm
     rdfs:label   "legal form"@en, "rechtsvorm"@nl ;
     rdfs:comment "The legal form of the corporation (e.g., SA, NV)"@en .
 
-bhf:dateOfFounding
+bhf:dateOfIncorporation
     rdf:type           owl:DatatypeProperty ;
     rdfs:subPropertyOf dct:created ;
     rdfs:domain        bhf:Corporation ;

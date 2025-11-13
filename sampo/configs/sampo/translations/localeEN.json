@@ -273,9 +273,9 @@
                     "label": "Street Address",
                     "description": "Street Address of the corporation"
                 },
-                "dateOfFounding": {
-                    "label": "Date of Founding",
-                    "description": "Date of founding"
+                "dateOfIncorporation": {
+                    "label": "Date of Incorporation",
+                    "description": "Date of incorporation"
                 },
                 "dateOfDissolution": {
                     "label": "Date of Dissolution",

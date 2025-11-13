@@ -28,9 +28,9 @@ export const corporationProperties = `
     BIND(
       CONCAT(
         COALESCE(?address__street, ""), 
-        " ",
+        ", ",
         COALESCE(?address__city, ""), 
-        " ",
+        ", ",
         COALESCE(?address__country, "")
       )
     AS ?address__prefLabel)
@@ -44,8 +44,8 @@ export const corporationProperties = `
   }
   UNION
   {
-    ?id bhf:dateOfFounding ?dateOfFounding__id .
-    BIND(?dateOfFounding__id as ?dateOfFounding__prefLabel)
+    ?id bhf:dateOfIncorporation ?dateOfIncorporation__id .
+    BIND(STR(?dateOfIncorporation__id) as ?dateOfIncorporation__prefLabel)
   }
   UNION
   {

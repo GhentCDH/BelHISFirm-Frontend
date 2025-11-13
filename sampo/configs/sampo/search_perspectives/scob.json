@@ -84,7 +84,7 @@
             "minWidth": 350
         },
         {
-            "id": "dateOfFounding",
+            "id": "dateOfIncorporation",
             "valueType": "object",
             "makeLink": false,
             "externalLink": false,
@@ -127,16 +127,16 @@
             "sortDirection": "desc",
             "literal": true
         },
-        "dateOfFounding": {
+        "dateOfIncorporation": {
             "containerClass": "four",
             "facetType": "integer",
             "filterType": "dateNoTimespanFilter",
             "max": null,
             "min": null,
-            "predicate": "bhf:dateOfFounding",
-            "sortByAscPredicate": "bhf:dateOfFounding",
-            "sortByDescPredicate": "bhf:dateOfFounding",
-            "sortByPredicate": "bhf:dateOfFounding"
+            "predicate": "bhf:dateOfIncorporation",
+            "sortByAscPredicate": "bhf:dateOfIncorporation",
+            "sortByDescPredicate": "bhf:dateOfIncorporation",
+            "sortByPredicate": "bhf:dateOfIncorporation"
         },
         "dateOfDissolution": {
             "containerClass": "four",

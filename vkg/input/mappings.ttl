@@ -50,16 +50,16 @@
                                             SELECT id,
                                             CASE
                                                 WHEN startdate <= DATE '1000-12-31' THEN NULL
-                                                ELSE startdate
+                                                ELSE CAST(startdate as DATE)
                                             END AS startdate,
                                             CASE
                                                 WHEN enddate >= DATE '3900-01-01' THEN NULL
-                                                ELSE enddate
+                                                ELSE CAST(enddate as DATE)
                                             END AS enddate
                                             FROM scoball.corporation
                                        """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{id}" ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:dateOfFounding ;
+    rr:predicateObjectMap [ rr:predicate bhf:dateOfIncorporation ;
                             rr:objectMap [ rr:column   "startdate" ;
                                            rr:datatype xsd:date ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:dateOfDissolution ;
@@ -88,11 +88,11 @@
                                             name,
                                             CASE
                                                 WHEN startdate <= DATE '1000-12-31' THEN NULL
-                                                ELSE startdate
+                                                ELSE CAST(startdate as DATE)
                                             END AS startdate,
                                             CASE
                                                 WHEN enddate >= DATE '3900-01-01' THEN NULL
-                                                ELSE enddate
+                                                ELSE CAST(enddate as DATE)
                                             END AS enddate,
                                             source,
                                             comments
@@ -135,8 +135,14 @@
                 cjs.id AS id,
                 cjs.juridisch_statuut AS juridisch_statuut_id,
                 js.juridisch_statuut  AS juridisch_statuut_label,
-                CASE WHEN cjs.startdate <= DATE '1000-12-31' THEN NULL ELSE cjs.startdate END AS startdate,
-                CASE WHEN cjs.enddate >= DATE '3900-01-01' THEN NULL ELSE cjs.enddate END AS enddate,
+                CASE
+                    WHEN cjs.startdate <= DATE '1000-12-31' THEN NULL
+                    ELSE CAST(cjs.startdate as DATE)
+                END AS startdate,
+                CASE
+                    WHEN cjs.enddate >= DATE '3900-01-01' THEN NULL
+                    ELSE CAST(cjs.enddate as DATE)
+                END AS enddate,
                 cjs.source,
                 cjs.comments
             FROM scoball.corporation_juridisch_statuut cjs
@@ -187,11 +193,11 @@
                                     END AS country,
                                     CASE
                                         WHEN startdate <= DATE '1000-12-31' THEN NULL
-                                        ELSE startdate
+                                        ELSE CAST(startdate as DATE)
                                     END AS startdate,
                                     CASE
                                         WHEN enddate >= DATE '3900-01-01' THEN NULL
-                                        ELSE enddate
+                                        ELSE CAST(enddate as DATE)
                                     END AS enddate
                                 FROM scoball.corporation_location;
     """ ] ;

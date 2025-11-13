@@ -267,7 +267,7 @@
                     "label": "Adres",
                     "description": "Adres van het bedrijf"
                 },
-                "dateOfFounding": {
+                "dateOfIncorporation": {
                     "label": "Oprichtingsdatum",
                     "description": "Datum van oprichting"
                 },
