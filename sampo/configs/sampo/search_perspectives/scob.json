@@ -54,7 +54,7 @@
             "externalLink": true,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 300
+            "minWidth": 50
         },
         {
             "id": "corporationName",
@@ -90,7 +90,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 150
+            "minWidth": 175
         },
         {
             "id": "dateOfDissolution",

@@ -29,8 +29,6 @@ services:
     depends_on:
       db-scob:
         condition: service_healthy
-#      dataseeder:
-#        condition: service_completed_successfully
     ports:
       - "8082:8080"
     volumes:
