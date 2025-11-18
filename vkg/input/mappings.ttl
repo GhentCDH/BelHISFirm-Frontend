@@ -24,7 +24,8 @@
 :CORPORATION-NAME
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery
-                                    """SELECT corporation, id FROM scoball.corporation_name WHERE name IS NOT NULL""" ] ;
+                                    """SELECT corporation, RAWTOHEX(STANDARD_HASH(corporation || name || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
+                                            FROM scoball.corporation_name WHERE name IS NOT NULL""" ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasName ;
                             rr:objectMap [ rr:template "http://belhisfirm.be/resource/corporationName/{id}" ] ] .
@@ -32,14 +33,16 @@
 :CORPORATION-LEGAL-FORM
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery
-                                    """SELECT id, corporation FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
+                                    """SELECT corporation, RAWTOHEX(STANDARD_HASH(corporation || juridisch_statuut || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
+                                            FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasLegalForm ;
                             rr:objectMap [ rr:template "http://belhisfirm.be/resource/legalForm/{id}" ] ] .
 
 :CORPORATION-LOCATION
     a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """SELECT id, corporation FROM scoball.corporation_location""" ] ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT corporation, RAWTOHEX(STANDARD_HASH(corporation || city || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
+                                                FROM scoball.corporation_location""" ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasAddress ;
                             rr:objectMap [ rr:template "http://belhisfirm.be/resource/address/{id}" ] ] .
@@ -49,12 +52,12 @@
     rr:logicalTable       [ rr:sqlQuery """
                                             SELECT id,
                                             CASE
-                                                WHEN startdate <= DATE '1000-12-31' THEN NULL
-                                                ELSE CAST(startdate as DATE)
+                                                WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                                                ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
                                             END AS startdate,
                                             CASE
-                                                WHEN enddate >= DATE '3900-01-01' THEN NULL
-                                                ELSE CAST(enddate as DATE)
+                                                WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
+                                                ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
                                             END AS enddate
                                             FROM scoball.corporation
                                        """ ] ;
@@ -76,7 +79,7 @@
 
 :CORPORATION-NAME-TYPE
     a               rr:TriplesMap ;
-    rr:logicalTable [ rr:sqlQuery """SELECT id FROM scoball.corporation_name WHERE name IS NOT NULL""" ] ;
+    rr:logicalTable [ rr:sqlQuery """SELECT RAWTOHEX(STANDARD_HASH(corporation || name || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id FROM scoball.corporation_name WHERE name IS NOT NULL""" ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/corporationName/{id}" ;
                       rr:class    bhf:CorporationName ] .
 
@@ -84,16 +87,18 @@
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """
                                         SELECT
-                                            id,
+                                            corporation,
+                                            RAWTOHEX(STANDARD_HASH(corporation || name || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id,
                                             name,
+                                            startdate,
                                             CASE
-                                                WHEN startdate <= DATE '1000-12-31' THEN NULL
-                                                ELSE CAST(startdate as DATE)
-                                            END AS startdate,
+                                                WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                                                ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
+                                            END AS startdate_fixed,
                                             CASE
-                                                WHEN enddate >= DATE '3900-01-01' THEN NULL
-                                                ELSE CAST(enddate as DATE)
-                                            END AS enddate,
+                                                WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
+                                                ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
+                                            END AS enddate_fixed,
                                             source,
                                             comments
                                         FROM scoball.corporation_name
@@ -104,10 +109,10 @@
                             rr:objectMap [ rr:column   "name" ;
                                            rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:startDate ;
-                            rr:objectMap [ rr:column   "startdate" ;
+                            rr:objectMap [ rr:column   "startdate_fixed" ;
                                            rr:datatype xsd:date ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:endDate ;
-                            rr:objectMap [ rr:column   "enddate" ;
+                            rr:objectMap [ rr:column   "enddate_fixed" ;
                                            rr:datatype xsd:date ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:source ;
                             rr:objectMap [ rr:column   "source" ;
@@ -124,7 +129,8 @@
 :LEGAL-FORM-TYPE
     a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery
-                              """SELECT id FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
+                              """SELECT corporation, RAWTOHEX(STANDARD_HASH(corporation || juridisch_statuut || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
+                                    FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/legalForm/{id}" ;
                       rr:class    bhf:LegalForm ] .
 
@@ -132,17 +138,18 @@
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """
             SELECT
-                cjs.id AS id,
+                cjs.corporation AS corporation,
                 cjs.juridisch_statuut AS juridisch_statuut_id,
                 js.juridisch_statuut  AS juridisch_statuut_label,
+                RAWTOHEX(STANDARD_HASH(cjs.corporation || cjs.juridisch_statuut || TO_CHAR(cjs.startdate,'YYYY-MM-DD'), 'SHA1')) AS id,
                 CASE
-                    WHEN cjs.startdate <= DATE '1000-12-31' THEN NULL
-                    ELSE CAST(cjs.startdate as DATE)
-                END AS startdate,
+                    WHEN cjs.startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                    ELSE TO_CHAR(cjs.startdate, 'YYYY-MM-DD')
+                END AS startdate_fixed,
                 CASE
-                    WHEN cjs.enddate >= DATE '3900-01-01' THEN NULL
-                    ELSE CAST(cjs.enddate as DATE)
-                END AS enddate,
+                    WHEN cjs.enddate >= TO_DATE('3900-01-01', 'YYYY-MM-DD') THEN NULL
+                    ELSE TO_CHAR(cjs.enddate, 'YYYY-MM-DD')
+                END AS enddate_fixed,
                 cjs.source,
                 cjs.comments
             FROM scoball.corporation_juridisch_statuut cjs
@@ -155,10 +162,10 @@
                             rr:objectMap [ rr:column   "juridisch_statuut_label" ;
                                            rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:startDate ;
-                            rr:objectMap [ rr:column   "startdate" ;
+                            rr:objectMap [ rr:column   "startdate_fixed" ;
                                            rr:datatype xsd:date ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:endDate ;
-                            rr:objectMap [ rr:column   "enddate" ;
+                            rr:objectMap [ rr:column   "enddate_fixed" ;
                                            rr:datatype xsd:date ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:source ;
                             rr:objectMap [ rr:column   "source" ;
@@ -173,7 +180,8 @@
 ##################
 :LOCATION-TYPE
     a               rr:TriplesMap ;
-    rr:logicalTable [ rr:sqlQuery """SELECT id FROM scoball.corporation_location""" ] ;
+    rr:logicalTable [ rr:sqlQuery """SELECT corporation, RAWTOHEX(STANDARD_HASH(corporation || city || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
+                                        FROM scoball.corporation_location""" ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/address/{id}" ;
                       rr:class    bhf:Address ] .
 
@@ -181,24 +189,26 @@
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """
                                 SELECT
-                                    id,
+                                    corporation,
+                                    RAWTOHEX(STANDARD_HASH(corporation || city || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id,
                                     address,
+                                    city,
                                     CASE
                                         WHEN LOWER(city) = 'onbekend' THEN NULL
                                         ELSE city
-                                    END AS city,
+                                    END AS city_fixed,
                                     CASE
                                         WHEN LOWER(country) = 'onbekend' THEN NULL
                                         ELSE country
                                     END AS country,
                                     CASE
-                                        WHEN startdate <= DATE '1000-12-31' THEN NULL
-                                        ELSE CAST(startdate as DATE)
-                                    END AS startdate,
+                                        WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                                        ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
+                                    END AS startdate_fixed,
                                     CASE
-                                        WHEN enddate >= DATE '3900-01-01' THEN NULL
-                                        ELSE CAST(enddate as DATE)
-                                    END AS enddate
+                                        WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
+                                        ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
+                                    END AS enddate_fixed
                                 FROM scoball.corporation_location;
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/address/{id}" ] ;
@@ -206,16 +216,16 @@
                             rr:objectMap [ rr:column   "address" ;
                                            rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:city ;
-                            rr:objectMap [ rr:column   "city" ;
+                            rr:objectMap [ rr:column   "city_fixed" ;
                                            rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:country ;
                             rr:objectMap [ rr:column   "country" ;
                                            rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:startDate ;
-                            rr:objectMap [ rr:column   "startdate" ;
+                            rr:objectMap [ rr:column   "startdate_fixed" ;
                                            rr:datatype xsd:date ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:endDate ;
-                            rr:objectMap [ rr:column   "enddate" ;
+                            rr:objectMap [ rr:column   "enddate_fixed" ;
                                            rr:datatype xsd:date ] ] .
 
 

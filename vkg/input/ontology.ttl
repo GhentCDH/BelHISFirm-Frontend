@@ -71,14 +71,6 @@ bhf:endDate
     rdfs:label   "end date"@en, "einde datum"@nl ;
     rdfs:comment "end date of when a property became valid."@en .
 
-bhf:label
-    rdf:type               owl:DatatypeProperty ;
-    owl:equivalentProperty rdfs:label ;
-    rdfs:domain            bhf:PropertyClass ;
-    rdfs:range             xsd:string ;
-    rdfs:label             "Label"@en, "Label"@nl ;
-    rdfs:comment           "String representation of property"@en .
-
 bhf:source
     rdf:type     owl:DatatypeProperty ;
     rdfs:domain  bhf:PropertyClass ;

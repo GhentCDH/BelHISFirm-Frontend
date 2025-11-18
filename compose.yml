@@ -1,36 +1,36 @@
 services:
 
-  db-scob:
-    image: postgres:17
-    container_name: belhisfirm-scob-db
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: scob
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "5433:5432"
-    volumes:
-      - postgres_data_scob:/var/lib/postgresql/data
-      - ./scob_db_dump/init:/docker-entrypoint-initdb.d
-    networks:
-      - belhisfirm-network
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U scob_user -d scob" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+#  db-scob:
+#    image: postgres:17
+#    container_name: belhisfirm-scob-db
+#    restart: unless-stopped
+#    environment:
+#      POSTGRES_DB: scob
+#      POSTGRES_USER: ${DB_USER}
+#      POSTGRES_PASSWORD: ${DB_PASSWORD}
+#    ports:
+#      - "5433:5432"
+#    volumes:
+#      - postgres_data_scob:/var/lib/postgresql/data
+#      - ./scob_db_dump/init:/docker-entrypoint-initdb.d
+#    networks:
+#      - belhisfirm-network
+#    healthcheck:
+#      test: [ "CMD-SHELL", "pg_isready -U scob_user -d scob" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
 
   # Ontop Virtual Knowledge Graph
   vkg-scob:
     image: ontop/ontop:latest
     container_name: belhisfirm-scob-vkg
     restart: unless-stopped
-    depends_on:
-      db-scob:
-        condition: service_healthy
+#    depends_on:
+#      db-scob:
+#        condition: service_healthy
     ports:
-      - "8082:8080"
+      - "8080:8080"
     volumes:
       - ./vkg/input:/opt/ontop/input
       - ./vkg/jdbc:/opt/ontop/jdbc
@@ -41,12 +41,11 @@ services:
       ONTOP_CORS_ALLOWED_ORIGINS: "*"
       ONTOP_LAZY_INIT: "true"
       ONTOP_DEV_MODE: "false"
-      DB_URL: ${DB_URL}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_DRIVER: ${DB_DRIVER}
-    networks:
-      - belhisfirm-network
+      DB_URL: ${DB_URL_SCOB}
+      DB_USER: ${DB_USER_SCOB}
+      DB_PASSWORD: ${DB_PASSWORD_SCOB}
+      DB_DRIVER: ${DB_DRIVER_SCOB}
+    network_mode: host
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/"]
       interval: 30s
@@ -62,7 +61,7 @@ services:
       - ./sampo/client:/app/client
       - client_node_modules:/app/client/node_modules # Prevent overwrite of deps
     ports:
-      - "8080:8080"
+      - "8083:8083"
     working_dir: /app/client
     environment:
       BABEL_ENV: ${BABEL_ENV}
@@ -70,8 +69,7 @@ services:
       API_URL: ${API_URL}
     depends_on:
       - sampo-server
-    networks:
-      - belhisfirm-network
+    network_mode: host
 
   sampo-server:
     build:
@@ -88,8 +86,7 @@ services:
     environment:
       BABEL_ENV: ${SERVER_BABEL_ENV}
       NODE_ENV: ${NODE_ENV}
-    networks:
-      - belhisfirm-network
+    network_mode: host
 
 
 networks:
