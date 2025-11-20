@@ -1,60 +1,11 @@
+# Compose file to connect directly to scob db via vpn
 services:
-
-#  db-scob:
-#    image: postgres:17
-#    container_name: belhisfirm-scob-db
-#    restart: unless-stopped
-#    environment:
-#      POSTGRES_DB: scob
-#      POSTGRES_USER: ${DB_USER}
-#      POSTGRES_PASSWORD: ${DB_PASSWORD}
-#    ports:
-#      - "5433:5432"
-#    volumes:
-#      - postgres_data_scob:/var/lib/postgresql/data
-#      - ./scob_db_dump/init:/docker-entrypoint-initdb.d
-#    networks:
-#      - belhisfirm-network
-#    healthcheck:
-#      test: [ "CMD-SHELL", "pg_isready -U scob_user -d scob" ]
-#      interval: 10s
-#      timeout: 5s
-#      retries: 5
-
-  # Local oracle db for dev
-  oracle:
-    image: gvenzl/oracle-free:latest
-    container_name: oracle_db
-    restart: unless-stopped
-    environment:
-      ORACLE_PASSWORD: ${ORACLE_PASSWORD}
-      ORACLE_DATABASE: "scob"
-      APP_USER: ${ORACLE_USER}
-      APP_USER_PASSWORD: ${ORACLE_PASSWORD}
-    ports:
-      - "1521:1521"
-    volumes:
-      - ./scob_db_dump/init:/container-entrypoint-initdb.d
-      - oracle_data:/opt/oracle/oradata
-    healthcheck:
-      test: [ "CMD", "bash", "-c", "echo 'SELECT 1 FROM dual;' | sqlplus -s system/${ORACLE_PASSWORD}@localhost:1521/scob | grep 1" ]
-      interval: 15s
-      timeout: 5s
-      retries: 20
-    networks:
-      - belhisfirm-network
-
 
   # Ontop Virtual Knowledge Graph
   vkg-scob:
     image: ontop/ontop:latest
     container_name: belhisfirm-scob-vkg
     restart: unless-stopped
-    depends_on:
-      oracle:
-        condition: service_healthy
-    ports:
-      - "8080:8080"
     volumes:
       - ./vkg/input:/opt/ontop/input
       - ./vkg/jdbc:/opt/ontop/jdbc
@@ -65,12 +16,11 @@ services:
       ONTOP_CORS_ALLOWED_ORIGINS: "*"
       ONTOP_LAZY_INIT: "true"
       ONTOP_DEV_MODE: "false"
-      DB_URL: ${DB_URL_ORACLE_LOCAL}
-      DB_USER: ${ORACLE_USER}
-      DB_PASSWORD: ${ORACLE_PASSWORD}
+      DB_URL: ${DB_URL_SCOB}
+      DB_USER: ${DB_USER_SCOB}
+      DB_PASSWORD: ${DB_PASSWORD_SCOB}
       DB_DRIVER: ${DB_DRIVER_SCOB}
-    networks:
-      - belhisfirm-network
+    network_mode: host
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/"]
       interval: 30s
@@ -85,8 +35,6 @@ services:
     volumes:
       - ./sampo/client:/app/client
       - client_node_modules:/app/client/node_modules # Prevent overwrite of deps
-    ports:
-      - "8081:8080"
     working_dir: /app/client
     environment:
       BABEL_ENV: ${BABEL_ENV}
@@ -94,8 +42,7 @@ services:
       API_URL: ${API_URL}
     depends_on:
       - sampo-server
-    networks:
-      - belhisfirm-network
+    network_mode: host
 
   sampo-server:
     build:
@@ -106,14 +53,11 @@ services:
       - ./sampo/server:/app/server
       - ./sampo/configs:/app/configs
       - server_node_modules:/app/server/node_modules # Prevent overwrite of deps
-    ports:
-      - "3001:3001"
     working_dir: /app/server
     environment:
       BABEL_ENV: ${SERVER_BABEL_ENV}
       NODE_ENV: ${NODE_ENV}
-    networks:
-      - belhisfirm-network
+    network_mode: host
 
 
 networks:
@@ -125,4 +69,3 @@ volumes:
   postgres_data_scob:
   client_node_modules:
   server_node_modules:
-  oracle_data:
