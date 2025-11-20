@@ -10,31 +10,45 @@ A Docker Compose application stack for BellHisFirm consisting of:
 ```
 
 ┌─────────────────┐
-│   Sampo UI      │  (Port 8080)
+│   Sampo UI      │ 
 │    Client       │
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│   Sampo UI      │  (Port 3001)
+│   Sampo UI      │ 
 │    Server       │
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│   Ontop VKG     │  (Port 8082)
+│   Ontop VKG     │
 │ SPARQL Endpoint │
 └────────┬────────┘
          │
          ▼
 ┌─────────────────┐
-│   PostgreSQL    │  (Port 5432)
+│   PostgreSQL    │
 │    Database     │
 └─────────────────┘
 ```
 
 ## Prerequisites
-- PostgreSQL JDBC driver (see setup instructions below)
+### Install jdbc driver(s) for database
+
+Run this command from the project root:
+
+Postgres:
+```bash
+curl -L https://jdbc.postgresql.org/download/postgresql-42.7.8.jar -o vkg/jdbc/postgresql-42.7.1.jar
+```
+
+Oracle:
+```shell
+curl -L -o vkg/jdbc/ojdbc8-21.11.0.0.jar https://repo1.maven.org/maven2/com/oracle/database/jdbc/ojdbc8/21.11.0.0/ojdbc8-21.11.0.0.jar
+```
+
+You should then see the jar file(s) in `vkg/jdbc`
 
 ## Quick Start
 

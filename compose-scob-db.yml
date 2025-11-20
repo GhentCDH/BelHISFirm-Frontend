@@ -1,4 +1,7 @@
 # Compose file to connect directly to scob db via vpn
+# Using network mode host means you can't change the external ports
+# this also means ontop and sampo-client will both want to use 8080, so you have to change
+# the port sampo uses in sampo/client/webpack.client.dev.js
 services:
 
   # Ontop Virtual Knowledge Graph
