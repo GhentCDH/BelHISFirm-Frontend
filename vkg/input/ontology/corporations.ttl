@@ -1,0 +1,148 @@
+@prefix :       <http://belhisfirm.be/resource/> .
+@prefix bhf:    <http://belhisfirm.be/ontology#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf:   <http://xmlns.com/foaf/0.1/> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix rov:    <http://www.w3.org/ns/regorg#> .
+@prefix schema: <http://schema.org/> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix vcard:  <http://www.w3.org/2006/vcard/ns#> .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+bhf:PropertyClass
+    rdf:type     owl:Class ;
+    rdfs:label   "belhisfirm property class"@en ;
+    rdfs:comment "Generic property class for properties of corporations."@en .
+
+### Corporation Classes
+bhf:Corporation
+    rdf:type        owl:Class ;
+    rdfs:subClassOf org:Organization, rov:RegisteredOrganization ;
+    rdfs:label      "Corporation"@en, "Bedrijf"@nl ;
+    rdfs:comment    "A business organization registered in Belgium"@en .
+
+### Address and Location
+bhf:Address
+    rdf:type        owl:Class ;
+    rdfs:subClassOf vcard:Address, bhf:PropertyClass ;
+    rdfs:label      "Address"@en, "Adres"@nl ;
+    rdfs:comment    "Physical address of a corporation"@en .
+
+bhf:LegalForm
+    rdf:type        owl:Class ;
+    rdfs:subClassOf bhf:PropertyClass ;
+    rdfs:label      "Legal Form"@en, "Juridisch Statuut"@nl ;
+    rdfs:comment    "Legal Form of a corporation within a certain timespan"@en .
+
+bhf:CorporationName
+    rdf:type        owl:Class ;
+    rdfs:subClassOf bhf:PropertyClass ;
+    rdfs:label      "Corporation Name"@en, "Bedrijfsnaam"@nl ;
+    rdfs:comment    "Legal name of a corporation within a certain timespan"@en .
+
+### General properties
+bhf:startDate
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:PropertyClass ;
+    rdfs:range   xsd:date ;
+    rdfs:label   "start date"@en, "start datum"@nl ;
+    rdfs:comment "Start date of when a property became valid."@en .
+
+bhf:endDate
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:PropertyClass ;
+    rdfs:range   xsd:date ;
+    rdfs:label   "end date"@en, "einde datum"@nl ;
+    rdfs:comment "end date of when a property became valid."@en .
+
+bhf:source
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:PropertyClass ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Source"@en, "Bron"@nl ;
+    rdfs:comment "Source of the property"@en .
+
+bhf:comments
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:PropertyClass ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Comments"@en, "Extra info"@nl ;
+    rdfs:comment "Extra info on the property"@en .
+
+
+### Corporation properties
+bhf:hasName
+    rdf:type     owl:ObjectProperty ;
+    rdfs:domain  bhf:Corporation ;
+    rdfs:range   bhf:CorporationName ;
+    rdfs:label   "corporation name"@en, "bedrijfsnaam"@nl ;
+    rdfs:comment "The legal name of the corporation"@en .
+
+bhf:hasLegalForm
+    rdf:type     owl:ObjectProperty ;
+    rdfs:domain  bhf:Corporation ;
+    rdfs:range   bhf:LegalForm ;
+    rdfs:label   "legal form"@en, "rechtsvorm"@nl ;
+    rdfs:comment "The legal form of the corporation (e.g., SA, NV)"@en .
+
+bhf:dateOfIncorporation
+    rdf:type           owl:DatatypeProperty ;
+    rdfs:subPropertyOf dct:created ;
+    rdfs:domain        bhf:Corporation ;
+    rdfs:range         xsd:date ;
+    rdfs:label         "date of founding"@en, "oprichtingsdatum"@nl ;
+    rdfs:comment       "The date when the corporation was founded"@en .
+
+bhf:dateOfDissolution
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:Corporation ;
+    rdfs:range   xsd:date ;
+    rdfs:label   "date of dissolution"@en, "ontbindingsdatum"@nl ;
+    rdfs:comment "The date when the corporation was dissolved"@en .
+
+bhf:hasAddress
+    rdf:type           owl:ObjectProperty ;
+    rdfs:subPropertyOf vcard:hasAddress ;
+    rdfs:subPropertyOf schema:address ;
+    rdfs:domain        bhf:Corporation ;
+    rdfs:range         bhf:Address ;
+    rdfs:label         "has address"@en, "heeft adres"@nl ;
+    rdfs:comment       "Links a corporation to its physical address"@en .
+
+bhf:scobID
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:Corporation ;
+    rdfs:range   xsd:integer ;
+    rdfs:label   "scob ID"@en ;
+    rdfs:comment "ID of corporation in the scob Database"@en .
+
+
+### Address properties
+bhf:streetAddress
+    rdf:type           owl:DatatypeProperty ;
+    rdfs:subPropertyOf vcard:street-address ;
+    rdfs:domain        bhf:Address ;
+    rdfs:range         xsd:string ;
+    rdfs:label         "street address"@en, "straatadres"@nl .
+
+bhf:city
+    rdf:type           owl:DatatypeProperty ;
+    rdfs:subPropertyOf vcard:locality ;
+    rdfs:domain        bhf:Address ;
+    rdfs:range         xsd:string ;
+    rdfs:label         "city"@en, "stad"@nl .
+
+bhf:country
+    rdf:type           owl:DatatypeProperty ;
+    rdfs:subPropertyOf vcard:country-name ;
+    rdfs:domain        bhf:Address ;
+    rdfs:range         xsd:string ;
+    rdfs:label         "country"@en, "land"@nl .
+

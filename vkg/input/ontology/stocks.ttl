@@ -1,0 +1,89 @@
+@prefix :       <http://belhisfirm.be/resource/> .
+@prefix bhf:    <http://belhisfirm.be/ontology#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf:   <http://xmlns.com/foaf/0.1/> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix rov:    <http://www.w3.org/ns/regorg#> .
+@prefix schema: <http://schema.org/> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix vcard:  <http://www.w3.org/2006/vcard/ns#> .
+
+#################################################################
+#    Classes
+#################################################################
+
+bhf:Stock
+    a            owl:Class ;
+    rdfs:label   "Stock"@en ;
+    rdfs:comment "A stock of a registered corporation in Belgium"@en .
+# stockexchange, stocknames, sharetype(string), notations, Stock type(s), Stock quantity(ies)
+
+bhf:StockName
+    a            owl:Class ;
+    rdfs:label   "Name of a stock"@en ;
+    rdfs:comment "Name of a stock between a certain start and end date"@en .
+# startdate, enddate, name(string)
+
+bhf:StockExchange
+    a            owl:Class ;
+    rdfs:label   "Stock exchange"@en ;
+    rdfs:comment "A stock exchange where stocks can be registered"@en .
+# startdate, enddate, StockExchangeName(s)(usually 1 name, but brussels has 2)
+
+bhf:StockExchangeName
+    a            owl:Class ;
+    rdfs:label   "Stock Exchange Name"@en ;
+    rdfs:comment ""@en .
+# name(string), dates
+
+bhf:Notation
+    a            owl:Class ;
+    rdfs:label   "Notation"@en ;
+    rdfs:comment "A listing of a stock on a particular sector"@en .
+# sector, startdate, enddate, notationprices
+
+bhf:NotationPrice
+    a            owl:Class ;
+    rdfs:label   "Price of a notation"@en ;
+    rdfs:comment ""@en .
+# bunch of price information
+
+bhf:Sector
+    a            owl:Class ;
+    rdfs:label   "Sector"@en ;
+    rdfs:comment ""@en .
+# SectorName, dates
+
+bhf:SectorName
+    a            owl:Class ;
+    rdfs:label   "Sector name"@en ;
+    rdfs:comment ""@en .
+# dates, name(string)
+
+bhf:StockType
+    a            owl:Class ;
+    rdfs:label   "Stock Type"@en ;
+    rdfs:comment ""@en .
+# dates, stocktypename(string), stocktypecompref
+
+bhf:StockCorporation
+    a            owl:Class ;
+    rdfs:label   "Corporation has stock"@en ;
+    rdfs:comment "Showing a corporation which had a particular stock from startdate till enddate"@en .
+# stock, dates, (corporation must have a stockcorporation)
+
+bhf:StockQuantity
+    a owl:Class ;
+    rdfs:label "Stock Quantity"@en ;
+    rdfs:comment ""@en .
+# dates, quantitytype(string), currency, bunch more info
+
+bhf:Currency
+    a owl:Class ;
+    rdfs:label "Currency"@en ;
+    rdfs:comment ""@en .
+#name and other strings
+
