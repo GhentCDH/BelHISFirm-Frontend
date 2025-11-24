@@ -5,7 +5,9 @@
 
 <http://belhisfirm.be/ontology>
     rdf:type     owl:Ontology ;
+    owl:imports  <ontology/general.ttl> ;
     owl:imports  <ontology/corporations.ttl> ;
+    owl:imports  <ontology/stocks.ttl> ;
     rdfs:label   "BellHisFirm Ontology"@en ;
     rdfs:comment "Ontology for Belgian Historical Firm Data (SCOB)"@en ;
     dct:creator  "BellHisFirm Project" ;

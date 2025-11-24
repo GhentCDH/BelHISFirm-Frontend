@@ -1,0 +1,66 @@
+@prefix :       <http://belhisfirm.be/resource/> .
+@prefix bhf:    <http://belhisfirm.be/ontology#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf:   <http://xmlns.com/foaf/0.1/> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix rov:    <http://www.w3.org/ns/regorg#> .
+@prefix schema: <http://schema.org/> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix vcard:  <http://www.w3.org/2006/vcard/ns#> .
+
+### General Classes
+bhf:Class
+    rdf:type owl:Class ;
+    rdfs:label "Belhisfirm class"@en ;
+    rdfs:comment "A generic class for belhisfirm objects that have other objects as properties" .
+
+bhf:PropertyClass
+    rdf:type     owl:Class ;
+    rdfs:label   "belhisfirm property class"@en ;
+    rdfs:comment "Generic property class for objects that are properties of main classes"@en .
+
+bhf:DatedName
+    rdf:type        owl:Class ;
+    rdfs:subClassOf bhf:PropertyClass ;
+    rdfs:label      "Dated Name"@en, "Gedateerde naam"@nl ;
+    rdfs:comment    "Name of an object in Belhisfirm, with a start and end date of the name being valid."@en .
+
+
+### General properties
+bhf:startDate
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:PropertyClass ;
+    rdfs:range   xsd:date ;
+    rdfs:label   "start date"@en, "start datum"@nl ;
+    rdfs:comment "Start date of when a property became valid."@en .
+
+bhf:endDate
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:PropertyClass ;
+    rdfs:range   xsd:date ;
+    rdfs:label   "end date"@en, "einde datum"@nl ;
+    rdfs:comment "end date of when a property became valid."@en .
+
+bhf:source
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:PropertyClass ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Source"@en, "Bron"@nl ;
+    rdfs:comment "Source of the property"@en .
+
+bhf:comments
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:PropertyClass ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Comments"@en, "Extra info"@nl ;
+    rdfs:comment "Extra info on the property"@en .
+
+bhf:hasName
+    rdf:type     owl:ObjectProperty ;
+    rdfs:domain  bhf:Class ;
+    rdfs:range   bhf:DatedName ;
+    rdfs:label   "has dated name"@en, "heeft gedateerde naam"@nl ;
+    rdfs:comment "has a dated name"@en .

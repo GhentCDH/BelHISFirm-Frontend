@@ -81,7 +81,7 @@
     a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery """SELECT RAWTOHEX(STANDARD_HASH(corporation || name || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id FROM scoball.corporation_name WHERE name IS NOT NULL""" ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/corporationName/{id}" ;
-                      rr:class    bhf:CorporationName ] .
+                      rr:class    bhf:DatedName ] .
 
 :CORPORATION-NAME-PROPERTIES
     a                     rr:TriplesMap ;

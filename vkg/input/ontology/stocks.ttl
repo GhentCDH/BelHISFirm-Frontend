@@ -16,74 +16,231 @@
 #################################################################
 
 bhf:Stock
-    a            owl:Class ;
-    rdfs:label   "Stock"@en ;
-    rdfs:comment "A stock of a registered corporation in Belgium"@en .
+    a               owl:Class ;
+    rdfs:subClassOf bhf:Class ;
+    rdfs:label      "Stock"@en ;
+    rdfs:comment    "A stock of a registered corporation in Belgium"@en .
 # stockexchange, stocknames, sharetype(string), notations, Stock type(s), Stock quantity(ies)
 
-bhf:StockName
-    a            owl:Class ;
-    rdfs:label   "Name of a stock"@en ;
-    rdfs:comment "Name of a stock between a certain start and end date"@en .
-# startdate, enddate, name(string)
-
 bhf:StockExchange
-    a            owl:Class ;
-    rdfs:label   "Stock exchange"@en ;
-    rdfs:comment "A stock exchange where stocks can be registered"@en .
+    a               owl:Class ;
+    rdfs:subClassOf bhf:PropertyClass, bhf:Class ;
+    rdfs:label      "Stock exchange"@en ;
+    rdfs:comment    "A stock exchange where stocks can be registered"@en .
 # startdate, enddate, StockExchangeName(s)(usually 1 name, but brussels has 2)
 
-bhf:StockExchangeName
-    a            owl:Class ;
-    rdfs:label   "Stock Exchange Name"@en ;
-    rdfs:comment ""@en .
-# name(string), dates
-
 bhf:Notation
-    a            owl:Class ;
-    rdfs:label   "Notation"@en ;
-    rdfs:comment "A listing of a stock on a particular sector"@en .
+    a               owl:Class ;
+    rdfs:subClassOf bhf:PropertyClass ;
+    rdfs:label      "Notation"@en ;
+    rdfs:comment    "A listing of a stock on a particular sector"@en .
 # sector, startdate, enddate, notationprices
 
 bhf:NotationPrice
-    a            owl:Class ;
-    rdfs:label   "Price of a notation"@en ;
-    rdfs:comment ""@en .
+    a               owl:Class ;
+    rdfs:subClassOf bhf:PropertyClass ;
+    rdfs:label      "Price of a notation"@en ;
+    rdfs:comment    ""@en .
 # bunch of price information
 
 bhf:Sector
-    a            owl:Class ;
-    rdfs:label   "Sector"@en ;
-    rdfs:comment ""@en .
+    a               owl:Class ;
+    rdfs:subClassOf bhf:PropertyClass, bhf:Class ;
+    rdfs:label      "Sector"@en ;
+    rdfs:comment    ""@en .
 # SectorName, dates
 
-bhf:SectorName
-    a            owl:Class ;
-    rdfs:label   "Sector name"@en ;
-    rdfs:comment ""@en .
-# dates, name(string)
-
 bhf:StockType
-    a            owl:Class ;
-    rdfs:label   "Stock Type"@en ;
-    rdfs:comment ""@en .
+    a               owl:Class ;
+    rdfs:subClassOf bhf:PropertyClass ;
+    rdfs:label      "Stock Type"@en ;
+    rdfs:comment    ""@en .
 # dates, stocktypename(string), stocktypecompref
 
 bhf:StockCorporation
-    a            owl:Class ;
-    rdfs:label   "Corporation has stock"@en ;
-    rdfs:comment "Showing a corporation which had a particular stock from startdate till enddate"@en .
-# stock, dates, (corporation must have a stockcorporation)
+    a               owl:Class ;
+    rdfs:subClassOf bhf:PropertyClass ;
+    rdfs:label      "Corporation has stock"@en ;
+    rdfs:comment    "Showing a corporation which had a particular stock from startdate till enddate"@en .
+# stock, dates, (corporation must have a stock-corporation)
 
 bhf:StockQuantity
-    a owl:Class ;
-    rdfs:label "Stock Quantity"@en ;
-    rdfs:comment ""@en .
+    a               owl:Class ;
+    rdfs:subClassOf bhf:PropertyClass ;
+    rdfs:label      "Stock Quantity"@en ;
+    rdfs:comment    ""@en .
 # dates, quantitytype(string), currency, bunch more info
 
 bhf:Currency
-    a owl:Class ;
-    rdfs:label "Currency"@en ;
-    rdfs:comment ""@en .
+    a               owl:Class ;
+    rdfs:subClassOf bhf:PropertyClass ;
+    rdfs:label      "Currency"@en ;
+    rdfs:comment    ""@en .
 #name and other strings
 
+
+#################################################################
+#    Properties
+#################################################################
+
+# Stock properties
+bhf:hasStockExchange
+    a            owl:ObjectProperty ;
+    rdfs:domain  bhf:Stock ;
+    rdfs:range   bhf:StockExchange ;
+    rdfs:label   "has stock exchange"@en ;
+    rdfs:comment ""@en .
+
+bhf:hasSharetype
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:Stock ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "has sharetype"@en ;
+    rdfs:comment ""@en .
+
+bhf:hasNotation
+    a            owl:ObjectProperty ;
+    rdfs:domain  bhf:Stock ;
+    rdfs:range   bhf:Notation ;
+    rdfs:label   "has notation"@en ;
+    rdfs:comment ""@en .
+
+bhf:hasStockType
+    a            owl:ObjectProperty ;
+    rdfs:domain  bhf:Stock ;
+    rdfs:range   bhf:StockType ;
+    rdfs:label   "has stock type"@en ;
+    rdfs:comment ""@en .
+
+bhf:hasStockQuantity
+    a            owl:ObjectProperty ;
+    rdfs:domain  bhf:Stock ;
+    rdfs:range   bhf:StockQuantity ;
+    rdfs:label   "has stock quantity"@en ;
+    rdfs:comment ""@en .
+
+#Notation properties
+bhf:hasSector
+    a            owl:ObjectProperty ;
+    rdfs:domain  bhf:Notation ;
+    rdfs:range   bhf:Sector ;
+    rdfs:label   "Notation in sector"@en ;
+    rdfs:comment ""@en .
+
+bhf:hasNotationPrice
+    a            owl:ObjectProperty ;
+    rdfs:domain  bhf:Notation ;
+    rdfs:range   bhf:NotationPrice ;
+    rdfs:label   "Notation has this price data point" ;
+    rdfs:comment ""@en .
+
+# NotationPrice properties
+bhf:priceDay
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:NotationPrice ;
+    rdfs:range   xsd:date ;
+    rdfs:label   "Day"@en ;
+    rdfs:comment "Day of the notation price"@en .
+
+bhf:argentValue
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:NotationPrice ;
+    rdfs:range   xsd:integer ;
+    rdfs:label   "Argent"@en ;
+    rdfs:comment "Argent value of the notation price"@en .
+
+bhf:papierValue
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:NotationPrice ;
+    rdfs:range   xsd:integer ;
+    rdfs:label   "papier"@en ;
+    rdfs:comment ""@en .
+
+bhf:openValue
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:NotationPrice ;
+    rdfs:range   xsd:integer ;
+    rdfs:label   "open"@en ;
+    rdfs:comment "Value at start of business day"@en .
+
+bhf:closeValue
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:NotationPrice ;
+    rdfs:range   xsd:integer ;
+    rdfs:label   "close"@en ;
+    rdfs:comment "Value at closing of business day"@en .
+
+bhf:minValue
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:NotationPrice ;
+    rdfs:range   xsd:integer ;
+    rdfs:label   "min"@en ;
+    rdfs:comment "Minimum value during day"@en .
+
+bhf:maxValue
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:NotationPrice ;
+    rdfs:range   xsd:integer ;
+    rdfs:label   "max"@en ;
+    rdfs:comment "Maximum value during day"@en .
+
+bhf:previousValue
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:NotationPrice ;
+    rdfs:range   xsd:integer ;
+    rdfs:label   "previous"@en ;
+    rdfs:comment "Previous recorded value (not necessarily previous day)"@en .
+
+bhf:externValue
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:NotationPrice ;
+    rdfs:range   xsd:integer ;
+    rdfs:label   "extern"@en ;
+    rdfs:comment ""@en .
+
+bhf:inPercent
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:NotationPrice ;
+    rdfs:range   xsd:boolean ;
+    rdfs:label   "percent"@en ;
+    rdfs:comment "Is price in percentage?"@en .
+
+bhf:indicativePrice
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:NotationPrice ;
+    rdfs:range   xsd:integer ;
+    rdfs:label   "indicative"@en ;
+    rdfs:comment ""@en .
+
+# Stock-Corporation properties
+bhf:hasStockCorporation
+    a            owl:ObjectProperty ;
+    rdfs:domain  bhf:Corporation ;
+    rdfs:range   bhf:StockCorporation ;
+    rdfs:label   "stock-corporation link"@en ;
+    rdfs:comment "Has a stock between start and end date"@en .
+
+bhf:hasStock
+    a            owl:ObjectProperty ;
+    rdfs:domain  bhf:StockCorporation ;
+    rdfs:range   bhf:Stock ;
+    rdfs:label   "has stock"@en ;
+    rdfs:comment "link to stock object"@en .
+
+# Stocktype properties
+bhf:typeName
+    a owl:DatatypeProperty ;
+    rdfs:domain bhf:StockType ;
+    rdfs:range xsd:string ;
+    rdfs:label "name of the type"@en ;
+    rdfs:comment ""@en .
+
+bhf:compref
+    a owl:DatatypeProperty ;
+    rdfs:domain bhf:StockType ;
+    rdfs:range xsd:integer ;
+    rdfs:label "compref"@en ;
+    rdfs:comment ""@en .
+
+# Currency properties
+# foaf:name, vcard:country-name, bhf:comments
