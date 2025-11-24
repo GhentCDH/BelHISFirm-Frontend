@@ -23,8 +23,7 @@
 
 :CORPORATION-NAME
     a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery
-                                    """SELECT corporation, RAWTOHEX(STANDARD_HASH(corporation || name || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
+    rr:logicalTable       [ rr:sqlQuery """SELECT corporation, RAWTOHEX(STANDARD_HASH(corporation || name || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
                                             FROM scoball.corporation_name WHERE name IS NOT NULL""" ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasName ;
@@ -32,8 +31,7 @@
 
 :CORPORATION-LEGAL-FORM
     a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery
-                                    """SELECT corporation, RAWTOHEX(STANDARD_HASH(corporation || juridisch_statuut || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
+    rr:logicalTable       [ rr:sqlQuery """SELECT corporation, RAWTOHEX(STANDARD_HASH(corporation || juridisch_statuut || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
                                             FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasLegalForm ;
@@ -79,7 +77,8 @@
 
 :CORPORATION-NAME-TYPE
     a               rr:TriplesMap ;
-    rr:logicalTable [ rr:sqlQuery """SELECT RAWTOHEX(STANDARD_HASH(corporation || name || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id FROM scoball.corporation_name WHERE name IS NOT NULL""" ] ;
+    rr:logicalTable [ rr:sqlQuery
+                              """SELECT RAWTOHEX(STANDARD_HASH(corporation || name || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id FROM scoball.corporation_name WHERE name IS NOT NULL""" ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/corporationName/{id}" ;
                       rr:class    bhf:DatedName ] .
 
@@ -128,8 +127,7 @@
 
 :LEGAL-FORM-TYPE
     a               rr:TriplesMap ;
-    rr:logicalTable [ rr:sqlQuery
-                              """SELECT corporation, RAWTOHEX(STANDARD_HASH(corporation || juridisch_statuut || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
+    rr:logicalTable [ rr:sqlQuery """SELECT corporation, RAWTOHEX(STANDARD_HASH(corporation || juridisch_statuut || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
                                     FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/legalForm/{id}" ;
                       rr:class    bhf:LegalForm ] .
@@ -229,5 +227,66 @@
                                            rr:datatype xsd:date ] ] .
 
 
+###################
+# STOCK
+##################
+:STOCK-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """
+                    SELECT id FROM scoball.stock
+    """ ] ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stock/{id}" ;
+                      rr:class    bhf:Stock ] .
 
+:STOCK-STOCKEXCHANGE
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT id, stockexchange FROM scoball.stock
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasStockExchange ;
+                            rr:objectMap [ rr:template
+                                                   "http://belhisfirm.be/resource/stockexchange/{stockexchange}" ] ] .
+
+:STOCK-SHARETYPE
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """corporation
+                    SELECT s.id AS stock_id,
+                           st.name AS sharetype_name
+                    FROM scoball.stock s
+                    LEFT JOIN scoball.sharetype st
+                           ON s.sharetype = st.id
+        """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{stock_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasSharetype ;
+                            rr:objectMap [ rr:column   "sharetype_name" ;
+                                           rr:datatype xsd:string ] ] .
+
+:STOCK-NOTATION
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT id, stock FROM scoball.notation
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{stock}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasNotation ;
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/notation/{id}" ] ] .
+
+:STOCK-STOCKTYPE
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT stock, RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
+                    FROM scoball.stock_type
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{stock}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasStockType ;
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/stocktype/{id}" ] ] .
+
+:STOCK-STOCKQUANTITY
+    a rr:TriplesMap ;
+    rr:logicalTable [rr:sqlQuery """
+                    SELECT stock, RAWTOHEX(STANDARD_HASH(stock || type || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
+    """] ;
+    rr:subjectMap [ rr:template "http://belhisfirm.be/resource/stock/{stock}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasStockQuantity ;
+                          rr:objectMap [rr:template "http://belhisfirm.be/resource/stockquantity/{id}"]] .
 

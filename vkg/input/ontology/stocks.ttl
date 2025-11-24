@@ -229,17 +229,46 @@ bhf:hasStock
 
 # Stocktype properties
 bhf:typeName
-    a owl:DatatypeProperty ;
-    rdfs:domain bhf:StockType ;
-    rdfs:range xsd:string ;
-    rdfs:label "name of the type"@en ;
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:StockType ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "name of the type"@en ;
     rdfs:comment ""@en .
 
 bhf:compref
-    a owl:DatatypeProperty ;
-    rdfs:domain bhf:StockType ;
-    rdfs:range xsd:integer ;
-    rdfs:label "compref"@en ;
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:StockType ;
+    rdfs:range   xsd:integer ;
+    rdfs:label   "compref"@en ;
+    rdfs:comment ""@en .
+
+# StockQuantity properties
+bhf:quantityType
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:StockQuantity ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "quantity type"@en ;
+    rdfs:comment ""@en .
+
+bhf:quantityVolume
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:StockQuantity ;
+    rdfs:range   xsd:integer ;
+    rdfs:label   "volume"@en ;
+    rdfs:comment ""@en .
+
+bhf:quantityValue
+    a            owl:DatatypeProperty ;
+    rdfs:domain  bhf:StockQuantity ;
+    rdfs:range   xsd:integer ;
+    rdfs:label   "value"@en ;
+    rdfs:comment ""@en .
+
+bhf:hasCurrency
+    a            owl:ObjectProperty ;
+    rdfs:domain  bhf:StockQuantity ;
+    rdfs:range   bhf:Currency ;
+    rdfs:label   "currency"@en ;
     rdfs:comment ""@en .
 
 # Currency properties
