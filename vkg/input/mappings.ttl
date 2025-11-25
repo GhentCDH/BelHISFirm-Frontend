@@ -264,7 +264,7 @@
                     SELECT s.id AS stock_id,
                            st.name AS sharetype_name
                     FROM scoball.stock s
-                    LEFT JOIN scoball.sharetype st
+                    JOIN scoball.sharetype st
                            ON s.sharetype = st.id
         """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{stock_id}" ] ;
@@ -316,16 +316,13 @@
 :STOCKEXCHANGE-NAME
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """
-                    SELECT se.id as id,
-                           RAWTOHEX(STANDARD_HASH(sn.stockexchange || TO_CHAR(sn.startdate,'YYYY-MM-DD'), 'SHA1')) as name_id
-                    FROM scoball.stockexchange se
-                    LEFT JOIN scoball.stockexchange_name sn
-                           ON se.id = sn.stockexchange
+                    SELECT stockexchange,
+                           RAWTOHEX(STANDARD_HASH(stockexchange || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
+                    FROM scoball.stockexchange_name
     """ ] ;
-    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stockexchange/{id}" ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stockexchange/{stockexchange}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasName ;
-                            rr:objectMap [ rr:template
-                                                   "http://belhisfirm.be/resource/stockexchange_name/{name_id}" ] ] .
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/stockexchange_name/{id}" ] ] .
 
 :STOCKEXCHANGE-PROPERTIES
     a                     rr:TriplesMap ;
@@ -344,6 +341,233 @@
                 FROM scoball.stockexchange
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stockexchange/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:startDate ;
+                            rr:objectMap [ rr:column   "startdate_fixed" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:endDate ;
+                            rr:objectMap [ rr:column   "enddate_fixed" ;
+                                           rr:datatype xsd:date ] ] .
+
+:STOCKEXCHANGE-NAME-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """
+                    SELECT RAWTOHEX(STANDARD_HASH(stockexchange || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
+                    FROM scoball.stockexchange_name
+    """ ] ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stockexchange_name/{id}" ;
+                      rr:class    bhf:DatedName ] .
+
+:STOCKEXCHANGE-NAME-PROPERTIES
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT RAWTOHEX(STANDARD_HASH(stockexchange || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id,
+                           CASE
+                               WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                               ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
+                           END AS startdate_fixed,
+                           CASE
+                               WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
+                               ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
+                           END AS enddate_fixed,
+                           name
+                    FROM scoball.stockexchange_name
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stockexchange_name/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:startDate ;
+                            rr:objectMap [ rr:column   "startdate_fixed" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:endDate ;
+                            rr:objectMap [ rr:column   "enddate_fixed" ;
+                                           rr:datatype xsd:date ] ] .
+
+
+###################
+# NOTATION
+##################
+:NOTATION-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """
+                    SELECT id FROM scoball.notation
+    """ ] ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/notation/{id}" ;
+                      rr:class    bhf:Notation ] .
+
+:NOTATION-PROPERTIES
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT id, sector,
+                           CASE
+                               WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                               ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
+                           END AS startdate_fixed,
+                           CASE
+                               WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
+                               ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
+                           END AS enddate_fixed
+                    FROM scoball.notation
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/notation/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasSector ;
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/sector/{sector}" ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:startDate ;
+                            rr:objectMap [ rr:column   "startdate_fixed" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:endDate ;
+                            rr:objectMap [ rr:column   "enddate_fixed" ;
+                                           rr:datatype xsd:date ] ] .
+
+:NOTATION-NOTATION-PRICE
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT notation,
+                           RAWTOHEX(STANDARD_HASH(notation || TO_CHAR(day,'YYYY-MM-DD'), 'SHA1')) as id
+                    FROM scoball.notation_price
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/notation/{notation}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasNotationPrice ;
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/notation_price/{id}" ] ] .
+
+
+###################
+# SECTOR
+##################
+:NOTATION-PRICE-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """
+                    SELECT RAWTOHEX(STANDARD_HASH(notation || TO_CHAR(day,'YYYY-MM-DD'), 'SHA1')) as id
+                    FROM scoball.notation_price
+    """ ] ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/notation_price/{id}" ;
+                      rr:class    bhf:NotationPrice ] .
+
+:NOTATION-PRICE-PROPERTIES
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT day,
+                           argent,
+                           papier,
+                           "OPEN",
+                           "CLOSE",
+                           min,
+                           max,
+                           previous,
+                           extern,
+                           percent,
+                           indicatief,
+                           notation,
+                           RAWTOHEX(STANDARD_HASH(notation || TO_CHAR(day,'YYYY-MM-DD'), 'SHA1')) as id
+                    FROM scoball.notation_price
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/notation_price/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:priceDay ;
+                            rr:objectMap [ rr:column   "day" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [rr:predicate bhf:argentValue ;
+                           rr:objectMap [rr:column "argent" ;
+                                         rr:datatype xsd:integer]] ;
+    rr:predicateObjectMap [rr:predicate bhf:papierValue ;
+                           rr:objectMap [rr:column "papier" ;
+                                         rr:datatype xsd:integer]] ;
+    rr:predicateObjectMap [rr:predicate bhf:openValue ;
+                           rr:objectMap [rr:column "open" ;
+                                         rr:datatype xsd:integer]] ;
+    rr:predicateObjectMap [rr:predicate bhf:closeValue ;
+                           rr:objectMap [rr:column "close" ;
+                                         rr:datatype xsd:integer]] ;
+    rr:predicateObjectMap [rr:predicate bhf:minValue ;
+                           rr:objectMap [rr:column "min" ;
+                                         rr:datatype xsd:integer]] ;
+    rr:predicateObjectMap [rr:predicate bhf:maxValue ;
+                           rr:objectMap [rr:column "max" ;
+                                         rr:datatype xsd:integer]] ;
+    rr:predicateObjectMap [rr:predicate bhf:previousValue ;
+                           rr:objectMap [rr:column "previous" ;
+                                         rr:datatype xsd:integer]] ;
+    rr:predicateObjectMap [rr:predicate bhf:externValue ;
+                           rr:objectMap [rr:column "extern" ;
+                                         rr:datatype xsd:integer]] ;
+    rr:predicateObjectMap [rr:predicate bhf:inPercent ;
+                           rr:objectMap [rr:column "percent" ;
+                                         rr:datatype xsd:string]] ;
+    rr:predicateObjectMap [rr:predicate bhf:indicativePrice ;
+                           rr:objectMap [rr:column "indicatief" ;
+                                         rr:datatype xsd:integer]] .
+
+###################
+# SECTOR
+##################
+:SECTOR-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """
+                    SELECT id FROM scoball.sector
+    """ ] ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/sector/{id}" ;
+                      rr:class    bhf:Sector ] .
+
+:SECTOR-PROPERTIES
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT id,
+                           CASE
+                               WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                               ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
+                           END AS startdate_fixed,
+                           CASE
+                               WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
+                               ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
+                           END AS enddate_fixed
+                    FROM scoball.sector
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/sector/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:startDate ;
+                            rr:objectMap [ rr:column   "startdate_fixed" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:endDate ;
+                            rr:objectMap [ rr:column   "enddate_fixed" ;
+                                           rr:datatype xsd:date ] ] .
+
+:SECTOR-NAME
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT sector,
+                           RAWTOHEX(STANDARD_HASH(sector || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
+                    FROM scoball.sector_name
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/sector/{sector}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasName ;
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/sector_name/{id}" ] ] .
+
+:SECTOR-NAME-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """
+                    SELECT RAWTOHEX(STANDARD_HASH(sector || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
+                    FROM scoball.sector_name
+    """ ] ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/sector_name/{id}" ;
+                      rr:class    bhf:DatedName ] .
+
+:SECTOR-NAME-PROPERTIES
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT RAWTOHEX(STANDARD_HASH(sector || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id,
+                           CASE
+                               WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                               ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
+                           END AS startdate_fixed,
+                           CASE
+                               WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
+                               ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
+                           END AS enddate_fixed,
+                           name
+                    FROM scoball.sector_name
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/sector_name/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:startDate ;
                             rr:objectMap [ rr:column   "startdate_fixed" ;
                                            rr:datatype xsd:date ] ] ;

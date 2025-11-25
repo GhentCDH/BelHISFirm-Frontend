@@ -201,9 +201,9 @@ bhf:externValue
 bhf:inPercent
     a            owl:DatatypeProperty ;
     rdfs:domain  bhf:NotationPrice ;
-    rdfs:range   xsd:boolean ;
+    rdfs:range   xsd:string ;
     rdfs:label   "percent"@en ;
-    rdfs:comment "Is price in percentage?"@en .
+    rdfs:comment "Is price in percentage? Y=true, N=false"@en .
 
 bhf:indicativePrice
     a            owl:DatatypeProperty ;
