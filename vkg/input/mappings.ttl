@@ -70,6 +70,16 @@
                             rr:objectMap [ rr:column   "id" ;
                                            rr:datatype xsd:integer ] ] .
 
+:CORPORATION-STOCK-CORPORATION
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT corporation,
+                           RAWTOHEX(STANDARD_HASH(stock || corporation || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
+                    FROM scoball.stock_corporation
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasStockCorporation ;
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/stockcorporation/{id}" ] ] .
 
 ###################
 # COROPORATION NAME
@@ -638,4 +648,41 @@
                             rr:objectMap [ rr:column   "compref" ;
                                            rr:datatype xsd:string ] ] .
 
+
+###################
+# STOCK-CORPORATION
+##################
+:STOCK-CORPORATION-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """
+                    SELECT RAWTOHEX(STANDARD_HASH(stock || corporation || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
+                    FROM scoball.stock_corporation
+    """ ] ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stockcorporation/{id}" ;
+                      rr:class    bhf:StockCorporation ] .
+
+:STOCK-CORPORATION-PROPERTIES
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT RAWTOHEX(STANDARD_HASH(stock || corporation || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id,
+                           CASE
+                               WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                              ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
+                           END AS startdate_fixed,
+                           CASE
+                               WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
+                               ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
+                           END AS enddate_fixed,
+                           stock
+                    FROM scoball.stock_corporation
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stockcorporation/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasStock ;
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/stock/{stock}" ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:startDate ;
+                            rr:objectMap [ rr:column   "startdate_fixed" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:endDate ;
+                            rr:objectMap [ rr:column   "enddate_fixed" ;
+                                           rr:datatype xsd:date ] ] .
 
