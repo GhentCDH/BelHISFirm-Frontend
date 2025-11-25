@@ -432,7 +432,7 @@
 
 
 ###################
-# SECTOR
+# NOTATION-PRICE
 ##################
 :NOTATION-PRICE-TYPE
     a               rr:TriplesMap ;
@@ -465,36 +465,36 @@
     rr:predicateObjectMap [ rr:predicate bhf:priceDay ;
                             rr:objectMap [ rr:column   "day" ;
                                            rr:datatype xsd:date ] ] ;
-    rr:predicateObjectMap [rr:predicate bhf:argentValue ;
-                           rr:objectMap [rr:column "argent" ;
-                                         rr:datatype xsd:integer]] ;
-    rr:predicateObjectMap [rr:predicate bhf:papierValue ;
-                           rr:objectMap [rr:column "papier" ;
-                                         rr:datatype xsd:integer]] ;
-    rr:predicateObjectMap [rr:predicate bhf:openValue ;
-                           rr:objectMap [rr:column "open" ;
-                                         rr:datatype xsd:integer]] ;
-    rr:predicateObjectMap [rr:predicate bhf:closeValue ;
-                           rr:objectMap [rr:column "close" ;
-                                         rr:datatype xsd:integer]] ;
-    rr:predicateObjectMap [rr:predicate bhf:minValue ;
-                           rr:objectMap [rr:column "min" ;
-                                         rr:datatype xsd:integer]] ;
-    rr:predicateObjectMap [rr:predicate bhf:maxValue ;
-                           rr:objectMap [rr:column "max" ;
-                                         rr:datatype xsd:integer]] ;
-    rr:predicateObjectMap [rr:predicate bhf:previousValue ;
-                           rr:objectMap [rr:column "previous" ;
-                                         rr:datatype xsd:integer]] ;
-    rr:predicateObjectMap [rr:predicate bhf:externValue ;
-                           rr:objectMap [rr:column "extern" ;
-                                         rr:datatype xsd:integer]] ;
-    rr:predicateObjectMap [rr:predicate bhf:inPercent ;
-                           rr:objectMap [rr:column "percent" ;
-                                         rr:datatype xsd:string]] ;
-    rr:predicateObjectMap [rr:predicate bhf:indicativePrice ;
-                           rr:objectMap [rr:column "indicatief" ;
-                                         rr:datatype xsd:integer]] .
+    rr:predicateObjectMap [ rr:predicate bhf:argentValue ;
+                            rr:objectMap [ rr:column   "argent" ;
+                                           rr:datatype xsd:integer ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:papierValue ;
+                            rr:objectMap [ rr:column   "papier" ;
+                                           rr:datatype xsd:integer ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:openValue ;
+                            rr:objectMap [ rr:column   "open" ;
+                                           rr:datatype xsd:integer ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:closeValue ;
+                            rr:objectMap [ rr:column   "close" ;
+                                           rr:datatype xsd:integer ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:minValue ;
+                            rr:objectMap [ rr:column   "min" ;
+                                           rr:datatype xsd:integer ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:maxValue ;
+                            rr:objectMap [ rr:column   "max" ;
+                                           rr:datatype xsd:integer ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:previousValue ;
+                            rr:objectMap [ rr:column   "previous" ;
+                                           rr:datatype xsd:integer ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:externValue ;
+                            rr:objectMap [ rr:column   "extern" ;
+                                           rr:datatype xsd:integer ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:inPercent ;
+                            rr:objectMap [ rr:column   "percent" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:indicativePrice ;
+                            rr:objectMap [ rr:column   "indicatief" ;
+                                           rr:datatype xsd:integer ] ] .
 
 ###################
 # SECTOR
@@ -574,4 +574,68 @@
     rr:predicateObjectMap [ rr:predicate bhf:endDate ;
                             rr:objectMap [ rr:column   "enddate_fixed" ;
                                            rr:datatype xsd:date ] ] .
+
+
+###################
+# STOCK-TYPE
+##################
+:STOCK-TYPE-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """
+                    SELECT RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
+                    FROM scoball.stock_type
+    """ ] ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stocktype/{id}" ;
+                      rr:class    bhf:StockType ] .
+
+:STOCK-TYPE-PROPERTIES
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id,
+                    CASE
+                        WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                       ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
+                    END AS startdate_fixed,
+                    CASE
+                        WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
+                        ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
+                    END AS enddate_fixed
+                    FROM scoball.stock_type
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stocktype/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:startDate ;
+                            rr:objectMap [ rr:column   "startdate_fixed" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:endDate ;
+                            rr:objectMap [ rr:column   "enddate_fixed" ;
+                                           rr:datatype xsd:date ] ] .
+
+:STOCK-TYPE-NAME
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT sn.name as name,
+                           RAWTOHEX(STANDARD_HASH(st.stock || TO_CHAR(st.startdate,'YYYY-MM-DD'), 'SHA1')) as id
+                    FROM scoball.stock_type st
+                    JOIN scoball.stocktype sn
+                    ON st.type = sn.id
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stocktype/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:typeName ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] .
+
+:STOCK-TYPE-COMPREF
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT cm.compref as compref,
+                           RAWTOHEX(STANDARD_HASH(st.stock || TO_CHAR(st.startdate,'YYYY-MM-DD'), 'SHA1')) as id
+                    FROM scoball.stock_type st
+                    JOIN scoball.stock_type_compref cm
+                    ON st.compref = cm.id
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stocktype/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:compref ;
+                            rr:objectMap [ rr:column   "compref" ;
+                                           rr:datatype xsd:string ] ] .
+
 

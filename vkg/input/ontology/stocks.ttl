@@ -238,7 +238,7 @@ bhf:typeName
 bhf:compref
     a            owl:DatatypeProperty ;
     rdfs:domain  bhf:StockType ;
-    rdfs:range   xsd:integer ;
+    rdfs:range   xsd:string ;
     rdfs:label   "compref"@en ;
     rdfs:comment ""@en .
 
