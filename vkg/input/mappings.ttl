@@ -686,3 +686,90 @@
                             rr:objectMap [ rr:column   "enddate_fixed" ;
                                            rr:datatype xsd:date ] ] .
 
+
+###################
+# STOCK-QUANTITY
+##################
+:STOCK-QUANTITY-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """
+                    SELECT RAWTOHEX(STANDARD_HASH(stock || type || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
+                    FROM scoball.stock_quantity
+    """ ] ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stockquantity/{id}" ;
+                      rr:class    bhf:StockQuantity ] .
+
+:STOCK-QUANTITY-TYPENAME
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT RAWTOHEX(STANDARD_HASH(sq.stock || sq.type || TO_CHAR(sq.startdate,'YYYY-MM-DD'), 'SHA1')) as id,
+                           qt.name as name
+                    FROM scoball.stock_quantity sq
+                    JOIN scoball.quantitytype qt
+                    ON sq.type = qt.id
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stockquantity/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:quantityType ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] .
+
+:STOCK-QUANTITY-PROPERTIES
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT RAWTOHEX(STANDARD_HASH(stock || type || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id,
+                           volume,
+                           value,
+                           currency,
+                           CASE
+                               WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                               ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
+                           END AS startdate_fixed,
+                           CASE
+                               WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
+                               ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
+                           END AS enddate_fixed
+                    FROM scoball.stock_quantity
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stockquantity/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:quantityVolume ;
+                            rr:objectMap [ rr:column   "volume" ;
+                                           rr:datatype xsd:integer ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:quantityValue ;
+                            rr:objectMap [ rr:column   "value" ;
+                                           rr:datatype xsd:integer ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasCurrency ;
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/currency/{currency}" ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:startDate ;
+                            rr:objectMap [ rr:column   "startdate_fixed" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:endDate ;
+                            rr:objectMap [ rr:column   "enddate_fixed" ;
+                                           rr:datatype xsd:date ] ] .
+
+
+###################
+# CURRENCY
+##################
+:CURRENCY-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """
+                    SELECT id FROM scoball.currency
+    """ ] ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/currency/{id}" ;
+                      rr:class    bhf:Currency ] .
+
+:CURRENCY-PROPERTIES
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """
+                    SELECT id, name, country, comments FROM scoball.currency
+    """ ] ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/currency/{id}" ] ;
+    rr:predicateObjectMap [rr:predicate foaf:name ;
+                          rr:objectMap [rr:column "name" ;
+                                       rr:datatype xsd:string ]] ;
+    rr:predicateObjectMap [rr:predicate vcard:country-name  ;
+                           rr:objectMap [rr:column "country" ;
+                                         rr:datatype xsd:string ]] ;
+    rr:predicateObjectMap [rr:predicate bhf:comments ;
+                           rr:objectMap [rr:column "comments" ;
+                                         rr:datatype xsd:string ]] .
