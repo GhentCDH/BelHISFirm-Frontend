@@ -48,6 +48,12 @@
             "minWidth": 250,
             "makeLink": true,
             "externalLink": false
+        },
+        {
+            "id": "name",
+            "valueType": "object",
+            "minwidth": 250,
+            "sortValues": true
         }
     ]
 }

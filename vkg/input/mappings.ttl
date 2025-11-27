@@ -266,7 +266,42 @@
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{stock}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasName ;
-                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/stockname/{id}" ] ] .
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/stock_name/{id}" ] ] .
+
+:STOCK-NAME-TYPE
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """
+                    SELECT name, RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
+                    FROM scoball.stock_name
+    """ ] ;
+    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stock_name/{id}" ;
+                      rr:class    bhf:DatedName ] .
+
+:STOCK-NAME-PROPERTIES
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id,
+                           CASE
+                               WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                               ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
+                           END AS startdate_fixed,
+                           CASE
+                               WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
+                               ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
+                           END AS enddate_fixed,
+                           name
+                    FROM scoball.stock_name
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock_name/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:startDate ;
+                            rr:objectMap [ rr:column   "startdate_fixed" ;
+                                           rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:endDate ;
+                            rr:objectMap [ rr:column   "enddate_fixed" ;
+                                           rr:datatype xsd:date ] ] .
 
 :STOCK-SHARETYPE
     a                     rr:TriplesMap ;

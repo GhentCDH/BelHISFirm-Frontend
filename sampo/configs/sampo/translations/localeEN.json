@@ -249,6 +249,10 @@
                     "label": "uri",
                     "description": "uri of corporation"
                 },
+                "scobID": {
+                    "label": "id",
+                    "description": "id of the corporation"
+                },
                 "corporationName": {
                     "label": "Name(s)",
                     "description":"Name(s) the corporation has had"
@@ -420,6 +424,10 @@
                 "corporation": {
                     "label": "corporation",
                     "description": "Corporation(s) this stock belonged to"
+                },
+                "name": {
+                    "label": "name(s)",
+                    "descirption": "Names(s) of this stock"
                 }
             }
         }

@@ -25,14 +25,29 @@ UNION
     ) as ?corporation__prefLabel)
     BIND(CONCAT("/scob/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporation__dataProviderUrl)
 }
+UNION
+{
+    ?id bhf:hasName ?name__id .
+    ?name__id rdfs:label ?name .
+    optional {?name__id bhf:startDate ?name__startDate .}
+    optional {?name__id bhf:endDate ?name__endDate .}
+    bind(concat(
+      str(?name),
+      ": ",
+      COALESCE(str(?name__startDate), "????"), 
+      " - ",
+      COALESCE(str(?name__endDate), "????")
+    ) as ?name__prefLabel)
+}
 `
 
 export const stocksGraphOpenClose = `
-SELECT * where {
+SELECT DISTINCT ?day ?open ?close
+where {
     bind(<ID> as ?id)
     ?id bhf:hasNotation/bhf:hasNotationPrice ?price__id .
-    optional {?price__id bhf:priceDay ?price__day .}
-    optional {?price__id bhf:openValue ?price__open .}
-    optional {?price__id bhf:closeValue ?price__close .}
+    optional {?price__id bhf:priceDay ?day .}
+    optional {?price__id bhf:openValue ?open .}
+    optional {?price__id bhf:closeValue ?close .}
 }
 `

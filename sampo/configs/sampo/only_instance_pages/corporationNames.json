@@ -42,7 +42,7 @@
             "valueType": "object",
             "minWidth": 250,
             "makeLink": true,
-            "externalLink": true
+            "externalLink": false
         },
         {
             "id": "startDate",

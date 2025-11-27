@@ -1,9 +1,11 @@
 export const corporationProperties = `
   {
     ?id rdf:type bhf:Corporation .
+    ?id bhf:scobID ?scobID__prefLabel .
+    BIND(?id as ?scobID_id)
     BIND(?id as ?uri__id)
     BIND(?id as ?uri__prefLabel)
-    BIND(CONCAT("/scob/page/", STRAFTER(STR(?id), "corporation/")) AS ?uri__dataProviderUrl)
+    BIND(CONCAT("/scob/page/", STRAFTER(STR(?id), "corporation/")) AS ?scobID__dataProviderUrl)
   }
   UNION
   {

@@ -48,13 +48,20 @@
     },
     "properties": [
         {
-            "id": "uri",
+            "id": "scobID",
             "valueType": "object",
             "makeLink": true,
             "externalLink": true,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 50
+            "minWidth": 30
+        },
+        {
+            "id": "uri",
+            "valueType": "object",
+            "makeLink": false,
+            "sortValues": true,
+            "onlyOnInstancePage": true
         },
         {
             "id": "corporationName",
@@ -112,7 +119,7 @@
         }
     ],
     "facets": {
-        "uri": {
+        "scobID": {
             "sortByPredicate": "bhf:scobID"
         },
         "corporationName": {
