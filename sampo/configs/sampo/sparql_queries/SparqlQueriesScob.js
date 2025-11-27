@@ -52,6 +52,23 @@ export const corporationProperties = `
     ?id bhf:dateOfDissolution ?dateOfDissolution__id .
     BIND(?dateOfDissolution__id as ?dateOfDissolution__prefLabel)
   }
+  UNION
+  {
+    ?id bhf:hasStockCorporation ?stockcorp__id .
+    ?stockcorp__id bhf:hasStock ?stock__id .
+    optional {?stockcorp__id bhf:startDate ?stock__startDate .}
+    optional {?stockcorp__id bhf:endDate ?stock__endDate .}
+    ?stock__id bhf:hasSharetype ?stock__sharetype .
+    bind(concat(
+      ?stock__sharetype,
+      ": ",
+      COALESCE(str(?stock__startDate), "????"), 
+      " - ",
+      COALESCE(str(?stock__endDate), "????")
+    ) as ?stock__prefLabel)
+    
+    BIND(CONCAT("/stocks/page/", STRAFTER(STR(?stock__id), "stock/")) AS ?stock__dataProviderUrl)
+  }
 `
 
 

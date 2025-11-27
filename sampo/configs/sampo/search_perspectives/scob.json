@@ -81,7 +81,16 @@
             "externalLink": true,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 350
+            "minWidth": 300
+        },
+        {
+            "id": "stock",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
         },
         {
             "id": "dateOfIncorporation",
@@ -183,6 +192,9 @@
             "sortByPredicate": "bhf:hasAddress/bhf:country",
             "sortDirection": "desc",
             "literal": true
+        },
+        "stock": {
+            "sortByPredicate": "bhf:hasStockCorporation/bhf:hasStock/bhf:hasSharetype"
         }
 
     }

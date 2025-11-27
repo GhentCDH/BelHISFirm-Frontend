@@ -280,6 +280,10 @@
                 "dateOfDissolution": {
                     "label": "Date of Dissolution",
                     "description": "Date of dissolution"
+                },
+                "stock": {
+                    "label": "Stocks",
+                    "description": "Stocks of this corporation"
                 }
             }
         },
@@ -391,6 +395,31 @@
                 "endDate": {
                     "label": "end date",
                     "description": "end date of this address being used"
+                }
+            }
+        },
+        "stocks": {
+            "label": "Stocks",
+            "instancePage": {
+                "label": "Stock",
+                "description": "Stock belonging to a corporation"
+            },
+            "properties": {
+                "uri": {
+                    "label": "uri",
+                    "description": "Id of this stock"
+                },
+                "sharetype": {
+                    "label": "sharetype",
+                    "description": "sharetype of this stock"
+                },
+                "stockExchange": {
+                    "label": "stock exchange",
+                    "description": "The stock exchange this stock is in"
+                },
+                "corporation": {
+                    "label": "corporation",
+                    "description": "Corporation(s) this stock belonged to"
                 }
             }
         }
