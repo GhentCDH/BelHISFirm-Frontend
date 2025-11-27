@@ -18,10 +18,11 @@ UNION
     optional {?stockcorp__id bhf:endDate ?corporation__endDate .}
     bind(concat(
       str(?corporation__id),
-      ": ",
+      " [",
       COALESCE(str(?corporation__startDate), "????"), 
       " - ",
-      COALESCE(str(?corporation__endDate), "????")
+      COALESCE(str(?corporation__endDate), "????"),
+      "]"
     ) as ?corporation__prefLabel)
     BIND(CONCAT("/scob/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporation__dataProviderUrl)
 }
@@ -33,10 +34,11 @@ UNION
     optional {?name__id bhf:endDate ?name__endDate .}
     bind(concat(
       str(?name),
-      ": ",
+      " [",
       COALESCE(str(?name__startDate), "????"), 
       " - ",
-      COALESCE(str(?name__endDate), "????")
+      COALESCE(str(?name__endDate), "????"),
+      "]"
     ) as ?name__prefLabel)
 }
 `

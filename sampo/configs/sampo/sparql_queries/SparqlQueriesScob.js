@@ -10,7 +10,18 @@ export const corporationProperties = `
   UNION
   {
     ?id bhf:hasName ?corporationName__id .
-    ?corporationName__id rdfs:label ?corporationName__prefLabel .
+    ?corporationName__id rdfs:label ?corporationName__label .
+    
+    optional {?corporationName__id bhf:startDate ?corporationName__startDate .}
+    optional {?corporationName__id bhf:endDate ?corporationName__endDate .}
+    bind(concat(
+      ?corporationName__label,
+      " [",
+      COALESCE(str(?corporationName__startDate), "????"), 
+      " - ",
+      COALESCE(str(?corporationName__endDate), "????"),
+      "]"
+    ) as ?corporationName__prefLabel)
     BIND(CONCAT("/corporationNames/page/", STRAFTER(STR(?corporationName__id), "corporationName/")) AS ?corporationName__dataProviderUrl)
   }
   UNION
@@ -30,7 +41,7 @@ export const corporationProperties = `
     BIND(
       CONCAT(
         COALESCE(?address__street, ""), 
-        ", ",
+        IF(BOUND(?address__street), ", ", ""),
         COALESCE(?address__city, ""), 
         ", ",
         COALESCE(?address__country, "")
@@ -63,10 +74,11 @@ export const corporationProperties = `
     ?stock__id bhf:hasSharetype ?stock__sharetype .
     bind(concat(
       ?stock__sharetype,
-      ": ",
+      " [",
       COALESCE(str(?stock__startDate), "????"), 
       " - ",
-      COALESCE(str(?stock__endDate), "????")
+      COALESCE(str(?stock__endDate), "????"),
+      "]"
     ) as ?stock__prefLabel)
     
     BIND(CONCAT("/stocks/page/", STRAFTER(STR(?stock__id), "stock/")) AS ?stock__dataProviderUrl)
