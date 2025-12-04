@@ -19,6 +19,51 @@
                         "component": "InstancePageTable",
                         "tabPath": "table",
                         "tabIcon": "CalendarViewDay"
+                    },
+                    "openCloseValuesChart": {
+                        "tabID": 1,
+                        "component": "ApexCharts",
+                        "tabPath": "openClose",
+                        "tabIcon": "ShowChart",
+                        "pageType": "instancePage",
+                        "sparqlQuery": "stocksGraphOpenClose",
+                        "resultMapper": "mapTimelineChart",
+                        "resultMapperConfig": {
+                            "fillEmptyValues": false,
+                            "dateCategory": true,
+                            "customizedCategoryLabels": true
+                        },
+                        "createChartData": "createMultipleLineChartData",
+                        "title": "Recorded stock prices",
+                        "xaxisTitle": "day",
+                        "xaxisType": "datetime",
+                        "xaxisTickAmount": 30,
+                        "yaxisTitle": "price",
+                        "seriesTitle": "price",
+                        "stroke": {
+                            "curve": "straight",
+                            "width": 2
+                        },
+                        "tooltip": {
+                            "x": {
+                                "format": "dd MMM yyyy"
+                            }
+                        },
+                        "fill": {
+                            "type": "gradient",
+                            "gradient": {
+                                "shadeIntensity": 1,
+                                "inverseColors": false,
+                                "opacityFrom": 0.6,
+                                "opacityTo": 0.05,
+                                "stops": [
+                                    20,
+                                    60,
+                                    100,
+                                    100
+                                ]
+                            }
+                        }
                     }
                 }
             }

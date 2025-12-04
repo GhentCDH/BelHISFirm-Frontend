@@ -44,12 +44,25 @@ UNION
 `
 
 export const stocksGraphOpenClose = `
-SELECT DISTINCT ?day ?open ?close
+SELECT DISTINCT ?date ?open ?close
 where {
     bind(<ID> as ?id)
     ?id bhf:hasNotation/bhf:hasNotationPrice ?price__id .
-    optional {?price__id bhf:priceDay ?day .}
+    ?price__id bhf:priceDay ?date .
     optional {?price__id bhf:openValue ?open .}
     optional {?price__id bhf:closeValue ?close .}
 }
+ORDER BY ?date
+`
+
+export const stocksGraphOpen = `
+SELECT DISTINCT ?category ?count ?categoryLabel
+where {
+    bind(<ID> as ?id)
+    ?id bhf:hasNotation/bhf:hasNotationPrice ?price__id .
+    ?price__id bhf:priceDay ?category .
+    bind(?category as ?categoryLabel)
+    ?price__id bhf:openValue ?count .
+}
+ORDER BY ?category
 `
