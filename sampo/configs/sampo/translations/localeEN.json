@@ -77,6 +77,7 @@
     },
     "tabs": {
         "table": "table",
+        "openClose": "open&close chart",
         "map": "map",
         "production_places": "production places",
         "production_places_heatmap": "production heatmap",
@@ -178,67 +179,54 @@
         }
     },
     "perspectives": {
-        "belhisfirm": {
-            "label": "belhisfirm",
-            "facetResultsType": "companies",
-            "shortDescription": "belhisfirm sampo",
-            "longDescription": "belhisfirm sampo long description",
+        "securities": {
+            "label": "securities",
+            "facetResultsType": "securities",
+            "shortDescription": "scob securities",
+            "longDescription": "TODO insert long description here",
             "instancePage": {
-                "label": "Company",
-                "description": "belhisfirm company"
+                "label": "Security",
+                "description": "scob belhisfirm security"
             },
             "properties": {
+                "scobID": {
+                    "label": "id",
+                    "description": "ID in the scob database"
+                },
                 "uri": {
-                    "label": "URI",
-                    "description": "Uniform Resource Identifier"
+                    "label": "uri",
+                    "description": "identifier of the resource"
                 },
-                "companyName": {
-                    "label": "Company Name",
-                    "description": "Name of the company",
-                    "textFacetInputPlaceholder": "Search..."
+                "name": {
+                    "label": "name(s)",
+                    "description": "name(s) of the secrutiy"
                 },
-                "founder": {
-                    "label": "founder(s)",
-                    "description": "Founder(s) of the company"
+                "stockExchangeName": {
+                    "label": "exchange",
+                    "description": "Exchange the security is on"
                 },
-                "director": {
-                    "label": "director(s)",
-                    "description": "Director(s) of the company"
+                "stocktype": {
+                    "label": "type(s)",
+                    "description": "type of the security"
                 },
-                "shareholder": {
-                    "label": "shareholder(s)",
-                    "description": "Shareholder(s) of the company"
+                "sectorName": {
+                    "label": "sector(s)",
+                    "description": "Sector(s) of the security"
                 },
-                "address": {
-                    "label": "address",
-                    "description": "Address of te company"
+                "sharetype": {
+                    "label": "sharetype",
+                    "description": "sharetype of the security"
                 },
-                "legalForm": {
-                    "label": "legal form",
-                    "description": ""
-                },
-                "dateOfFounding": {
-                    "label": "date of founding",
-                    "description": ""
-                },
-                "dateOfDissolution": {
-                    "label": "date of dissolution",
-                    "description": ""
-                },
-                "businessSector": {
-                    "label": "business sector",
-                    "description": ""
-                },
-                "registeredCapital": {
-                    "label": "registered capital",
-                    "description": ""
+                "currency": {
+                    "label": "currency",
+                    "description": "currency this security is in"
                 }
             }
         },
-        "scob": {
-            "label": "scob",
+        "corporations": {
+            "label": "corporations",
             "facetResultsType": "corporations",
-            "shortDescription": "scob belhisfirm sampo ui",
+            "shortDescription": "scob corporations",
             "longDescription": "TODO Insert long description here",
             "instancePage": {
                 "label": "Corporation",
@@ -399,35 +387,6 @@
                 "endDate": {
                     "label": "end date",
                     "description": "end date of this address being used"
-                }
-            }
-        },
-        "stocks": {
-            "label": "Stocks",
-            "instancePage": {
-                "label": "Stock",
-                "description": "Stock belonging to a corporation"
-            },
-            "properties": {
-                "uri": {
-                    "label": "uri",
-                    "description": "Id of this stock"
-                },
-                "sharetype": {
-                    "label": "sharetype",
-                    "description": "sharetype of this stock"
-                },
-                "stockExchange": {
-                    "label": "stock exchange",
-                    "description": "The stock exchange this stock is in"
-                },
-                "corporation": {
-                    "label": "corporation",
-                    "description": "Corporation(s) this stock belonged to"
-                },
-                "name": {
-                    "label": "name(s)",
-                    "descirption": "Names(s) of this stock"
                 }
             }
         }

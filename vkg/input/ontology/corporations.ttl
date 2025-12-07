@@ -70,12 +70,6 @@ bhf:hasAddress
     rdfs:label         "has address"@en, "heeft adres"@nl ;
     rdfs:comment       "Links a corporation to its physical address"@en .
 
-bhf:scobID
-    rdf:type     owl:DatatypeProperty ;
-    rdfs:domain  bhf:Corporation ;
-    rdfs:range   xsd:integer ;
-    rdfs:label   "scob ID"@en ;
-    rdfs:comment "ID of corporation in the scob Database"@en .
 
 
 ### Address properties

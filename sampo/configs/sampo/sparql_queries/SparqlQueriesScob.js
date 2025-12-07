@@ -1,11 +1,11 @@
 export const corporationProperties = `
   {
     ?id rdf:type bhf:Corporation .
-    ?id bhf:scobID ?scobID__prefLabel .
-    BIND(?id as ?scobID_id)
+    ?id bhf:scobID ?scobID__id .
+    BIND(?scobID__id as ?scobID__prefLabel)
     BIND(?id as ?uri__id)
     BIND(?id as ?uri__prefLabel)
-    BIND(CONCAT("/scob/page/", STRAFTER(STR(?id), "corporation/")) AS ?scobID__dataProviderUrl)
+    BIND(CONCAT("/corporations/page/", STRAFTER(STR(?id), "corporation/")) AS ?scobID__dataProviderUrl)
   }
   UNION
   {
@@ -81,7 +81,7 @@ export const corporationProperties = `
       "]"
     ) as ?stock__prefLabel)
     
-    BIND(CONCAT("/stocks/page/", STRAFTER(STR(?stock__id), "stock/")) AS ?stock__dataProviderUrl)
+    BIND(CONCAT("/securities/page/", STRAFTER(STR(?stock__id), "stock/")) AS ?stock__dataProviderUrl)
   }
 `
 

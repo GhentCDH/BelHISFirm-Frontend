@@ -248,6 +248,16 @@
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stock/{id}" ;
                       rr:class    bhf:Stock ] .
 
+:STOCK-SCOBID
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+                      SELECT id FROM scoball.stock
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:scobID ;
+                            rr:objectMap [ rr:column   "id" ;
+                                           rr:datatype xsd:integer ] ] .
+
 :STOCK-STOCKEXCHANGE
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """
@@ -794,17 +804,17 @@
                       rr:class    bhf:Currency ] .
 
 :CURRENCY-PROPERTIES
-    a               rr:TriplesMap ;
-    rr:logicalTable [ rr:sqlQuery """
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
                     SELECT id, name, country, comments FROM scoball.currency
     """ ] ;
-    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/currency/{id}" ] ;
-    rr:predicateObjectMap [rr:predicate foaf:name ;
-                          rr:objectMap [rr:column "name" ;
-                                       rr:datatype xsd:string ]] ;
-    rr:predicateObjectMap [rr:predicate vcard:country-name  ;
-                           rr:objectMap [rr:column "country" ;
-                                         rr:datatype xsd:string ]] ;
-    rr:predicateObjectMap [rr:predicate bhf:comments ;
-                           rr:objectMap [rr:column "comments" ;
-                                         rr:datatype xsd:string ]] .
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/currency/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate foaf:name ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate vcard:country-name ;
+                            rr:objectMap [ rr:column   "country" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:comments ;
+                            rr:objectMap [ rr:column   "comments" ;
+                                           rr:datatype xsd:string ] ] .

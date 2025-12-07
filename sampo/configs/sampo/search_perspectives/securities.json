@@ -1,0 +1,246 @@
+{
+    "id": "securities",
+    "endpoint": {
+        "url": "http://localhost:8080/sparql",
+        "useAuth": false,
+        "prefixesFile": "SparqlQueriesPrefixes.js",
+        "defaultSparql": true
+    },
+    "generalQueries": {
+        "facetResultSetQuery": "facetResultSetQueryBelhisfirm"
+    },
+    "sparqlQueriesFile": "ScobStocks.js",
+    "baseURI": "http://belhisfirm.be/resource",
+    "URITemplate": "<BASE_URI>/stock/<LOCAL_ID>",
+    "facetClass": "bhf:Stock",
+    "frontPageImage": "main_page/mmm-banner.jpg",
+    "searchMode": "faceted-search",
+    "enableDynamicLanguageChange": false,
+    "defaultActiveFacets": [],
+    "defaultTab": "table",
+    "defaultInstancePageTab": "table",
+    "resultClasses": {
+        "securities": {
+            "paginatedResultsConfig": {
+                "tabID": 0,
+                "component": "ResultTable",
+                "tabPath": "table",
+                "tabIcon": "CalendarViewDay",
+                "propertiesQueryBlock": "stocksProperties",
+                "pagesize": 10,
+                "sortBy": null,
+                "sortDirection": null
+            },
+            "instanceConfig": {
+                "propertiesQueryBlock": "stocksProperties",
+                "instancePageResultClasses": {
+                    "instancePageTable": {
+                        "tabID": 0,
+                        "component": "InstancePageTable",
+                        "tabPath": "table",
+                        "tabIcon": "CalendarViewDay"
+                    },
+                    "openCloseValuesChart": {
+                        "tabID": 1,
+                        "component": "ApexCharts",
+                        "tabPath": "openClose",
+                        "tabIcon": "ShowChart",
+                        "pageType": "instancePage",
+                        "sparqlQuery": "stocksGraphOpenClose",
+                        "resultMapper": "mapTimelineChart",
+                        "resultMapperConfig": {
+                            "fillEmptyValues": false,
+                            "dateCategory": true,
+                            "customizedCategoryLabels": true
+                        },
+                        "createChartData": "createMultipleLineChartData",
+                        "title": "Recorded stock prices",
+                        "xaxisTitle": "day",
+                        "xaxisType": "datetime",
+                        "xaxisTickAmount": 30,
+                        "yaxisTitle": "price",
+                        "seriesTitle": "price",
+                        "stroke": {
+                            "curve": "straight",
+                            "width": 2
+                        },
+                        "tooltip": {
+                            "x": {
+                                "format": "dd MMM yyyy"
+                            }
+                        },
+                        "fill": {
+                            "type": "gradient",
+                            "gradient": {
+                                "shadeIntensity": 1,
+                                "inverseColors": false,
+                                "opacityFrom": 0.3,
+                                "opacityTo": 0.3,
+                                "stops": [
+                                    20,
+                                    60,
+                                    100,
+                                    100
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "properties": [
+        {
+            "id": "scobID",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 30
+        },
+        {
+            "id": "uri",
+            "valueType": "object",
+            "makeLink": false,
+            "sortValues": true,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "name",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 250
+        },
+        {
+            "id": "currency",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 100
+        },
+        {
+            "id": "stockExchangeName",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 300
+        },
+        {
+            "id": "stocktype",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200
+        },
+        {
+            "id": "sectorName",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "sharetype",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 175
+        }
+    ],
+    "facets": {
+        "scobID": {
+            "sortByPredicate": "bhf:scobID"
+        },
+        "name": {
+            "containerClass": "one",
+            "facetType": "text",
+            "filterType": "textFilter",
+            "sortByPredicate": "bhf:hasName/rdfs:label",
+            "textQueryProperty": "bhf:hasName/rdfs:label"
+        },
+        "currency": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "bhf:hasStockQuantity/bhf:hasCurrency/foaf:name",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "bhf:hasStockQuantity/bhf:hasCurrency/foaf:name",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "stockExchangeName": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "bhf:hasStockExchange/bhf:hasName/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "bhf:hasStockExchange/bhf:hasName/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "stocktype": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "bhf:hasStockType/bhf:typeName",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "bhf:hasStockType/bhf:typeName",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "sectorName": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "bhf:hasNotation/bhf:hasSector/bhf:hasName/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "bhf:hasNotation/bhf:hasSector/bhf:hasName/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "sharetype": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "bhf:hasSharetype",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "bhf:hasSharetype",
+            "sortDirection": "desc",
+            "literal": true
+        }
+    }
+}

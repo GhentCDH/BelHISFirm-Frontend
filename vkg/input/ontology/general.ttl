@@ -64,3 +64,10 @@ bhf:hasName
     rdfs:range   bhf:DatedName ;
     rdfs:label   "has dated name"@en, "heeft gedateerde naam"@nl ;
     rdfs:comment "has a dated name"@en .
+
+bhf:scobID
+    rdf:type     owl:DatatypeProperty ;
+    rdfs:domain  bhf:Class ;
+    rdfs:range   xsd:integer ;
+    rdfs:label   "scob ID"@en ;
+    rdfs:comment "ID of an entity in the scob Database"@en .

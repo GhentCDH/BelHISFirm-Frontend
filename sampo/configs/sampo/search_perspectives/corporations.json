@@ -1,5 +1,5 @@
 {
-    "id": "scob",
+    "id": "corporations",
     "endpoint": {
         "url": "http://localhost:8080/sparql",
         "useAuth": false,
@@ -22,7 +22,7 @@
     "defaultTab": "table",
     "defaultInstancePageTab": "table",
     "resultClasses": {
-        "scob": {
+        "corporations": {
             "paginatedResultsConfig": {
                 "tabID": 0,
                 "component": "ResultTable",

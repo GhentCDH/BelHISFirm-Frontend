@@ -4,13 +4,13 @@
     "staticsUrl": "",
     "perspectives": {
         "searchPerspectives": [
-            "scob"
+            "corporations",
+            "securities"
         ],
         "onlyInstancePages": [
             "corporationNames",
             "legalForms",
-            "addresses",
-            "stocks"
+            "addresses"
         ]
     },
     "localeConfig": {
