@@ -159,7 +159,7 @@
             }
         },
         "corporations": {
-            "label": "scob",
+            "label": "bedrijven",
             "facetResultsType": "bedrijven",
             "shortDescription": "scob bedrijven",
             "longDescription": "TODO Insert long description here",
