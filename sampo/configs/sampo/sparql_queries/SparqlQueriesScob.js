@@ -118,7 +118,7 @@ UNION
 {
     ?corporation__id bhf:hasName ?id .
     BIND(?corporation__id as ?corporation__prefLabel)
-    BIND(CONCAT("/scob/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporation__dataProviderUrl)
+    BIND(CONCAT("/corporations/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporation__dataProviderUrl)
 }
 UNION
 {
@@ -154,7 +154,7 @@ UNION
 {
     ?corporation__id bhf:hasLegalForm ?id .
     BIND(?corporation__id as ?corporation__prefLabel)
-    BIND(CONCAT("/scob/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporation__dataProviderUrl)
+    BIND(CONCAT("/corporations/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporation__dataProviderUrl)
 }
 UNION
 {
@@ -190,7 +190,7 @@ UNION
 {
     ?corporation__id bhf:hasAddress ?id .
     BIND(?corporation__id as ?corporation__prefLabel)
-    BIND(CONCAT("/scob/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporation__dataProviderUrl)
+    BIND(CONCAT("/corporations/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporation__dataProviderUrl)
 }
 UNION
 {
