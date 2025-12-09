@@ -1,17 +1,15 @@
 {
     "languageLabel": "Nederlands",
     "html": {
-        "title": "Sampo-UI – A framework for building user interfaces for semantic portals",
-        "description": "The Sampo-UI framework makes it possible to create highly customizable, user-friendly, and responsive user interfaces using current state-of-the-art JavaScript libraries and data from SPARQL endpoints."
+        "title": "Belhisfirm",
+        "description": "Belhisfirm website built with sampo-ui"
     },
     "appTitle": {
-        "short": "Sampo-UI",
-        "mobile": "S-UI",
-        "long": "&nbsp; &nbsp; Sampo-UI &nbsp; &nbsp;",
-        "subheading": "\"Here to forge for us the Sampo, Hammer us the lid in colors\""
+        "short": "Belhisfirm",
+        "mobile": "Belhisfirm",
+        "long": "&nbsp; &nbsp; Belhisfirm &nbsp; &nbsp;",
+        "subheading": "\"TODO insert sub heading here\""
     },
-    "appDescription1": "Sampo is a web service for searching and studying place names. The search results can be viewed as a table, on maps, and as statistical distributions. Historical and current background maps are provided.",
-    "appDescription2": "Start by choosing source dataset(s) and input a place name on the search field. Alternatively you can search by area.",
     "selectPerspective": "Select a perspective to search and browse the knowledge graph:",
     "mainPageImageLicence": "Images used under license from Shutterstock.com",
     "backendErrorText": "One of the backend services is not available at the moment. Please try again later.",
@@ -19,15 +17,12 @@
         "toggleInstructions": "Click to show or hide instructions"
     },
     "topBar": {
-        "feedback": "feedback",
         "info": {
             "info": "Info",
-            "blog": "Projectblog",
+            "blog": "Project blog",
             "blogUrl": "https://seco.cs.aalto.fi/tools/sampo-ui/",
-            "aboutThePortal": "Over het portaal"
+            "aboutThePortal": "Over het Portaal"
         },
-        "searchBarPlaceHolder": "Zoek alle inhoud",
-        "searchBarPlaceHolderShort": "Zoeken",
         "instructions": "instructies"
     },
     "facetBar": {
@@ -52,65 +47,30 @@
         "min": "Min",
         "max": "Max",
         "facetSearchFieldPlaceholder": "Zoeken...",
-        "applyFacetSelection": "Apply",
+        "applyFacetSelection": "apply",
         "pieChart": {
             "tooltip": "Taartdiagram"
         },
         "barChart": {
             "tooltip": "Staafdiagram",
             "language": {
-                "title": "Taal",
-                "xaxisTitle": "Taal",
-                "yaxisTitle": "Manuscriptaantal",
-                "seriesTitle": "Manuscriptaantal"
+                "title": "Language",
+                "xaxisTitle": "Language"
             }
         },
         "lineChart": {
-            "tooltip": "Lijndiagram",
-            "productionTimespan": {
-                "title": "Manuscriptproductie per decennium",
-                "xaxisTitle": "Decennium",
-                "yaxisTitle": "Manuscriptaantal",
-                "seriesTitle": "Manuscriptaantal"
-            }
+            "tooltip": "Lijndiagram"
         }
     },
     "tabs": {
         "table": "tabel",
-        "map": "kaart",
-        "production_places": "productieplaatsen",
-        "production_places_heatmap": "productie heatmap",
-        "last_known_locations": "laatst bekende locaties",
-        "migrations": "migraties",
-        "network": "netwerk",
-        "export": "exporteren",
-        "production_dates": "productiedata",
-        "event_dates": "gebeurtenisdata",
-        "map_clusters": "geclusterde kaart",
-        "map_markers": "kaart",
-        "heatmap": "heatmap",
-        "statistics": "statistieken",
-        "emloLetterNetwork": "Brievennetwerk",
-        "emloSentReceived": "Verzonden en ontvangen brieven",
-        "download": "download",
-        "recommendations": "aanbevelingen",
-        "share": "delen"
+        "openCloseChart": "open&close prijzen grafiek",
+        "minMaxChart": "min&max prijzen grafiek"
     },
     "table": {
         "rowsPerPage": "Rijen per pagina",
         "of": "van"
     },
-    "lineChart": {
-        "productionCount": "Productie",
-        "transferCount": "Overdracht van bewaring",
-        "observationCount": "Observatie",
-        "sentCount": "Verzonden",
-        "receivedCount": "Ontvangen",
-        "allCount": "Alles"
-    },
-    "exportToYasgui": "open de resultaat-tabelquery in de yasgui sparql-editor",
-    "openInLinkedDataBrowser": "openen in linked-data browser",
-    "resultsAsCSV": "download de zoekresultaten als een CSV-tabel",
     "facets": {
         "dateFacet": {
             "invalidDate": "Ongeldige datum.",
@@ -132,15 +92,7 @@
         "basemaps": {
             "mapbox": {
                 "light-v10": "Mapbox Licht (OpenStreetMap)"
-            },
-            "googleRoadmap": "Google Maps",
-            "topographicalMapNLS": "Topografische kaart (Kadaster Finland)",
-            "backgroundMapNLS": "Achtergrondkaart (Kadaster Finland)",
-            "airMapNLS": "Luchtkaart (Kadaster Finland)"
-        },
-        "externalLayers": {
-            "WFS_MV_Kulttuuriymparisto:Arkeologiset_kohteet_aule": "Register archeologische locaties, gebieden (Fins Erfgoedagentschap)",
-            "...": "..."
+            }
         },
         "mapModeButtons": {
             "markers": "Markers",
@@ -150,89 +102,66 @@
         "wrongZoomLevelFHA": "Het zoomniveau moet minstens 13 zijn om deze laag te tonen",
         "tooManyResults": "Meer dan 500 resultaten, gebruik geclusterde kaart of heatmap"
     },
-
     "instancePageGeneral": {
         "introduction": "<p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Deze landingspagina geeft een leesbare samenvatting van de datapunten die naar dit {entity} verwijzen. ... </p>",
         "repetition": "<h6 class=\"MuiTypography-root MuiTypography-h6\"> Herhaling van gegevens </h6> ... "
     },
-
     "deckGlMap": {
         "arcColouring": "Boogkleuring:",
         "showMoreInformation": "Klik voor meer informatie.",
         "placesMsMigrations": {
-            "legendTitle": "Boogkleuring",
-            "legendFrom": "Manuscriptproductieplaats",
-            "legendTo": "Laatst bekende locatie",
-            "from": "Productieplaats:",
-            "to": "Laatst bekende locatie:",
-            "count": "Manuscriptaantal",
-            "listHeadingSingleInstance": "Manuscript:",
-            "listHeadingMultipleInstances": "Manuscripten:"
+            "legendTitle": "Boogkleuring"
         }
     },
-
     "perspectives": {
-        "belhisfirm": {
-            "label": "belhisfirm",
-            "facetResultsType": "bedrijven",
-            "shortDescription": "belhisfirm sampo",
-            "longDescription": "belhisfirm sampo lange beschrijving",
+        "securities": {
+            "label": "effecten",
+            "facetResultsType": "effecten",
+            "shortDescription": "scob effecten",
+            "longDescription": "TODO insert long description here",
             "instancePage": {
-                "label": "Bedrijf",
-                "description": "belhisfirm bedrijf"
+                "label": "Effect",
+                "description": "scob belhisfirm effect"
             },
             "properties": {
+                "scobID": {
+                    "label": "id",
+                    "description": "ID van het effect"
+                },
                 "uri": {
-                    "label": "URI",
-                    "description": "Uniform Resource Identifier"
+                    "label": "uri",
+                    "description": "uri van het effect"
                 },
-                "companyName": {
-                    "label": "Bedrijfsnaam",
-                    "description": "Naam van het bedrijf",
-                    "textFacetInputPlaceholder": "Zoeken..."
+                "name": {
+                    "label": "naam/namen",
+                    "description": "namen van het effect"
                 },
-                "founder": {
-                    "label": "oprichter(s)",
-                    "description": "Oprichter(s) van het bedrijf"
+                "stockExchangeName": {
+                    "label": "beurs",
+                    "description": "beurs/beurzen dat het effect op was"
                 },
-                "director": {
-                    "label": "directeur(s)",
-                    "description": "Directeur(s) van het bedrijf"
+                "stocktype": {
+                    "label": "type(s)",
+                    "description": "het type effect"
                 },
-                "shareholder": {
-                    "label": "aandeelhouder(s)",
-                    "description": "Aandeelhouder(s) van het bedrijf"
+                "sectorName": {
+                    "label": "sector(en)",
+                    "description": "Sector(en) van het effect"
                 },
-                "address": {
-                    "label": "adres",
-                    "description": "Adres van het bedrijf"
+                "sharetype": {
+                    "label": "sharetype",
+                    "description": "brede benaming voor diverse effecten"
                 },
-                "legalForm": {
-                    "label": "juridisch statuut",
-                    "description": ""
-                },
-                "dateOfFounding": {
-                    "label": "oprichtingsdatum",
-                    "description": ""
-                },
-                "dateOfDissolution": {
-                    "label": "datum van ontbinding",
-                    "description": ""
-                },
-                "businessSector": {
-                    "label": "bedrijfssector",
-                    "description": ""
-                },
-                "registeredCapital": {
-                    "label": "geregistreerd kapitaal",
-                    "description": ""
+                "currency": {
+                    "label": "munteenheid",
+                    "description": "munteenheid/munteenheden dat dit effect in was"
                 }
             }
         },
-        "scob": {
+        "corporations": {
             "label": "scob",
             "facetResultsType": "bedrijven",
-            "shortDescription": "scob belhisfirm sampo ui",
+            "shortDescription": "scob bedrijven",
             "longDescription": "TODO Insert long description here",
             "instancePage": {
                 "label": "Bedrijf",
@@ -242,6 +171,10 @@
                 "uri": {
                     "label": "id",
                     "description": "uri van het bedrijf"
+                },
+                "scobID": {
+                    "label": "id",
+                    "description": "id in van het bedrijf"
                 },
                 "corporationName": {
                     "label": "Naam/namen",
@@ -274,6 +207,10 @@
                 "dateOfDissolution": {
                     "label": "Ontbindingsdatum",
                     "description": "Datum van ontbinding"
+                },
+                "stock": {
+                    "label": "Effecten",
+                    "description": "Effecten van dit bedrijf"
                 }
             }
         },
@@ -390,19 +327,7 @@
         }
     },
 
-    "aboutThePortalPartOne": "<h1 ...> Over het portaal </h1> <p> ... </p>",
-    "aboutThePortalPartTwo": "<p> ... </p>",
-    "instructions": "<h1 ...> Instructies </h1> <p> ... </p>",
-    "feedback": "<h1 ...> Feedback </h1> <p> ... </p>",
-    "exportLink": {
-        "viewLabel": "Tab",
-        "viewInstructions": "Kies de tab waarin de query wordt geopend",
-        "fieldLabel": "Gegenereerde link (alleen-lezen)",
-        "infoBody": "U kunt de query delen via onderstaande link...",
-        "warningTitle": "Gegenereerde link kan te lang zijn",
-        "warningBody": "...",
-        "errorTitle": "Link is te lang",
-        "errorBody": "...",
-        "copyLinkToClipboard": "Kopieer link naar klembord"
-    }
+    "aboutThePortalPartOne": "<h1 class=\"MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom\"> About the Portal </h1> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Morbi nunc ex, ultrices vitae molestie eu, fringilla quis dolor. Vivamus in enim nibh. Nunc rutrum molestie ex eget dictum. Mauris lectus leo, ultrices in sodales ac, fermentum ut massa. In porta, mauris sed facilisis lacinia, eros magna sollicitudin tortor, quis venenatis nisl ipsum lacinia justo. Duis pretium bibendum consequat. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In hac habitasse platea dictumst. Curabitur consectetur aliquet est, ac dapibus ante semper vitae. Sed consequat at est ac lobortis. In vitae metus in ligula pretium vehicula. Aliquam maximus ac massa euismod eleifend. Vestibulum vehicula mattis libero at tempus. </p> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Data </h2> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Nullam eu blandit ex, quis consectetur enim. Nulla aliquam, enim non euismod tincidunt, neque eros tincidunt urna, eget elementum diam metus vel elit. Donec dui augue, vehicula a cursus ut, efficitur eget velit. Aliquam pellentesque odio vel metus sodales tempor. Donec in lectus magna. Cras at odio a libero laoreet viverra nec sed lorem. In malesuada tempus dolor. Suspendisse et ligula quis nisi facilisis maximus. Sed dictum justo eu condimentum efficitur. Mauris porttitor ante nec auctor vulputate. Phasellus varius, odio sed egestas bibendum, dolor lacus consequat turpis, ac pulvinar libero lorem maximus nunc. Praesent egestas volutpat leo, vel faucibus dui convallis sed. Ut sed libero eu nisi accumsan mollis. Pellentesque ultricies est non porta luctus. Maecenas eget viverra mauris. </p>",
+    "aboutThePortalPartTwo": "<p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Mauris porttitor ante nec auctor vulputate. Phasellus varius, odio sed egestas bibendum, dolor lacus consequat turpis, ac pulvinar libero lorem maximus nunc. Praesent egestas volutpat leo, vel faucibus dui convallis sed. Ut sed libero eu nisi accumsan mollis. Pellentesque ultricies est non porta luctus. Maecenas eget viverra mauris. </p> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Data Reuse </h2> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Nullam eu blandit ex, quis consectetur enim. Nulla aliquam, enim non euismod tincidunt, neque eros tincidunt urna, eget elementum diam metus vel elit. Donec dui augue, vehicula a cursus ut, efficitur eget velit. Aliquam pellentesque odio vel metus sodales tempor. Donec in lectus magna. Cras at odio a libero laoreet viverra nec sed lorem. In malesuada tempus dolor. Suspendisse et ligula quis nisi facilisis maximus. Sed dictum justo eu condimentum efficitur. Mauris porttitor ante nec auctor vulputate. Phasellus varius, odio sed egestas bibendum, dolor lacus consequat turpis, ac pulvinar libero lorem maximus nunc. Praesent egestas volutpat leo, vel faucibus dui convallis sed. Ut sed libero eu nisi accumsan mollis. Pellentesque ultricies est non porta luctus. Maecenas eget viverra mauris. </p> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> More Information </h2> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Nullam eu blandit ex, quis consectetur enim. Nulla aliquam, enim non euismod tincidunt, neque eros tincidunt urna, eget elementum diam metus vel elit. Donec dui augue, vehicula a cursus ut, efficitur eget velit. Aliquam pellentesque odio vel metus sodales tempor. Donec in lectus magna. Cras at odio a libero laoreet viverra nec sed lorem. In malesuada tempus dolor. Suspendisse et ligula quis nisi facilisis maximus. Sed dictum justo eu condimentum efficitur. Mauris porttitor ante nec auctor vulputate. Phasellus varius, odio sed egestas bibendum, dolor lacus consequat turpis, ac pulvinar libero lorem maximus nunc. Praesent egestas volutpat leo, vel faucibus dui convallis sed. Ut sed libero eu nisi accumsan mollis. Pellentesque ultricies est non porta luctus. Maecenas eget viverra mauris. </p>",
+    "instructions": "<h1 class=\"MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom\"> Instructions </h1> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> The search functionality of this semantic portal is based on the <a href=\"https://doi.org/10.2200/S00190ED1V01Y200904ICR005\" target='_blank' rel='noopener noreferrer'> faceted search</a> paradigm. By default each perspective displays all results from the corresponding class. This default result set can be narrowed down by using the filters on the left. </p> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Using a single filter </h2> <h3 class=\"MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom\"> Selecting values within a filter </h3> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> All possible values for a filter are displayed either as a list or as a hierarchical tree structure (if available). The number of results is shown in brackets for each value. Once a value is selected, the results are automatically updated. To prevent further selections that do not return any results, also the possible values for all other filters are updated at the same time. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Multiple values can be selected within a single filter. Selecting multiple values generates results that contain any of the selected values. For example, selecting both <i>Saint Augustine</i> and <i>Saint Jerome</i> as an Author returns results that include either <i>Saint Augustine</i> <strong>OR</strong> <i>Saint Jerome</i> as an Author. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Selected values of a filter appear in the Active filters section at the top of the list of filters. To deselect a filter, click the X mark next to it within the Active filters section. You can also deselect a filter value by unchecking the checkmark in the filter’s value list. The Active filters section only appears if there are filter values currently selected. </p> <h3 class=\"MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom\"> Searching within a filter </h3> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Search within a filter by using the search field at the top of each filter. All possible values of a filter remain visible at all times. The values of the filter that match the search term are indicated by a purple underline. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Steps for searching within filters: </p> <ol class=\"MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom\"> <li> Type search term into search field. If there are matches, a number will appear to the right of the search field, indicating the number of filter values that match the search term. </li> <li> Click the arrows to the right of the search field to cycle through the results. As you click the arrow, a different filter value will appear at the top of the list. Matched filters are underlined in purple. </li> <li> Click the checkmark next to a filter value to activate it. The results (and also other filters) are automatically updated. </li> </ol> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Using multiple filters simultaneously </h2> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> The effectiveness of faceted search is realized when multiple filters are applied at the same time. As in many e-commerce sites, a logical AND is always used between the filters. For example selecting <i>Saint Augustine </i> and <i>Saint Jerome</i> as an Author and <i>Sir Thomas Phillipps</i> and <i> Thomas Thorpe</i> as an Owner, the results are narrowed down as follows: </p> <p class=\"MuiTypography-root MuiTypography-body1\"> (Author: <i>Saint Augustine</i> <strong>OR</strong> Author: <i>Saint Jerome</i>) </p> <p class=\"MuiTypography-root MuiTypography-body1\"> <strong>AND</strong> </p> <p class=\"MuiTypography-root MuiTypography-body1\"> (Owner: <i>Sir Thomas Phillipps</i> <strong>OR</strong> Owner: <i>Thomas Thorpe</i>) </p>"
 }
