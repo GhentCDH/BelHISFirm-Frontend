@@ -155,6 +155,10 @@
                 "currency": {
                     "label": "currency",
                     "description": "currency this security is in"
+                },
+                "corporation": {
+                    "label": "corporation(s)",
+                    "description": "corporation(s) that had this security"
                 }
             }
         },

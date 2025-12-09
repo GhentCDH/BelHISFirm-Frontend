@@ -155,6 +155,10 @@
                 "currency": {
                     "label": "munteenheid",
                     "description": "munteenheid/munteenheden dat dit effect in was"
+                },
+                "corporation": {
+                    "label": "bedrijf",
+                    "description": "bedrijf/bedrijven van wie dit effect was"
                 }
             }
         },

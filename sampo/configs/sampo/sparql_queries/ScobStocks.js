@@ -55,10 +55,11 @@ union
 {
     ?stockcorp__id bhf:hasStock ?id .
     ?corporation__id bhf:hasStockCorporation ?stockcorp__id .
+    ?corporation__id bhf:hasName/rdfs:label ?corporation__name .
     optional {?stockcorp__id bhf:startDate ?corporation__startDate .}
     optional {?stockcorp__id bhf:endDate ?corporation__endDate .}
     bind(concat(
-      str(?corporation__id),
+      str(?corporation__name),
       " [",
       COALESCE(str(?corporation__startDate), "????"), 
       " - ",
