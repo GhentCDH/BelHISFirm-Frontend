@@ -1,7 +1,7 @@
 {
     "id": "legalForms",
     "endpoint": {
-        "url": "http://localhost:8080/sparql",
+        "url": "http://localhost:8082/sparql",
         "useAuth": false,
         "prefixesFile": "SparqlQueriesPrefixes.js",
         "defaultSparql": true

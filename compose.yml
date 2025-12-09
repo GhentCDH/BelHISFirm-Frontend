@@ -30,6 +30,35 @@ services:
       timeout: 10s
       retries: 3
 
+  # Varnish Cache Layer (Development Only)
+  varnish:
+    image: varnish:8.0.0
+    container_name: belhisfirm-varnish-dev
+    volumes:
+      - ./varnish/default.vcl:/etc/varnish/default.vcl:ro
+    ports:
+      - "8082:80"
+    environment:
+      VARNISH_SIZE: 256M
+    command:
+      - "-p"
+      - "feature=+esi_ignore_https"
+      - "-p"
+      - "feature=+esi_disable_xml_check"
+      - "-p"
+      - "vcc_allow_inline_c=on"
+    depends_on:
+      vkg-scob:
+        condition: service_healthy
+    networks:
+      - belhisfirm-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "varnishstat", "-1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
   sampo-client:
     build:
       context: ./sampo/client
