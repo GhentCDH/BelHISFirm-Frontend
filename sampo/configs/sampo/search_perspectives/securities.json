@@ -204,6 +204,16 @@
             "sortValues": true,
             "numberedList": false,
             "minWidth": 175
+        },
+        {
+            "id": "corporation",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200,
+            "onlyOnInstancePage": true
         }
     ],
     "facets": {
