@@ -28,7 +28,8 @@ A Docker Compose application stack for BellHisFirm consisting of:
          │
          ▼
 ┌─────────────────┐
-│   PostgreSQL    │
+│      SCOB       │
+│     Oracle      │
 │    Database     │
 └─────────────────┘
 ```
@@ -75,7 +76,7 @@ Or download manually from: https://jdbc.postgresql.org/download/
 
 Copy the example environment file and customize if needed:
 ```bash
-cp .env.example .env
+cp env.example .env
 # Edit .env with your preferred settings
 ```
 
@@ -89,36 +90,26 @@ Launch all services with Docker Compose:
 docker-compose up -d
 ```
 
-Check the status of services:
-```bash
-docker-compose ps
+Or first build sampo images and run prod compose:
+```shell
+cd sampo
+docker compose -f compose-prod.yaml build 
 ```
 
-View logs:
-```bash
-# All services
-docker-compose logs -f
-
-# Specific service
-docker-compose logs -f vkg
+```shell
+docker compose -f compose-prod.yml up
 ```
 
 ### 5. Access the Services
 
-Once all services are running:
+Once all services are running
 
-- **Sampo UI**: http://localhost:8080
-- **Ontop SPARQL Endpoint**: http://localhost:8082
-- **PostgreSQL Database**: localhost:5432
-  - Database name and login to be set in `.env` and `compose.yml`
+In dev:
+- **Sampo UI client**: http://localhost:8081
+- **Sampo UI server**: http://localhost:3001
+- **Ontop SPARQL Endpoint**: http://localhost:8080/sparql
 
 ## Configuration
-
-### Database (PostgreSQL)
-
-- **Init Scripts**: Place SQL scripts in `scob_db_dump/init/` - they run automatically on first startup
-- **Data Persistence**: Data is stored in a Docker volume named `postgres_data`
-- **Connection**: Services connect via the internal network using hostname `scob-db`
 
 ### Virtual Knowledge Graph (Ontop)
 
@@ -131,8 +122,8 @@ The VKG maps relational database data to RDF/OWL knowledge graphs.
 3. **ontop.properties** - Database connection and Ontop settings
 
 **SPARQL Endpoint**:
-- Access the YASGUI query interface at http://localhost:8082
-- Query via POST to http://localhost:8082/sparql
+- Access the YASGUI query interface at http://localhost:8080
+- Query via POST to http://localhost:8080/sparql
 - Ontop automatically translates SPARQL queries to SQL
 
 ### Sampo UI
@@ -146,22 +137,22 @@ Configs set in `sampo/configs`
 
 ### Stop the Application
 ```bash
-docker-compose down
+docker compose down
 ```
 
 ### Stop and Remove Volumes (⚠️ Deletes all data)
 ```bash
-docker-compose down -v
+docker compose down -v
 ```
 
 ### Restart a Specific Service
 ```bash
-docker-compose restart scob-vkg
+docker compose restart vkg-scob
 ```
 
 ### Rebuild After Changes
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 ## Resources
@@ -172,10 +163,6 @@ docker-compose up -d --build
 - Docker Hub: https://hub.docker.com/r/ontop/ontop
 - Tutorials: https://ontop-vkg.org/tutorial/
 - R2RML Specification: https://www.w3.org/TR/r2rml/
-
-### PostgreSQL
-- Official Documentation: https://www.postgresql.org/docs/
-- JDBC Driver Downloads: https://jdbc.postgresql.org/download/
 
 ### SPARQL
 - SPARQL 1.1 Query Language: https://www.w3.org/TR/sparql11-query/

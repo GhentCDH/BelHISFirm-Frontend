@@ -5,13 +5,11 @@
         "description": "The Sampo-UI framework makes it possible to create highly customizable, user-friendly, and responsive user interfaces using current state-of-the-art JavaScript libraries and data from SPARQL endpoints."
     },
     "appTitle": {
-        "short": "Sampo-UI",
-        "mobile": "S-UI",
-        "long": "&nbsp; &nbsp; Sampo-UI &nbsp; &nbsp;",
-        "subheading": "\"Here to forge for us the Sampo, Hammer us the lid in colors\""
+        "short": "Belhisfirm",
+        "mobile": "Belhisfirm",
+        "long": "&nbsp; &nbsp; Belhisfirm &nbsp; &nbsp;",
+        "subheading": "\"TODO insert sub heqading here\""
     },
-    "appDescription1": "Sampo is a web service for searching and studying place names. The search results can be viewed as a table, on maps, and as statistical distributions. Historical and current background maps are provided.",
-    "appDescription2": "Start by choosing source dataset(s) and input a place name on the search field. Alternatively you can search by area.",
     "selectPerspective": "Select a perspective to search and browse the knowledge graph:",
     "mainPageImageLicence": "Images used under license from Shutterstock.com",
     "backendErrorText": "One of the backend services is not available at the moment. Please try again later.",
@@ -19,15 +17,12 @@
         "toggleInstructions": "Click to show or hide instructions"
     },
     "topBar": {
-        "feedback": "feedback",
         "info": {
             "info": "Info",
             "blog": "Project blog",
             "blogUrl": "https://seco.cs.aalto.fi/tools/sampo-ui/",
             "aboutThePortal": "About the Portal"
         },
-        "searchBarPlaceHolder": "Search all content",
-        "searchBarPlaceHolderShort": "Search",
         "instructions": "instructions"
     },
     "facetBar": {
@@ -78,54 +73,14 @@
     "tabs": {
         "table": "table",
         "openCloseChart": "open&close chart",
-        "minMaxChart": "min&max chart",
-        "map": "map",
-        "production_places": "production places",
-        "production_places_heatmap": "production heatmap",
-        "last_known_locations": "last known locations",
-        "migrations": "migrations",
-        "network": "network",
-        "export": "export",
-        "production_dates": "production dates",
-        "event_dates": "event dates",
-        "map_clusters": "clustered map",
-        "map_markers": "map",
-        "heatmap": "heatmap",
-        "statistics": "statistics",
-        "emloLetterNetwork": "Network of letters",
-        "emloSentReceived": "Sent and received letters",
-        "download": "download",
-        "recommendations": "recommendations",
-        "share": "share"
+        "minMaxChart": "min&max chart"
     },
     "table": {
         "rowsPerPage": "Rows per page",
         "of": "of"
     },
-    "lineChart": {
-        "productionCount": "Production",
-        "transferCount": "Transfer of custody",
-        "observationCount": "Observation",
-        "sentCount": "Sent",
-        "receivedCount": "Received",
-        "allCount": "All"
-    },
-    "exportToYasgui": "open the result table query in yasgui sparql editor",
-    "openInLinkedDataBrowser": "open in linked data browser",
-    "resultsAsCSV": "download the search results as a CSV table",
     "facets": {
-        "dateFacet": {
-            "invalidDate": "Epäkelpo päivämäärä.",
-            "toBeforeFrom": "Alkupäivämäärän täytyy olla ennen loppupäivämäärää.",
-            "minDate": "Aikaisin sallittu päivämäärä on {minDate}",
-            "maxDate": "Myöhäisin sallittu päivämäärä on {maxDate}",
-            "cancel": "Peruuta",
-            "fromLabel": "Alku",
-            "toLabel": "Loppu"
-        },
-        "textFacet": {
-            "inputLabel": "Etsi nimellä"
-        },
+
         "sliderFacet": {
             "invalidStartOrEnd": "Min value must be smaller than max value. The smallest value can be {min} and the largest value can be {max}."
         }
@@ -134,24 +89,7 @@
         "basemaps": {
             "mapbox": {
                 "light-v10": "Mapbox Light (OpenStreetMap)"
-            },
-            "googleRoadmap": "Google Maps",
-            "topographicalMapNLS": "Topographical map (National Land Survey of Finland)",
-            "backgroundMapNLS": "Background map (National Land Survey of Finland)",
-            "airMapNLS": "Aerial map (National Land Survey of Finland)"
-        },
-        "externalLayers": {
-            "WFS_MV_Kulttuuriymparisto:Arkeologiset_kohteet_alue": "Register of Archaeological Sites, areas (Finnish Heritage Agency)",
-            "WFS_MV_Kulttuuriymparisto:Arkeologiset_kohteet_piste": "Register of Archaeological Sites, points (Finnish Heritage Agency)",
-            "WFS_MV_KulttuuriymparistoSuojellut:Muinaisjaannokset_alue": "Register of Archaeological Sites, areas (Finnish Heritage Agency)",
-            "WFS_MV_KulttuuriymparistoSuojellut:Muinaisjaannokset_piste": "Register of Archaeological Sites, points (Finnish Heritage Agency)",
-            "fhaLidar": "Elevation model (Finnish Heritage Agency)",
-            "karelianMaps": "Karelian maps, 1:100 000 topographic (SeCo)",
-            "senateAtlas": "Senate atlas, 1:21 000 topographic (SeCo)",
-            "kotus:pitajat": "Finnish parishes in 1938 (Institute for the Languages of Finland)",
-            "kotus:rajat-sms-alueet": "Dialectical regions in Finland (Institute for the Languages of Finland)",
-            "kotus:rajat-sms-alueosat": "Dialectical subregions in Finland (Institute for the Languages of Finland)",
-            "kotus:rajat-lansi-ita": "Border between western and eastern dialects in Finland (Institute for the Languages of Finland)"
+            }
         },
         "mapModeButtons": {
             "markers": "Markers",
@@ -169,14 +107,7 @@
         "arcColouring": "Arc colouring:",
         "showMoreInformation": "Click to show more information.",
         "placesMsMigrations": {
-            "legendTitle": "Arc colouring",
-            "legendFrom": "Manuscript production place",
-            "legendTo": "Last known location",
-            "from": "Production place:",
-            "to": "Last known location:",
-            "count": "Manuscript count",
-            "listHeadingSingleInstance": "Manuscript:",
-            "listHeadingMultipleInstances": "Manuscripts:"
+            "legendTitle": "Arc colouring"
         }
     },
     "perspectives": {
