@@ -50,8 +50,7 @@ services:
     depends_on:
       vkg-scob:
         condition: service_healthy
-    networks:
-      - belhisfirm-network
+    network_mode: host
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "varnishstat", "-1"]
@@ -90,11 +89,6 @@ services:
       BABEL_ENV: ${SERVER_BABEL_ENV}
       NODE_ENV: ${NODE_ENV}
     network_mode: host
-
-
-networks:
-  belhisfirm-network:
-    driver: bridge
 
 volumes:
   client_node_modules:
