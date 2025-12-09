@@ -77,7 +77,8 @@
     },
     "tabs": {
         "table": "table",
-        "openClose": "open&close chart",
+        "openCloseChart": "open&close chart",
+        "minMaxChart": "min&max chart",
         "map": "map",
         "production_places": "production places",
         "production_places_heatmap": "production heatmap",
