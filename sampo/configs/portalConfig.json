@@ -111,16 +111,6 @@
     "mapboxConfig": {
         "mapboxStyle": "light-v10"
     },
-    "yasguiConfig": {
-        "yasguiBaseURL": "https://yasgui.triply.cc",
-        "yasguiParams": {
-            "contentTypeConstruct": "text/turtle",
-            "contentTypeSelect": "application/sparql-results+json",
-            "endpoint": "http://localhost:8082/sparql",
-            "requestMethod": "POST",
-            "tabTitle": "Exported query"
-        }
-    },
     "documentFinderConfig": {
         "apiURL": "https://data.finlex.fi/document-finder-backend"
     },
