@@ -5,7 +5,7 @@ services:
     build:
       context: ./client
       target: client-dev
-    command: npm run dev
+    command: node install && npm run dev
     volumes:
       - ./client:/app/client
       - client_node_modules:/app/client/node_modules # Prevent overwrite of deps
@@ -23,7 +23,7 @@ services:
     build:
       context: ./server
       target: server-dev
-    command: npm run dev
+    command: node install && npm run dev
     volumes:
       - ./server:/app/server
       - ./configs:/app/configs
