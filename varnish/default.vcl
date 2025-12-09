@@ -2,6 +2,8 @@ vcl 4.1;
 
 # Import std module for cache operations
 import std;
+# Import bodyaccess for POST request body hashing
+import bodyaccess;
 
 # Define ACL for localhost (used for cache purging)
 acl localhost {
@@ -13,7 +15,7 @@ acl localhost {
 # Backend definition - Ontop SPARQL endpoint
 backend ontop {
     # Use host.docker.internal to access services on host network from bridge network
-    .host = "host.docker.internal";
+    .host = "localhost";
     .port = "8080";
 
     # Connection timeouts
@@ -36,9 +38,27 @@ sub vcl_recv {
     # Set backend
     set req.backend_hint = ontop;
 
-    # Allow POST caching for SPARQL queries
-    # SPARQL queries typically use POST method, so we need to explicitly allow caching
+    # Clear the body length marker
+    unset req.http.X-Body-Len;
+
+    # Cache POST requests to SPARQL endpoint
     if (req.method == "POST" && req.url ~ "^/sparql") {
+        std.log("Caching POST request for: " + req.http.host + req.url);
+
+        # Check body size limit (10MB for SPARQL queries)
+        if (std.integer(req.http.content-length, 0) > 10485760) {
+            return(synth(413, "Request body too large (max 10MB)"));
+        }
+
+        # Cache the request body (up to 10MB)
+        if (!std.cache_req_body(10MB)) {
+            std.log("Failed to cache request body, passing through");
+            return(pass);
+        }
+
+        # Mark that we have a body to hash
+        set req.http.X-Body-Len = bodyaccess.len_req_body();
+
         return(hash);
     }
 
@@ -48,11 +68,15 @@ sub vcl_recv {
     }
 
     # Allow cache purging from localhost
-    if (req.method == "PURGE") {
+    # Use BAN instead of PURGE to clear all /sparql entries regardless of body
+    if (req.method == "PURGE" || req.method == "BAN") {
         if (!client.ip ~ localhost) {
             return (synth(403, "Not allowed."));
         }
-        return (purge);
+        # BAN clears all cached objects matching the URL pattern
+        # This works for POST requests with different bodies
+        ban("req.url ~ " + req.url);
+        return (synth(200, "Banned"));
     }
 
     # Pass through other methods (PUT, DELETE, etc.) without caching
@@ -72,11 +96,12 @@ sub vcl_hash {
         hash_data(server.ip);
     }
 
-    # For POST requests, include Content-Type in hash
-    if (req.method == "POST") {
-        if (req.http.Content-Type) {
-            hash_data(req.http.Content-Type);
-        }
+    # For POST requests, hash the request body
+    # This ensures different SPARQL queries get different cache entries
+    if (req.http.X-Body-Len) {
+        bodyaccess.hash_req_body();
+    } else {
+        hash_data("");
     }
 
     return(lookup);
@@ -175,9 +200,9 @@ sub vcl_miss {
 
 # Called when backend fetch is about to be done
 sub vcl_backend_fetch {
-    # Preserve POST method for backend requests
-    # Varnish converts POST to GET by default, we want to keep POST
-    if (bereq.method == "POST") {
+    # Restore POST method for backend requests
+    # Varnish converts POST to GET by default after caching
+    if (bereq.http.X-Body-Len) {
         set bereq.method = "POST";
     }
 

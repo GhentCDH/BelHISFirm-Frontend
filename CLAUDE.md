@@ -105,6 +105,16 @@ docker compose restart vkg-scob
 
 Varnish caches SPARQL query responses on port 8082.
 
+**Run cache test suite:**
+```bash
+./varnish/test-cache.py
+```
+
+**Automatic test mode:**
+```bash
+./varnish/test-cache.py --auto
+```
+
 **View cache statistics:**
 ```bash
 docker exec belhisfirm-varnish-dev varnishstat
@@ -178,9 +188,11 @@ All config files reference the endpoint. In development, these should point to:
 ### Varnish Configuration (`varnish/`)
 
 1. **default.vcl** - Varnish caching logic
-   - Backend: `host.docker.internal:8080` (accesses Ontop on host network)
-   - Caches POST requests to `/sparql` (SPARQL uses POST)
+   - Backend: `localhost:8080` (Varnish uses host networking)
+   - Caches POST requests to `/sparql` using bodyaccess VMOD
+   - Hashes request body to ensure different queries get different cache entries
    - TTL: 1 hour, grace period: 6 hours
+   - Request size limit: 10MB
    - Adds `X-Cache: HIT/MISS` headers for debugging
 
 ## Common Workflows
