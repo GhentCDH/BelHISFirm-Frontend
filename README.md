@@ -22,6 +22,12 @@ A Docker Compose application stack for BellHisFirm consisting of:
          │
          ▼
 ┌─────────────────┐
+│     Varnish     │
+│ HTTP cache layer│
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
 │   Ontop VKG     │
 │ SPARQL Endpoint │
 └────────┬────────┘
@@ -29,27 +35,21 @@ A Docker Compose application stack for BellHisFirm consisting of:
          ▼
 ┌─────────────────┐
 │      SCOB       │
-│     Oracle      │
-│    Database     │
+│ Oracle Database │
 └─────────────────┘
 ```
 
 ## Prerequisites
-### Install jdbc driver(s) for database
+
+### Install jdbc driver(s) for Oracle database
 
 Run this command from the project root:
 
-Postgres:
-```bash
-curl -L https://jdbc.postgresql.org/download/postgresql-42.7.8.jar -o vkg/jdbc/postgresql-42.7.1.jar
-```
 
-Oracle:
-```shell
-curl -L -o vkg/jdbc/ojdbc8-21.11.0.0.jar https://repo1.maven.org/maven2/com/oracle/database/jdbc/ojdbc8/21.11.0.0/ojdbc8-21.11.0.0.jar
-```
 
 You should then see the jar file(s) in `vkg/jdbc`
+
+
 
 ## Quick Start
 
@@ -60,27 +60,20 @@ Clone or navigate to the project directory:
 cd ~/Projects/BellHisFirm-Frontend
 ```
 
-### 2. Download PostgreSQL JDBC Driver
+### 2. Download Oracle JDBC Driver
 
-The Ontop VKG service requires a PostgreSQL JDBC driver. Download it and place it in the `vkg/jdbc/` directory:
-
-```bash
-# Download the PostgreSQL JDBC driver
-curl -L https://jdbc.postgresql.org/download/postgresql-42.7.1.jar \
-  -o vkg/jdbc/postgresql-42.7.1.jar
+Oracle:
+```shell
+curl -L -o vkg/jdbc/ojdbc8-21.11.0.0.jar https://repo1.maven.org/maven2/com/oracle/database/jdbc/ojdbc8/21.11.0.0/ojdbc8-21.11.0.0.jar
 ```
 
-Or download manually from: https://jdbc.postgresql.org/download/
-
-### 3. Configure Environment (Optional)
+### 3. Configure Environment
 
 Copy the example environment file and customize if needed:
 ```bash
 cp env.example .env
 # Edit .env with your preferred settings
 ```
-
-**Important**: Change the default password in production!
 
 ### 4. Start the Application
 
@@ -91,6 +84,7 @@ docker-compose up -d
 ```
 
 Or first build sampo images and run prod compose:
+
 ```shell
 cd sampo
 docker compose -f compose-prod.yaml build 
@@ -108,6 +102,7 @@ In dev:
 - **Sampo UI client**: http://localhost:8081
 - **Sampo UI server**: http://localhost:3001
 - **Ontop SPARQL Endpoint**: http://localhost:8080/sparql
+- **Varnish Caching Layer**: http://localhost:8082/sparql
 
 ## Configuration
 
@@ -122,7 +117,7 @@ The VKG maps relational database data to RDF/OWL knowledge graphs.
 3. **ontop.properties** - Database connection and Ontop settings
 
 **SPARQL Endpoint**:
-- Access the YASGUI query interface at http://localhost:8080
+- Access the YASGUI Ontop query interface at http://localhost:8080
 - Query via POST to http://localhost:8080/sparql
 - Ontop automatically translates SPARQL queries to SQL
 
@@ -175,4 +170,10 @@ For issues or questions:
 - Check the Ontop documentation at https://ontop-vkg.org/
 - Consult the Docker Compose documentation
 
----
+## Credits
+
+Sampo UI by the Semantic Computing Research Group (SeCo), Helsinki.
+
+Development by [Ghent Centre for Digital Humanities - Ghent University](https://www.ghentcdh.ugent.be/). Funded by the [GhentCDH research projects](https://www.ghentcdh.ugent.be/projects).
+
+<img src="https://www.ghentcdh.ugent.be/ghentcdh_logo_blue_text_transparent_bg_landscape.svg" alt="Landscape" width="500">
