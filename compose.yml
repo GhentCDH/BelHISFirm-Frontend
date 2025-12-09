@@ -68,7 +68,5 @@ networks:
     driver: bridge
 
 volumes:
-  postgres_data:
-  postgres_data_scob:
   client_node_modules:
   server_node_modules:
