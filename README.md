@@ -75,7 +75,7 @@ Or download manually from: https://jdbc.postgresql.org/download/
 
 Copy the example environment file and customize if needed:
 ```bash
-cp .env.example .env
+cp example.env .env
 # Edit .env with your preferred settings
 ```
 
