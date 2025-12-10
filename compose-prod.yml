@@ -4,16 +4,11 @@ services:
 
   # Ontop Virtual Knowledge Graph
   vkg-scob:
-    image: ontop/ontop:latest
+    build: ./vkg
+    image: belhisfirm-ontop:latest
     container_name: belhisfirm-scob-vkg
     restart: unless-stopped
-    volumes:
-      - ./vkg/input:/opt/ontop/input
-      - ./vkg/jdbc:/opt/ontop/jdbc
     environment:
-      ONTOP_ONTOLOGY_FILE: /opt/ontop/input/ontology.ttl
-      ONTOP_MAPPING_FILE: /opt/ontop/input/mappings.ttl
-      ONTOP_PROPERTIES_FILE: /opt/ontop/input/ontop.properties
       ONTOP_CORS_ALLOWED_ORIGINS: "*"
       ONTOP_LAZY_INIT: "true"
       ONTOP_DEV_MODE: "false"
