@@ -1,4 +1,4 @@
-FROM ontop/ontop:5.3.1
+FROM ontop/ontop:5.4.0
 
 # Copy Oracle JDBC driver
 COPY jdbc/ojdbc8-21.11.0.0.jar /opt/ontop/jdbc/
