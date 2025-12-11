@@ -8,7 +8,7 @@
         "short": "Belhisfirm",
         "mobile": "Belhisfirm",
         "long": "&nbsp; &nbsp; Belhisfirm &nbsp; &nbsp;",
-        "subheading": "\"TODO insert sub heading here\""
+        "subheading": ""
     },
     "selectPerspective": "Select a perspective to search and browse the knowledge graph:",
     "mainPageImageLicence": "Images used under license from Shutterstock.com",
@@ -118,7 +118,7 @@
             "label": "securities",
             "facetResultsType": "securities",
             "shortDescription": "scob securities",
-            "longDescription": "TODO insert long description here",
+            "longDescription": "",
             "instancePage": {
                 "label": "Security",
                 "description": "scob belhisfirm security"
@@ -166,7 +166,7 @@
             "label": "corporations",
             "facetResultsType": "corporations",
             "shortDescription": "scob corporations",
-            "longDescription": "TODO Insert long description here",
+            "longDescription": "",
             "instancePage": {
                 "label": "Corporation",
                 "description": "scob belhisfirm corporation"

@@ -8,7 +8,7 @@
         "short": "Belhisfirm",
         "mobile": "Belhisfirm",
         "long": "&nbsp; &nbsp; Belhisfirm &nbsp; &nbsp;",
-        "subheading": "\"TODO insert sub heading here\""
+        "subheading": ""
     },
     "selectPerspective": "Select a perspective to search and browse the knowledge graph:",
     "mainPageImageLicence": "Images used under license from Shutterstock.com",
@@ -118,7 +118,7 @@
             "label": "effecten",
             "facetResultsType": "effecten",
             "shortDescription": "scob effecten",
-            "longDescription": "TODO insert long description here",
+            "longDescription": "",
             "instancePage": {
                 "label": "Effect",
                 "description": "scob belhisfirm effect"
@@ -166,7 +166,7 @@
             "label": "bedrijven",
             "facetResultsType": "bedrijven",
             "shortDescription": "scob bedrijven",
-            "longDescription": "TODO Insert long description here",
+            "longDescription": "",
             "instancePage": {
                 "label": "Bedrijf",
                 "description": "scob belhisfirm bedrijf"
