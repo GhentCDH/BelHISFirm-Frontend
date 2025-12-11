@@ -1,7 +1,7 @@
 {
     "id": "corporations",
     "endpoint": {
-        "url": "http://localhost:8082/sparql",
+        "url": "",
         "useAuth": false,
         "prefixesFile": "SparqlQueriesPrefixes.js",
         "defaultSparql": true
