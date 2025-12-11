@@ -62,5 +62,7 @@ services:
     image: ghcr.io/ghentcdh/sampo-ui-server:latest
     container_name: sampo-ui-server-prod
     network_mode: host
+    environment:
+      SPARQL_ENDPOINT: ${SPARQL_ENDPOINT}
     volumes:
       - ./sampo/configs:/app/configs
