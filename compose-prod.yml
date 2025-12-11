@@ -4,8 +4,7 @@ services:
 
   # Ontop Virtual Knowledge Graph
   vkg-scob:
-    build: ./vkg
-    image: belhisfirm-ontop:latest
+    image: ghcr.io/ghentcdh/belhisfirm-ontop:latest
     container_name: belhisfirm-scob-vkg
     restart: unless-stopped
     environment:
@@ -52,10 +51,7 @@ services:
 
   # Sampo UI - Client
   client:
-    build:
-      context: ./client
-      target: client-prod
-    image: sampo-ui-client:prod
+    image: ghcr.io/ghentcdh/sampo-ui-client:latest
     container_name: sampo-ui-client-prod
     network_mode: host
     environment:
@@ -63,10 +59,7 @@ services:
 
   # Sampo UI - Server
   server:
-    build:
-      context: ./server
-      target: server-build
-    image: sampo-ui-server:prod
+    image: ghcr.io/ghentcdh/sampo-ui-server:latest
     container_name: sampo-ui-server-prod
     network_mode: host
     volumes:

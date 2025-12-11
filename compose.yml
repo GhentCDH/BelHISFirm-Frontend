@@ -57,37 +57,23 @@ services:
       timeout: 3s
       retries: 3
 
-  sampo-client:
-    build:
-      context: ./sampo/client
-      target: client-dev
-    command: npm run dev
-    volumes:
-      - ./sampo/client:/app/client
-      - client_node_modules:/app/client/node_modules # Prevent overwrite of deps
-    working_dir: /app/client
+  # Sampo UI - Client
+  client:
+    image: ghcr.io/ghentcdh/sampo-ui-client:latest
+    container_name: sampo-ui-client-prod
+    network_mode: host
     environment:
-      BABEL_ENV: ${BABEL_ENV}
-      NODE_ENV: ${NODE_ENV}
       API_URL: ${API_URL}
-    depends_on:
-      - sampo-server
-    network_mode: host
 
-  sampo-server:
-    build:
-      context: ./sampo/server
-      target: server-dev
-    command: npm run dev
-    volumes:
-      - ./sampo/server:/app/server
-      - ./sampo/configs:/app/configs
-      - server_node_modules:/app/server/node_modules # Prevent overwrite of deps
-    working_dir: /app/server
-    environment:
-      BABEL_ENV: ${SERVER_BABEL_ENV}
-      NODE_ENV: ${NODE_ENV}
+  # Sampo UI - Server
+  server:
+    image: ghcr.io/ghentcdh/sampo-ui-server:latest
+    container_name: sampo-ui-server-prod
     network_mode: host
+    environment:
+      SPARQL_ENDPOINT: ${SPARQL_ENDPOINT}
+    volumes:
+      - ./sampo/configs:/app/configs
 
 volumes:
   client_node_modules:

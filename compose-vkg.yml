@@ -4,16 +4,10 @@ services:
 
   # Ontop Virtual Knowledge Graph
   vkg-scob:
-    image: ontop/ontop:latest
+    image: ghcr.io/ghentcdh/belhisfirm-ontop:latest
     container_name: belhisfirm-scob-vkg
     restart: unless-stopped
-    volumes:
-      - ./vkg/input:/opt/ontop/input
-      - ./vkg/jdbc:/opt/ontop/jdbc
     environment:
-      ONTOP_ONTOLOGY_FILE: /opt/ontop/input/ontology.ttl
-      ONTOP_MAPPING_FILE: /opt/ontop/input/mappings.ttl
-      ONTOP_PROPERTIES_FILE: /opt/ontop/input/ontop.properties
       ONTOP_CORS_ALLOWED_ORIGINS: "*"
       ONTOP_LAZY_INIT: "true"
       ONTOP_DEV_MODE: "false"
@@ -26,31 +20,4 @@ services:
       test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/" ]
       interval: 30s
       timeout: 10s
-      retries: 3
-
-  # Varnish Cache Layer for Ontop
-  varnish:
-    image: varnish:8.0.0
-    container_name: belhisfirm-varnish-dev
-    volumes:
-      - ./varnish/default.vcl:/etc/varnish/default.vcl:ro
-    environment:
-      VARNISH_SIZE: 256M
-      VARNISH_HTTP_PORT: 8082
-    command:
-      - "-p"
-      - "feature=+esi_ignore_https"
-      - "-p"
-      - "feature=+esi_disable_xml_check"
-      - "-p"
-      - "vcc_allow_inline_c=on"
-    depends_on:
-      vkg-scob:
-        condition: service_healthy
-    network_mode: host
-    restart: unless-stopped
-    healthcheck:
-      test: [ "CMD", "varnishstat", "-1" ]
-      interval: 10s
-      timeout: 3s
       retries: 3
