@@ -39,18 +39,6 @@ A Docker Compose application stack for BellHisFirm consisting of:
 └─────────────────┘
 ```
 
-## Prerequisites
-
-### Install jdbc driver(s) for Oracle database
-
-Run this command from the project root:
-
-
-
-You should then see the jar file(s) in `vkg/jdbc`
-
-
-
 ## Quick Start
 
 ### 1. Initial Setup
@@ -99,7 +87,7 @@ docker compose -f compose-prod.yml up
 Once all services are running
 
 In dev:
-- **Sampo UI client**: http://localhost:8081
+- **Sampo UI client**: http://localhost:80
 - **Sampo UI server**: http://localhost:3001
 - **Ontop SPARQL Endpoint**: http://localhost:8080/sparql
 - **Varnish Caching Layer**: http://localhost:8082/sparql
