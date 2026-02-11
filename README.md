@@ -22,7 +22,7 @@ A Docker Compose application stack for BellHisFirm consisting of:
          │
          ▼
 ┌─────────────────┐
-│     Varnish     │
+│     NGINX.      │
 │ HTTP cache layer│
 └────────┬────────┘
          │
@@ -90,7 +90,7 @@ In dev:
 - **Sampo UI client**: http://localhost:80
 - **Sampo UI server**: http://localhost:3001
 - **Ontop SPARQL Endpoint**: http://localhost:8080/sparql
-- **Varnish Caching Layer**: http://localhost:8082/sparql
+- **HAProxy Caching Layer**: http://localhost:8864/sparql
 
 ## Configuration
 
