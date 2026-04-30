@@ -76,9 +76,11 @@ export const corporationProperties = `
     ?stockcorp__id bhf:hasStock ?stock__id .
     optional {?stockcorp__id bhf:startDate ?stock__startDate .}
     optional {?stockcorp__id bhf:endDate ?stock__endDate .}
-    ?stock__id bhf:hasSharetype ?stock__sharetype .
+    ?stock__id bhf:hasSharetype ?stock__sharetype ;
+               bhf:hasStockType ?stock__stockTypeId .
+    ?stock__stockTypeId bhf:typeName ?stock__stockType .
     bind(concat(
-      ?stock__sharetype,
+      ?stock__stockType,
       " [",
       COALESCE(str(?stock__startDate), "..."), 
       " - ",

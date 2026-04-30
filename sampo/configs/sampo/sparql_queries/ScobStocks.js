@@ -16,9 +16,9 @@ union
     bind(concat(
       str(?name),
       " [",
-      COALESCE(str(?name__startDate), "????"), 
+      COALESCE(str(?name__startDate), "..."), 
       " - ",
-      COALESCE(str(?name__endDate), "????"),
+      COALESCE(str(?name__endDate), "..."),
       "]"
     ) as ?name__prefLabel)
 }
@@ -61,9 +61,9 @@ union
     bind(concat(
       str(?corporation__name),
       " [",
-      COALESCE(str(?corporation__startDate), "????"), 
+      COALESCE(str(?corporation__startDate), "..."), 
       " - ",
-      COALESCE(str(?corporation__endDate), "????"),
+      COALESCE(str(?corporation__endDate), "..."),
       "]"
     ) as ?corporation__prefLabel)
     BIND(CONCAT("/corporations/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporation__dataProviderUrl)

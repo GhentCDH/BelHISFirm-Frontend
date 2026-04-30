@@ -190,20 +190,20 @@
                     "description": "Juridisch statuut van het bedrijf"
                 },
                 "address": {
-                    "label": "Adres(sen)",
+                    "label": "Maatschappelijke zetel",
                     "description": "Adres(sen) van het bedrijf"
                 },
                 "country": {
                     "label": "Land",
-                    "description": "Land waar het bedrijf is gevestigd"
+                    "description": "Land van de maatschappelijke zetel van het bedrijf"
                 },
                 "city": {
                     "label": "Stad",
-                    "description": "Stad waar het bedrijf is gevestigd"
+                    "description": "Stad van de maatschappelijke zetel van het bedrijf"
                 },
                 "streetAddress": {
-                    "label": "Adres",
-                    "description": "Adres van het bedrijf"
+                    "label": "Straatadres",
+                    "description": "Straatadres van de maatschappelijke zetel van het bedrijf. Veel bedrijven (vooral oudere) hebben geen straat."
                 },
                 "dateOfIncorporation": {
                     "label": "Oprichtingsdatum",
