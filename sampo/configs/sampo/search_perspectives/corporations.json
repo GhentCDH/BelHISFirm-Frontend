@@ -52,7 +52,8 @@
             "tabIcon": "CloudDownload",
             "resultClass": "corporations",
             "facetClass": "corporations",
-            "sparqlQuery": "corporationsExportQuery"
+            "sparqlQuery": "corporationsExportQuery",
+            "filterTarget": "uri"
         }
     },
     "properties": [

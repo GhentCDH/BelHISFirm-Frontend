@@ -95,6 +95,48 @@ union
 // `
 
 
+export const securitiesExportQuery = `
+  SELECT DISTINCT ?uri ?scobID ?name ?exchange ?type ?sector ?sharetype ?currency ?corporation
+  WHERE {
+    <FILTER>
+    ?uri rdf:type bhf:Stock .
+    ?uri bhf:scobID ?scobID .
+    OPTIONAL {
+      ?uri bhf:hasName ?_nameNode .
+      ?_nameNode rdfs:label ?name .
+    }
+    OPTIONAL {
+      ?uri bhf:hasStockExchange ?_seNode .
+      ?_seNode bhf:hasName ?_seNameNode .
+      ?_seNameNode rdfs:label ?exchange .
+    }
+    OPTIONAL {
+      ?uri bhf:hasStockType ?_stNode .
+      ?_stNode bhf:typeName ?type .
+    }
+    OPTIONAL {
+      ?uri bhf:hasNotation ?_notationNode .
+      ?_notationNode bhf:hasSector ?_sectorNode .
+      ?_sectorNode bhf:hasName ?_sectorNameNode .
+      ?_sectorNameNode rdfs:label ?sector .
+    }
+    OPTIONAL {
+      ?uri bhf:hasSharetype ?sharetype .
+    }
+    OPTIONAL {
+      ?uri bhf:hasStockQuantity ?_sqNode .
+      ?_sqNode bhf:hasCurrency ?_currencyNode .
+      ?_currencyNode foaf:name ?currency .
+    }
+    OPTIONAL {
+      ?_stockcorpNode bhf:hasStock ?uri .
+      ?_corpNode bhf:hasStockCorporation ?_stockcorpNode .
+      ?_corpNode bhf:hasName/rdfs:label ?corporation .
+    }
+  }
+  ORDER BY ?scobID
+`
+
 export const facetResultSetQueryBelhisfirm = `
   SELECT *
   WHERE {

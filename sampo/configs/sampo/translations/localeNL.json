@@ -191,7 +191,7 @@
                 },
                 "address": {
                     "label": "Maatschappelijke zetel",
-                    "description": "Adres(sen) van het bedrijf"
+                    "description": "Adres(sen) van de maatschappelijke zetel van het bedrijf."
                 },
                 "country": {
                     "label": "Land",

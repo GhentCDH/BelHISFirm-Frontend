@@ -191,7 +191,7 @@
                 },
                 "address": {
                     "label": "Registered office",
-                    "description": "Address(es) of the corporation"
+                    "description": "Address(es) of the corporation's registered office."
                 },
                 "country": {
                     "label": "Country",
