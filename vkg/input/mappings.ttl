@@ -474,82 +474,82 @@
                             rr:objectMap [ rr:column   "enddate_fixed" ;
                                            rr:datatype xsd:date ] ] .
 
-:NOTATION-NOTATION-PRICE
-    a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """
-                    SELECT notation,
-                           RAWTOHEX(STANDARD_HASH(notation || TO_CHAR(day,'YYYY-MM-DD'), 'SHA1')) as id
-                    FROM scoball.notation_price
-    """ ] ;
-    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/notation/{notation}" ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:hasNotationPrice ;
-                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/notation_price/{id}" ] ] .
-
-
+#:NOTATION-NOTATION-PRICE
+#    a                     rr:TriplesMap ;
+#    rr:logicalTable       [ rr:sqlQuery """
+#                    SELECT notation,
+#                           RAWTOHEX(STANDARD_HASH(notation || TO_CHAR(day,'YYYY-MM-DD'), 'SHA1')) as id
+#                    FROM scoball.notation_price
+#    """ ] ;
+#    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/notation/{notation}" ] ;
+#    rr:predicateObjectMap [ rr:predicate bhf:hasNotationPrice ;
+#                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/notation_price/{id}" ] ] .
+#
+#
+####################
+## NOTATION-PRICE
 ###################
-# NOTATION-PRICE
-##################
-:NOTATION-PRICE-TYPE
-    a               rr:TriplesMap ;
-    rr:logicalTable [ rr:sqlQuery """
-                    SELECT RAWTOHEX(STANDARD_HASH(notation || TO_CHAR(day,'YYYY-MM-DD'), 'SHA1')) as id
-                    FROM scoball.notation_price
-    """ ] ;
-    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/notation_price/{id}" ;
-                      rr:class    bhf:NotationPrice ] .
-
-:NOTATION-PRICE-PROPERTIES
-    a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """
-                    SELECT day,
-                           argent,
-                           papier,
-                           "OPEN",
-                           "CLOSE",
-                           min,
-                           max,
-                           previous,
-                           extern,
-                           percent,
-                           indicatief,
-                           notation,
-                           RAWTOHEX(STANDARD_HASH(notation || TO_CHAR(day,'YYYY-MM-DD'), 'SHA1')) as id
-                    FROM scoball.notation_price
-    """ ] ;
-    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/notation_price/{id}" ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:priceDay ;
-                            rr:objectMap [ rr:column   "day" ;
-                                           rr:datatype xsd:date ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:argentValue ;
-                            rr:objectMap [ rr:column   "argent" ;
-                                           rr:datatype xsd:integer ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:papierValue ;
-                            rr:objectMap [ rr:column   "papier" ;
-                                           rr:datatype xsd:integer ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:openValue ;
-                            rr:objectMap [ rr:column   "open" ;
-                                           rr:datatype xsd:integer ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:closeValue ;
-                            rr:objectMap [ rr:column   "close" ;
-                                           rr:datatype xsd:integer ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:minValue ;
-                            rr:objectMap [ rr:column   "min" ;
-                                           rr:datatype xsd:integer ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:maxValue ;
-                            rr:objectMap [ rr:column   "max" ;
-                                           rr:datatype xsd:integer ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:previousValue ;
-                            rr:objectMap [ rr:column   "previous" ;
-                                           rr:datatype xsd:integer ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:externValue ;
-                            rr:objectMap [ rr:column   "extern" ;
-                                           rr:datatype xsd:integer ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:inPercent ;
-                            rr:objectMap [ rr:column   "percent" ;
-                                           rr:datatype xsd:string ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:indicativePrice ;
-                            rr:objectMap [ rr:column   "indicatief" ;
-                                           rr:datatype xsd:integer ] ] .
+#:NOTATION-PRICE-TYPE
+#    a               rr:TriplesMap ;
+#    rr:logicalTable [ rr:sqlQuery """
+#                    SELECT RAWTOHEX(STANDARD_HASH(notation || TO_CHAR(day,'YYYY-MM-DD'), 'SHA1')) as id
+#                    FROM scoball.notation_price
+#    """ ] ;
+#    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/notation_price/{id}" ;
+#                      rr:class    bhf:NotationPrice ] .
+#
+#:NOTATION-PRICE-PROPERTIES
+#    a                     rr:TriplesMap ;
+#    rr:logicalTable       [ rr:sqlQuery """
+#                    SELECT day,
+#                           argent,
+#                           papier,
+#                           "OPEN",
+#                           "CLOSE",
+#                           min,
+#                           max,
+#                           previous,
+#                           extern,
+#                           percent,
+#                           indicatief,
+#                           notation,
+#                           RAWTOHEX(STANDARD_HASH(notation || TO_CHAR(day,'YYYY-MM-DD'), 'SHA1')) as id
+#                    FROM scoball.notation_price
+#    """ ] ;
+#    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/notation_price/{id}" ] ;
+#    rr:predicateObjectMap [ rr:predicate bhf:priceDay ;
+#                            rr:objectMap [ rr:column   "day" ;
+#                                           rr:datatype xsd:date ] ] ;
+#    rr:predicateObjectMap [ rr:predicate bhf:argentValue ;
+#                            rr:objectMap [ rr:column   "argent" ;
+#                                           rr:datatype xsd:integer ] ] ;
+#    rr:predicateObjectMap [ rr:predicate bhf:papierValue ;
+#                            rr:objectMap [ rr:column   "papier" ;
+#                                           rr:datatype xsd:integer ] ] ;
+#    rr:predicateObjectMap [ rr:predicate bhf:openValue ;
+#                            rr:objectMap [ rr:column   "open" ;
+#                                           rr:datatype xsd:integer ] ] ;
+#    rr:predicateObjectMap [ rr:predicate bhf:closeValue ;
+#                            rr:objectMap [ rr:column   "close" ;
+#                                           rr:datatype xsd:integer ] ] ;
+#    rr:predicateObjectMap [ rr:predicate bhf:minValue ;
+#                            rr:objectMap [ rr:column   "min" ;
+#                                           rr:datatype xsd:integer ] ] ;
+#    rr:predicateObjectMap [ rr:predicate bhf:maxValue ;
+#                            rr:objectMap [ rr:column   "max" ;
+#                                           rr:datatype xsd:integer ] ] ;
+#    rr:predicateObjectMap [ rr:predicate bhf:previousValue ;
+#                            rr:objectMap [ rr:column   "previous" ;
+#                                           rr:datatype xsd:integer ] ] ;
+#    rr:predicateObjectMap [ rr:predicate bhf:externValue ;
+#                            rr:objectMap [ rr:column   "extern" ;
+#                                           rr:datatype xsd:integer ] ] ;
+#    rr:predicateObjectMap [ rr:predicate bhf:inPercent ;
+#                            rr:objectMap [ rr:column   "percent" ;
+#                                           rr:datatype xsd:string ] ] ;
+#    rr:predicateObjectMap [ rr:predicate bhf:indicativePrice ;
+#                            rr:objectMap [ rr:column   "indicatief" ;
+#                                           rr:datatype xsd:integer ] ] .
 
 ###################
 # SECTOR
@@ -783,7 +783,7 @@
                             rr:objectMap [ rr:column   "value" ;
                                            rr:datatype xsd:integer ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasCurrency ;
-                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/currency/{currency}" ] ] ;
+                            rr:objectMap [ rr:template "http://belhisfirm.be/resopricurce/currency/{currency}" ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:startDate ;
                             rr:objectMap [ rr:column   "startdate_fixed" ;
                                            rr:datatype xsd:date ] ] ;

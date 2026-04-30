@@ -70,29 +70,29 @@ union
 }
 `
 
-export const stocksGraphOpenClose = `
-SELECT DISTINCT ?date ?open ?close
-where {
-    bind(<ID> as ?id)
-    ?id bhf:hasNotation/bhf:hasNotationPrice ?price__id .
-    ?price__id bhf:priceDay ?date .
-    optional {?price__id bhf:openValue ?open .}
-    optional {?price__id bhf:closeValue ?close .}
-}
-ORDER BY ?date
-`
-
-export const stocksGraphMinMax = `
-SELECT DISTINCT ?date ?min ?max
-where {
-    bind(<ID> as ?id)
-    ?id bhf:hasNotation/bhf:hasNotationPrice ?price__id .
-    ?price__id bhf:priceDay ?date .
-    optional {?price__id bhf:maxValue ?max .}
-    optional {?price__id bhf:minValue ?min .}
-}
-ORDER BY ?date
-`
+// export const stocksGraphOpenClose = `
+// SELECT DISTINCT ?date ?open ?close
+// where {
+//     bind(<ID> as ?id)
+//     ?id bhf:hasNotation/bhf:hasNotationPrice ?price__id .
+//     ?price__id bhf:priceDay ?date .
+//     optional {?price__id bhf:openValue ?open .}
+//     optional {?price__id bhf:closeValue ?close .}
+// }
+// ORDER BY ?date
+// `
+//
+// export const stocksGraphMinMax = `
+// SELECT DISTINCT ?date ?min ?max
+// where {
+//     bind(<ID> as ?id)
+//     ?id bhf:hasNotation/bhf:hasNotationPrice ?price__id .
+//     ?price__id bhf:priceDay ?date .
+//     optional {?price__id bhf:maxValue ?max .}
+//     optional {?price__id bhf:minValue ?min .}
+// }
+// ORDER BY ?date
+// `
 
 
 export const facetResultSetQueryBelhisfirm = `
