@@ -36,7 +36,14 @@ server {
     gzip_proxied any;
     gzip_types application/json application/sparql-results+json application/sparql-results+xml text/turtle application/ld+json;
 
-    proxy_buffer_size 8k;
+    # Upstream response buffering.
+    # proxy_buffer_size holds the first part of the response (status line + headers).
+    # proxy_buffers holds the rest of the body in memory before spilling to disk.
+    # SPARQL JSON responses can be large; keep enough memory to avoid 502s caused
+    # by nginx failing to buffer the upstream response.
+    proxy_buffer_size        16k;
+    proxy_buffers            8 16k;
+    proxy_busy_buffers_size  32k;
 
     # Buffer POST bodies so $request_body is available for the cache key.
     # Requests whose body exceeds this size spill to disk ($request_body_file)

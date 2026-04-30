@@ -44,7 +44,12 @@ export const corporationProperties = `
         IF(BOUND(?address__street), ", ", ""),
         COALESCE(?address__city, ""), 
         ", ",
-        COALESCE(?address__country, "")
+        COALESCE(?address__country, ""),
+        " [",
+        COALESCE(str(?address__startDate), "..."), 
+        " - ",
+        COALESCE(str(?address__endDate), "..."),
+        "]"
       )
     AS ?address__prefLabel)
     BIND(?address__id as ?streetAddress__id)

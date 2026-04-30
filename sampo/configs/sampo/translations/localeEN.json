@@ -190,7 +190,7 @@
                     "description": "Legal form of the corporation"
                 },
                 "address": {
-                    "label": "Address(es)",
+                    "label": "Registered office",
                     "description": "Address(es) of the corporation"
                 },
                 "country": {

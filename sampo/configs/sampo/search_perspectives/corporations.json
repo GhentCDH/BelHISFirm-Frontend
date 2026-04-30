@@ -88,6 +88,7 @@
             "makeLink": true,
             "externalLink": true,
             "sortValues": true,
+            "sortBy": "startDate",
             "numberedList": false,
             "minWidth": 300
         },
