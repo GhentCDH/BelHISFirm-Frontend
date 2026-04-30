@@ -44,6 +44,15 @@
                     }
                 }
             }
+        },
+        "export": {
+            "tabID": 1,
+            "component": "ExportCSV",
+            "tabPath": "export",
+            "tabIcon": "CloudDownload",
+            "resultClass": "corporations",
+            "facetClass": "corporations",
+            "sparqlQuery": "corporationsExportQuery"
         }
     },
     "properties": [
@@ -69,17 +78,9 @@
             "makeLink": true,
             "externalLink": true,
             "sortValues": true,
+            "sortBy": "startDate",
             "numberedList": false,
             "minWidth": 250
-        },
-        {
-            "id": "legalForm",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": true,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 200
         },
         {
             "id": "address",
@@ -91,15 +92,6 @@
             "minWidth": 300
         },
         {
-            "id": "stock",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": true,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 150
-        },
-        {
             "id": "dateOfIncorporation",
             "valueType": "object",
             "makeLink": false,
@@ -109,10 +101,28 @@
             "minWidth": 175
         },
         {
+            "id": "legalForm",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200
+        },
+        {
             "id": "dateOfDissolution",
             "valueType": "object",
             "makeLink": false,
             "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "stock",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
             "sortValues": true,
             "numberedList": false,
             "minWidth": 150
@@ -155,11 +165,6 @@
             "sortByPredicate": "bhf:dateOfIncorporation"
         },
         "dateOfDissolution": {
-            "containerClass": "four",
-            "facetType": "integer",
-            "filterType": "dateNoTimespanFilter",
-            "max": null,
-            "min": null,
             "predicate": "bhf:dateOfDissolution",
             "sortByAscPredicate": "bhf:dateOfDissolution",
             "sortByDescPredicate": "bhf:dateOfDissolution",

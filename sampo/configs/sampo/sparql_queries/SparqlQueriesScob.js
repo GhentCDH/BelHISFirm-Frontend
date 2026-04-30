@@ -17,9 +17,9 @@ export const corporationProperties = `
     bind(concat(
       ?corporationName__label,
       " [",
-      COALESCE(str(?corporationName__startDate), "????"), 
+      COALESCE(str(?corporationName__startDate), "..."), 
       " - ",
-      COALESCE(str(?corporationName__endDate), "????"),
+      COALESCE(str(?corporationName__endDate), "..."),
       "]"
     ) as ?corporationName__prefLabel)
     BIND(CONCAT("/corporationNames/page/", STRAFTER(STR(?corporationName__id), "corporationName/")) AS ?corporationName__dataProviderUrl)
@@ -75,9 +75,9 @@ export const corporationProperties = `
     bind(concat(
       ?stock__sharetype,
       " [",
-      COALESCE(str(?stock__startDate), "????"), 
+      COALESCE(str(?stock__startDate), "..."), 
       " - ",
-      COALESCE(str(?stock__endDate), "????"),
+      COALESCE(str(?stock__endDate), "..."),
       "]"
     ) as ?stock__prefLabel)
     
@@ -213,6 +213,39 @@ UNION
     BIND(?endDate__id as ?endDate__prefLabel)
 }
 
+`
+
+export const corporationsExportQuery = `
+  SELECT DISTINCT ?id ?scobID ?corporationNameLabel ?legalFormLabel
+    ?dateOfIncorporation ?dateOfDissolution
+    ?streetAddress ?city ?country ?sharetype
+  WHERE {
+    <FILTER>
+    ?id rdf:type bhf:Corporation .
+    ?id bhf:scobID ?scobID .
+    OPTIONAL { ?id bhf:dateOfIncorporation ?dateOfIncorporation . }
+    OPTIONAL { ?id bhf:dateOfDissolution ?dateOfDissolution . }
+    OPTIONAL {
+      ?id bhf:hasName ?_nameNode .
+      ?_nameNode rdfs:label ?corporationNameLabel .
+    }
+    OPTIONAL {
+      ?id bhf:hasLegalForm ?_legalFormNode .
+      ?_legalFormNode rdfs:label ?legalFormLabel .
+    }
+    OPTIONAL {
+      ?id bhf:hasAddress ?_addressNode .
+      OPTIONAL { ?_addressNode bhf:streetAddress ?streetAddress . }
+      OPTIONAL { ?_addressNode bhf:city ?city . }
+      OPTIONAL { ?_addressNode bhf:country ?country . }
+    }
+    OPTIONAL {
+      ?id bhf:hasStockCorporation ?_stockCorpNode .
+      ?_stockCorpNode bhf:hasStock ?_stockNode .
+      ?_stockNode bhf:hasSharetype ?sharetype .
+    }
+  }
+  ORDER BY ?scobID
 `
 
 

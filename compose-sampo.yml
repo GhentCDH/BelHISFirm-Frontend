@@ -1,6 +1,20 @@
 name: belhisfirm-sampo
 
 services:
+
+  # NGINX Cache Layer for Ontop
+  cache:
+    image: nginx:1.29.5-alpine
+    network_mode: host
+    volumes:
+      - ./cache:/etc/nginx/templates
+    environment:
+      - CACHE_ENDPOINT=https://data.belhisfirm.be
+      - CACHE_HOST=data.belhisfirm.be
+      - CACHE_DURATION=24h
+      - CACHE_MAX_SIZE=2g
+      - CACHE_HTTP_PORT=8099
+
   # Sampo UI - Client
   client:
     image: ghcr.io/ghentcdh/sampo-ui-client:latest
@@ -11,7 +25,7 @@ services:
 
   # Sampo UI - Server
   server:
-    image: ghcr.io/ghentcdh/sampo-ui-server:latest
+    image: sampo-ui-server:prod
     container_name: sampo-ui-server-prod
     network_mode: host
     environment:

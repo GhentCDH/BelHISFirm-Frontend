@@ -41,7 +41,7 @@
         "sortAlphabetically": "Sort alphabetically",
         "sortByNumberOfSearchResults": "Sort by number of search results",
         "useDisjunction": "Use logical OR between selections",
-        "useConjuction": "Use logical AND between selections",
+        "useConjunction": "Use logical AND between selections",
         "minYear": "Min year",
         "maxYear": "Max year",
         "min": "Min",
@@ -65,7 +65,8 @@
     "tabs": {
         "table": "table",
         "openCloseChart": "open&close prices chart",
-        "minMaxChart": "min&max prices chart"
+        "minMaxChart": "min&max prices chart",
+        "export": "export"
     },
     "table": {
         "rowsPerPage": "Rows per page",
@@ -115,101 +116,101 @@
     },
     "perspectives": {
         "securities": {
-            "label": "securities",
+            "label": "Securities",
             "facetResultsType": "securities",
-            "shortDescription": "scob securities",
+            "shortDescription": "Scob securities",
             "longDescription": "",
             "instancePage": {
                 "label": "Security",
-                "description": "scob belhisfirm security"
+                "description": "Scob belhisfirm security"
             },
             "properties": {
                 "scobID": {
-                    "label": "id",
+                    "label": "ID",
                     "description": "ID of the security"
                 },
                 "uri": {
-                    "label": "uri",
-                    "description": "identifier of the resource"
+                    "label": "URI",
+                    "description": "Identifier of the resource"
                 },
                 "name": {
-                    "label": "name(s)",
-                    "description": "name(s) of the security"
+                    "label": "Name(s)",
+                    "description": "Name(s) of the security"
                 },
                 "stockExchangeName": {
-                    "label": "exchange",
+                    "label": "Exchange",
                     "description": "Exchange the security is on"
                 },
                 "stocktype": {
-                    "label": "type(s)",
-                    "description": "type of the security"
+                    "label": "Type(s)",
+                    "description": "Type of the security"
                 },
                 "sectorName": {
-                    "label": "sector(s)",
+                    "label": "Sector(s)",
                     "description": "Sector(s) of the security"
                 },
                 "sharetype": {
-                    "label": "sharetype",
-                    "description": "sharetype of the security"
+                    "label": "Sharetype",
+                    "description": "Sharetype of the security"
                 },
                 "currency": {
-                    "label": "currency",
-                    "description": "currency this security is in"
+                    "label": "Currency",
+                    "description": "Currency this security is in"
                 },
                 "corporation": {
-                    "label": "corporation(s)",
-                    "description": "corporation(s) that had this security"
+                    "label": "Corporation(s)",
+                    "description": "Sorporation(s) that had this security"
                 }
             }
         },
         "corporations": {
-            "label": "corporations",
+            "label": "Corporations",
             "facetResultsType": "corporations",
-            "shortDescription": "scob corporations",
+            "shortDescription": "Scob corporations",
             "longDescription": "",
             "instancePage": {
                 "label": "Corporation",
-                "description": "scob belhisfirm corporation"
+                "description": "Scob belhisfirm corporation"
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
-                    "description": "uri of corporation"
+                    "label": "URI",
+                    "description": "Identifier of the resource"
                 },
                 "scobID": {
-                    "label": "id",
-                    "description": "id of the corporation"
+                    "label": "ID",
+                    "description": "ID of the corporation"
                 },
                 "corporationName": {
                     "label": "Name(s)",
-                    "description":"Name(s) the corporation has had"
+                    "description": "Name(s) the corporation has had"
                 },
                 "legalForm": {
                     "label": "Legal form",
                     "description": "Legal form of the corporation"
                 },
                 "address": {
-                    "label": "address(es)",
+                    "label": "Address(es)",
                     "description": "Address(es) of the corporation"
                 },
                 "country": {
                     "label": "Country",
-                    "description": "Country where the corporation is located"
+                    "description": "Country of the corporation's registered office"
                 },
                 "city": {
                     "label": "City",
-                    "description": "City where the corporation is located"
+                    "description": "City of the corporation's registered office"
                 },
                 "streetAddress": {
-                    "label": "Street Address",
-                    "description": "Street Address of the corporation"
+                    "label": "Street address",
+                    "description": "Street address of the corporation's registered office. A lot of corporations (especially older ones) do not have a street. "
                 },
                 "dateOfIncorporation": {
-                    "label": "Date of Incorporation",
+                    "label": "Date of incorporation",
                     "description": "Date of incorporation"
                 },
                 "dateOfDissolution": {
-                    "label": "Date of Dissolution",
+                    "label": "Date of dissolution",
                     "description": "Date of dissolution"
                 },
                 "stock": {
@@ -219,76 +220,76 @@
             }
         },
         "corporationNames": {
-            "label": "corporation names",
+            "label": "Corporation names",
             "instancePage": {
-                "label": "corporation name",
+                "label": "Corporation name",
                 "description": "Name the corporation has/had at some point in time."
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
-                    "description": "Id of the name associated to the corporation"
+                    "label": "URI",
+                    "description": "ID of the name associated to the corporation"
                 },
                 "corporation": {
-                    "label": "corporation",
-                    "description": "corporation associated with this name"
+                    "label": "Corporation",
+                    "description": "Corporation associated with this name"
                 },
                 "name": {
-                    "label": "name",
-                    "description": "name of the corporation"
+                    "label": "Name",
+                    "description": "Name of the corporation"
                 },
                 "startDate": {
-                    "label": "start date",
+                    "label": "Start date",
                     "description": "Start date of this name being used"
                 },
                 "endDate": {
-                    "label": "end date",
+                    "label": "End date",
                     "description": "End date of this name being used"
                 },
                 "source": {
-                    "label": "source",
-                    "description": "source of this information"
+                    "label": "Source",
+                    "description": "Source of this information"
                 },
                 "comments": {
-                    "label": "comments",
-                    "description": "extra info"
+                    "label": "Comments",
+                    "description": "Extra info"
                 }
             }
         },
         "legalForms": {
-            "label": "legal forms",
+            "label": "Legal forms",
             "instancePage": {
-                "label": "legal form",
+                "label": "Legal form",
                 "description": "Legal form the corporation has/had at some point in time."
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
-                    "description": "Id of the legal form instance associated to the corporation"
+                    "label": "URI",
+                    "description": "ID of the legal form instance associated to the corporation"
                 },
                 "corporation": {
-                    "label": "corporation",
-                    "description": "corporation associated with this legal form instance"
+                    "label": "Corporation",
+                    "description": "Corporation associated with this legal form instance"
                 },
                 "legalForm": {
-                    "label": "legal form",
-                    "description": "legal form of the corporation"
+                    "label": "Legal form",
+                    "description": "Legal form of the corporation"
                 },
                 "startDate": {
-                    "label": "start date",
+                    "label": "Start date",
                     "description": "Start date of this legal form being used"
                 },
                 "endDate": {
-                    "label": "end date",
+                    "label": "End date",
                     "description": "End date of this legal form being used"
                 },
                 "source": {
-                    "label": "source",
-                    "description": "source of this information"
+                    "label": "Source",
+                    "description": "Source of this information"
                 },
                 "comments": {
-                    "label": "comments",
-                    "description": "extra info"
+                    "label": "Comments",
+                    "description": "Extra info"
                 }
             }
         },
@@ -300,32 +301,32 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
-                    "description": "Id of this location"
+                    "label": "URI",
+                    "description": "ID of this location"
                 },
                 "corporation": {
-                    "label": "corporation",
-                    "description": "corporation associated with this location"
+                    "label": "Corporation",
+                    "description": "Corporation associated with this location"
                 },
                 "country": {
-                    "label": "country",
-                    "description": "country of this location"
+                    "label": "Country",
+                    "description": "Country of this location"
                 },
                 "city": {
-                    "label": "city",
-                    "description": "city of this location"
+                    "label": "City",
+                    "description": "City of this location"
                 },
                 "streetAddress": {
-                    "label": "street address",
-                    "description": "street address of this location"
+                    "label": "Street address",
+                    "description": "Street address of this location"
                 },
                 "startDate": {
-                    "label": "start date",
-                    "description": "start date of this address being used"
+                    "label": "Start date",
+                    "description": "Start date of this address being used"
                 },
                 "endDate": {
-                    "label": "end date",
-                    "description": "end date of this address being used"
+                    "label": "End date",
+                    "description": "End date of this address being used"
                 }
             }
         }
