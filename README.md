@@ -52,7 +52,7 @@ cd ~/Projects/BellHisFirm-Frontend
 
 Oracle:
 ```shell
-curl -L -o vkg/jdbc/ojdbc8-21.11.0.0.jar https://repo1.maven.org/maven2/com/oracle/database/jdbc/ojdbc8/21.11.0.0/ojdbc8-21.11.0.0.jar
+curl -L -o vkg/jdbc/ojdbc8-21.21.0.0.jar https://repo1.maven.org/maven2/com/oracle/database/jdbc/ojdbc8/21.21.0.0/ojdbc8-21.21.0.0.jar
 ```
 
 ### 3. Configure Environment
