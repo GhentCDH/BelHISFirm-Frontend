@@ -195,11 +195,11 @@
                 },
                 "country": {
                     "label": "Land",
-                    "description": "Land van de maatschappelijke zetel van het bedrijf"
+                    "description": "Land waar de maatschappelijke zetel van het bedrijf zich bevindt."
                 },
                 "city": {
                     "label": "Stad",
-                    "description": "Stad van de maatschappelijke zetel van het bedrijf"
+                    "description": "Stad waar de maatschappelijke zetel van het bedrijf zich bevindt."
                 },
                 "streetAddress": {
                     "label": "Straatadres",

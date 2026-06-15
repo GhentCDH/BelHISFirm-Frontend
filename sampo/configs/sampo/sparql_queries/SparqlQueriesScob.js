@@ -17,9 +17,7 @@ export const corporationProperties = `
     bind(concat(
       ?corporationName__label,
       " [",
-      COALESCE(str(?corporationName__startDate), "..."), 
-      " - ",
-      COALESCE(str(?corporationName__endDate), "..."),
+      COALESCE(str(?corporationName__startDate), "..."),
       "]"
     ) as ?corporationName__prefLabel)
     BIND(CONCAT("/corporationNames/page/", STRAFTER(STR(?corporationName__id), "corporationName/")) AS ?corporationName__dataProviderUrl)
@@ -46,9 +44,7 @@ export const corporationProperties = `
         ", ",
         COALESCE(?address__country, ""),
         " [",
-        COALESCE(str(?address__startDate), "..."), 
-        " - ",
-        COALESCE(str(?address__endDate), "..."),
+        COALESCE(str(?address__startDate), "..."),
         "]"
       )
     AS ?address__prefLabel)

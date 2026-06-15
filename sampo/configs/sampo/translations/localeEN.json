@@ -195,11 +195,11 @@
                 },
                 "country": {
                     "label": "Country",
-                    "description": "Country of the corporation's registered office"
+                    "description": "Country where the corporation's registered office is located."
                 },
                 "city": {
                     "label": "City",
-                    "description": "City of the corporation's registered office"
+                    "description": "City in which the corporation's registered office is located."
                 },
                 "streetAddress": {
                     "label": "Street address",

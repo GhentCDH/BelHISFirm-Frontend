@@ -50,14 +50,19 @@
     rr:logicalTable       [ rr:sqlQuery """
                                             SELECT id,
                                             CASE
-                                                WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
-                                                ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
+                                                WHEN cn.earliest_startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                                                ELSE TO_CHAR(cn.earliest_startdate, 'YYYY-MM-DD')
                                             END AS startdate,
                                             CASE
-                                                WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
-                                                ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
+                                                WHEN c.enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
+                                                ELSE TO_CHAR(c.enddate, 'YYYY-MM-DD')
                                             END AS enddate
-                                            FROM scoball.corporation
+                                            FROM scoball.corporation c
+                                            JOIN (
+                                                SELECT corporation, MIN(startdate) as earliest_startdate
+                                                FROM scoball.corporation_name cn
+                                                GROUP BY corporation
+                                            ) cn ON cn.corporation = c.id
                                        """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:dateOfIncorporation ;
