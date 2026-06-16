@@ -69,15 +69,10 @@
             "mobileMenuBreakpoint": 1360,
             "infoDropdown": [
                 {
-                    "id": "about",
-                    "translatedText": "aboutThePortal",
+                    "id": "aboutPage",
+                    "externalLink": false,
+                    "translatedText": "aboutPage",
                     "internalLink": "/about"
-                },
-                {
-                    "id": "blog",
-                    "externalLink": true,
-                    "translatedUrl": "blogUrl",
-                    "translatedText": "blog"
                 }
             ]
         },
