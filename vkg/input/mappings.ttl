@@ -479,21 +479,12 @@
                             rr:objectMap [ rr:column   "enddate_fixed" ;
                                            rr:datatype xsd:date ] ] .
 
-# Only grab the last recorded day of every year per notation
+# Reads from the SCOBALL.NOTATION_PRICE_YEARLY lens (see lenses.json), which computes the
+# last recorded day per year per notation once. The lens declares a unique key on `id`,
+# letting Ontop self-join-eliminate this mapping against :NOTATION-PRICE-TYPE.
 :NOTATION-NOTATION-PRICE
     a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """
-                            SELECT notation, id
-                            FROM (
-                                SELECT np.DAY as day, np.notation as notation, notation || EXTRACT(YEAR FROM day) as id,
-                                       ROW_NUMBER() OVER (
-                                           PARTITION BY np.notation, EXTRACT(YEAR FROM np.day)
-                                           ORDER BY np.day DESC
-                                       ) AS rn
-                                FROM scoball.notation_price np
-                            ) sub
-                            WHERE rn = 1
-    """ ] ;
+    rr:logicalTable       [ rr:tableName "scoball.notation_price_yearly" ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/notation/{notation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasNotationPrice ;
                             rr:objectMap [ rr:template "http://belhisfirm.be/resource/notation_price/{id}" ] ] .
@@ -503,22 +494,11 @@
 ## NOTATION-PRICE
 ###################
 
-# Only grabbing the last recorded day per year of each notation
+# Reads from the SCOBALL.NOTATION_PRICE_YEARLY lens (see lenses.json) instead of
+# re-running the window query, so the windowed scan is evaluated once for both mappings.
 :NOTATION-PRICE-TYPE
     a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """
-                    SELECT id, day, open, close, previous
-                    FROM (
-                        SELECT np.DAY as day, notation as notation, notation || EXTRACT(YEAR FROM day) as id,
-                               ROW_NUMBER() OVER (
-                                   PARTITION BY np.notation, EXTRACT(YEAR FROM np.day)
-                                   ORDER BY np.day DESC
-                               ) AS rn,
-                               np."OPEN" as open, np."CLOSE" as close, np.previous as previous
-                        FROM scoball.notation_price np
-                    ) sub
-                    WHERE rn = 1
-    """ ] ;
+    rr:logicalTable       [ rr:tableName "scoball.notation_price_yearly" ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/notation_price/{id}" ;
                             rr:class    bhf:NotationPrice ] ;
     rr:predicateObjectMap [ rr:predicate bhf:priceDay ;

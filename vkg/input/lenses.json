@@ -1,0 +1,28 @@
+{
+    "relations": [
+        {
+            "name": [
+                "SCOBALL",
+                "NOTATION_PRICE_YEARLY"
+            ],
+            "type": "SQLLens",
+            "query": "SELECT notation, id, day, open, close, previous FROM ( SELECT np.notation AS notation, np.notation || '-' || EXTRACT(YEAR FROM np.day) AS id, np.DAY AS day, np.\"OPEN\" AS open, np.\"CLOSE\" AS close, np.previous AS previous, ROW_NUMBER() OVER (PARTITION BY np.notation, EXTRACT(YEAR FROM np.day) ORDER BY np.day DESC) AS rn FROM scoball.notation_price np ) sub WHERE rn = 1",
+            "uniqueConstraints": {
+                "added": [
+                    {
+                        "name": "pk_npy",
+                        "determinants": [
+                            "id"
+                        ]
+                    }
+                ]
+            },
+            "nonNullConstraints": {
+                "added": [
+                    "id",
+                    "notation"
+                ]
+            }
+        }
+    ]
+}
