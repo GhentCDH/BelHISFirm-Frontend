@@ -59,7 +59,7 @@
             "id": "scobID",
             "valueType": "object",
             "makeLink": true,
-            "externalLink": true,
+            "externalLink": false,
             "sortValues": true,
             "numberedList": false,
             "minWidth": 30
@@ -75,7 +75,7 @@
             "id": "name",
             "valueType": "object",
             "makeLink": true,
-            "externalLink": true,
+            "externalLink": false,
             "sortValues": true,
             "numberedList": false,
             "minWidth": 250
@@ -129,7 +129,7 @@
             "id": "corporation",
             "valueType": "object",
             "makeLink": true,
-            "externalLink": true,
+            "externalLink": false,
             "sortValues": true,
             "numberedList": false,
             "minWidth": 200,
