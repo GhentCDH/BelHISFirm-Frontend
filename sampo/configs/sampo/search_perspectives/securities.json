@@ -27,7 +27,7 @@
                 "tabPath": "table",
                 "tabIcon": "CalendarViewDay",
                 "propertiesQueryBlock": "stocksProperties",
-                "pagesize": 10,
+                "pagesize": 20,
                 "sortBy": null,
                 "sortDirection": null
             },
