@@ -6,7 +6,7 @@
                 "NOTATION_PRICE_YEARLY"
             ],
             "type": "SQLLens",
-            "query": "SELECT notation, id, day, open, close, previous FROM ( SELECT np.notation AS notation, np.notation || '-' || EXTRACT(YEAR FROM np.day) AS id, np.DAY AS day, np.\"OPEN\" AS open, np.\"CLOSE\" AS close, np.previous AS previous, ROW_NUMBER() OVER (PARTITION BY np.notation, EXTRACT(YEAR FROM np.day) ORDER BY np.day DESC) AS rn FROM scoball.notation_price np ) sub WHERE rn = 1",
+            "query": "SELECT notation, id, day, year, open, close, previous FROM ( SELECT np.notation AS notation, np.notation || '-' || EXTRACT(YEAR FROM np.day) AS id, EXTRACT(YEAR FROM np.day) AS year, np.DAY AS day, np.\"OPEN\" AS open, np.\"CLOSE\" AS close, np.previous AS previous, ROW_NUMBER() OVER (PARTITION BY np.notation, EXTRACT(YEAR FROM np.day) ORDER BY np.day DESC) AS rn FROM scoball.notation_price np ) sub WHERE rn = 1 and EXTRACT(MONTH FROM day) > 10",
             "uniqueConstraints": {
                 "added": [
                     {

@@ -504,6 +504,9 @@
     rr:predicateObjectMap [ rr:predicate bhf:priceDay ;
                             rr:objectMap [ rr:column   "day" ;
                                            rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:priceYearEnd ;
+                            rr:objectMap [ rr:column   "year" ;
+                                           rr:datatype xsd:integer ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:openValue ;
                             rr:objectMap [ rr:column   "open" ;
                                            rr:datatype xsd:integer ] ] ;
