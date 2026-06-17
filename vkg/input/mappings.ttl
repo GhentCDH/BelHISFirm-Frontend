@@ -135,6 +135,18 @@
                             rr:objectMap [ rr:column   "comments" ;
                                            rr:datatype xsd:string ] ] .
 
+# Links a corporation directly to the string of its single most recent dated name
+# (greatest startdate). Reads from the SCOBALL.CORPORATION_LATEST_NAME lens (see lenses.json),
+# which declares a unique key on CORPORATION so Ontop knows there is exactly one latest name
+# per corporation (avoids DISTINCT fan-out). Maps the name as a plain literal.
+:CORPORATION-LATEST-NAME
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:tableName "scoball.corporation_latest_name" ] ;
+    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
+    rr:predicateObjectMap [ rr:predicate bhf:hasLatestName ;
+                            rr:objectMap [ rr:column   "corp_name" ;
+                                           rr:datatype xsd:string ] ] .
+
 
 ##################
 # LEGAL FORM
@@ -502,19 +514,19 @@
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/notation_price/{id}" ;
                             rr:class    bhf:NotationPrice ] ;
     rr:predicateObjectMap [ rr:predicate bhf:priceDay ;
-                            rr:objectMap [ rr:column   "day" ;
+                            rr:objectMap [ rr:column   "price_day" ;
                                            rr:datatype xsd:date ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:priceYearEnd ;
-                            rr:objectMap [ rr:column   "year" ;
+                            rr:objectMap [ rr:column   "price_year" ;
                                            rr:datatype xsd:integer ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:openValue ;
-                            rr:objectMap [ rr:column   "open" ;
+                            rr:objectMap [ rr:column   "open_value" ;
                                            rr:datatype xsd:integer ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:closeValue ;
-                            rr:objectMap [ rr:column   "close" ;
+                            rr:objectMap [ rr:column   "close_value" ;
                                            rr:datatype xsd:integer ] ] ;
     rr:predicateObjectMap [ rr:predicate bhf:previousValue ;
-                            rr:objectMap [ rr:column   "previous" ;
+                            rr:objectMap [ rr:column   "previous_value" ;
                                            rr:datatype xsd:integer ] ] .
 
 

@@ -6,23 +6,15 @@
                 "NOTATION_PRICE_YEARLY"
             ],
             "type": "SQLLens",
-            "query": "SELECT notation, id, day, year, open, close, previous FROM ( SELECT np.notation AS notation, np.notation || '-' || EXTRACT(YEAR FROM np.day) AS id, EXTRACT(YEAR FROM np.day) AS year, np.DAY AS day, np.\"OPEN\" AS open, np.\"CLOSE\" AS close, np.previous AS previous, ROW_NUMBER() OVER (PARTITION BY np.notation, EXTRACT(YEAR FROM np.day) ORDER BY np.day DESC) AS rn FROM scoball.notation_price np ) sub WHERE rn = 1 and EXTRACT(MONTH FROM day) > 10",
-            "uniqueConstraints": {
-                "added": [
-                    {
-                        "name": "pk_npy",
-                        "determinants": [
-                            "id"
-                        ]
-                    }
-                ]
-            },
-            "nonNullConstraints": {
-                "added": [
-                    "id",
-                    "notation"
-                ]
-            }
+            "query": "SELECT notation, id, price_day, price_year, open_value, close_value, previous_value FROM ( SELECT np.notation AS notation, np.notation || '-' || EXTRACT(YEAR FROM np.day) AS id, np.day AS price_day, EXTRACT(YEAR FROM np.day) AS price_year, np.\"OPEN\" AS open_value, np.\"CLOSE\" AS close_value, np.previous AS previous_value, EXTRACT(MONTH FROM np.day) AS price_month, ROW_NUMBER() OVER (PARTITION BY np.notation, EXTRACT(YEAR FROM np.day) ORDER BY np.day DESC) AS rn FROM scoball.notation_price np ) sub WHERE rn = 1 AND price_month > 10"
+        },
+        {
+            "name": [
+                "SCOBALL",
+                "CORPORATION_LATEST_NAME"
+            ],
+            "type": "SQLLens",
+            "query": "SELECT corporation, corp_name FROM ( SELECT corporation, name AS corp_name, ROW_NUMBER() OVER (PARTITION BY corporation ORDER BY startdate DESC NULLS LAST) AS rn FROM scoball.corporation_name WHERE name IS NOT NULL ) sub WHERE rn = 1"
         }
     ]
 }
