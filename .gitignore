@@ -27,3 +27,5 @@ Thumbs.db
 *.swo
 
 .claude
+/custom_components/node_modules/
+/custom_components/dist/

@@ -323,6 +323,54 @@
                     "description": "End date of this address being used"
                 }
             }
+        },
+        "yearEndPrices": {
+            "label": "Year-end prices",
+            "facetResultsType": "yearEndPrices",
+            "shortDescription": "Year-end notation prices per year",
+            "longDescription": "",
+            "instancePage": {
+                "label": "Year-end price",
+                "description": "A stock's year-end notation price"
+            },
+            "properties": {
+                "uri": {
+                    "label": "URI",
+                    "description": "Identifier of the resource"
+                },
+                "year": {
+                    "label": "Year",
+                    "description": "Select a year to list its year-end notation prices"
+                },
+                "sector": {
+                    "label": "Sector",
+                    "description": "Filter by the notation's sector name"
+                },
+                "corporationName": {
+                    "label": "Corporation",
+                    "description": "Filter by the corporation's most recent name"
+                },
+                "priceYearEnd": {
+                    "label": "Year",
+                    "description": "The year of the year-end price"
+                },
+                "priceDay": {
+                    "label": "Date",
+                    "description": "Date of the year-end notation price"
+                },
+                "openValue": {
+                    "label": "Open",
+                    "description": "Opening value"
+                },
+                "closeValue": {
+                    "label": "Close",
+                    "description": "Closing value"
+                },
+                "previousValue": {
+                    "label": "Previous",
+                    "description": "Previous value"
+                }
+            }
         }
     },
     "aboutPage": "htmlFile:pages/about_en.html",
