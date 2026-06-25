@@ -101,17 +101,31 @@
             "priority": 0
         },
         "sector": {
-            "containerClass": "one",
-            "facetType": "text",
-            "filterType": "textFilter",
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "literal": true,
             "customFilterName": "sectorFilter",
+            "predicate": "bhf:hasStockCorporation/bhf:hasStock/bhf:hasNotation/bhf:hasSector/bhf:hasName/rdfs:label",
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortDirection": "desc",
+            "pieChartButton": true,
+            "barChartButton": true,
             "priority": 1
         },
         "corporationName": {
-            "containerClass": "one",
-            "facetType": "text",
-            "filterType": "textFilter",
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "literal": true,
             "customFilterName": "nameFilter",
+            "predicate": "bhf:hasLatestName",
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortDirection": "desc",
             "priority": 2
         }
     }

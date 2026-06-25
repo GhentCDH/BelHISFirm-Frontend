@@ -10,19 +10,15 @@
 // ?id = the notation-price node (one result row per stock-notation year-end price).
 // makeObjectList (the default result mapper) merges rows by ?id.
 
+// The corp -> notation -> price chain arrives via <FILTER> (emitted by the yearBind custom
+// filter only when a year is selected); the value triples stay inside the LIMIT-bounded inner
+// sub-SELECT. This perspective is gated by GatedResultTable, so this query only runs once a
+// year is set.
 export const yearEndPricesResultSetQuery = `
   SELECT * WHERE {
     {
-      SELECT DISTINCT ?id ?corp ?not ?day ?val ?val2 ?val3 ?year {
+      SELECT DISTINCT ?id ?corp ?not ?year {
         <FILTER>
-        ?corp a bhf:Corporation ;
-              bhf:hasStockCorporation/bhf:hasStock/bhf:hasNotation ?not .
-        ?not bhf:hasNotationPrice ?id .
-        ?id bhf:priceYearEnd ?year ;
-            bhf:priceDay ?day ;
-            bhf:openValue ?val ;
-            bhf:closeValue ?val2 ;
-            bhf:previousValue ?val3 .
         <ORDER_BY_TRIPLE>
       }
       <ORDER_BY>
@@ -33,16 +29,16 @@ export const yearEndPricesResultSetQuery = `
   }
 `
 
-// Count: same inner shape wrapped in COUNT(DISTINCT ?id). Inherits the same <FILTER> (year),
-// so it is only cheap once a year is set; the gated result component prevents it from firing
-// before a year is chosen.
+// Count: the price chain (and thus ?id) is supplied entirely by <FILTER> via the yearBind
+// custom filter. With no year selected, <FILTER> is empty, ?id is unbound, and
+// COUNT(DISTINCT ?id) returns 0 without scanning the price data. The VALUES ?ping row guards
+// against an empty group pattern and adds no scan. The count query is dispatched by the
+// framework on load and on every facet change (FacetInfo), which we cannot gate from config —
+// so we make it cheap until a year bounds it.
 export const yearEndPricesCountQuery = `
   SELECT (COUNT(DISTINCT ?id) AS ?count) WHERE {
     <FILTER>
-    ?corp a bhf:Corporation ;
-          bhf:hasStockCorporation/bhf:hasStock/bhf:hasNotation ?not .
-    ?not bhf:hasNotationPrice ?id .
-    ?id bhf:priceYearEnd ?year .
+    VALUES ?ping { 1 }
   }
 `
 
@@ -51,15 +47,16 @@ export const yearEndPricesCountQuery = `
 export const yearEndPricesProperties = `
   BIND(?id AS ?uri__id)
   BIND(?id AS ?uri__prefLabel)
+  BIND(STR(?year) AS ?priceYearEnd__prefLabel)
+
   OPTIONAL {
     ?corp bhf:hasLatestName ?corporationName__prefLabel .
     BIND(?corp AS ?corporationName__id)
     BIND(CONCAT("/corporations/page/", STRAFTER(STR(?corp), "corporation/")) AS ?corporationName__dataProviderUrl)
   }
-  OPTIONAL { ?not bhf:hasSector/bhf:hasName/rdfs:label ?sector__prefLabel . }
-  BIND(STR(?year) AS ?priceYearEnd__prefLabel)
-  BIND(STR(?day)  AS ?priceDay__prefLabel)
-  BIND(STR(?val)  AS ?openValue__prefLabel)
-  BIND(STR(?val2) AS ?closeValue__prefLabel)
-  BIND(STR(?val3) AS ?previousValue__prefLabel)
+  OPTIONAL { ?not bhf:hasSector/bhf:hasName/rdfs:label ?sector__prefLabel }
+  OPTIONAL { ?id bhf:priceDay      ?day  . BIND(STR(?day)  AS ?priceDay__prefLabel) }
+  OPTIONAL { ?id bhf:openValue     ?val  . BIND(STR(?val)  AS ?openValue__prefLabel) }
+  OPTIONAL { ?id bhf:closeValue    ?val2 . BIND(STR(?val2) AS ?closeValue__prefLabel) }
+  OPTIONAL { ?id bhf:previousValue ?val3 . BIND(STR(?val3) AS ?previousValue__prefLabel) }
 `
