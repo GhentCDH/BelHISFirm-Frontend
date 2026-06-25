@@ -131,7 +131,7 @@
                     "label": "Name(s)",
                     "description": "Name(s) of the security"
                 },
-                "stockExchangeName": {
+                "stockExchange": {
                     "label": "Exchange",
                     "description": "Exchange the security is on"
                 },

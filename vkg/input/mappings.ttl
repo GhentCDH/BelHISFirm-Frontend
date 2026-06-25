@@ -278,12 +278,18 @@
 :STOCK-STOCKEXCHANGE
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """
-                    SELECT id, stockexchange FROM scoball.stock
+                    SELECT id,
+                        CASE stockexchange
+                            WHEN 1 THEN 'Brussels Stock Exchange'
+                            WHEN 2 THEN 'Antwerp Stock Exchange'
+                            ELSE Null
+                        END AS exchange_name
+                    FROM scoball.stock
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasStockExchange ;
-                            rr:objectMap [ rr:template
-                                                   "http://belhisfirm.be/resource/stockexchange/{stockexchange}" ] ] .
+                            rr:objectMap [ rr:column   "exchange_name" ;
+                                           rr:datatype xsd:string ] ] .
 
 :STOCK-NAME
     a                     rr:TriplesMap ;

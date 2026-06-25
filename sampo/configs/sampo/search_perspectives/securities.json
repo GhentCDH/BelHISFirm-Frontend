@@ -90,7 +90,7 @@
             "minWidth": 100
         },
         {
-            "id": "stockExchangeName",
+            "id": "stockExchange",
             "valueType": "object",
             "makeLink": false,
             "externalLink": false,
@@ -161,17 +161,17 @@
             "sortDirection": "desc",
             "literal": true
         },
-        "stockExchangeName": {
+        "stockExchange": {
             "containerClass": "ten",
             "facetType": "list",
             "filterType": "uriFilter",
-            "predicate": "bhf:hasStockExchange/bhf:hasName/rdfs:label",
+            "predicate": "bhf:hasStockExchange",
             "pieChartButton": true,
             "barChartButton": true,
             "searchField": true,
             "sortButton": true,
             "sortBy": "instanceCount",
-            "sortByPredicate": "bhf:hasStockExchange/bhf:hasName/rdfs:label",
+            "sortByPredicate": "bhf:hasStockExchange",
             "sortDirection": "desc",
             "literal": true
         },

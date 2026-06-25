@@ -31,8 +31,7 @@ union
 union
 {
     ?id bhf:hasStockExchange ?stockExchange__id .
-    ?stockExchange__id bhf:hasName ?stockExchangeName__id .
-    ?stockExchangeName__id rdfs:label ?stockExchangeName__prefLabel .
+    bind(?stockExchange__id as ?stockExchange__prefLabel)
 }
 union 
 {
@@ -106,9 +105,7 @@ export const securitiesExportQuery = `
       ?_nameNode rdfs:label ?name .
     }
     OPTIONAL {
-      ?uri bhf:hasStockExchange ?_seNode .
-      ?_seNode bhf:hasName ?_seNameNode .
-      ?_seNameNode rdfs:label ?exchange .
+      ?uri bhf:hasStockExchange ?exchange .
     }
     OPTIONAL {
       ?uri bhf:hasStockType ?_stNode .

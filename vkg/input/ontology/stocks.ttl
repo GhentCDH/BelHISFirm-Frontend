@@ -85,9 +85,9 @@ bhf:Currency
 
 # Stock properties
 bhf:hasStockExchange
-    a            owl:ObjectProperty ;
+    a            owl:DatatypeProperty ;
     rdfs:domain  bhf:Stock ;
-    rdfs:range   bhf:StockExchange ;
+    rdfs:range   xsd:string ;
     rdfs:label   "has stock exchange"@en ;
     rdfs:comment ""@en .
 

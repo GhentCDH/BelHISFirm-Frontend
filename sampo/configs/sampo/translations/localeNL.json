@@ -135,7 +135,7 @@
                     "label": "Naam/namen",
                     "description": "Namen van het effect"
                 },
-                "stockExchangeName": {
+                "stockExchange": {
                     "label": "Beurs",
                     "description": "Beurs/beurzen dat het effect op was"
                 },
