@@ -6,7 +6,7 @@
                 "NOTATION_PRICE_YEARLY"
             ],
             "type": "SQLLens",
-            "query": "SELECT notation, id, price_day, price_year, open_value, close_value, previous_value FROM ( SELECT np.notation AS notation, np.notation || '-' || EXTRACT(YEAR FROM np.day) AS id, np.day AS price_day, EXTRACT(YEAR FROM np.day) AS price_year, np.\"OPEN\" AS open_value, np.\"CLOSE\" AS close_value, np.previous AS previous_value, EXTRACT(MONTH FROM np.day) AS price_month, ROW_NUMBER() OVER (PARTITION BY np.notation, EXTRACT(YEAR FROM np.day) ORDER BY np.day DESC) AS rn FROM scoball.notation_price np ) sub WHERE rn = 1 AND price_month > 10"
+            "query": "SELECT\n    np.notation,\n    np.notation || '-' || eoy.price_year AS id,\n    np.day AS price_day,\n    eoy.price_year,\n    np.\"OPEN\" AS open_value,\n    np.\"CLOSE\" AS close_value,\n    np.previous AS previous_value\nFROM scoball.notation_price np\n     JOIN scoball.notation n\n       ON np.notation = n.id\n     JOIN scoball.stock s\n       ON n.stock = s.id\n     JOIN scoball.end_of_year_days eoy\n       ON eoy.price_day = np.day\n      AND eoy.stockexchange = s.stockexchange"
         },
         {
             "name": [

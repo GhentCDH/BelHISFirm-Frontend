@@ -81,15 +81,6 @@
             "minWidth": 250
         },
         {
-            "id": "currency",
-            "valueType": "object",
-            "makeLink": false,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 100
-        },
-        {
             "id": "stockExchange",
             "valueType": "object",
             "makeLink": false,
@@ -146,20 +137,6 @@
             "filterType": "textFilter",
             "sortByPredicate": "bhf:hasName/rdfs:label",
             "textQueryProperty": "bhf:hasName/rdfs:label"
-        },
-        "currency": {
-            "containerClass": "ten",
-            "facetType": "list",
-            "filterType": "uriFilter",
-            "predicate": "bhf:hasStockQuantity/bhf:hasCurrency/foaf:name",
-            "pieChartButton": true,
-            "barChartButton": true,
-            "searchField": true,
-            "sortButton": true,
-            "sortBy": "instanceCount",
-            "sortByPredicate": "bhf:hasStockQuantity/bhf:hasCurrency/foaf:name",
-            "sortDirection": "desc",
-            "literal": true
         },
         "stockExchange": {
             "containerClass": "ten",

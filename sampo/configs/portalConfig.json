@@ -43,12 +43,13 @@
         "perspective": "perspective1"
     },
     "layoutConfig": {
+        "customCssFile": "custom.css",
         "colorPalette": {
             "primary": {
-                "main": "#212121"
+                "main": "#2a2521"
             },
             "secondary": {
-                "main": "#EB1806"
+                "main": "#9e1b1e"
             }
         },
         "hundredPercentHeightBreakPoint": 900,
@@ -58,7 +59,7 @@
         "tableFontSize": "0.8rem",
         "topBar": {
             "showSearchField": false,
-            "logoImage": "logos/logo.png",
+            "logoImage": "",
             "logoTextTransform": "none",
             "hideLogoTextOnMobile": true,
             "showLanguageButton": true,
@@ -79,11 +80,22 @@
         },
         "mainPage": {
             "bannerImage": "main_page/mmm-banner.jpg",
-            "bannerBackground": "linear-gradient( rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45) ), url(<BANNER_IMAGE_URL>)",
+            "bannerBackground": "#f3eee3",
             "bannerMobileHeight": 150,
             "bannerReducedHeight": 220,
             "bannerDefaultHeight": 300,
-            "wrapSubheading": true
+            "wrapSubheading": true,
+            "perspectives": [
+                {
+                    "id": "part1",
+                    "cardsPerRow": 3,
+                    "perspectives": [
+                        "corporations",
+                        "securities",
+                        "yearEndPrices"
+                    ]
+                }
+            ]
         },
         "infoHeader": {
             "default": {
@@ -100,8 +112,34 @@
             }
         },
         "footer": {
-            "reducedHeight": 44,
-            "defaultHeight": 64
+            "reducedHeight": 54,
+            "defaultHeight": 64,
+            "images": [
+                {
+                    "id": "ugent",
+                    "image": "logos/ugent.webp",
+                    "href": "https://www.ugent.be/en",
+                    "alt": "Ghent University logo",
+                    "width": 55,
+                    "height": 44
+                },
+                {
+                    "id": "uantwerpen",
+                    "image": "logos/uantwerpen.webp",
+                    "href": "https://www.uantwerpen.be/en/",
+                    "alt": "University of Antwerp logo",
+                    "width": 122,
+                    "height": 36
+                },
+                {
+                    "id": "fwo",
+                    "image": "logos/fwo.webp",
+                    "href": "https://www.fwo.be/en/",
+                    "alt": "Research Foundation Flanders (FWO) logo",
+                    "width": 89,
+                    "height": 40
+                }
+            ]
         }
     },
     "mapboxConfig": {

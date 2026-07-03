@@ -1,0 +1,771 @@
+/* ==========================================================================
+   BelHISFirm portal theme
+   Applied on top of the bundled Sampo UI / MUI styles via
+   layoutConfig.customCssFile. Targets stable .Mui* slot classes and the few
+   stable ids (#infoheader-header, #<facetID>-header). !important is needed
+   wherever the framework styles via Emotion sx/styled or inline style attrs.
+   Design source: "BELHISFIRM website theming HTMLs" mockups.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Fonts (self-hosted, see assets/fonts/)
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Zilla Slab';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/zilla-slab-v12-latin_latin-ext-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Zilla Slab';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/zilla-slab-v12-latin_latin-ext-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Zilla Slab';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/zilla-slab-v12-latin_latin-ext-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Zilla Slab';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/zilla-slab-v12-latin_latin-ext-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/pt-serif-v19-latin_latin-ext-regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'PT Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/pt-serif-v19-latin_latin-ext-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/pt-serif-v19-latin_latin-ext-700.woff2') format('woff2');
+}
+
+/* --------------------------------------------------------------------------
+   Design tokens
+   -------------------------------------------------------------------------- */
+:root {
+  --bhf-bg: #f3eee3;
+  --bhf-bg-card: #faf7ef;
+  --bhf-bg-facets: #ece5d5;
+  --bhf-border: #e2dacb;
+  --bhf-border-facet: #ded5c2;
+  --bhf-border-card: #e4ddcd;
+  --bhf-border-row: #ece4d4;
+  --bhf-ink: #2a2521;
+  --bhf-ink-heading: #241f1b;
+  --bhf-ink-nav: #4a433b;
+  --bhf-ink-secondary: #6a6157;
+  --bhf-ink-muted: #8a8177;
+  --bhf-ink-faint: #9a9187;
+  --bhf-accent: #9e1b1e;
+  --bhf-focus-ring: rgba(158, 27, 30, 0.12);
+  --bhf-serif: 'PT Serif', Georgia, serif;
+  --bhf-slab: 'Zilla Slab', 'PT Serif', Georgia, serif;
+  /* Width of the facet sidebar on desktop (>=900px). Edit this to taste;
+     the results column automatically grows to fill the freed space. */
+  --bhf-facet-width: 400px;
+  /* Homepage perspective-card icons. Point these at a different file in
+     assets/icons/ to swap an icon; the accent tint/size is set on the
+     shared ::before rule further down. */
+  --bhf-card-icon-corporations: url("icons/corporations.svg");
+  --bhf-card-icon-securities: url("icons/securities.svg");
+  --bhf-card-icon-yearEndPrices: url("icons/yearEndPrices.svg");
+}
+
+/* --------------------------------------------------------------------------
+   Global
+   -------------------------------------------------------------------------- */
+html,
+body,
+#root {
+  background-color: var(--bhf-bg) !important;
+  color: var(--bhf-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* App root Box (SemanticPortal hardcodes #bdbdbd) */
+#root > .MuiBox-root,
+.MuiBox-root:has(> header.MuiAppBar-root) {
+  background-color: var(--bhf-bg) !important;
+}
+
+body,
+.MuiTypography-root,
+.MuiButton-root,
+.MuiTab-root,
+.MuiTableCell-root,
+.MuiMenuItem-root,
+.MuiInputBase-root,
+.MuiFormLabel-root,
+.MuiTablePagination-root,
+.MuiTooltip-tooltip,
+.MuiChip-root,
+.MuiAlert-root {
+  font-family: var(--bhf-serif) !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.MuiTypography-h1, .MuiTypography-h2, .MuiTypography-h3,
+.MuiTypography-h4, .MuiTypography-h5, .MuiTypography-h6 {
+  font-family: var(--bhf-slab) !important;
+  color: var(--bhf-ink-heading);
+  letter-spacing: -0.5px;
+}
+
+::selection {
+  background: var(--bhf-accent);
+  color: var(--bhf-bg);
+}
+
+a {
+  color: var(--bhf-accent);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--bhf-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.MuiCircularProgress-root {
+  color: var(--bhf-accent) !important;
+}
+
+/* Dropdown menus and popovers */
+.MuiMenu-paper,
+.MuiPopover-paper {
+  background: var(--bhf-bg-card) !important;
+  color: var(--bhf-ink) !important;
+  border: 1px solid var(--bhf-border-card);
+  border-radius: 5px !important;
+  box-shadow: 0 18px 40px -24px rgba(70, 45, 20, 0.55) !important;
+}
+.MuiMenuItem-root {
+  color: var(--bhf-ink-nav);
+  font-size: 14px;
+  letter-spacing: 0.6px;
+}
+.MuiMenuItem-root:hover,
+.MuiMenuItem-root.Mui-selected {
+  background: var(--bhf-bg) !important;
+  color: var(--bhf-accent);
+}
+
+/* --------------------------------------------------------------------------
+   Top bar
+   -------------------------------------------------------------------------- */
+header.MuiAppBar-root {
+  background: var(--bhf-bg) !important;
+  color: var(--bhf-ink) !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--bhf-border);
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+/* All top bar buttons: uppercase letterspaced serif nav (mockup header nav).
+   !important also defeats the inline style attr on NavLink buttons and the
+   `color: white !important` on the language/info buttons. */
+header.MuiAppBar-root .MuiButtonBase-root.MuiButton-root {
+  font-family: var(--bhf-serif) !important;
+  font-size: 14px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--bhf-ink-nav) !important;
+  border-color: transparent !important;
+  background: transparent !important;
+}
+header.MuiAppBar-root .MuiButtonBase-root.MuiButton-root:hover {
+  color: var(--bhf-accent) !important;
+  background: transparent !important;
+}
+/* Active perspective (react-router NavLink) */
+header.MuiAppBar-root a.active.MuiButton-root,
+header.MuiAppBar-root a[aria-current='page'].MuiButton-root {
+  color: var(--bhf-accent) !important;
+}
+
+/* Logo button: "Belhisfirm" in Zilla Slab with the red diamond mark */
+header.MuiAppBar-root .MuiToolbar-root > .MuiButton-root:first-of-type {
+  text-transform: none;
+  letter-spacing: 0.3px;
+}
+header.MuiAppBar-root .MuiToolbar-root > .MuiButton-root:first-of-type .MuiTypography-root {
+  background: transparent !important;
+  color: var(--bhf-ink) !important;
+  font-family: var(--bhf-slab) !important;
+  font-weight: 700;
+  font-size: 23px;
+  letter-spacing: 0.3px;
+}
+header.MuiAppBar-root .MuiToolbar-root > .MuiButton-root:first-of-type .MuiTypography-root::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: var(--bhf-accent);
+  transform: rotate(45deg);
+  margin-right: 13px;
+  vertical-align: 10%;
+}
+
+/* Divider between perspective links and info/language buttons
+   (the only empty Box in the toolbar carrying a border) */
+header.MuiAppBar-root .MuiToolbar-root div:empty {
+  border-left-color: #d4cbba !important;
+  border-left-width: 1px !important;
+  align-self: center;
+  height: 16px;
+}
+
+/* Hide the hardcoded SECO research-group logo in the topbar (not config-driven) */
+a[href="https://seco.cs.aalto.fi"] {
+  display: none !important;
+}
+/* Fallback selector in case the link wrapper changes but the img stays */
+img[alt="Semantic Computing research group logo"] {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Landing page
+   -------------------------------------------------------------------------- */
+/* Banner box (flat cream via portalConfig bannerBackground): kill the grey
+   inset shadow and recolor the white title/subtitle */
+.MuiBox-root:has(> .MuiBox-root > .MuiBox-root > h1.MuiTypography-root) {
+  box-shadow: none !important;
+  border-bottom: none;
+}
+.MuiBox-root:has(> .MuiBox-root > h1.MuiTypography-root) {
+  color: var(--bhf-ink-secondary) !important;
+}
+.MuiBox-root h1.MuiTypography-root {
+  color: var(--bhf-ink-heading) !important;
+  font-family: var(--bhf-slab) !important;
+  font-weight: 700 !important;
+  letter-spacing: -1.5px !important;
+}
+/* Subheading under the main title: red uppercase tagline (mockup) */
+.MuiBox-root:has(> .MuiBox-root > h1.MuiTypography-root) p.MuiTypography-root {
+  font-size: 13px !important;
+  letter-spacing: 2.5px !important;
+  text-transform: uppercase;
+  color: var(--bhf-accent) !important;
+  font-weight: 400 !important;
+}
+
+/* Landing intro paragraph (appDescription) and "Select a perspective" line.
+   Both live in the same content Box; selectPerspective is the centered one,
+   appDescription is not. Styling matches the v2 landing mockup. */
+.MuiBox-root:has(> p.MuiTypography-alignCenter.MuiTypography-paragraph) > p:not(.MuiTypography-alignCenter) {
+  font-family: var(--bhf-serif) !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: clamp(17px, 1.4vw, 19px) !important;
+  line-height: 1.65 !important;
+  color: #5f574d !important;
+  max-width: 620px;
+  margin: 16px auto 0 !important;
+  text-align: center;
+}
+.MuiBox-root:has(> p.MuiTypography-alignCenter.MuiTypography-paragraph) > p.MuiTypography-alignCenter {
+  font-family: var(--bhf-serif) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  color: var(--bhf-ink-muted) !important;
+  margin: clamp(44px, 6vw, 60px) 0 26px !important;
+}
+
+/* Perspective cards: cream, bordered, hover lift */
+a.MuiGrid-root.MuiGrid-item {
+  text-decoration: none;
+  min-height: 280px;
+}
+a.MuiGrid-root.MuiGrid-item > .MuiPaper-root {
+  background: var(--bhf-bg-card) !important;
+  color: var(--bhf-ink) !important;
+  border: 1px solid var(--bhf-border-card);
+  border-radius: 5px !important;
+  padding: 24px !important;
+  box-shadow: none !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+}
+a.MuiGrid-root.MuiGrid-item:hover > .MuiPaper-root {
+  transform: translateY(-5px);
+  box-shadow: 0 22px 48px -28px rgba(70, 45, 20, 0.55) !important;
+  border-color: var(--bhf-accent);
+}
+a.MuiGrid-root.MuiGrid-item > .MuiPaper-root h2.MuiTypography-root {
+  color: var(--bhf-ink-heading) !important;
+  font-family: var(--bhf-slab) !important;
+  font-weight: 600 !important;
+  font-size: 26px !important;
+}
+a.MuiGrid-root.MuiGrid-item > .MuiPaper-root p.MuiTypography-root {
+  color: var(--bhf-ink-secondary) !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+}
+
+/* Perspective-card icons: a masked ::before above each card's title, tinted
+   with the accent. Scoped to the three known cards (keyed on the anchor href)
+   so no stray badge appears on any future card without an icon. Swap icons via
+   the --bhf-card-icon-* variables in :root; size/color are set here. */
+a.MuiGrid-item[href*="/corporations/"] > .MuiPaper-root::before,
+a.MuiGrid-item[href*="/securities/"] > .MuiPaper-root::before,
+a.MuiGrid-item[href*="/yearEndPrices/"] > .MuiPaper-root::before {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 20px;
+  background-color: var(--bhf-accent);
+  -webkit-mask: var(--bhf-card-icon) no-repeat center / contain;
+  mask: var(--bhf-card-icon) no-repeat center / contain;
+}
+a.MuiGrid-item[href*="/corporations/"] > .MuiPaper-root {
+  --bhf-card-icon: var(--bhf-card-icon-corporations);
+}
+a.MuiGrid-item[href*="/securities/"] > .MuiPaper-root {
+  --bhf-card-icon: var(--bhf-card-icon-securities);
+}
+a.MuiGrid-item[href*="/yearEndPrices/"] > .MuiPaper-root {
+  --bhf-card-icon: var(--bhf-card-icon-yearEndPrices);
+}
+
+/* --------------------------------------------------------------------------
+   Perspective pages: info header
+   -------------------------------------------------------------------------- */
+.MuiAccordion-root:has(#infoheader-header) {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--bhf-border);
+  border-radius: 0 !important;
+}
+#infoheader-header h1.MuiTypography-root {
+  color: var(--bhf-ink-heading) !important;
+  font-family: var(--bhf-slab) !important;
+  font-weight: 700 !important;
+}
+#infoheader-header .MuiIconButton-root,
+#infoheader-header + * .MuiIconButton-root {
+  color: var(--bhf-ink-faint);
+}
+
+/* --------------------------------------------------------------------------
+   Facet sidebar (left column, md=3)
+   -------------------------------------------------------------------------- */
+/* Make the facet column thinner and let the results column absorb the space.
+   The knob is --bhf-facet-width in :root above. Only applies on desktop
+   (>=900px = the md breakpoint); below that the layout stacks full-width. */
+@media (min-width: 900px) {
+  .MuiGrid-container > .MuiGrid-item.MuiGrid-grid-md-3 {
+    flex-basis: var(--bhf-facet-width) !important;
+    max-width: var(--bhf-facet-width) !important;
+  }
+  .MuiGrid-container > .MuiGrid-item.MuiGrid-grid-md-9 {
+    flex-basis: 0 !important;
+    max-width: none !important;
+    flex-grow: 1 !important;
+    min-width: 0 !important;
+  }
+}
+.MuiGrid-grid-md-3 .MuiPaper-root {
+  background: var(--bhf-bg-facets) !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  color: var(--bhf-ink);
+}
+.MuiGrid-grid-md-3 > .MuiPaper-root:first-of-type {
+  border-right: 1px solid var(--bhf-border);
+}
+.MuiGrid-grid-md-3 .MuiAccordion-root {
+  border-top: 1px solid var(--bhf-border-facet);
+  margin: 0 !important;
+}
+.MuiGrid-grid-md-3 .MuiAccordion-root::before {
+  display: none;
+}
+/* Give each collapsed facet header row more vertical breathing room */
+.MuiGrid-grid-md-3 .MuiAccordionSummary-root {
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+}
+.MuiGrid-grid-md-3 .MuiAccordionSummary-root .MuiTypography-root {
+  font-family: var(--bhf-serif) !important;
+  font-size: 15px !important;
+  color: var(--bhf-ink);
+}
+.MuiGrid-grid-md-3 .MuiAccordionSummary-expandIconWrapper,
+.MuiGrid-grid-md-3 .MuiSvgIcon-root {
+  color: var(--bhf-ink-faint);
+}
+/* Result count line: "Results: N ..." */
+.MuiGrid-grid-md-3 .MuiPaper-root h2.MuiTypography-root {
+  font-family: var(--bhf-slab) !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  color: var(--bhf-ink-heading);
+}
+/* "Narrow down by:" label under it */
+.MuiGrid-grid-md-3 .MuiPaper-root h2.MuiTypography-root:not(:first-of-type) {
+  font-family: var(--bhf-serif) !important;
+  font-weight: 400 !important;
+  font-size: 13px !important;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--bhf-ink-muted) !important;
+}
+.MuiGrid-grid-md-3 .MuiDivider-root {
+  border-color: var(--bhf-border-facet);
+}
+
+/* Facet option chips (active selections) */
+.MuiChip-root {
+  background: var(--bhf-bg-card) !important;
+  border: 1px solid var(--bhf-border-card);
+  color: var(--bhf-ink-nav) !important;
+}
+.MuiChip-root .MuiChip-deleteIcon {
+  color: var(--bhf-accent);
+}
+
+/* Checkboxes in list facets */
+.MuiCheckbox-root {
+  color: #b9ad99 !important;
+}
+.MuiCheckbox-root.Mui-checked {
+  color: var(--bhf-accent) !important;
+}
+
+/* Sliders (range facets) */
+.MuiSlider-root {
+  color: var(--bhf-accent) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Inputs
+   -------------------------------------------------------------------------- */
+.MuiOutlinedInput-root,
+.MuiFilledInput-root,
+.MuiInputBase-root {
+  background: #ffffff !important;
+  border-radius: 4px !important;
+  font-size: 15px;
+  color: var(--bhf-ink) !important;
+}
+.MuiOutlinedInput-notchedOutline {
+  border-color: var(--bhf-border-facet) !important;
+}
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--bhf-accent) !important;
+  border-width: 1px !important;
+}
+.MuiOutlinedInput-root.Mui-focused {
+  box-shadow: 0 0 0 3px var(--bhf-focus-ring);
+}
+.MuiInputLabel-root.Mui-focused {
+  color: var(--bhf-accent) !important;
+}
+/* Underline variants (standard TextFields) */
+.MuiInput-underline::after {
+  border-bottom-color: var(--bhf-accent) !important;
+}
+
+/* Search / submit icon buttons next to facet inputs */
+.MuiGrid-grid-md-3 .MuiIconButton-root:hover {
+  color: var(--bhf-accent);
+  background: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.MuiButton-contained,
+.MuiButton-containedPrimary,
+.MuiButton-containedSecondary {
+  background: var(--bhf-accent) !important;
+  color: var(--bhf-bg) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+.MuiButton-contained:hover {
+  filter: brightness(1.1);
+}
+.MuiButton-outlined,
+.MuiButton-text:not(header.MuiAppBar-root .MuiButton-text) {
+  color: var(--bhf-accent);
+}
+.MuiButton-outlined {
+  border-color: var(--bhf-accent) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Result area: tabs
+   -------------------------------------------------------------------------- */
+.MuiPaper-root:has(> .MuiTabs-root) {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-bottom: 2px solid var(--bhf-accent);
+  border-radius: 0 !important;
+}
+.MuiTab-root {
+  font-family: var(--bhf-serif) !important;
+  font-size: 12px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase;
+  color: var(--bhf-ink-secondary) !important;
+}
+.MuiTab-root.Mui-selected {
+  color: var(--bhf-accent) !important;
+}
+.MuiTabs-indicator {
+  background-color: var(--bhf-accent) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Result area: table + pagination
+   -------------------------------------------------------------------------- */
+/* Result column containers: let the parchment show through.
+   The results table's scroll wrapper is a tss-hashed <div> (background.paper=#fff),
+   not a MuiTableContainer. Match it two ways: by structure (a div directly wrapping
+   the table), and — so it also stays transparent while data is loading, when that
+   same div wraps the loading spinner instead of the table — as the sibling directly
+   after the pagination bar (its fixed position in ResultTable's markup). */
+.MuiGrid-grid-md-9 > .MuiPaper-root,
+.MuiTableContainer-root,
+.MuiTablePagination-root + div,
+div:has(> .MuiTable-root) {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+div:has(> .MuiTable-root) {
+  border-top: 1px solid var(--bhf-border) !important;
+}
+
+.MuiTable-root {
+  background: transparent;
+}
+
+.MuiTableRow-root > * {
+  font-family: var(--bhf-serif) !important;
+  font-size: 14px !important;
+  color: var(--bhf-ink);
+  border-bottom: 1px solid var(--bhf-border-row) !important;
+  background: var(--bhf-bg) !important;
+}
+.MuiTableHead-root .MuiTableCell-root {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--bhf-ink-muted) !important;
+  border-bottom: 1.5px solid #ddd2bd !important;
+}
+.MuiTableSortLabel-root,
+.MuiTableSortLabel-root:hover,
+.MuiTableSortLabel-root.Mui-active {
+  color: var(--bhf-ink-muted) !important;
+}
+.MuiTableSortLabel-root.Mui-active .MuiTableSortLabel-icon {
+  color: var(--bhf-accent) !important;
+}
+.MuiTableBody-root .MuiTableRow-root:hover {
+  background: var(--bhf-bg-card);
+}
+.MuiTableBody-root a {
+  color: var(--bhf-accent);
+  text-decoration: none;
+}
+.MuiTableBody-root a:hover {
+  text-decoration: underline;
+}
+/* Row expand chevrons */
+.MuiTableBody-root .MuiIconButton-root {
+  color: #b9ad99;
+}
+
+/* Pagination toolbar (inline sx paints it white) */
+.MuiTablePagination-root {
+  background: transparent !important;
+  color: var(--bhf-ink-secondary) !important;
+  border-bottom: none !important;
+}
+.MuiTablePagination-toolbar .MuiIconButton-root {
+  color: var(--bhf-accent);
+}
+.MuiTablePagination-toolbar .MuiIconButton-root.Mui-disabled {
+  color: var(--bhf-ink-faint);
+}
+.MuiTablePagination-selectLabel,
+.MuiTablePagination-displayedRows {
+  font-family: var(--bhf-serif) !important;
+  font-size: 14px !important;
+  color: var(--bhf-ink-secondary);
+  background: transparent !important;
+}
+
+/* --------------------------------------------------------------------------
+   Static text pages (About / Instructions) and instance pages
+   -------------------------------------------------------------------------- */
+/* TextPage paper: transparent so the parchment shows through */
+.MuiPaper-root:has(> .bhf-page) {
+  background: transparent !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+/* Static page content: wrap the HTML in pages/*.html with
+   <div class="bhf-page"> to get the mockup typography below. */
+.bhf-page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 8px 64px;
+}
+.bhf-page h1 {
+  font-family: var(--bhf-slab) !important;
+  font-weight: 700 !important;
+  font-size: clamp(38px, 5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -1px;
+  color: var(--bhf-ink-heading);
+  margin: 0 0 8px;
+}
+.bhf-page h1::before {
+  content: '';
+  display: block;
+  width: 46px;
+  height: 3px;
+  background: var(--bhf-accent);
+  margin-bottom: 26px;
+}
+/* Subtitle line directly under the page title */
+.bhf-page h1 + p {
+  font-style: italic;
+  font-size: 17px !important;
+  color: var(--bhf-ink-muted) !important;
+}
+.bhf-page h2 {
+  font-family: var(--bhf-slab) !important;
+  font-weight: 600 !important;
+  font-size: clamp(24px, 2.8vw, 30px) !important;
+  color: var(--bhf-ink-heading);
+  margin: 48px 0 4px;
+}
+.bhf-page h2::after {
+  content: '';
+  display: block;
+  width: 34px;
+  height: 2px;
+  background: var(--bhf-accent);
+  margin-top: 6px;
+  margin-bottom: 22px;
+}
+.bhf-page p,
+.bhf-page li {
+  font-family: var(--bhf-serif) !important;
+  font-size: 17.5px !important;
+  color: var(--bhf-ink-nav);
+  line-height: 1.75 !important;
+}
+.bhf-page blockquote {
+  font-family: var(--bhf-serif);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--bhf-ink-nav);
+  margin: 0;
+  padding: 22px 26px;
+  background: var(--bhf-bg-card);
+  border-left: 3px solid var(--bhf-accent);
+  border-radius: 0 5px 5px 0;
+}
+/* Two-column list block (wrap a <div class="bhf-cols"> around two column divs) */
+.bhf-page .bhf-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 26px;
+  margin: 8px 0 24px;
+}
+/* Column sub-headings (e.g. "University of Antwerp") render as slab labels */
+.bhf-page .bhf-cols > div > p:first-child {
+  font-family: var(--bhf-slab) !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  color: var(--bhf-ink-heading);
+  margin: 0 0 8px;
+}
+
+/* About-page content footer (Cite & reuse / Contact), styled like the mockup */
+.bhf-page footer {
+  border-top: 1px solid var(--bhf-border);
+  margin-top: clamp(48px, 6vw, 72px);
+  padding: clamp(48px, 6vw, 72px) 0 clamp(40px, 4vw, 52px);
+}
+.bhf-page footer .bhf-cols {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(32px, 5vw, 60px);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.bhf-page footer p {
+  font-size: 15px !important;
+  line-height: 1.65 !important;
+  color: var(--bhf-ink-secondary);
+  margin: 0 0 16px;
+}
+/* Section labels ("Cite & reuse", "Contact"): small uppercase red — overrides
+   the slab-heading rule used for the university columns above. */
+.bhf-page footer .bhf-cols > div > p:first-child {
+  font-family: var(--bhf-serif) !important;
+  font-weight: 400 !important;
+  font-size: 12.5px !important;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: var(--bhf-accent) !important;
+  margin: 0 0 16px;
+}
+/* Citation block: smaller, sits on the page background (not the card cream) */
+.bhf-page footer blockquote {
+  font-size: 13.5px;
+  line-height: 1.65;
+  margin: 0 0 14px;
+  padding: 16px 20px;
+  background: var(--bhf-bg);
+}
+
+/* --------------------------------------------------------------------------
+   Footer (front page): flat parchment bar with partner logos
+   -------------------------------------------------------------------------- */
+.MuiPaper-root:has(> a.MuiBox-root > img) {
+  background: var(--bhf-bg) !important;
+  box-shadow: none !important;
+  border-top: 1px solid var(--bhf-border);
+}

@@ -8,10 +8,11 @@
         "short": "Belhisfirm",
         "mobile": "Belhisfirm",
         "long": "&nbsp; &nbsp; Belhisfirm &nbsp; &nbsp;",
-        "subheading": ""
+        "subheading": "De Belgische ondernemingshistorische databank · 1873–2002"
     },
-    "selectPerspective": "Select a perspective to search and browse the knowledge graph:",
-    "mainPageImageLicence": "Images used under license from Shutterstock.com",
+    "appDescription": "Verken de Belgische ondernemingsgeschiedenis via één databank van ondernemingen en hun genoteerde effecten op de Belgische beurzen.<br>Ontwikkeld door het Studiecentrum voor Onderneming en Beurs en het Ghent Centre for Digital Humanities",
+    "selectPerspective": "Kies een invalshoek om te zoeken en te bladeren",
+    "mainPageImageLicence": "",
     "backendErrorText": "One of the backend services is not available at the moment. Please try again later.",
     "infoHeader": {
         "toggleInstructions": "Click to show or hide instructions"
@@ -21,7 +22,7 @@
             "info": "Info",
             "aboutPage": "Over het portaal"
         },
-        "instructions": "instructies"
+        "instructions": "Handleiding"
     },
     "facetBar": {
         "results": "Resultaten",
@@ -116,7 +117,7 @@
         "securities": {
             "label": "Effecten",
             "facetResultsType": "effecten",
-            "shortDescription": "Scob effecten",
+            "shortDescription": "Een historisch register van genoteerde aandelen en obligaties op de beurzen van Antwerpen en Brussel, opgenomen per jaareinde.",
             "longDescription": "",
             "instancePage": {
                 "label": "Effect",
@@ -156,52 +157,52 @@
                     "description": "Munteenheid/munteenheden dat dit effect in was"
                 },
                 "corporation": {
-                    "label": "Bedrijf",
-                    "description": "Bedrijf/bedrijven van wie dit effect was"
+                    "label": "Onderneming",
+                    "description": "Onderneming/ondernemingen van wie dit effect was"
                 }
             }
         },
         "corporations": {
-            "label": "Bedrijven",
-            "facetResultsType": "bedrijven",
-            "shortDescription": "Scob bedrijven",
+            "label": "Ondernemingen",
+            "facetResultsType": "ondernemingen",
+            "shortDescription": "De juridische en biografische gegevens van Belgische ondernemingen sinds 1873, van oprichting tot ontbinding.",
             "longDescription": "",
             "instancePage": {
-                "label": "Bedrijf",
-                "description": "Scob belhisfirm bedrijf"
+                "label": "Onderneming",
+                "description": "Scob belhisfirm onderneming"
             },
             "properties": {
                 "uri": {
                     "label": "URI",
-                    "description": "URI van het bedrijf"
+                    "description": "URI van het onderneming"
                 },
                 "scobID": {
                     "label": "ID",
-                    "description": "ID van het bedrijf"
+                    "description": "ID van het onderneming"
                 },
                 "corporationName": {
                     "label": "Naam/namen",
-                    "description": "Naam/namen die het bedrijf heeft gehad"
+                    "description": "Naam/namen die het onderneming heeft gehad"
                 },
                 "legalForm": {
                     "label": "Juridisch statuut",
-                    "description": "Juridisch statuut van het bedrijf"
+                    "description": "Juridisch statuut van het onderneming"
                 },
                 "address": {
                     "label": "Maatschappelijke zetel",
-                    "description": "Adres(sen) van de maatschappelijke zetel van het bedrijf."
+                    "description": "Adres(sen) van de maatschappelijke zetel van het onderneming."
                 },
                 "country": {
                     "label": "Land",
-                    "description": "Land waar de maatschappelijke zetel van het bedrijf zich bevindt."
+                    "description": "Land waar de maatschappelijke zetel van het onderneming zich bevindt."
                 },
                 "city": {
                     "label": "Stad",
-                    "description": "Stad waar de maatschappelijke zetel van het bedrijf zich bevindt."
+                    "description": "Stad waar de maatschappelijke zetel van het onderneming zich bevindt."
                 },
                 "streetAddress": {
                     "label": "Straatadres",
-                    "description": "Straatadres van de maatschappelijke zetel van het bedrijf. Veel bedrijven (vooral oudere) hebben geen straat."
+                    "description": "Straatadres van de maatschappelijke zetel van het onderneming. Veel ondernemingen (vooral oudere) hebben geen straat."
                 },
                 "dateOfIncorporation": {
                     "label": "Oprichtingsdatum",
@@ -213,28 +214,28 @@
                 },
                 "stock": {
                     "label": "Effecten",
-                    "description": "Effecten van dit bedrijf"
+                    "description": "Effecten van dit onderneming"
                 }
             }
         },
         "corporationNames": {
-            "label": "Bedrijfsnamen",
+            "label": "Ondernemingsnamen",
             "instancePage": {
-                "label": "Bedrijfsnaam",
-                "description": "Naam die het bedrijf op een bepaald moment had of heeft gehad."
+                "label": "Ondernemingsnaam",
+                "description": "Naam die het onderneming op een bepaald moment had of heeft gehad."
             },
             "properties": {
                 "uri": {
                     "label": "URI",
-                    "description": "ID van de naam die aan het bedrijf is gekoppeld"
+                    "description": "ID van de naam die aan het onderneming is gekoppeld"
                 },
                 "corporation": {
-                    "label": "Bedrijf",
-                    "description": "Bedrijf dat aan deze naam is gekoppeld"
+                    "label": "Onderneming",
+                    "description": "Onderneming dat aan deze naam is gekoppeld"
                 },
                 "name": {
                     "label": "Naam",
-                    "description": "Naam van het bedrijf"
+                    "description": "Naam van het onderneming"
                 },
                 "startDate": {
                     "label": "Startdatum",
@@ -258,20 +259,20 @@
             "label": "Juridische statuten",
             "instancePage": {
                 "label": "Juridisch statuut",
-                "description": "Juridisch statuut dat het bedrijf op een bepaald moment had of heeft gehad."
+                "description": "Juridisch statuut dat het onderneming op een bepaald moment had of heeft gehad."
             },
             "properties": {
                 "uri": {
                     "label": "URI",
-                    "description": "ID van de instantie van het juridisch statuut dat aan het bedrijf is gekoppeld"
+                    "description": "ID van de instantie van het juridisch statuut dat aan het onderneming is gekoppeld"
                 },
                 "corporation": {
-                    "label": "Bedrijf",
-                    "description": "Bedrijf dat aan deze instantie van juridisch statuut is gekoppeld"
+                    "label": "Onderneming",
+                    "description": "Onderneming dat aan deze instantie van juridisch statuut is gekoppeld"
                 },
                 "legalForm": {
                     "label": "Juridisch statuut",
-                    "description": "Juridisch statuut van het bedrijf"
+                    "description": "Juridisch statuut van het onderneming"
                 },
                 "startDate": {
                     "label": "Startdatum",
@@ -295,7 +296,7 @@
             "label": "Adressen",
             "instancePage": {
                 "label": "Adres",
-                "description": "Adres dat het bedrijf op een bepaald moment had of heeft gehad."
+                "description": "Adres dat het onderneming op een bepaald moment had of heeft gehad."
             },
             "properties": {
                 "uri": {
@@ -303,8 +304,8 @@
                     "description": "ID van deze locatie"
                 },
                 "corporation": {
-                    "label": "Bedrijf",
-                    "description": "Bedrijf dat aan deze locatie is gekoppeld"
+                    "label": "Onderneming",
+                    "description": "Onderneming dat aan deze locatie is gekoppeld"
                 },
                 "country": {
                     "label": "Land",
@@ -351,8 +352,8 @@
                     "description": "Filter op de sectornaam van de notering"
                 },
                 "corporationName": {
-                    "label": "Bedrijf",
-                    "description": "Filter op de meest recente naam van het bedrijf"
+                    "label": "Onderneming",
+                    "description": "Filter op de meest recente naam van het onderneming"
                 },
                 "priceYearEnd": {
                     "label": "Jaar",

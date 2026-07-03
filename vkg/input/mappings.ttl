@@ -50,7 +50,7 @@
     rr:logicalTable       [ rr:sqlQuery """
                                             SELECT id,
                                             CASE
-                                                WHEN cn.earliest_startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                                                WHEN cn.earliest_startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
                                                 ELSE TO_CHAR(cn.earliest_startdate, 'YYYY-MM-DD')
                                             END AS startdate,
                                             CASE
@@ -106,7 +106,7 @@
                                             name,
                                             startdate,
                                             CASE
-                                                WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                                                WHEN startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
                                                 ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
                                             END AS startdate_fixed,
                                             CASE
@@ -168,7 +168,7 @@
                 js.juridisch_statuut  AS juridisch_statuut_label,
                 RAWTOHEX(STANDARD_HASH(cjs.corporation || cjs.juridisch_statuut || TO_CHAR(cjs.startdate,'YYYY-MM-DD'), 'SHA1')) AS id,
                 CASE
-                    WHEN cjs.startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                    WHEN cjs.startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
                     ELSE TO_CHAR(cjs.startdate, 'YYYY-MM-DD')
                 END AS startdate_fixed,
                 CASE
@@ -227,7 +227,7 @@
                                         ELSE country
                                     END AS country,
                                     CASE
-                                        WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                                        WHEN startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
                                         ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
                                     END AS startdate_fixed,
                                     CASE
@@ -315,7 +315,7 @@
     rr:logicalTable       [ rr:sqlQuery """
                     SELECT RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id,
                            CASE
-                               WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                               WHEN startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
                                ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
                            END AS startdate_fixed,
                            CASE
@@ -409,7 +409,7 @@
                     id,
                     startdate,
                     CASE
-                        WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                        WHEN startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
                         ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
                     END AS startdate_fixed,
                     CASE
@@ -440,7 +440,7 @@
     rr:logicalTable       [ rr:sqlQuery """
                     SELECT RAWTOHEX(STANDARD_HASH(stockexchange || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id,
                            CASE
-                               WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                               WHEN startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
                                ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
                            END AS startdate_fixed,
                            CASE
@@ -478,7 +478,7 @@
     rr:logicalTable       [ rr:sqlQuery """
                     SELECT id, sector,
                            CASE
-                               WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                               WHEN startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
                                ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
                            END AS startdate_fixed,
                            CASE
@@ -552,7 +552,7 @@
     rr:logicalTable       [ rr:sqlQuery """
                     SELECT id,
                            CASE
-                               WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                               WHEN startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
                                ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
                            END AS startdate_fixed,
                            CASE
@@ -594,7 +594,7 @@
     rr:logicalTable       [ rr:sqlQuery """
                     SELECT RAWTOHEX(STANDARD_HASH(sector || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id,
                            CASE
-                               WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                               WHEN startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
                                ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
                            END AS startdate_fixed,
                            CASE
@@ -633,7 +633,7 @@
     rr:logicalTable       [ rr:sqlQuery """
                     SELECT RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id,
                     CASE
-                        WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                        WHEN startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
                        ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
                     END AS startdate_fixed,
                     CASE
@@ -696,7 +696,7 @@
     rr:logicalTable       [ rr:sqlQuery """
                     SELECT RAWTOHEX(STANDARD_HASH(stock || corporation || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id,
                            CASE
-                               WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                               WHEN startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
                               ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
                            END AS startdate_fixed,
                            CASE
@@ -751,7 +751,7 @@
                            value,
                            currency,
                            CASE
-                               WHEN startdate <= TO_DATE('1000-12-31','YYYY-MM-DD') THEN NULL
+                               WHEN startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
                                ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
                            END AS startdate_fixed,
                            CASE

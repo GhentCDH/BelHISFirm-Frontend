@@ -8,13 +8,14 @@
         "short": "Belhisfirm",
         "mobile": "Belhisfirm",
         "long": "&nbsp; &nbsp; Belhisfirm &nbsp; &nbsp;",
-        "subheading": ""
+        "subheading": "The Belgian corporate history database · 1873–2002"
     },
-    "selectPerspective": "Select a perspective to search and browse the knowledge graph:",
-    "mainPageImageLicence": "Images used under license from Shutterstock.com",
+    "appDescription": "Explore Belgian corporate history through a single database of companies and their listed securities on Belgian stock exchanges.<br>Developed by Study Center for Companies and Exchanges and Ghent Centre for Digital Humanities",
+    "selectPerspective": "Select a perspective to search and browse",
+    "mainPageImageLicence": "",
     "backendErrorText": "One of the backend services is not available at the moment. Please try again later.",
     "infoHeader": {
-        "toggleInstructions": "Click to show or hide instructions"
+        "toggleInstructions": "Click to show or hide extra info"
     },
     "topBar": {
         "info": {
@@ -22,6 +23,12 @@
             "aboutPage": "About the portal"
         },
         "instructions": "instructions"
+    },
+    "mainPageLayout": {
+        "part1": {
+            "heading": "",
+            "description": ""
+        }
     },
     "facetBar": {
         "results": "Results",
@@ -112,8 +119,8 @@
         "securities": {
             "label": "Securities",
             "facetResultsType": "securities",
-            "shortDescription": "Scob securities",
-            "longDescription": "",
+            "shortDescription": "A historical register of listed shares and bonds on the Antwerp and Brussels exchanges, captured at year-end.",
+            "longDescription": "PUBLISHED IN THE STOCK EXCHANGES\nShares and bonds listed on the Antwerp and Brussel stock exchanges, available for the last trading day of each year.",
             "instancePage": {
                 "label": "Security",
                 "description": "Scob belhisfirm security"
@@ -160,8 +167,8 @@
         "corporations": {
             "label": "Corporations",
             "facetResultsType": "corporations",
-            "shortDescription": "Scob corporations",
-            "longDescription": "",
+            "shortDescription": "The legal and biographical data of Belgian firms since 1873, from incorporation to dissolution.",
+            "longDescription": "PUBLISHED IN THE OFFICIAL GAZETTE\nBiographical data on Belgian firms since 1873, including data of incorporation, legal form, address, name changes and dissolution.",
             "instancePage": {
                 "label": "Corporation",
                 "description": "Scob belhisfirm corporation"
