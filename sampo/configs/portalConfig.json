@@ -6,7 +6,7 @@
         "searchPerspectives": [
             "corporations",
             "securities",
-            "yearEndPrices"
+            "infoPage"
         ],
         "onlyInstancePages": [
             "corporationNames",
@@ -71,10 +71,10 @@
             "mobileMenuBreakpoint": 1360,
             "infoDropdown": [
                 {
-                    "id": "aboutPage",
+                    "id": "infoPage",
                     "externalLink": false,
-                    "translatedText": "aboutPage",
-                    "internalLink": "/about"
+                    "translatedText": "infoPage",
+                    "internalLink": "/info"
                 }
             ]
         },
@@ -88,11 +88,10 @@
             "perspectives": [
                 {
                     "id": "part1",
-                    "cardsPerRow": 3,
+                    "cardsPerRow": 2,
                     "perspectives": [
                         "corporations",
-                        "securities",
-                        "yearEndPrices"
+                        "securities"
                     ]
                 }
             ]

@@ -250,6 +250,15 @@ img[alt="Semantic Computing research group logo"] {
   display: none !important;
 }
 
+/* Hide the leftover "Info" dropdown button in the topbar. About is now its own
+   dummy-internal perspective button; infoDropdown is kept in portalConfig only to
+   generate the /about route. The language selector shares aria-haspopup + the same
+   expand icon, so we single out the info button structurally: it is the topbar
+   popup-button that has a *later* popup-button sibling (the language selector). */
+header.MuiAppBar-root button[aria-haspopup="true"]:has(~ button[aria-haspopup="true"]) {
+  display: none !important;
+}
+
 /* --------------------------------------------------------------------------
    Landing page
    -------------------------------------------------------------------------- */

@@ -1,16 +1,16 @@
 {
     "languageLabel": "English",
     "html": {
-        "title": "Belhisfirm",
-        "description": "Belhisfirm website built with sampo-ui"
+        "title": "BelHisFirm",
+        "description": "BelHisFirm website built with sampo-ui"
     },
     "appTitle": {
-        "short": "Belhisfirm",
-        "mobile": "Belhisfirm",
-        "long": "&nbsp; &nbsp; Belhisfirm &nbsp; &nbsp;",
+        "short": "BelHisFirm",
+        "mobile": "BelHisFirm",
+        "long": "&nbsp; &nbsp; BelHisFirm &nbsp; &nbsp;",
         "subheading": "The Belgian corporate history database · 1873–2002"
     },
-    "appDescription": "Explore Belgian corporate history through a single database of companies and their listed securities on Belgian stock exchanges.<br>Developed by Study Center for Companies and Exchanges and Ghent Centre for Digital Humanities",
+    "appDescription": "Explore Belgian corporate history through a single database of companies and their listed securities on Belgian stock exchanges.<br>Developed by Study Centre for Companies and Exchanges and Ghent Centre for Digital Humanities",
     "selectPerspective": "Select a perspective to search and browse",
     "mainPageImageLicence": "",
     "backendErrorText": "One of the backend services is not available at the moment. Please try again later.",
@@ -374,8 +374,11 @@
                     "description": "Previous value"
                 }
             }
+        },
+        "infoPage": {
+            "label": "info"
         }
     },
-    "aboutPage": "htmlFile:pages/about_en.html",
-    "instructions": "htmlFile:pages/instructions_en.html"
+    "instructions": "htmlFile:pages/instructions_en.html",
+    "infoPage": "htmlFile:pages/about_en.html"
 }

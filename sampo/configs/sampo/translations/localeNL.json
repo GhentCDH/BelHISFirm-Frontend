@@ -1,13 +1,13 @@
 {
     "languageLabel": "Nederlands",
     "html": {
-        "title": "Belhisfirm",
-        "description": "Belhisfirm website built with sampo-ui"
+        "title": "BelHisFirm",
+        "description": "BelHisFirm website built with sampo-ui"
     },
     "appTitle": {
-        "short": "Belhisfirm",
-        "mobile": "Belhisfirm",
-        "long": "&nbsp; &nbsp; Belhisfirm &nbsp; &nbsp;",
+        "short": "BelHisFirm",
+        "mobile": "BelHisFirm",
+        "long": "&nbsp; &nbsp; BelHisFirm &nbsp; &nbsp;",
         "subheading": "De Belgische ondernemingshistorische databank · 1873–2002"
     },
     "appDescription": "Verken de Belgische ondernemingsgeschiedenis via één databank van ondernemingen en hun genoteerde effecten op de Belgische beurzen.<br>Ontwikkeld door het Studiecentrum voor Onderneming en Beurs en het Ghent Centre for Digital Humanities",
@@ -372,8 +372,11 @@
                     "description": "Vorige waarde"
                 }
             }
+        },
+        "infoPage": {
+            "label": "info"
         }
     },
-    "aboutPage": "htmlFile:pages/about_nl.html",
-    "instructions": "htmlFile:pages/instructions_nl.html"
+    "instructions": "htmlFile:pages/instructions_nl.html",
+    "infoPage": "htmlFile:pages/about_nl.html"
 }
