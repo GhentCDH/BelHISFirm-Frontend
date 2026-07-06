@@ -120,7 +120,7 @@
             "label": "Securities",
             "facetResultsType": "securities",
             "shortDescription": "A historical register of listed shares and bonds on the Antwerp and Brussels exchanges, captured at year-end.",
-            "longDescription": "PUBLISHED IN THE STOCK EXCHANGES\nShares and bonds listed on the Antwerp and Brussel stock exchanges, available for the last trading day of each year.",
+            "longDescription": "Historical data on listed securities and their classifications on stock exchanges.",
             "instancePage": {
                 "label": "Security",
                 "description": "Scob belhisfirm security"
@@ -128,39 +128,35 @@
             "properties": {
                 "scobID": {
                     "label": "ID",
-                    "description": "ID of the security"
+                    "description": "ID of the security."
                 },
                 "uri": {
                     "label": "URI",
-                    "description": "Identifier of the resource"
+                    "description": "Identifier of the resource."
                 },
                 "name": {
                     "label": "Name(s)",
-                    "description": "Name(s) of the security"
+                    "description": "Name(s) of the security."
                 },
                 "stockExchange": {
                     "label": "Exchange",
-                    "description": "Exchange the security is on"
+                    "description": "Stock exchange where the security was listed."
                 },
                 "stocktype": {
                     "label": "Type(s)",
-                    "description": "Type of the security"
+                    "description": "Type of security (e.g. share or bond)."
                 },
                 "sectorName": {
                     "label": "Sector(s)",
-                    "description": "Sector(s) of the security"
+                    "description": "Market sector(s) as listed in official exchange classifications."
                 },
                 "sharetype": {
                     "label": "Sharetype",
-                    "description": "Sharetype of the security"
-                },
-                "currency": {
-                    "label": "Currency",
-                    "description": "Currency this security is in"
+                    "description": "Sharetype of the security."
                 },
                 "corporation": {
                     "label": "Corporation(s)",
-                    "description": "Sorporation(s) that had this security"
+                    "description": "Corporation(s) that had this security."
                 }
             }
         },
@@ -168,7 +164,7 @@
             "label": "Corporations",
             "facetResultsType": "corporations",
             "shortDescription": "The legal and biographical data of Belgian firms since 1873, from incorporation to dissolution.",
-            "longDescription": "PUBLISHED IN THE OFFICIAL GAZETTE\nBiographical data on Belgian firms since 1873, including data of incorporation, legal form, address, name changes and dissolution.",
+            "longDescription": "Historical data on Belgian (listed) companies",
             "instancePage": {
                 "label": "Corporation",
                 "description": "Scob belhisfirm corporation"
@@ -184,35 +180,35 @@
                 },
                 "corporationName": {
                     "label": "Name(s)",
-                    "description": "Name(s) the corporation has had"
+                    "description": "One or more historical company names linked to a company ID (optionally with period or location)."
                 },
                 "legalForm": {
                     "label": "Legal form",
-                    "description": "Legal form of the corporation"
+                    "description": "Successive legal forms of the company over time."
                 },
                 "address": {
                     "label": "Registered office",
-                    "description": "Address(es) of the corporation's registered office."
+                    "description": "Successive registered office addresses."
                 },
                 "country": {
                     "label": "Country",
-                    "description": "Country where the corporation's registered office is located."
+                    "description": "Successive countries of the registered office."
                 },
                 "city": {
                     "label": "City",
-                    "description": "City in which the corporation's registered office is located."
+                    "description": "Successive cities of the registered office."
                 },
                 "streetAddress": {
                     "label": "Street address",
-                    "description": "Street address of the corporation's registered office. A lot of corporations (especially older ones) do not have a street. "
+                    "description": "Successive registered office addresses."
                 },
                 "dateOfIncorporation": {
                     "label": "Date of incorporation",
-                    "description": "Date of incorporation"
+                    "description": "Date of first incorporation deed."
                 },
                 "dateOfDissolution": {
                     "label": "Date of dissolution",
-                    "description": "Date of dissolution"
+                    "description": "Date of legal dissolution; liquidation may occur later. New ID assigned upon re-establishment."
                 },
                 "stock": {
                     "label": "Securities",

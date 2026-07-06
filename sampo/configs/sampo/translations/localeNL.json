@@ -118,7 +118,7 @@
             "label": "Effecten",
             "facetResultsType": "effecten",
             "shortDescription": "Een historisch register van genoteerde aandelen en obligaties op de beurzen van Antwerpen en Brussel, opgenomen per jaareinde.",
-            "longDescription": "",
+            "longDescription": "Historische gegevens over genoteerde effecten en hun classificaties op beurzen.",
             "instancePage": {
                 "label": "Effect",
                 "description": "Scob belhisfirm effect"
@@ -126,39 +126,35 @@
             "properties": {
                 "scobID": {
                     "label": "ID",
-                    "description": "ID van het effect"
+                    "description": "ID van het effect."
                 },
                 "uri": {
                     "label": "URI",
-                    "description": "URI van het effect"
+                    "description": "URI van het effect."
                 },
                 "name": {
-                    "label": "Naam/namen",
-                    "description": "Namen van het effect"
+                    "label": "Na(a)m(en)",
+                    "description": "Naam van het effect."
                 },
                 "stockExchange": {
                     "label": "Beurs",
-                    "description": "Beurs/beurzen dat het effect op was"
+                    "description": "Beurs waarop het effect was genoteerd."
                 },
                 "stocktype": {
                     "label": "Type(s)",
-                    "description": "Het type effect"
+                    "description": "Type effect (bijv. aandeel of obligatie)."
                 },
                 "sectorName": {
                     "label": "Sector(en)",
-                    "description": "Sector(en) van het effect"
+                    "description": "Beurssector(en) volgens officiële koersenlijsten."
                 },
                 "sharetype": {
                     "label": "Sharetype",
-                    "description": "Brede benaming voor diverse effecten"
-                },
-                "currency": {
-                    "label": "Munteenheid",
-                    "description": "Munteenheid/munteenheden dat dit effect in was"
+                    "description": "Brede benaming voor diverse effecten."
                 },
                 "corporation": {
                     "label": "Onderneming",
-                    "description": "Onderneming/ondernemingen van wie dit effect was"
+                    "description": "Onderneming/ondernemingen van wie dit effect was."
                 }
             }
         },
@@ -166,7 +162,7 @@
             "label": "Ondernemingen",
             "facetResultsType": "ondernemingen",
             "shortDescription": "De juridische en biografische gegevens van Belgische ondernemingen sinds 1873, van oprichting tot ontbinding.",
-            "longDescription": "",
+            "longDescription": "Historische gegevens over Belgische (beursgenoteerde) bedrijven.",
             "instancePage": {
                 "label": "Onderneming",
                 "description": "Scob belhisfirm onderneming"
@@ -174,43 +170,43 @@
             "properties": {
                 "uri": {
                     "label": "URI",
-                    "description": "URI van het onderneming"
+                    "description": "URI van het onderneming."
                 },
                 "scobID": {
                     "label": "ID",
-                    "description": "ID van het onderneming"
+                    "description": "ID van het onderneming."
                 },
                 "corporationName": {
-                    "label": "Naam/namen",
-                    "description": "Naam/namen die het onderneming heeft gehad"
+                    "label": "Na(a)m(en)",
+                    "description": "Eén of meer historische bedrijfsnamen gekoppeld aan een bedrijfs-ID (eventueel met periode of locatie)."
                 },
                 "legalForm": {
-                    "label": "Juridisch statuut",
-                    "description": "Juridisch statuut van het onderneming"
+                    "label": "Rechtsvorm",
+                    "description": "Opeenvolgende rechtsvormen van het bedrijf over de tijd."
                 },
                 "address": {
                     "label": "Maatschappelijke zetel",
-                    "description": "Adres(sen) van de maatschappelijke zetel van het onderneming."
+                    "description": "Opeenvolgende adressen van de maatschappelijke zetel."
                 },
                 "country": {
                     "label": "Land",
-                    "description": "Land waar de maatschappelijke zetel van het onderneming zich bevindt."
+                    "description": "Opeenvolgende steden van de maatschappelijke zetel."
                 },
                 "city": {
                     "label": "Stad",
-                    "description": "Stad waar de maatschappelijke zetel van het onderneming zich bevindt."
+                    "description": "Opeenvolgende steden van de maatschappelijke zetel."
                 },
                 "streetAddress": {
                     "label": "Straatadres",
-                    "description": "Straatadres van de maatschappelijke zetel van het onderneming. Veel ondernemingen (vooral oudere) hebben geen straat."
+                    "description": "Opeenvolgende adressen van de maatschappelijke zetel."
                 },
                 "dateOfIncorporation": {
                     "label": "Oprichtingsdatum",
-                    "description": "Datum van oprichting"
+                    "description": "Datum van de eerste oprichtingsakte."
                 },
                 "dateOfDissolution": {
                     "label": "Ontbindingsdatum",
-                    "description": "Datum van ontbinding"
+                    "description": "Ontbindingsdatum; liquidatie kan later volgen. Bij heroprichting wordt een nieuw ID toegekend."
                 },
                 "stock": {
                     "label": "Effecten",
@@ -258,29 +254,29 @@
         "legalForms": {
             "label": "Juridische statuten",
             "instancePage": {
-                "label": "Juridisch statuut",
-                "description": "Juridisch statuut dat het onderneming op een bepaald moment had of heeft gehad."
+                "label": "Rechtsvorm",
+                "description": "Rechtsvorm dat het onderneming op een bepaald moment had of heeft gehad."
             },
             "properties": {
                 "uri": {
                     "label": "URI",
-                    "description": "ID van de instantie van het juridisch statuut dat aan het onderneming is gekoppeld"
+                    "description": "ID van de instantie van het rechtsvorm dat aan het onderneming is gekoppeld"
                 },
                 "corporation": {
                     "label": "Onderneming",
-                    "description": "Onderneming dat aan deze instantie van juridisch statuut is gekoppeld"
+                    "description": "Onderneming dat aan deze instantie van rechtsvorm is gekoppeld"
                 },
                 "legalForm": {
-                    "label": "Juridisch statuut",
-                    "description": "Juridisch statuut van het onderneming"
+                    "label": "Rechtsvorm",
+                    "description": "Rechtsvorm van het onderneming"
                 },
                 "startDate": {
                     "label": "Startdatum",
-                    "description": "Startdatum waarop dit juridisch statuut werd gebruikt"
+                    "description": "Startdatum waarop dit rechtsvorm werd gebruikt"
                 },
                 "endDate": {
                     "label": "Einddatum",
-                    "description": "Einddatum waarop dit juridisch statuut werd gebruikt"
+                    "description": "Einddatum waarop dit rechtsvorm werd gebruikt"
                 },
                 "source": {
                     "label": "Bron",
