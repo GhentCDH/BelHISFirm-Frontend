@@ -24,12 +24,6 @@ union
 }
 union
 {
-    ?id bhf:hasStockQuantity ?stockQuantity__id .
-    ?stockQuantity__id bhf:hasCurrency ?currency__id .
-    ?currency__id foaf:name ?currency__prefLabel .
-}
-union
-{
     ?id bhf:hasStockExchange ?stockExchange__id .
     bind(?stockExchange__id as ?stockExchange__prefLabel)
 }
@@ -95,7 +89,7 @@ union
 
 
 export const securitiesExportQuery = `
-  SELECT DISTINCT ?uri ?scobID ?name ?exchange ?type ?sector ?sharetype ?currency ?corporation
+  SELECT DISTINCT ?uri ?scobID ?name ?exchange ?type ?sector ?sharetype ?corporation
   WHERE {
     <FILTER>
     ?uri rdf:type bhf:Stock .
@@ -121,11 +115,6 @@ export const securitiesExportQuery = `
       ?uri bhf:hasSharetype ?sharetype .
     }
     OPTIONAL {
-      ?uri bhf:hasStockQuantity ?_sqNode .
-      ?_sqNode bhf:hasCurrency ?_currencyNode .
-      ?_currencyNode foaf:name ?currency .
-    }
-    OPTIONAL {
       ?_stockcorpNode bhf:hasStock ?uri .
       ?_corpNode bhf:hasStockCorporation ?_stockcorpNode .
       ?_corpNode bhf:hasName/rdfs:label ?corporation .
@@ -134,14 +123,15 @@ export const securitiesExportQuery = `
   ORDER BY ?scobID
 `
 
-export const facetResultSetQueryBelhisfirm = `
+export const facetResultSetQueryStocks = `
   SELECT *
   WHERE {
     {
       SELECT DISTINCT * {
         <FILTER>
         VALUES ?facetClass { <FACET_CLASS> }
-        ?id <FACET_CLASS_PREDICATE> ?facetClass .
+        ?id <FACET_CLASS_PREDICATE> ?facetClass ;
+            bhf:hasStockExchange ?_exchng .
         <ORDER_BY_TRIPLE>
       }
       <ORDER_BY>

@@ -81,6 +81,7 @@
                     SELECT corporation,
                            RAWTOHEX(STANDARD_HASH(stock || corporation || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
                     FROM scoball.stock_corporation
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasStockCorporation ;
@@ -260,7 +261,7 @@
 :STOCK-TYPE
     a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery """
-                    SELECT id FROM scoball.stock
+                    SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2)
     """ ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stock/{id}" ;
                       rr:class    bhf:Stock ] .
@@ -268,7 +269,7 @@
 :STOCK-SCOBID
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """
-                      SELECT id FROM scoball.stock
+                      SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2)
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:scobID ;
@@ -284,7 +285,7 @@
                             WHEN 2 THEN 'Antwerp Stock Exchange'
                             ELSE Null
                         END AS exchange_name
-                    FROM scoball.stock
+                    FROM scoball.stock WHERE stockexchange IN (1, 2)
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasStockExchange ;
@@ -296,6 +297,7 @@
     rr:logicalTable       [ rr:sqlQuery """
                     SELECT stock,  RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
                     FROM scoball.stock_name
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{stock}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasName ;
@@ -306,6 +308,7 @@
     rr:logicalTable [ rr:sqlQuery """
                     SELECT name, RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
                     FROM scoball.stock_name
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
     """ ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stock_name/{id}" ;
                       rr:class    bhf:DatedName ] .
@@ -324,6 +327,7 @@
                            END AS enddate_fixed,
                            name
                     FROM scoball.stock_name
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock_name/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate rdfs:label ;
@@ -344,6 +348,7 @@
                     FROM scoball.stock s
                     JOIN scoball.sharetype st
                            ON s.sharetype = st.id
+                    WHERE s.stockexchange IN (1, 2)
         """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{stock_id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasSharetype ;
@@ -354,6 +359,7 @@
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """
                     SELECT id, stock FROM scoball.notation
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{stock}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasNotation ;
@@ -364,103 +370,11 @@
     rr:logicalTable       [ rr:sqlQuery """
                     SELECT stock, RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
                     FROM scoball.stock_type
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{stock}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasStockType ;
                             rr:objectMap [ rr:template "http://belhisfirm.be/resource/stocktype/{id}" ] ] .
-
-:STOCK-STOCKQUANTITY
-    a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """
-                    SELECT stock, RAWTOHEX(STANDARD_HASH(stock || type || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
-                    FROM scoball.stock_quantity
-    """ ] ;
-    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{stock}" ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:hasStockQuantity ;
-                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/stockquantity/{id}" ] ] .
-
-
-###################
-# STOCK-EXCHANGE
-##################
-:STOCKEXCHANGE-TYPE
-    a               rr:TriplesMap ;
-    rr:logicalTable [ rr:sqlQuery """
-                    SELECT id FROM scoball.stockexchange
-    """ ] ;
-    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stockexchange/{id}" ;
-                      rr:class    bhf:StockExchange ] .
-
-:STOCKEXCHANGE-NAME
-    a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """
-                    SELECT stockexchange,
-                           RAWTOHEX(STANDARD_HASH(stockexchange || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
-                    FROM scoball.stockexchange_name
-    """ ] ;
-    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stockexchange/{stockexchange}" ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:hasName ;
-                            rr:objectMap [ rr:template "http://belhisfirm.be/resource/stockexchange_name/{id}" ] ] .
-
-:STOCKEXCHANGE-PROPERTIES
-    a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """
-                    SELECT
-                    id,
-                    startdate,
-                    CASE
-                        WHEN startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
-                        ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
-                    END AS startdate_fixed,
-                    CASE
-                        WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
-                        ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
-                    END AS enddate_fixed
-                FROM scoball.stockexchange
-    """ ] ;
-    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stockexchange/{id}" ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:startDate ;
-                            rr:objectMap [ rr:column   "startdate_fixed" ;
-                                           rr:datatype xsd:date ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:endDate ;
-                            rr:objectMap [ rr:column   "enddate_fixed" ;
-                                           rr:datatype xsd:date ] ] .
-
-:STOCKEXCHANGE-NAME-TYPE
-    a               rr:TriplesMap ;
-    rr:logicalTable [ rr:sqlQuery """
-                    SELECT RAWTOHEX(STANDARD_HASH(stockexchange || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
-                    FROM scoball.stockexchange_name
-    """ ] ;
-    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stockexchange_name/{id}" ;
-                      rr:class    bhf:DatedName ] .
-
-:STOCKEXCHANGE-NAME-PROPERTIES
-    a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """
-                    SELECT RAWTOHEX(STANDARD_HASH(stockexchange || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id,
-                           CASE
-                               WHEN startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
-                               ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
-                           END AS startdate_fixed,
-                           CASE
-                               WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
-                               ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
-                           END AS enddate_fixed,
-                           name
-                    FROM scoball.stockexchange_name
-    """ ] ;
-    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stockexchange_name/{id}" ] ;
-    rr:predicateObjectMap [ rr:predicate rdfs:label ;
-                            rr:objectMap [ rr:column   "name" ;
-                                           rr:datatype xsd:string ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:startDate ;
-                            rr:objectMap [ rr:column   "startdate_fixed" ;
-                                           rr:datatype xsd:date ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:endDate ;
-                            rr:objectMap [ rr:column   "enddate_fixed" ;
-                                           rr:datatype xsd:date ] ] .
-
 
 ###################
 # NOTATION
@@ -469,6 +383,7 @@
     a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery """
                     SELECT id FROM scoball.notation
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
     """ ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/notation/{id}" ;
                       rr:class    bhf:Notation ] .
@@ -486,6 +401,7 @@
                                ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
                            END AS enddate_fixed
                     FROM scoball.notation
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/notation/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasSector ;
@@ -624,6 +540,7 @@
     rr:logicalTable [ rr:sqlQuery """
                     SELECT RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
                     FROM scoball.stock_type
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
     """ ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stocktype/{id}" ;
                       rr:class    bhf:StockType ] .
@@ -641,6 +558,7 @@
                         ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
                     END AS enddate_fixed
                     FROM scoball.stock_type
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stocktype/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:startDate ;
@@ -658,24 +576,11 @@
                     FROM scoball.stock_type st
                     JOIN scoball.stocktype sn
                     ON st.type = sn.id
+                    WHERE st.stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stocktype/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:typeName ;
                             rr:objectMap [ rr:column   "name" ;
-                                           rr:datatype xsd:string ] ] .
-
-:STOCK-TYPE-COMPREF
-    a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """
-                    SELECT cm.compref as compref,
-                           RAWTOHEX(STANDARD_HASH(st.stock || TO_CHAR(st.startdate,'YYYY-MM-DD'), 'SHA1')) as id
-                    FROM scoball.stock_type st
-                    JOIN scoball.stock_type_compref cm
-                    ON st.compref = cm.id
-    """ ] ;
-    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stocktype/{id}" ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:compref ;
-                            rr:objectMap [ rr:column   "compref" ;
                                            rr:datatype xsd:string ] ] .
 
 
@@ -687,6 +592,7 @@
     rr:logicalTable [ rr:sqlQuery """
                     SELECT RAWTOHEX(STANDARD_HASH(stock || corporation || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
                     FROM scoball.stock_corporation
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
     """ ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stockcorporation/{id}" ;
                       rr:class    bhf:StockCorporation ] .
@@ -705,6 +611,7 @@
                            END AS enddate_fixed,
                            stock
                     FROM scoball.stock_corporation
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stockcorporation/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasStock ;
@@ -715,91 +622,3 @@
     rr:predicateObjectMap [ rr:predicate bhf:endDate ;
                             rr:objectMap [ rr:column   "enddate_fixed" ;
                                            rr:datatype xsd:date ] ] .
-
-
-###################
-# STOCK-QUANTITY
-##################
-:STOCK-QUANTITY-TYPE
-    a               rr:TriplesMap ;
-    rr:logicalTable [ rr:sqlQuery """
-                    SELECT RAWTOHEX(STANDARD_HASH(stock || type || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
-                    FROM scoball.stock_quantity
-    """ ] ;
-    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stockquantity/{id}" ;
-                      rr:class    bhf:StockQuantity ] .
-
-:STOCK-QUANTITY-TYPENAME
-    a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """
-                    SELECT RAWTOHEX(STANDARD_HASH(sq.stock || sq.type || TO_CHAR(sq.startdate,'YYYY-MM-DD'), 'SHA1')) as id,
-                           qt.name as name
-                    FROM scoball.stock_quantity sq
-                    JOIN scoball.quantitytype qt
-                    ON sq.type = qt.id
-    """ ] ;
-    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stockquantity/{id}" ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:quantityType ;
-                            rr:objectMap [ rr:column   "name" ;
-                                           rr:datatype xsd:string ] ] .
-
-:STOCK-QUANTITY-PROPERTIES
-    a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """
-                    SELECT RAWTOHEX(STANDARD_HASH(stock || type || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id,
-                           volume,
-                           value,
-                           currency,
-                           CASE
-                               WHEN startdate <= TO_DATE('1005-12-31','YYYY-MM-DD') THEN NULL
-                               ELSE TO_CHAR(startdate, 'YYYY-MM-DD')
-                           END AS startdate_fixed,
-                           CASE
-                               WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
-                               ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
-                           END AS enddate_fixed
-                    FROM scoball.stock_quantity
-    """ ] ;
-    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stockquantity/{id}" ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:quantityVolume ;
-                            rr:objectMap [ rr:column   "volume" ;
-                                           rr:datatype xsd:integer ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:quantityValue ;
-                            rr:objectMap [ rr:column   "value" ;
-                                           rr:datatype xsd:integer ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:hasCurrency ;
-                            rr:objectMap [ rr:template "http://belhisfirm.be/resopricurce/currency/{currency}" ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:startDate ;
-                            rr:objectMap [ rr:column   "startdate_fixed" ;
-                                           rr:datatype xsd:date ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:endDate ;
-                            rr:objectMap [ rr:column   "enddate_fixed" ;
-                                           rr:datatype xsd:date ] ] .
-
-
-###################
-# CURRENCY
-##################
-:CURRENCY-TYPE
-    a               rr:TriplesMap ;
-    rr:logicalTable [ rr:sqlQuery """
-                    SELECT id FROM scoball.currency
-    """ ] ;
-    rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/currency/{id}" ;
-                      rr:class    bhf:Currency ] .
-
-:CURRENCY-PROPERTIES
-    a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """
-                    SELECT id, name, country, comments FROM scoball.currency
-    """ ] ;
-    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/currency/{id}" ] ;
-    rr:predicateObjectMap [ rr:predicate foaf:name ;
-                            rr:objectMap [ rr:column   "name" ;
-                                           rr:datatype xsd:string ] ] ;
-    rr:predicateObjectMap [ rr:predicate vcard:country-name ;
-                            rr:objectMap [ rr:column   "country" ;
-                                           rr:datatype xsd:string ] ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:comments ;
-                            rr:objectMap [ rr:column   "comments" ;
-                                           rr:datatype xsd:string ] ] .

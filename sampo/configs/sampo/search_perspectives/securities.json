@@ -7,7 +7,7 @@
         "defaultSparql": true
     },
     "generalQueries": {
-        "facetResultSetQuery": "facetResultSetQueryBelhisfirm"
+        "facetResultSetQuery": "facetResultSetQueryStocks"
     },
     "sparqlQueriesFile": "ScobStocks.js",
     "baseURI": "http://belhisfirm.be/resource",
