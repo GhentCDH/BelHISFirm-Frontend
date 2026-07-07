@@ -123,6 +123,10 @@ export const securitiesExportQuery = `
   ORDER BY ?scobID
 `
 
+// ONTOP rewrites the limit of the inner query when you add all the unions for the properties causing it to get more
+// ID's than we want to query and too many rows to be displayed with missing info. This is because we filter in our
+// mappings on only certain stockexchanges and sharetypes, to fix this in here we force the matched ID's to have
+// a stockexchange and sharetype.
 export const facetResultSetQueryStocks = `
   SELECT *
   WHERE {
@@ -131,7 +135,8 @@ export const facetResultSetQueryStocks = `
         <FILTER>
         VALUES ?facetClass { <FACET_CLASS> }
         ?id <FACET_CLASS_PREDICATE> ?facetClass ;
-            bhf:hasStockExchange ?_exchng .
+            bhf:hasStockExchange ?_exchng ;
+            bhf:hasShareType ?_shrtyp .
         <ORDER_BY_TRIPLE>
       }
       <ORDER_BY>

@@ -139,7 +139,7 @@
             "textQueryProperty": "bhf:hasName/rdfs:label"
         },
         "stockExchange": {
-            "containerClass": "ten",
+            "containerClass": "five",
             "facetType": "list",
             "filterType": "uriFilter",
             "predicate": "bhf:hasStockExchange",
@@ -181,7 +181,7 @@
             "literal": true
         },
         "sharetype": {
-            "containerClass": "ten",
+            "containerClass": "five",
             "facetType": "list",
             "filterType": "uriFilter",
             "predicate": "bhf:hasSharetype",

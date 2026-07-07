@@ -81,7 +81,7 @@
                     SELECT corporation,
                            RAWTOHEX(STANDARD_HASH(stock || corporation || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
                     FROM scoball.stock_corporation
-                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasStockCorporation ;
@@ -261,7 +261,7 @@
 :STOCK-TYPE
     a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery """
-                    SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2)
+                    SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2)
     """ ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stock/{id}" ;
                       rr:class    bhf:Stock ] .
@@ -269,7 +269,7 @@
 :STOCK-SCOBID
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """
-                      SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2)
+                      SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2)
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:scobID ;
@@ -285,7 +285,7 @@
                             WHEN 2 THEN 'Antwerp Stock Exchange'
                             ELSE Null
                         END AS exchange_name
-                    FROM scoball.stock WHERE stockexchange IN (1, 2)
+                    FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2)
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasStockExchange ;
@@ -297,7 +297,7 @@
     rr:logicalTable       [ rr:sqlQuery """
                     SELECT stock,  RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
                     FROM scoball.stock_name
-                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{stock}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasName ;
@@ -308,7 +308,7 @@
     rr:logicalTable [ rr:sqlQuery """
                     SELECT name, RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
                     FROM scoball.stock_name
-                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2))
     """ ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stock_name/{id}" ;
                       rr:class    bhf:DatedName ] .
@@ -327,7 +327,7 @@
                            END AS enddate_fixed,
                            name
                     FROM scoball.stock_name
-                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock_name/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate rdfs:label ;
@@ -348,7 +348,7 @@
                     FROM scoball.stock s
                     JOIN scoball.sharetype st
                            ON s.sharetype = st.id
-                    WHERE s.stockexchange IN (1, 2)
+                    WHERE s.stockexchange IN (1, 2) and sharetype IN (1,2)
         """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{stock_id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasSharetype ;
@@ -359,7 +359,7 @@
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """
                     SELECT id, stock FROM scoball.notation
-                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{stock}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasNotation ;
@@ -370,7 +370,7 @@
     rr:logicalTable       [ rr:sqlQuery """
                     SELECT stock, RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
                     FROM scoball.stock_type
-                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stock/{stock}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasStockType ;
@@ -383,7 +383,7 @@
     a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery """
                     SELECT id FROM scoball.notation
-                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2))
     """ ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/notation/{id}" ;
                       rr:class    bhf:Notation ] .
@@ -401,7 +401,7 @@
                                ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
                            END AS enddate_fixed
                     FROM scoball.notation
-                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/notation/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasSector ;
@@ -540,7 +540,7 @@
     rr:logicalTable [ rr:sqlQuery """
                     SELECT RAWTOHEX(STANDARD_HASH(stock || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) as id
                     FROM scoball.stock_type
-                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2))
     """ ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stocktype/{id}" ;
                       rr:class    bhf:StockType ] .
@@ -558,7 +558,7 @@
                         ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
                     END AS enddate_fixed
                     FROM scoball.stock_type
-                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stocktype/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:startDate ;
@@ -576,7 +576,7 @@
                     FROM scoball.stock_type st
                     JOIN scoball.stocktype sn
                     ON st.type = sn.id
-                    WHERE st.stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
+                    WHERE st.stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stocktype/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:typeName ;
@@ -592,7 +592,7 @@
     rr:logicalTable [ rr:sqlQuery """
                     SELECT RAWTOHEX(STANDARD_HASH(stock || corporation || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
                     FROM scoball.stock_corporation
-                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2))
     """ ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/stockcorporation/{id}" ;
                       rr:class    bhf:StockCorporation ] .
@@ -611,7 +611,7 @@
                            END AS enddate_fixed,
                            stock
                     FROM scoball.stock_corporation
-                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2))
+                    WHERE stock IN (SELECT id FROM scoball.stock WHERE stockexchange IN (1, 2) and sharetype IN (1,2))
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/stockcorporation/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasStock ;
