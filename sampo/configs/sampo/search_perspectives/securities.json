@@ -7,7 +7,9 @@
         "defaultSparql": true
     },
     "generalQueries": {
-        "facetResultSetQuery": "facetResultSetQueryStocks"
+        "facetResultSetQuery": "facetResultSetQueryStocks",
+        "facetValuesQuery": "facetValuesQueryStocks",
+        "countQuery": "countQueryStocks"
     },
     "sparqlQueriesFile": "ScobStocks.js",
     "baseURI": "http://belhisfirm.be/resource",
@@ -77,6 +79,7 @@
             "makeLink": true,
             "externalLink": false,
             "sortValues": true,
+            "sortBy": "startDate",
             "numberedList": false,
             "minWidth": 250
         },
@@ -139,13 +142,13 @@
             "textQueryProperty": "bhf:hasName/rdfs:label"
         },
         "stockExchange": {
-            "containerClass": "five",
+            "containerClass": "three",
             "facetType": "list",
             "filterType": "uriFilter",
             "predicate": "bhf:hasStockExchange",
             "pieChartButton": true,
             "barChartButton": true,
-            "searchField": true,
+            "searchField": false,
             "sortButton": true,
             "sortBy": "instanceCount",
             "sortByPredicate": "bhf:hasStockExchange",
@@ -181,13 +184,13 @@
             "literal": true
         },
         "sharetype": {
-            "containerClass": "five",
+            "containerClass": "three",
             "facetType": "list",
             "filterType": "uriFilter",
             "predicate": "bhf:hasSharetype",
             "pieChartButton": true,
             "barChartButton": true,
-            "searchField": true,
+            "searchField": false,
             "sortButton": true,
             "sortBy": "instanceCount",
             "sortByPredicate": "bhf:hasSharetype",

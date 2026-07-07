@@ -241,13 +241,6 @@ bhf:typeName
     rdfs:label   "name of the type"@en ;
     rdfs:comment ""@en .
 
-bhf:compref
-    a            owl:DatatypeProperty ;
-    rdfs:domain  bhf:StockType ;
-    rdfs:range   xsd:string ;
-    rdfs:label   "compref"@en ;
-    rdfs:comment ""@en .
-
 # StockQuantity properties
 bhf:quantityType
     a            owl:DatatypeProperty ;

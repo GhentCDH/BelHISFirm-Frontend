@@ -5,20 +5,17 @@ export const stocksProperties = `
     bind(?id as ?uri__id)
     bind(?id as ?uri__prefLabel)
     BIND(CONCAT("/securities/page/", str(?scobID__id)) AS ?scobID__dataProviderUrl)
-    BIND(?scobID__dataProviderUrl AS ?name__dataProviderUrl)
 }
 union
 {
     ?id bhf:hasName ?name__id .
-    ?name__id rdfs:label ?name .
+    ?name__id rdfs:label ?name__label .
     optional {?name__id bhf:startDate ?name__startDate .}
     optional {?name__id bhf:endDate ?name__endDate .}
     bind(concat(
-      str(?name),
+      str(?name__label),
       " [",
-      COALESCE(str(?name__startDate), "..."), 
-      " - ",
-      COALESCE(str(?name__endDate), "..."),
+      COALESCE(str(?name__startDate), "..."),
       "]"
     ) as ?name__prefLabel)
 }
@@ -123,10 +120,7 @@ export const securitiesExportQuery = `
   ORDER BY ?scobID
 `
 
-// ONTOP rewrites the limit of the inner query when you add all the unions for the properties causing it to get more
-// ID's than we want to query and too many rows to be displayed with missing info. This is because we filter in our
-// mappings on only certain stockexchanges and sharetypes, to fix this in here we force the matched ID's to have
-// a stockexchange and sharetype.
+// Force having a stockexchange and a sharetype for all queries about securities
 export const facetResultSetQueryStocks = `
   SELECT *
   WHERE {
@@ -136,7 +130,7 @@ export const facetResultSetQueryStocks = `
         VALUES ?facetClass { <FACET_CLASS> }
         ?id <FACET_CLASS_PREDICATE> ?facetClass ;
             bhf:hasStockExchange ?_exchng ;
-            bhf:hasShareType ?_shrtyp .
+            bhf:hasSharetype ?_shrtyp .
         <ORDER_BY_TRIPLE>
       }
       <ORDER_BY>
@@ -144,6 +138,46 @@ export const facetResultSetQueryStocks = `
     }
     FILTER(BOUND(?id))
     <RESULT_SET_PROPERTIES>
+  }
+  <ORDER_BY>
+`
+
+export const countQueryStocks = `
+  SELECT (COUNT(DISTINCT ?id) as ?count)
+  WHERE {
+    <FILTER>
+    VALUES ?facetClass { <FACET_CLASS> }
+    ?id <FACET_CLASS_PREDICATE> ?facetClass ;
+        bhf:hasStockExchange ?_exchng ;
+        bhf:hasSharetype ?_shrtyp .
+  }
+`
+
+export const facetValuesQueryStocks = `
+  SELECT DISTINCT ?id ?prefLabel ?selected ?parent ?instanceCount {
+    {
+      {
+        SELECT DISTINCT (count(DISTINCT ?instance) as ?instanceCount) ?id ?parent ?selected {
+          # facet values that return results
+          {
+            <FILTER>
+            ?instance <PREDICATE> ?id .
+            <PARENTS>
+            VALUES ?facetClass { <FACET_CLASS> }
+            ?instance <FACET_CLASS_PREDICATE> ?facetClass ;
+                      bhf:hasStockExchange ?_exchng ;
+                      bhf:hasSharetype ?_shrtyp .
+            <SELECTED_VALUES>
+          }
+          <SELECTED_VALUES_NO_HITS>     
+          BIND(COALESCE(?selected_, false) as ?selected)
+        }
+        GROUP BY ?id ?parent ?selected
+      }
+      FILTER(BOUND(?id))
+      <FACET_VALUE_FILTER>
+      <LABELS>
+    }
   }
   <ORDER_BY>
 `
