@@ -152,6 +152,18 @@
                     "label": "Sharetype",
                     "description": "Brede benaming voor diverse effecten."
                 },
+                "year": {
+                    "label": "Jaar",
+                    "description": "Kies een jaar om effecten met een eindejaarskoers in dat jaar te tonen."
+                },
+                "corporationName": {
+                    "label": "Onderneming",
+                    "description": "Naam van de onderneming zoals geldig op het geselecteerde jaareinde."
+                },
+                "openValue": {
+                    "label": "Open",
+                    "description": "Openingskoers op het jaareinde van het geselecteerde jaar."
+                },
                 "corporation": {
                     "label": "Onderneming",
                     "description": "Onderneming/ondernemingen van wie dit effect was."

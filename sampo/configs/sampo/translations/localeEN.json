@@ -154,6 +154,18 @@
                     "label": "Sharetype",
                     "description": "Sharetype of the security."
                 },
+                "year": {
+                    "label": "Year",
+                    "description": "Select a year to list securities with a year-end price that year."
+                },
+                "corporationName": {
+                    "label": "Corporation",
+                    "description": "Corporation name valid at the selected year-end."
+                },
+                "openValue": {
+                    "label": "Open",
+                    "description": "Year-end opening price in the selected year."
+                },
                 "corporation": {
                     "label": "Corporation(s)",
                     "description": "Corporation(s) that had this security."

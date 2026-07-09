@@ -18,20 +18,24 @@
     "frontPageImage": "main_page/mmm-banner.jpg",
     "searchMode": "faceted-search",
     "enableDynamicLanguageChange": false,
-    "defaultActiveFacets": [],
+    "defaultActiveFacets": [
+        "year"
+    ],
     "defaultTab": "table",
     "defaultInstancePageTab": "table",
     "resultClasses": {
         "securities": {
             "paginatedResultsConfig": {
                 "tabID": 0,
-                "component": "ResultTable",
+                "component": "CustomComponent",
+                "componentName": "GatedResultTable",
                 "tabPath": "table",
                 "tabIcon": "CalendarViewDay",
                 "propertiesQueryBlock": "stocksProperties",
+                "postprocess": { "func": "corporationNameForYear" },
                 "pagesize": 20,
-                "sortBy": null,
-                "sortDirection": null
+                "sortBy": "scobID",
+                "sortDirection": "asc"
             },
             "instanceConfig": {
                 "propertiesQueryBlock": "stocksProperties",
@@ -120,6 +124,24 @@
             "minWidth": 175
         },
         {
+            "id": "corporationName",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 250
+        },
+        {
+            "id": "openValue",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 110
+        },
+        {
             "id": "corporation",
             "valueType": "object",
             "makeLink": true,
@@ -131,6 +153,16 @@
         }
     ],
     "facets": {
+        "year": {
+            "containerClass": "three",
+            "facetType": "custom",
+            "filterType": "CustomComponent",
+            "componentName": "YearSelectFacet",
+            "customFilterName": "yearBindStock",
+            "minYear": 1830,
+            "maxYear": 2000,
+            "priority": 0
+        },
         "scobID": {
             "sortByPredicate": "bhf:scobID"
         },

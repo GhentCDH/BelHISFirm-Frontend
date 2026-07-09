@@ -19,11 +19,6 @@ union
       "]"
     ) as ?name__prefLabel)
 }
-union
-{
-    ?id bhf:hasStockExchange ?stockExchange__id .
-    bind(?stockExchange__id as ?stockExchange__prefLabel)
-}
 union 
 {
     ?id bhf:hasStockType ?stocktype__id .
@@ -36,27 +31,17 @@ union
     ?sector__id bhf:hasName ?sectorName__id .
     ?sectorName__id rdfs:label ?sectorName__prefLabel
 }
-union 
-{
-    ?id bhf:hasSharetype ?sharetype__id .
-    bind(?sharetype__id as ?sharetype__prefLabel)
-}
 union
 {
+    # All corporation-name candidates (with their validity dates); the corporationNameForYear
+    # postprocess (mappers.js) keeps only the name valid at the selected year-end.
     ?stockcorp__id bhf:hasStock ?id .
     ?corporation__id bhf:hasStockCorporation ?stockcorp__id .
-    ?corporation__id bhf:hasName/rdfs:label ?corporation__name .
-    optional {?stockcorp__id bhf:startDate ?corporation__startDate .}
-    optional {?stockcorp__id bhf:endDate ?corporation__endDate .}
-    bind(concat(
-      str(?corporation__name),
-      " [",
-      COALESCE(str(?corporation__startDate), "..."), 
-      " - ",
-      COALESCE(str(?corporation__endDate), "..."),
-      "]"
-    ) as ?corporation__prefLabel)
-    BIND(CONCAT("/corporations/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporation__dataProviderUrl)
+    ?corporation__id bhf:hasName ?corporationName__id .
+    ?corporationName__id rdfs:label ?corporationName__prefLabel .
+    optional { ?corporationName__id bhf:startDate ?corporationName__startDate . }
+    optional { ?corporationName__id bhf:endDate ?corporationName__endDate . }
+    BIND(CONCAT("/corporations/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporationName__dataProviderUrl)
 }
 `
 
@@ -120,36 +105,36 @@ export const securitiesExportQuery = `
   ORDER BY ?scobID
 `
 
-// Force having a stockexchange and a sharetype for all queries about securities
+// The stock -> exchange/sharetype/notation -> year-end openValue-price skeleton (bounded to the
+// selected year) is emitted by the `yearBindStock` custom filter into <FILTER>, inside the
+// LIMIT-bounded inner sub-SELECT (keeps the expensive price scan under Ontop's 30s timeout).
+// The cheap single-valued display binds live in the outer <RESULT_SET_PROPERTIES> block.
+// With no year selected <FILTER> is empty, ?id is unbound and the perspective shows nothing
+// (the GatedResultTable placeholder handles that).
 export const facetResultSetQueryStocks = `
-  SELECT *
-  WHERE {
+  SELECT * WHERE {
     {
-      SELECT DISTINCT * {
+      SELECT DISTINCT ?id ?year ?not ?price__id ?stockExchange__id ?sharetype__id ?openValue__prefLabel {
         <FILTER>
-        VALUES ?facetClass { <FACET_CLASS> }
-        ?id <FACET_CLASS_PREDICATE> ?facetClass ;
-            bhf:hasStockExchange ?_exchng ;
-            bhf:hasSharetype ?_shrtyp .
         <ORDER_BY_TRIPLE>
       }
       <ORDER_BY>
       <PAGE>
     }
     FILTER(BOUND(?id))
+    BIND(?stockExchange__id AS ?stockExchange__prefLabel)
+    BIND(?sharetype__id AS ?sharetype__prefLabel)
     <RESULT_SET_PROPERTIES>
   }
-  <ORDER_BY>
 `
 
+// Count: ?id (and the whole skeleton) is supplied by <FILTER> via yearBindStock. With no year
+// selected <FILTER> is empty, ?id is unbound and COUNT(DISTINCT ?id) is 0 without scanning the
+// price data. VALUES ?ping guards the otherwise-empty group pattern. Mirrors yearEndPricesCountQuery.
 export const countQueryStocks = `
-  SELECT (COUNT(DISTINCT ?id) as ?count)
-  WHERE {
+  SELECT (COUNT(DISTINCT ?id) as ?count) WHERE {
     <FILTER>
-    VALUES ?facetClass { <FACET_CLASS> }
-    ?id <FACET_CLASS_PREDICATE> ?facetClass ;
-        bhf:hasStockExchange ?_exchng ;
-        bhf:hasSharetype ?_shrtyp .
+    VALUES ?ping { 1 }
   }
 `
 

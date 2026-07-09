@@ -10,8 +10,6 @@
 // ?year, ?corp and ?not are in scope, so we constrain those variables directly instead of
 // going through ?id with long inverse property paths.
 
-const esc = s => String(s).replace(/["\\]/g, '\\$&')
-const MISSING = 'http://ldf.fi/MISSING_VALUE'
 
 const firstValue = values => {
   if (Array.isArray(values)) return values[0]
@@ -19,16 +17,7 @@ const firstValue = values => {
   return values
 }
 
-// Normalize a uriFilter selection into a clean array of literal strings, dropping the
-// "unknown value" sentinel and empties.
-const toLiterals = values =>
-  (Array.isArray(values) ? values : [values])
-    .filter(v => v != null && v !== '' && v !== MISSING)
-    .map(String)
 
-// Forward paths from a Corporation (?instance in facet-values queries) to each filtered value.
-const CORP_TO_SECTOR =
-  'bhf:hasStockCorporation/bhf:hasStock/bhf:hasNotation/bhf:hasSector/bhf:hasName/rdfs:label'
 const CORP_TO_PRICEYEAR =
   'bhf:hasStockCorporation/bhf:hasStock/bhf:hasNotation/bhf:hasNotationPrice/bhf:priceYearEnd'
 
@@ -51,35 +40,34 @@ export const yearBind = ({ values, filterTarget }) => {
   }
   return `
     BIND(${year} AS ?year)
-    ?corp a bhf:Corporation ;
-          bhf:hasStockCorporation/bhf:hasStock/bhf:hasNotation ?not .
-    ?not bhf:hasNotationPrice ?id .
-    ?id bhf:priceYearEnd ${year} .
   `
 }
 
-// sector: exact match on the notation's sector label (multi-select OR).
-export const sectorFilter = ({ values, filterTarget }) => {
-  const labels = toLiterals(values)
-  if (!labels.length) return ''
-  const vals = labels.map(l => `"${esc(l)}"`).join(' ')
-  if (filterTarget === 'instance') {
-    return `?instance ${CORP_TO_SECTOR} ?sectorFilter .
-            VALUES ?sectorFilter { ${vals} }\n`
-  }
-  return `?not bhf:hasSector/bhf:hasName/rdfs:label ?sectorFilter .
-          VALUES ?sectorFilter { ${vals} }\n`
-}
+// Forward path from a Stock (?instance in facet-values queries) to its year-end price year.
+const STOCK_TO_PRICEYEAR = 'bhf:hasNotation/bhf:hasNotationPrice/bhf:priceYearEnd'
 
-// corporation: exact match on the corporation's latest name (multi-select OR).
-export const nameFilter = ({ values, filterTarget }) => {
-  const labels = toLiterals(values)
-  if (!labels.length) return ''
-  const vals = labels.map(l => `"${esc(l)}"`).join(' ')
+// Securities year filter. Here ?id is the bhf:Stock itself (unlike yearBind, where ?id is a
+// price node). The whole "stock that has an exchange, a sharetype and a year-end openValue price
+// in <year>" skeleton lives in the FILTER, so the count query stays a cheap COUNT(DISTINCT ?id)
+// over <FILTER> (0 until a year is chosen), the result-set inner SELECT only needs <FILTER> +
+// paging, and ?id/?year/?not/?price__id/?stockExchange__id/?sharetype__id/?openValue__prefLabel are
+// all in scope for the outer <RESULT_SET_PROPERTIES> block.
+// ?year is bound first so the priceYearEnd triple inlines the literal (BIND can't reassign a var
+// already used in a triple).
+export const yearBindStock = ({ values, filterTarget }) => {
+  const year = parseInt(firstValue(values), 10)
+  if (!Number.isInteger(year)) return ''
   if (filterTarget === 'instance') {
-    return `?instance bhf:hasLatestName ?nameFilter .
-            VALUES ?nameFilter { ${vals} }\n`
+    return `?instance ${STOCK_TO_PRICEYEAR} ${year} .\n`
   }
-  return `?corp bhf:hasLatestName ?nameFilter .
-          VALUES ?nameFilter { ${vals} }\n`
+  return `
+    BIND(${year} AS ?year)
+    ?id a bhf:Stock ;
+        bhf:hasStockExchange ?stockExchange__id ;
+        bhf:hasSharetype ?sharetype__id ;
+        bhf:hasNotation ?not .
+    ?not bhf:hasNotationPrice ?price__id .
+    ?price__id bhf:priceYearEnd ${year} ;
+               bhf:openValue ?openValue__prefLabel .
+  `
 }
