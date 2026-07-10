@@ -4,8 +4,6 @@
 # Docker volumes
 postgres_data/
 
-# JDBC drivers (add manually)
-vkg/jdbc/*.jar
 
 # Node modules
 sampo/node_modules/
