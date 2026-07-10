@@ -160,8 +160,12 @@
                     "label": "Onderneming",
                     "description": "Naam van de onderneming zoals geldig op het geselecteerde jaareinde."
                 },
+                "corporationNames": {
+                    "label": "Onderneming",
+                    "description": "Namen van de onderneming."
+                },
                 "openValue": {
-                    "label": "Open",
+                    "label": "Openingskoers",
                     "description": "Openingskoers op het jaareinde van het geselecteerde jaar."
                 },
                 "corporation": {
@@ -372,7 +376,7 @@
                     "description": "Datum van de eindejaarsnoteringskoers"
                 },
                 "openValue": {
-                    "label": "Open",
+                    "label": "Prijs",
                     "description": "Openingswaarde"
                 },
                 "closeValue": {

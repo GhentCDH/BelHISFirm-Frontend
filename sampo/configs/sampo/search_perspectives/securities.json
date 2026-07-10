@@ -38,13 +38,87 @@
                 "sortDirection": "asc"
             },
             "instanceConfig": {
-                "propertiesQueryBlock": "stocksProperties",
+                "propertiesQueryBlock": "stockInstanceProperties",
                 "instancePageResultClasses": {
                     "instancePageTable": {
                         "tabID": 0,
                         "component": "InstancePageTable",
                         "tabPath": "table",
-                        "tabIcon": "CalendarViewDay"
+                        "tabIcon": "CalendarViewDay",
+                        "properties": [
+                            {
+                                "id": "scobID",
+                                "valueType": "object",
+                                "makeLink": true,
+                                "externalLink": false,
+                                "sortValues": true,
+                                "numberedList": false,
+                                "minWidth": 30
+                            },
+                            {
+                                "id": "uri",
+                                "valueType": "object",
+                                "makeLink": false,
+                                "sortValues": true,
+                                "onlyOnInstancePage": true
+                            },
+                            {
+                                "id": "name",
+                                "valueType": "object",
+                                "makeLink": true,
+                                "externalLink": false,
+                                "sortValues": true,
+                                "sortBy": "startDate",
+                                "numberedList": false,
+                                "minWidth": 250
+                            },
+                            {
+                                "id": "stockExchange",
+                                "valueType": "object",
+                                "makeLink": false,
+                                "externalLink": false,
+                                "sortValues": true,
+                                "numberedList": false,
+                                "minWidth": 300
+                            },
+                            {
+                                "id": "stocktype",
+                                "valueType": "object",
+                                "makeLink": false,
+                                "externalLink": false,
+                                "sortValues": true,
+                                "numberedList": false,
+                                "minWidth": 200
+                            },
+                            {
+                                "id": "sectorName",
+                                "valueType": "object",
+                                "makeLink": false,
+                                "externalLink": false,
+                                "sortValues": true,
+                                "numberedList": false,
+                                "minWidth": 150
+                            },
+                            {
+                                "id": "sharetype",
+                                "valueType": "object",
+                                "makeLink": false,
+                                "externalLink": false,
+                                "sortValues": true,
+                                "numberedList": false,
+                                "minWidth": 175
+                            },
+                            {
+                                "id": "corporationNames",
+                                "valueType": "object",
+                                "makeLink": true,
+                                "externalLink": false,
+                                "sortValues": true,
+                                "numberedList": false,
+                                "sortBy": "startDate",
+                                "minWidth": 250
+                            }
+                        ]
                     }
                 }
             }
@@ -88,13 +162,22 @@
             "minWidth": 250
         },
         {
+            "id": "openValue",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
             "id": "stockExchange",
             "valueType": "object",
             "makeLink": false,
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 300
+            "minWidth": 200
         },
         {
             "id": "stocktype",
@@ -121,7 +204,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 175
+            "minWidth": 150
         },
         {
             "id": "corporationName",
@@ -131,25 +214,6 @@
             "sortValues": true,
             "numberedList": false,
             "minWidth": 250
-        },
-        {
-            "id": "openValue",
-            "valueType": "object",
-            "makeLink": false,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 110
-        },
-        {
-            "id": "corporation",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 200,
-            "onlyOnInstancePage": true
         }
     ],
     "facets": {

@@ -45,6 +45,75 @@ union
 }
 `
 
+
+// Instance-page property block for a single security. Independent of the year-scoped result-set
+// query (no ?year / ?price plumbing): it reads the security's own detail directly off ?id, so
+// the instance page shows the full history (all names, all corporation names) regardless of any
+// selected year. Referenced by securities.json instanceConfig.propertiesQueryBlock.
+export const stockInstanceProperties = `
+{
+    ?id bhf:scobID ?scobID__id .
+    bind(?scobID__id as ?scobID__prefLabel)
+    bind(?id as ?uri__id)
+    bind(?id as ?uri__prefLabel)
+    BIND(CONCAT("/securities/page/", str(?scobID__id)) AS ?scobID__dataProviderUrl)
+}
+union
+{
+    ?id bhf:hasName ?name__id .
+    ?name__id rdfs:label ?name__label .
+    optional {?name__id bhf:startDate ?name__startDate .}
+    optional {?name__id bhf:endDate ?name__endDate .}
+    bind(concat(
+      str(?name__label),
+      " [",
+      COALESCE(str(?name__startDate), "..."),
+      "]"
+    ) as ?name__prefLabel)
+}
+union
+{
+    ?id bhf:hasStockExchange ?stockExchange__id .
+    bind(?stockExchange__id as ?stockExchange__prefLabel)
+}
+union
+{
+    ?id bhf:hasSharetype ?sharetype__id .
+    bind(?sharetype__id as ?sharetype__prefLabel)
+}
+union
+{
+    ?id bhf:hasStockType ?stocktype__id .
+    ?stocktype__id bhf:typeName ?stocktype__prefLabel .
+}
+union
+{
+    ?id bhf:hasNotation ?notation__id .
+    ?notation__id bhf:hasSector ?sector__id .
+    ?sector__id bhf:hasName ?sectorName__id .
+    ?sectorName__id rdfs:label ?sectorName__prefLabel
+}
+union
+{
+    # No ?year in scope and no postprocess on instanceConfig, so all of the security's
+    # corporation names are shown (year-independent).
+    ?stockcorp__id bhf:hasStock ?id .
+    ?corporation__id bhf:hasStockCorporation ?stockcorp__id .
+    ?corporation__id bhf:hasName ?corporationNames__id .
+    ?corporationNames__id rdfs:label ?corporationNames__label .
+    optional { ?corporationNames__id bhf:startDate ?corporationNames__startDate . }
+    
+    bind(concat(
+      str(?corporationNames__label),
+      " [",
+      COALESCE(str(?corporationNames__startDate), "..."),
+      "]"
+    ) as ?corporationNames__prefLabel)
+    
+    BIND(CONCAT("/corporations/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporationNames__dataProviderUrl)
+}
+`
+
 // export const stocksGraphOpenClose = `
 // SELECT DISTINCT ?date ?open ?close
 // where {

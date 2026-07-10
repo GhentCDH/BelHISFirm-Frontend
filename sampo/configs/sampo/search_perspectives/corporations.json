@@ -127,6 +127,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
+            "sortBy": "startDate",
             "minWidth": 150
         }
     ],

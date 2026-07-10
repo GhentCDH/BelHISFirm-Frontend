@@ -162,8 +162,12 @@
                     "label": "Corporation",
                     "description": "Corporation name valid at the selected year-end."
                 },
+                "corporationNames": {
+                    "label": "Corporation",
+                    "description": "Names of the corporation"
+                },
                 "openValue": {
-                    "label": "Open",
+                    "label": "Opening price",
                     "description": "Year-end opening price in the selected year."
                 },
                 "corporation": {
@@ -374,7 +378,7 @@
                     "description": "Date of the year-end notation price"
                 },
                 "openValue": {
-                    "label": "Open",
+                    "label": "Price",
                     "description": "Opening value"
                 },
                 "closeValue": {
