@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: ghcr.io/${{ github.repository_owner }}/belhisfirm-ontop
+  IMAGE: ghcr.io/${{ github.repository_owner }}/belhisfirm-sampo
 
 jobs:
   build-and-push:
