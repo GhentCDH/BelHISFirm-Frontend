@@ -139,40 +139,7 @@ union
 // `
 
 
-export const securitiesExportQuery = `
-  SELECT DISTINCT ?uri ?scobID ?name ?exchange ?type ?sector ?sharetype ?corporation
-  WHERE {
-    <FILTER>
-    ?uri rdf:type bhf:Stock .
-    ?uri bhf:scobID ?scobID .
-    OPTIONAL {
-      ?uri bhf:hasName ?_nameNode .
-      ?_nameNode rdfs:label ?name .
-    }
-    OPTIONAL {
-      ?uri bhf:hasStockExchange ?exchange .
-    }
-    OPTIONAL {
-      ?uri bhf:hasStockType ?_stNode .
-      ?_stNode bhf:typeName ?type .
-    }
-    OPTIONAL {
-      ?uri bhf:hasNotation ?_notationNode .
-      ?_notationNode bhf:hasSector ?_sectorNode .
-      ?_sectorNode bhf:hasName ?_sectorNameNode .
-      ?_sectorNameNode rdfs:label ?sector .
-    }
-    OPTIONAL {
-      ?uri bhf:hasSharetype ?sharetype .
-    }
-    OPTIONAL {
-      ?_stockcorpNode bhf:hasStock ?uri .
-      ?_corpNode bhf:hasStockCorporation ?_stockcorpNode .
-      ?_corpNode bhf:hasName/rdfs:label ?corporation .
-    }
-  }
-  ORDER BY ?scobID
-`
+
 
 // The stock -> exchange/sharetype/notation -> year-end openValue-price skeleton (bounded to the
 // selected year) is emitted by the `yearBindStock` custom filter into <FILTER>, inside the

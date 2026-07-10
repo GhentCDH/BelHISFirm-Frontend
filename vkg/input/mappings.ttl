@@ -234,7 +234,7 @@
                                         WHEN enddate >= TO_DATE('3900-01-01','YYYY-MM-DD') THEN NULL
                                         ELSE TO_CHAR(enddate, 'YYYY-MM-DD')
                                     END AS enddate_fixed
-                                FROM scoball.corporation_location;
+                                FROM scoball.corporation_location
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/address/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:streetAddress ;

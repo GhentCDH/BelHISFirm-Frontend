@@ -221,53 +221,56 @@ UNION
 `
 
 export const corporationsExportQuery = `
-  SELECT DISTINCT ?uri ?scobID ?name ?legalForm
-    ?registeredOffice
-    ?dateOfIncorporation ?dateOfDissolution
-    ?securities
-  WHERE {
-    <FILTER>
-    ?uri rdf:type bhf:Corporation .
-    ?uri bhf:scobID ?scobID .
-    OPTIONAL { ?uri bhf:dateOfIncorporation ?dateOfIncorporation . }
-    OPTIONAL { ?uri bhf:dateOfDissolution ?dateOfDissolution . }
-    OPTIONAL {
-      ?uri bhf:hasName ?_nameNode .
-      ?_nameNode rdfs:label ?name .
-    }
-    OPTIONAL {
-      ?uri bhf:hasLegalForm ?_legalFormNode .
-      ?_legalFormNode rdfs:label ?legalForm .
-    }
-    OPTIONAL {
-      ?uri bhf:hasAddress ?address__id .
-      OPTIONAL { ?address__id bhf:streetAddress ?address__street . }
-      OPTIONAL { ?address__id bhf:city ?address__city . }
-      OPTIONAL { ?address__id bhf:country ?address__country . }
-      OPTIONAL { ?address__id bhf:startDate ?address__startDate . }
-      OPTIONAL { ?address__id bhf:endDate ?address__endDate . }
-      BIND(
-        CONCAT(
-          COALESCE(?address__street, ""), 
-          IF(BOUND(?address__street), ", ", ""),
-          COALESCE(?address__city, ""), 
-          ", ",
-          COALESCE(?address__country, ""),
-          " [",
-          COALESCE(str(?address__startDate), "..."), 
-          " - ",
-          COALESCE(str(?address__endDate), "..."),
-          "]"
-        )
-      AS ?registeredOffice)
-    }
-    OPTIONAL {
-      ?uri bhf:hasStockCorporation ?_stockCorpNode .
-      ?_stockCorpNode bhf:hasStock ?_stockNode .
-      ?_stockNode bhf:hasSharetype ?securities .
-    }
-  }
-  ORDER BY ?scobID
+   SELECT DISTINCT ?scobID ?corporationName ?address
+     ?dateOfIncorporation ?legalForm ?dateOfDissolution ?security
+   WHERE {
+     <FILTER>
+     ?uri rdf:type bhf:Corporation .
+     ?uri bhf:scobID ?scobID .
+     OPTIONAL {
+       ?uri bhf:hasName ?_nameNode .
+       ?_nameNode rdfs:label ?_nameLabel .
+       OPTIONAL { ?_nameNode bhf:startDate ?_nameStart . }
+       BIND(CONCAT(?_nameLabel, " [", COALESCE(STR(?_nameStart), "..."), "]") AS ?corporationName)
+     }
+     OPTIONAL {
+       ?uri bhf:hasAddress ?_addr .
+       OPTIONAL { ?_addr bhf:streetAddress ?_street . }
+       OPTIONAL { ?_addr bhf:city ?_city . }
+       OPTIONAL { ?_addr bhf:country ?_country . }
+       OPTIONAL { ?_addr bhf:startDate ?_addrStart . }
+       BIND(CONCAT(
+         COALESCE(?_street, ""),
+         IF(BOUND(?_street), ", ", ""),
+         COALESCE(?_city, ""),
+         ", ",
+         COALESCE(?_country, ""),
+         " [",
+         COALESCE(STR(?_addrStart), "..."),
+         "]"
+       ) AS ?address)
+     }
+     OPTIONAL { ?uri bhf:dateOfIncorporation ?_doi . BIND(STR(?_doi) AS ?dateOfIncorporation) }
+     OPTIONAL { ?uri bhf:hasLegalForm ?_lf . ?_lf rdfs:label ?legalForm . }
+     OPTIONAL { ?uri bhf:dateOfDissolution ?dateOfDissolution . }
+     OPTIONAL {
+       ?uri bhf:hasStockCorporation ?_sc .
+       ?_sc bhf:hasStock ?_stock .
+       OPTIONAL { ?_sc bhf:startDate ?_stockStart . }
+       OPTIONAL { ?_sc bhf:endDate ?_stockEnd . }
+       ?_stock bhf:hasStockType ?_stType .
+       ?_stType bhf:typeName ?_stTypeName .
+       ?_stock bhf:hasStockExchange ?_stExch .
+       BIND(CONCAT(
+         ?_stTypeName, " (", ?_stExch, ") [",
+         COALESCE(STR(?_stockStart), "..."), " - ",
+         COALESCE(STR(?_stockEnd), "..."),
+         "]"
+       ) AS ?security)
+     }
+   }
+   ORDER BY STR(?scobID)
+
 `
 
 
