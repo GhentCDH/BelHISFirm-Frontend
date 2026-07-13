@@ -125,13 +125,14 @@
         },
         "export": {
             "tabID": 1,
-            "component": "ExportCSV",
+            "component": "CustomComponent",
+            "componentName": "GatedExportCSV",
             "tabPath": "export",
             "tabIcon": "CloudDownload",
             "resultClass": "securities",
             "facetClass": "securities",
             "sparqlQuery": "securitiesExportQuery",
-            "filterTarget": "uri"
+            "filterTarget": "id"
         }
     },
     "properties": [

@@ -38,9 +38,18 @@ union
     ?stockcorp__id bhf:hasStock ?id .
     ?corporation__id bhf:hasStockCorporation ?stockcorp__id .
     ?corporation__id bhf:hasName ?corporationName__id .
-    ?corporationName__id rdfs:label ?corporationName__prefLabel .
+    ?corporationName__id rdfs:label ?corporationName__label .
+    
     optional { ?corporationName__id bhf:startDate ?corporationName__startDate . }
     optional { ?corporationName__id bhf:endDate ?corporationName__endDate . }
+    
+    bind(concat(
+      str(?corporationName__label),
+      " [",
+      COALESCE(str(?corporationName__startDate), "..."),
+      "]"
+    ) as ?corporationName__prefLabel)
+    
     BIND(CONCAT("/corporations/page/", STRAFTER(STR(?corporation__id), "corporation/")) AS ?corporationName__dataProviderUrl)
 }
 `
@@ -201,4 +210,39 @@ export const facetValuesQueryStocks = `
     }
   }
   <ORDER_BY>
+`
+
+// CSV export for the securities perspective. This is the un-paged form of the result-table query
+// (facetResultSetQueryStocks) and reuses the same `stocksProperties` block, so it returns the exact
+// same columns/values as the table: scobID, name (all candidates), openValue, stockExchange,
+// stocktype, sectorName, sharetype, corporationName (all candidates). The year skeleton (?id, ?year,
+// ?stockExchange__id, ?sharetype__id, ?not, ?price__id, ?openValue__prefLabel) is supplied by the
+// `yearBindStock` custom filter into <FILTER>, so the export resultClass must use filterTarget "id".
+//
+// Unlike a SPARQL-side year match, name/corporationName are NOT filtered by date here — all name
+// candidates (with their startDate/endDate) are returned cheaply and the GatedExportCSV custom
+// component picks the value valid at <year>-12-31 in the browser (mirroring the corporationNameForYear
+// mapper). This moves the expensive per-row date comparisons off the Ontop/Oracle VKG. The component
+// fetches this with resultFormat=json so makeObjectList groups the candidates into arrays.
+//
+// The inner OPTIONAL{?id bhf:scobID ?orderBy} + ORDER BY is a materialization boundary that Ontop needs
+// to type the outer UNION (stocksProperties): without it, an unbounded `SELECT *` over the UNION fails
+// reformulation with "Was expecting a unique and known DB term type … for the SQL variable v3m…". This
+// mirrors the working result-table query (facetResultSetQueryStocks), minus paging. We do NOT put a
+// top-level ORDER BY on the integer scobID (that hits the separate Ontop/Oracle "ORDER BY under DISTINCT"
+// bug); the boolean+asc inner ORDER BY is safe, and the component sorts rows by numeric scobID anyway.
+export const securitiesExportQuery = `
+  SELECT * WHERE {
+    {
+      SELECT DISTINCT ?id ?year ?not ?price__id ?stockExchange__id ?sharetype__id ?openValue__prefLabel {
+        <FILTER>
+        OPTIONAL { ?id bhf:scobID ?orderBy }
+      }
+      ORDER BY (!BOUND(?orderBy)) ASC(?orderBy)
+    }
+    FILTER(BOUND(?id))
+    BIND(?stockExchange__id AS ?stockExchange__prefLabel)
+    BIND(?sharetype__id AS ?sharetype__prefLabel)
+    ${stocksProperties}
+  }
 `
