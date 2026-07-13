@@ -1,7 +1,6 @@
 # BellHisFirm Frontend
 
 A Docker Compose application stack for BellHisFirm consisting of:
-- **PostgreSQL Database** - Relational data storage
 - **Ontop VKG** - Virtual Knowledge Graph SPARQL endpoint
 - **Sampo UI** - Frontend user interface
 
@@ -48,14 +47,7 @@ Clone or navigate to the project directory:
 cd ~/Projects/BellHisFirm-Frontend
 ```
 
-### 2. Download Oracle JDBC Driver
-
-Oracle:
-```shell
-curl -L -o vkg/jdbc/ojdbc8-21.21.0.0.jar https://repo1.maven.org/maven2/com/oracle/database/jdbc/ojdbc8/21.21.0.0/ojdbc8-21.21.0.0.jar
-```
-
-### 3. Configure Environment
+### 2. Configure Environment
 
 Copy the example environment file and customize if needed:
 ```bash
@@ -63,7 +55,7 @@ cp env.example .env
 # Edit .env with your preferred settings
 ```
 
-### 4. Start the Application
+### 3. Start the Application
 
 Launch all services with Docker Compose:
 
@@ -82,7 +74,7 @@ docker compose -f compose-prod.yaml build
 docker compose -f compose-prod.yml up
 ```
 
-### 5. Access the Services
+### 4. Access the Services
 
 Once all services are running
 
@@ -100,7 +92,7 @@ The VKG maps relational database data to RDF/OWL knowledge graphs.
 
 **Configuration Files** (in `vkg/input/`):
 
-1. **ontology.ttl** - Define your OWL ontology (classes, properties, relationships)
+1. **ontology.ttl** - OWL ontology (classes, properties, relationships)
 2. **mappings.ttl** - R2RML mappings from SQL to RDF
 3. **ontop.properties** - Database connection and Ontop settings
 
