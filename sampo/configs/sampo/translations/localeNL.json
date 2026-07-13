@@ -102,10 +102,6 @@
         "wrongZoomLevelFHA": "Het zoomniveau moet minstens 13 zijn om deze laag te tonen",
         "tooManyResults": "Meer dan 500 resultaten, gebruik geclusterde kaart of heatmap"
     },
-    "instancePageGeneral": {
-        "introduction": "<p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Deze landingspagina geeft een leesbare samenvatting van de datapunten die naar dit {entity} verwijzen. ... </p>",
-        "repetition": "<h6 class=\"MuiTypography-root MuiTypography-h6\"> Herhaling van gegevens </h6> ... "
-    },
     "deckGlMap": {
         "arcColouring": "Boogkleuring:",
         "showMoreInformation": "Klik voor meer informatie.",
@@ -121,7 +117,7 @@
             "longDescription": "Historische gegevens over genoteerde effecten en hun classificaties op beurzen.",
             "instancePage": {
                 "label": "Effect",
-                "description": "Scob belhisfirm effect"
+                "description": "Historische gegevens over genoteerde effecten en hun classificaties op beurzen."
             },
             "properties": {
                 "scobID": {
@@ -181,7 +177,7 @@
             "longDescription": "Historische gegevens over Belgische (beursgenoteerde) bedrijven.",
             "instancePage": {
                 "label": "Onderneming",
-                "description": "Scob belhisfirm onderneming"
+                "description": "Historische gegevens over Belgische (beursgenoteerde) bedrijven."
             },
             "properties": {
                 "uri": {

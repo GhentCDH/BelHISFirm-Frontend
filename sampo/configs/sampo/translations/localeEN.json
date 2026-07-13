@@ -123,7 +123,7 @@
             "longDescription": "Historical data on listed securities and their classifications on stock exchanges.",
             "instancePage": {
                 "label": "Security",
-                "description": "Scob belhisfirm security"
+                "description": "Historical data on listed securities and their classifications on stock exchanges."
             },
             "properties": {
                 "scobID": {
@@ -180,10 +180,10 @@
             "label": "Corporations",
             "facetResultsType": "corporations",
             "shortDescription": "The legal and biographical data of Belgian firms since 1873, from incorporation to dissolution.",
-            "longDescription": "Historical data on Belgian (listed) companies",
+            "longDescription": "Historical data on Belgian (listed) companies.",
             "instancePage": {
                 "label": "Corporation",
-                "description": "Scob belhisfirm corporation"
+                "description": "Historical data on Belgian (listed) companies."
             },
             "properties": {
                 "uri": {
