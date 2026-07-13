@@ -259,6 +259,23 @@ header.MuiAppBar-root button[aria-haspopup="true"]:has(~ button[aria-haspopup="t
   display: none !important;
 }
 
+/* Mobile "⋮" (More) menu — renders in a body-level MUI portal, so the header-scoped
+   topbar rules above don't reach it. Hide the two leftover rows that desktop already
+   hides/omits and that render EMPTY here:
+     • Feedback — showFeedbackButton is false + feedbackLink unset, but the mobile menu
+       renders it unconditionally, emitting an <a target=_blank> with no href/label.
+     • The infoPage info-dropdown item — topBar.info has no `infoPage` translation, so it
+       emits an empty /info menu link (desktop collapses this into the hidden info button).
+   The About page is its own dummy-internal perspective link ABOVE these (before the
+   divider), and Instructions (translated) both stay. */
+.MuiMenu-paper a[target="_blank"]:not([href]) {                                   /* feedback */
+  display: none !important;
+}
+.MuiMenu-paper a[target="_blank"]:not([href]) ~ a.MuiMenuItem-root[href$="/info"] { /* info item */
+  display: none !important;
+}
+
+
 /* --------------------------------------------------------------------------
    Landing page
    -------------------------------------------------------------------------- */
