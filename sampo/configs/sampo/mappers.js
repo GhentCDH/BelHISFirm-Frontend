@@ -21,9 +21,10 @@ const pickForYear = (value, yearEnd) => {
 }
 
 // securities perspective: each result row is a stock that has a year-end price in the selected
-// year (carried through as `year`) plus one or more candidate corporation names AND security
-// names, each with its validity dates (.startDate / .endDate). Reduce both `corporationName`
-// and the security's own `name` to the single value valid at that year-end (Dec 31 of `year`).
+// year (carried through as `year`) plus one or more candidate corporation names, security names
+// AND sector names, each with its validity dates (.startDate / .endDate). Reduce `corporationName`,
+// the security's own `name`, and `sectorName` to the single value valid at that year-end
+// (Dec 31 of `year`). pickForYear treats a null startDate/endDate as unbounded on that side.
 export const corporationNameForYear = ({ data }) => {
   if (!Array.isArray(data)) return data
   return data.map(row => {
@@ -34,6 +35,7 @@ export const corporationNameForYear = ({ data }) => {
     const next = { ...row }
     if (row.corporationName != null) next.corporationName = pickForYear(row.corporationName, yearEnd)
     if (row.name != null) next.name = pickForYear(row.name, yearEnd)
+    if (row.sectorName != null) next.sectorName = pickForYear(row.sectorName, yearEnd)
     return next
   })
 }

@@ -70,13 +70,14 @@ const buildRequest = ({ apiBase, resultClass, facetClass, facets }) => {
 const rowToCsvValues = (row, yearEnd) => {
   const name = pickForYear(row.name, yearEnd)
   const corporationName = pickForYear(row.corporationName, yearEnd)
+  const sectorName = pickForYear(row.sectorName, yearEnd)
   return {
     scobID: label(row.scobID),
     name: name ? label(name) : '',
     openValue: label(row.openValue),
     stockExchange: label(row.stockExchange),
     stocktype: label(row.stocktype),
-    sectorName: label(row.sectorName),
+    sectorName: sectorName ? label(sectorName) : '',
     sharetype: label(row.sharetype),
     corporationName: corporationName ? label(corporationName) : ''
   }

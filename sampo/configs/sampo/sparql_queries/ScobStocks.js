@@ -26,10 +26,16 @@ union
 }
 union
 {
+    # All sector-name candidates (with their validity dates); the corporationNameForYear
+    # postprocess (mappers.js) keeps only the sector name valid at the selected year-end.
+    # startDate and/or endDate are frequently null (open-ended intervals); pickForYear treats
+    # a null bound as "unbounded on that side".
     ?id bhf:hasNotation ?notation__id .
     ?notation__id bhf:hasSector ?sector__id .
     ?sector__id bhf:hasName ?sectorName__id .
-    ?sectorName__id rdfs:label ?sectorName__prefLabel
+    ?sectorName__id rdfs:label ?sectorName__prefLabel .
+    optional { ?sectorName__id bhf:startDate ?sectorName__startDate . }
+    optional { ?sectorName__id bhf:endDate ?sectorName__endDate . }
 }
 union
 {
@@ -100,7 +106,9 @@ union
     ?id bhf:hasNotation ?notation__id .
     ?notation__id bhf:hasSector ?sector__id .
     ?sector__id bhf:hasName ?sectorName__id .
-    ?sectorName__id rdfs:label ?sectorName__prefLabel
+    ?sectorName__id rdfs:label ?sectorName__prefLabel .
+    optional { ?sectorName__id bhf:startDate ?sectorName__startDate . }
+    optional { ?sectorName__id bhf:endDate ?sectorName__endDate . }
 }
 union
 {

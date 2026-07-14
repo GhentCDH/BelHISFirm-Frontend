@@ -224,8 +224,8 @@
             "filterType": "CustomComponent",
             "componentName": "YearSelectFacet",
             "customFilterName": "yearBindStock",
-            "minYear": 1830,
-            "maxYear": 2000,
+            "minYear": 1815,
+            "maxYear": 2025,
             "priority": 0
         },
         "scobID": {
