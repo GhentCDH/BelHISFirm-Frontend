@@ -10,6 +10,8 @@
 @prefix schema: <http://schema.org/> .
 @prefix dct:    <http://purl.org/dc/terms/> .
 @prefix vcard:  <http://www.w3.org/2006/vcard/ns#> .
+@prefix ehfi: <http://data.eurhisfirm.eu/wiki/Item:> .
+@prefix ehfp: <http://data.eurhisfirm.eu/wiki/Property:> .
 
 #################################################################
 #    Classes
@@ -18,13 +20,15 @@
 bhf:Stock
     a               owl:Class ;
     rdfs:subClassOf bhf:Class ;
+    rdfs:subClassOf ehfi:Q13 ;
     rdfs:label      "Stock"@en ;
     rdfs:comment    "A stock of a registered corporation in Belgium"@en .
 # stockexchange, stocknames, sharetype(string), notations, Stock type(s), Stock quantity(ies)
 
 bhf:StockExchange
     a               owl:Class ;
-    rdfs:subClassOf bhf:PropertyClass, bhf:Class ;
+    rdfs:subClassOf bhf:PropertyClass ;
+    rdfs:subClassOf bhf:Class ;
     rdfs:label      "Stock exchange"@en ;
     rdfs:comment    "A stock exchange where stocks can be registered"@en .
 # startdate, enddate, StockExchangeName(s)(usually 1 name, but brussels has 2)
@@ -45,7 +49,9 @@ bhf:NotationPrice
 
 bhf:Sector
     a               owl:Class ;
-    rdfs:subClassOf bhf:PropertyClass, bhf:Class ;
+    rdfs:subClassOf bhf:PropertyClass ;
+    rdfs:subClassOf bhf:Class ;
+    rdfs:subClassOf ehfi:Q17 ;
     rdfs:label      "Sector"@en ;
     rdfs:comment    ""@en .
 # SectorName, dates
@@ -53,6 +59,7 @@ bhf:Sector
 bhf:StockType
     a               owl:Class ;
     rdfs:subClassOf bhf:PropertyClass ;
+    rdfs:subClassOf ehfi:Q15 ;
     rdfs:label      "Stock Type"@en ;
     rdfs:comment    ""@en .
 # dates, stocktypename(string), stocktypecompref
@@ -107,6 +114,7 @@ bhf:hasNotation
 
 bhf:hasStockType
     a            owl:ObjectProperty ;
+    rdfs:subPropertyOf ehfp:P26 ;
     rdfs:domain  bhf:Stock ;
     rdfs:range   bhf:StockType ;
     rdfs:label   "has stock type"@en ;
@@ -122,6 +130,7 @@ bhf:hasStockQuantity
 #Notation properties
 bhf:hasSector
     a            owl:ObjectProperty ;
+    rdfs:subPropertyOf ehfp:P56 ;
     rdfs:domain  bhf:Notation ;
     rdfs:range   bhf:Sector ;
     rdfs:label   "Notation in sector"@en ;
@@ -269,6 +278,3 @@ bhf:hasCurrency
     rdfs:range   bhf:Currency ;
     rdfs:label   "currency"@en ;
     rdfs:comment ""@en .
-
-# Currency properties
-# foaf:name, vcard:country-name, bhf:comments
