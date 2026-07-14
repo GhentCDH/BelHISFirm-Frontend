@@ -337,54 +337,6 @@
                 }
             }
         },
-        "yearEndPrices": {
-            "label": "Eindejaarskoersen",
-            "facetResultsType": "yearEndPrices",
-            "shortDescription": "Eindejaarsnoteringskoersen per jaar",
-            "longDescription": "",
-            "instancePage": {
-                "label": "Eindejaarskoers",
-                "description": "Eindejaarsnoteringskoers van een effect"
-            },
-            "properties": {
-                "uri": {
-                    "label": "URI",
-                    "description": "Identifier van de resource"
-                },
-                "year": {
-                    "label": "Jaar",
-                    "description": "Kies een jaar om de eindejaarsnoteringskoersen te tonen"
-                },
-                "sector": {
-                    "label": "Sector",
-                    "description": "Filter op de sectornaam van de notering"
-                },
-                "corporationName": {
-                    "label": "Onderneming",
-                    "description": "Filter op de meest recente naam van het onderneming"
-                },
-                "priceYearEnd": {
-                    "label": "Jaar",
-                    "description": "Het jaar van de eindejaarskoers"
-                },
-                "priceDay": {
-                    "label": "Datum",
-                    "description": "Datum van de eindejaarsnoteringskoers"
-                },
-                "openValue": {
-                    "label": "Prijs",
-                    "description": "Openingswaarde"
-                },
-                "closeValue": {
-                    "label": "Slot",
-                    "description": "Slotwaarde"
-                },
-                "previousValue": {
-                    "label": "Vorige",
-                    "description": "Vorige waarde"
-                }
-            }
-        },
         "infoPage": {
             "label": "info"
         }
