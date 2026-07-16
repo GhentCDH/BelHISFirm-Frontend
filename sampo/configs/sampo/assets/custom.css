@@ -79,8 +79,8 @@
   --bhf-ink-faint: #9a9187;
   --bhf-accent: #9e1b1e;
   --bhf-focus-ring: rgba(158, 27, 30, 0.12);
-  --bhf-serif: 'PT Serif', Georgia, serif;
-  --bhf-slab: 'Zilla Slab', 'PT Serif', Georgia, serif;
+  --bhf-serif: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --bhf-slab: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   /* Width of the facet sidebar on desktop (>=900px). Edit this to taste;
      the results column automatically grows to fill the freed space. */
   --bhf-facet-width: 400px;
