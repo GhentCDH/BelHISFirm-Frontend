@@ -130,6 +130,33 @@ docker compose restart vkg-scob
 docker compose up -d --build
 ```
 
+## Making changes
+
+### Text and column names
+All text on the app can be edited in the localeEN and localeNL files in `sampo/configs/sampo/translations`.
+Info and instructions pages can be edited in `sampo/configs/sampo/pages` in the html files.
+
+### Ontology
+Ontology is defined in `vkg/input/ontology.ttl` and in the ttk files under `vkg/input/ontology`. Be careful if edits
+need to be made to ontology it likely means mappings need to change as well.
+
+Important to note is that while the portal uses the term "security", since the DB uses the term "Stock" the ontology
+also uses the term "Stock".
+
+### Mappings
+All mappings are defined in the `vkg/input/ontology/mappings.ttl` file using the R2RML standard. 
+
+Because of the nature of the legacy scob database some choices had to be made for the mappings that might not seem
+intuitive at first sight:
+- Corporations with IDs 1 and 2 are results of some unclean design in the scob database that have to be filtered out
+- The scob database often uses years 1000-01-01 and 3999-12-31 for unknown dates, so those have to be mapped to null at
+multiple spots
+- For notation prices it is irrelevant to query prices without an `open_value`, so that also gets filtered out at sql
+level.
+
+### Sampo configs and custom components
+Find more detailed info on how these systems work on the [sampo docs](https://github.com/GhentCDH/sampo-ui/tree/master/docs).
+
 ## Resources
 
 ### Ontop Documentation
@@ -142,6 +169,10 @@ docker compose up -d --build
 ### SPARQL
 - SPARQL 1.1 Query Language: https://www.w3.org/TR/sparql11-query/
 - YASGUI Query Interface: https://yasgui.triply.cc/
+
+### Sampo-ui
+- Main repository (we only use version 4): https://github.com/SemanticComputing/sampo-ui/tree/dev-v4
+- Sampo docs: https://github.com/GhentCDH/sampo-ui/tree/master/docs
 
 ## Support
 

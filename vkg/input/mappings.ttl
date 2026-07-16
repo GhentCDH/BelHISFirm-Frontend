@@ -15,6 +15,8 @@
 #################
 # CORPORATION
 ##################
+
+# Corporations with ID 1 and 2 are the result of some unclean design in the scob db, they have to be filtered out
 :CORPORATION-TYPE
     a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery """SELECT id FROM scoball.corporation WHERE id not in (1,2)""" ] ;
