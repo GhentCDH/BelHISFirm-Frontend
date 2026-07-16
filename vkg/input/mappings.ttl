@@ -17,14 +17,14 @@
 ##################
 :CORPORATION-TYPE
     a               rr:TriplesMap ;
-    rr:logicalTable [ rr:sqlQuery """SELECT id FROM scoball.corporation""" ] ;
+    rr:logicalTable [ rr:sqlQuery """SELECT id FROM scoball.corporation WHERE id not in (1,2)""" ] ;
     rr:subjectMap   [ rr:template "http://belhisfirm.be/resource/corporation/{id}" ;
                       rr:class    bhf:Corporation ] .
 
 :CORPORATION-NAME
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """SELECT corporation, RAWTOHEX(STANDARD_HASH(corporation || name || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
-                                            FROM scoball.corporation_name WHERE name IS NOT NULL""" ] ;
+                                            FROM scoball.corporation_name WHERE name IS NOT NULL and corporation not in (1,2)""" ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasName ;
                             rr:objectMap [ rr:template "http://belhisfirm.be/resource/corporationName/{id}" ] ] .
@@ -32,7 +32,7 @@
 :CORPORATION-LEGAL-FORM
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """SELECT corporation, RAWTOHEX(STANDARD_HASH(corporation || juridisch_statuut || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
-                                            FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL""" ] ;
+                                            FROM scoball.corporation_juridisch_statuut WHERE juridisch_statuut IS NOT NULL and corporation not in (1,2)""" ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasLegalForm ;
                             rr:objectMap [ rr:template "http://belhisfirm.be/resource/legalForm/{id}" ] ] .
@@ -40,7 +40,7 @@
 :CORPORATION-LOCATION
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """SELECT corporation, RAWTOHEX(STANDARD_HASH(corporation || city || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
-                                                FROM scoball.corporation_location""" ] ;
+                                                FROM scoball.corporation_location where corporation not in (1,2)""" ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasAddress ;
                             rr:objectMap [ rr:template "http://belhisfirm.be/resource/address/{id}" ] ] .
@@ -63,6 +63,7 @@
                                                 FROM scoball.corporation_name cn
                                                 GROUP BY corporation
                                             ) cn ON cn.corporation = c.id
+                                            where id not in (1,2)
                                        """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:dateOfIncorporation ;
@@ -81,6 +82,7 @@
                     SELECT corporation,
                            RAWTOHEX(STANDARD_HASH(stock || corporation || TO_CHAR(startdate,'YYYY-MM-DD'), 'SHA1')) AS id
                     FROM scoball.stock_corporation
+                    where corporation not in (1,2)
     """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasStockCorporation ;
@@ -394,9 +396,7 @@
                             rr:objectMap [ rr:column   "enddate_fixed" ;
                                            rr:datatype xsd:date ] ] .
 
-# Reads from the SCOBALL.NOTATION_PRICE_YEARLY lens (see lenses.json), which computes the
-# last recorded day per year per notation once. The lens declares a unique key on `id`,
-# letting Ontop self-join-eliminate this mapping against :NOTATION-PRICE-TYPE.
+
 :NOTATION-NOTATION-PRICE
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """
@@ -412,8 +412,6 @@
 ## NOTATION-PRICE
 ###################
 
-# Reads from the SCOBALL.NOTATION_PRICE_YEARLY lens (see lenses.json) instead of
-# re-running the window query, so the windowed scan is evaluated once for both mappings.
 :NOTATION-PRICE-TYPE
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery """
