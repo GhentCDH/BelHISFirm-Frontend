@@ -135,17 +135,6 @@
                             rr:objectMap [ rr:column   "comments" ;
                                            rr:datatype xsd:string ] ] .
 
-# Links a corporation directly to the string of its single most recent dated name
-# (greatest startdate). Reads from the SCOBALL.CORPORATION_LATEST_NAME lens (see lenses.json),
-# which declares a unique key on CORPORATION so Ontop knows there is exactly one latest name
-# per corporation (avoids DISTINCT fan-out). Maps the name as a plain literal.
-:CORPORATION-LATEST-NAME
-    a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:tableName "scoball.corporation_latest_name" ] ;
-    rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/corporation/{corporation}" ] ;
-    rr:predicateObjectMap [ rr:predicate bhf:hasLatestName ;
-                            rr:objectMap [ rr:column   "corp_name" ;
-                                           rr:datatype xsd:string ] ] .
 
 
 ##################
@@ -410,7 +399,10 @@
 # letting Ontop self-join-eliminate this mapping against :NOTATION-PRICE-TYPE.
 :NOTATION-NOTATION-PRICE
     a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:tableName "scoball.notation_price_yearly" ] ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT notation, id, price_day, price_year, open_value, close_value, previous_value
+                    FROM scoball.notation_price_yearly_mv WHERE open_value IS NOT null
+    """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/notation/{notation}" ] ;
     rr:predicateObjectMap [ rr:predicate bhf:hasNotationPrice ;
                             rr:objectMap [ rr:template "http://belhisfirm.be/resource/notation_price/{id}" ] ] .
@@ -424,7 +416,10 @@
 # re-running the window query, so the windowed scan is evaluated once for both mappings.
 :NOTATION-PRICE-TYPE
     a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:tableName "scoball.notation_price_yearly" ] ;
+    rr:logicalTable       [ rr:sqlQuery """
+                    SELECT notation, id, price_day, price_year, open_value, close_value, previous_value
+                    FROM scoball.notation_price_yearly_mv WHERE open_value IS NOT null
+    """ ] ;
     rr:subjectMap         [ rr:template "http://belhisfirm.be/resource/notation_price/{id}" ;
                             rr:class    bhf:NotationPrice ] ;
     rr:predicateObjectMap [ rr:predicate bhf:priceDay ;

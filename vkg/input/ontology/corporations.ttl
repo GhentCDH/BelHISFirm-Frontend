@@ -78,14 +78,6 @@ bhf:hasAddress
     rdfs:label         "has address"@en, "heeft adres"@nl ;
     rdfs:comment       "Links a corporation to its physical address"@en .
 
-bhf:hasLatestName
-    rdf:type           owl:DatatypeProperty ;
-    rdfs:domain        bhf:Corporation ;
-    rdfs:range         xsd:string ;
-    rdfs:label         "latest name"@en, "meest recente naam"@nl ;
-    rdfs:comment       "The most recent dated name (greatest start date) of the corporation, as a plain string"@en .
-
-
 
 ### Address properties
 bhf:streetAddress
